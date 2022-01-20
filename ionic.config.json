@@ -1,0 +1,7 @@
+{
+  "name": "borelog",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
