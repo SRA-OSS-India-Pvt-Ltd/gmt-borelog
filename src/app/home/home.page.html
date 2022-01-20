@@ -4,6 +4,33 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" >
+  <form>
+    <ion-img src="assets/images/2.png" class="img3"></ion-img>
+
+    
+    <!-- <img src="assets/images/aarveicon.png" alt="app icon" class="img2" /> -->
+
+    <ion-list>
+      <ion-item class="input">
+        <!-- <ion-label position="stacked">UserName:</ion-label> -->
+        <ion-input type="text" placeholder="   UserName" name="username" [(ngModel)]="postData.employeeid" >
+          <ion-icon slot="start" name="person" color="dark"></ion-icon>
+        </ion-input>
+      </ion-item>
+
+      <ion-item class="input">
+        <!-- <ion-label position="stacked">Password:</ion-label> -->
+        <ion-input type="Password" placeholder="   Password" name="password" [(ngModel)]="postData.epassword" >
+          <ion-icon slot="start" name="eye-off" color="dark"></ion-icon>
+
+        </ion-input>
+      </ion-item>
+      <ion-button (click)="callloginservice()" expand="block"
+      class="center"style="text-transform:none"> Login</ion-button>
+
+
+    </ion-list>
+  </form>
 
 </ion-content>
