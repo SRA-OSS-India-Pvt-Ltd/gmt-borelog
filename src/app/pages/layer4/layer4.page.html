@@ -15,11 +15,134 @@
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding">
+  <ion-list>
+    <ion-grid fixed>
+      <ion-row >
+        <ion-col size="6">
+          <ion-item class="padding">
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Depth of termination:</strong></ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item class="input">
+            <ion-input type="text" [(ngModel)]="depthOfTermination" ></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row >
+        <ion-col size="6">
+          <ion-item class="padding">
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Borehole End Date:</strong></ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item class="input">
+             <ion-datetime display-format="DD-MM-YYYY" [(ngModel)]="endDate"></ion-datetime>
+          </ion-item>
+        </ion-col>
+      </ion-row>
 
-  <div class="signature-pad">
-    <div>
-      <canvas class="signature-pad-canvas" #canvas width="900" height="400" style="touch-action: none;"></canvas>
-    </div>
-  </div>
+      <ion-row >
+        <ion-col size="6">
+          <ion-item class="padding">
+            <ion-label  style="white-space: pre-wrap !important;"><strong>AARVEE Representative Name:</strong></ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item class="input">
+            <ion-input type="text" [(ngModel)]="aarveRepresName" ></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+
+      <ion-row >
+        <ion-col size="12">
+          <ion-item class="padding">
+            <ion-label  style="white-space: pre-wrap !important;"><strong>AARVEE Representative Signature:</strong></ion-label>
+          </ion-item>
+        </ion-col>
+
+      </ion-row>
+      <ion-row>
+        <ion-col size="12" class="signature-pad">
+          <canvas class="signature-pad-canvas" #canvas width="200" height="50" style="touch-action: none;"></canvas>
+
+        </ion-col>
+      </ion-row>
+
+      <ion-row >
+        <ion-col size="6">
+          <ion-item class="padding">
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Sub Agency Representative Name:</strong></ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item class="input">
+            <ion-input type="text" [(ngModel)]="subAgencyRepresentivaeName" ></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+
+      <ion-row >
+        <ion-col size="12">
+          <ion-item class="padding">
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Sub Agency Representative Signature:</strong></ion-label>
+          </ion-item>
+        </ion-col>
+
+      </ion-row>
+      <ion-row>
+        <ion-col size="12" class="signature-pad">
+          <canvas class="signature-pad-canvas" #canvas width="200" height="50" style="touch-action: none;"></canvas>
+
+        </ion-col>
+      </ion-row>
+
+
+      <ion-row >
+        <ion-col size="6">
+          <ion-item class="padding">
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Client Representative Name:</strong></ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item class="input">
+            <ion-input type="text" [(ngModel)]="clientRepresNaame" ></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+
+      <ion-row >
+        <ion-col size="12">
+          <ion-item class="padding">
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Client Representative Signature:</strong></ion-label>
+          </ion-item>
+        </ion-col>
+
+      </ion-row>
+      <ion-row>
+        <ion-col size="12" class="signature-pad">
+          <canvas class="signature-pad-canvas" #canvas width="200" height="50" style="touch-action: none;"></canvas>
+
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="12" class="signature-pad">
+
+          <ion-button expand="block" style="text-transform: none;" class="button">
+Save          </ion-button>
+        </ion-col>
+      </ion-row>
+
+
+
+    </ion-grid>
+  </ion-list>
+
+
 </ion-content>
 

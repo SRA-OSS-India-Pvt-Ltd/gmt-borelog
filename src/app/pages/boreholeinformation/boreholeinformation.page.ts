@@ -24,23 +24,14 @@ export class BoreholeinformationPage implements OnInit {
   casingDepth: any;
   startDate: any;
   constructor() {
-    this.getCurrentDate();
-   }
+    this.boreholeStartDate = new Date().toISOString();
+    console.log('date',this.boreholeStartDate);
+ }
 
   ngOnInit() {
   }
-  getCurrentDate() {
-    const now = new Date();
-    const date = now.toISOString();
-    console.log('today', date);
-    const date1 = new Date(date);
-    const format = 'YYYY-MM-dd HH:mm:ss';
-    const locale = 'en-US';
-    this.today = formatDate(date1, format, locale);
-    console.log('formattedDate', this.today);
-    this.boreholeStartDate = this.today;
 
-  }
+  getResopnseWithDates(){}
   rigChange($event){
     console.log($event.target.value);
 

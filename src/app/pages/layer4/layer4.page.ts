@@ -12,11 +12,19 @@ export class Layer4Page implements OnInit, AfterViewInit {
 
   @ViewChild('canvas', { static: true }) signaturePadElement;
 signaturePad;
+depthOfTermination: any;
+endDate: any;
+date: any;
+aarveRepresName: any;
+subAgencyRepresentivaeName: any;
+clientRepresNaame: any;
   constructor(private base64ToGallery: Base64ToGallery,
     private elementRef: ElementRef,) {
+      this.date = new Date().toISOString();
+      console.log('date',this.date);
+      this.endDate = this.date;
 
-
-   }
+     }
   ngOnInit(): void {
     this.init();
   }
