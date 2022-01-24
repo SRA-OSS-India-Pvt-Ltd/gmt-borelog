@@ -58,4 +58,24 @@ this.toaseSer.presentError('Else');
     });
     alert.present();
   }
+  moveToOrganization(){
+    this.router.navigate(['organization']);
+    this.menu.close();
+
+  }
+  moveto(){
+    this.router.navigate(['boreholeinformation']);
+    this.menu.close();
+
+  }
+  loggongInfo(){
+   this.router.navigate(['logginginformation']);
+   this.menu.close();
+
+  }
+  layer4(){
+    this.router.navigate(['layer4']);
+    this.menu.close();
+
+  }
 }

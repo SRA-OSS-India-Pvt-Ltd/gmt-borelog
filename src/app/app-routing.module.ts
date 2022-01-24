@@ -15,6 +15,22 @@ const routes: Routes = [
     path: 'sidemenu',
     loadChildren: () => import('./pages/sidemenu/sidemenu.module').then( m => m.SidemenuPageModule)
   },
+  {
+    path: 'organization',
+    loadChildren: () => import('./pages/organization/organization.module').then( m => m.OrganizationPageModule)
+  },
+  {
+    path: 'boreholeinformation',
+    loadChildren: () => import('./pages/boreholeinformation/boreholeinformation.module').then( m => m.BoreholeinformationPageModule)
+  },
+  {
+    path: 'logginginformation',
+    loadChildren: () => import('./pages/logginginformation/logginginformation.module').then( m => m.LogginginformationPageModule)
+  },
+  {
+    path: 'layer4',
+    loadChildren: () => import('./pages/layer4/layer4.module').then( m => m.Layer4PageModule)
+  },
 ];
 
 @NgModule({
