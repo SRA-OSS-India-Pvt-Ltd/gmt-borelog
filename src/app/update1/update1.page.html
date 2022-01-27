@@ -1,0 +1,194 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/viewlist"></ion-back-button>
+    </ion-buttons>
+    <ion-title style="white-space: pre-wrap !important;" >Organization Edit</ion-title>
+
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list >
+
+    <ion-item class="padding">
+      <ion-label class="label"><strong>Layer1</strong></ion-label>
+    </ion-item>
+
+    <ion-item class="padding1">
+      <ion-label class="label"><strong>Organization Details</strong></ion-label>
+    </ion-item>
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col size="6">
+          <ion-item class="padding">
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Organization Name:</strong></ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item class="padding">
+            <ion-label>{{orgName}}</ion-label>
+
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="6">
+          <ion-item class="padding">
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Organization Address:</strong></ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item class="padding">
+            <ion-label>{{orgAddrs}}</ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="6">
+          <ion-item class="padding">
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Organization Logo</strong></ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+      <img src="{{orgLogo}}" alt="app icon" class="img2" />
+    </ion-col>
+      </ion-row>
+
+    </ion-grid>
+    <ion-item class="padding1">
+      <ion-label class="label"><strong>Project Information</strong></ion-label>
+    </ion-item>
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col size="6">
+          <ion-item class="padding">
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Project Name:</strong></ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item class="padding">
+              <ion-label>{{projName}}</ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="6">
+          <ion-item class="padding">
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Clent Name:</strong></ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item class="padding">
+             <ion-label>{{clientName}}</ion-label>
+           </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="6">
+          <ion-item class="padding">
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Project Location:</strong></ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item class="padding">
+  <ion-label>{{projLocation}}</ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+       <ion-col size="6">
+          <ion-item class="padding">
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Package:</strong></ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item class="input">
+            <ion-select placeholder="Select Project" (ionChange)="packageChange($event)" value="{{package}}">
+              <ion-select-option  *ngFor="let package of packageList" [value]="package.pkg_name" >
+                {{package.pkg_name}}</ion-select-option>
+            </ion-select>        </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="6">
+          <ion-item class="padding">
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Number of Boreholes:</strong></ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item class="input">
+            <ion-input type="Number" cass="input" [(ngModel)]="boreHoles"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+
+    <ion-item class="padding1">
+      <ion-label class="label"><strong>Sub Agency Details</strong></ion-label>
+    </ion-item>
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col size="6">
+          <ion-item class="padding">
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Sub Agency Name:</strong></ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item class="input">{{subAgency}}
+            <ion-select placeholder="Select" (ionChange)="subAgencyChange($event)" value="{{subAgency}}">
+              <ion-select-option  *ngFor="let subAgency1 of subAencyList" [value]="subAgency1" >
+                {{subAgency1.sa_name}}</ion-select-option>
+            </ion-select>        </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="6">
+          <ion-item class="padding">
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Sub Agency Address:</strong></ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item class="padding">
+  <ion-label>{{subAgencyAddress}}</ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="6">
+          <ion-item class="padding">
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Sub Agency Logo:</strong></ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <img src="{{subAgencyLogo}}" alt="app icon" class="img2" />
+        </ion-col>
+      </ion-row>
+
+
+      <ion-row>
+        <ion-col size="6">
+          <ion-button  expand="block" style="text-transform: none;" (click)="updateLayer1()">
+            Update
+          </ion-button>
+        </ion-col>
+        <ion-col size="6">
+          <ion-button  expand="block" style="text-transform: none;">
+            Cancel
+          </ion-button>
+
+        </ion-col>
+
+      </ion-row>
+
+
+    </ion-grid>
+
+  </ion-list>
+
+</ion-content>

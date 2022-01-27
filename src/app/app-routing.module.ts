@@ -35,6 +35,10 @@ const routes: Routes = [
     path: 'viewlist',
     loadChildren: () => import('./pages/viewlist/viewlist.module').then( m => m.ViewlistPageModule)
   },
+  {
+    path: 'update1',
+    loadChildren: () => import('./update1/update1.module').then( m => m.Update1PageModule)
+  },
 ];
 
 @NgModule({

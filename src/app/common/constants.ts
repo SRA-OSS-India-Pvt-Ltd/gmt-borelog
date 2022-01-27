@@ -11,6 +11,7 @@ export abstract class Constants {
   public static projectLocation: any;
   public static packageList: any =[];
   public static subAgencyList: any =[];
+  public static laYer1Id: any;
 
   //ionic build --prod -- --base-href /dailydiaryweb/
 //        classpath 'com.android.tools.build:gradle:4.0.0'

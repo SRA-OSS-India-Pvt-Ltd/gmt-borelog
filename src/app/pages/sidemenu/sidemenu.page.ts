@@ -88,7 +88,7 @@ export class SidemenuPage implements OnInit {
 
   }
   movetoList(){
-    this.router.navigate(['organization']);
+    this.router.navigate(['viewlist']);
 
   }
 

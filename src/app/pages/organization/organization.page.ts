@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { AndroidDatabaseService } from './../../database/android-database.service';
 import { ToastService } from './../../services/toast.service';
 import { Component, OnInit } from '@angular/core';
@@ -25,7 +26,8 @@ subAgencyAddress: any;
 subAgencyLogo: any;
 boreHoles: any;
   constructor(public toastService: ToastService,
-    public androiDatabase: AndroidDatabaseService) {
+    public androiDatabase: AndroidDatabaseService,
+    public router: Router) {
     this.orgName = Constants.orgName;
     this.orgAddrs = Constants.orgAddre;
     this.orgLogo = Constants.orgLogo;
@@ -65,7 +67,7 @@ boreHoles: any;
 
     }else{
       this.androiDatabase.addLayer1Details(this.package,this.boreHoles,this.subAgency,this.subAgencyAddress,this.subAgencyLogo);
-      this.toastService.presentSuccess('Else');
+      this.router.navigate(['viewlist']);
 
     }
   }
