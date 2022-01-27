@@ -1,3 +1,4 @@
+import { AndroidDatabaseService } from './../../database/android-database.service';
 import { ToastService } from './../../services/toast.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -16,13 +17,17 @@ export class SidemenuPage implements OnInit {
     private menu: MenuController,
     public platform: Platform,
     public alertCtrl: AlertController,
-    public toaseSer: ToastService
+    public toaseSer: ToastService,
+    public androidDatabase: AndroidDatabaseService
     ) {
       platform.ready().then(() => {
         if (this.platform.is('android')) {
+         this.androidDatabase.createDatabase();
         this.toaseSer.presentSuccess('Android');
          }else{
-this.toaseSer.presentError('Else');
+          this.androidDatabase.createDatabase();
+
+         this.toaseSer.presentError('Else');
 
         }
 
@@ -78,4 +83,13 @@ this.toaseSer.presentError('Else');
     this.menu.close();
 
   }
+  movetoLayer1(){
+    this.router.navigate(['organization']);
+
+  }
+  movetoList(){
+    this.router.navigate(['organization']);
+
+  }
+
 }

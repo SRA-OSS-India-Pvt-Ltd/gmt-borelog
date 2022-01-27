@@ -31,6 +31,10 @@ const routes: Routes = [
     path: 'layer4',
     loadChildren: () => import('./pages/layer4/layer4.module').then( m => m.Layer4PageModule)
   },
+  {
+    path: 'viewlist',
+    loadChildren: () => import('./pages/viewlist/viewlist.module').then( m => m.ViewlistPageModule)
+  },
 ];
 
 @NgModule({

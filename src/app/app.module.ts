@@ -9,12 +9,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { Base64ToGallery } from '@ionic-native/base64-to-gallery/ngx';
 import { DatePicker } from '@ionic-native/date-picker/ngx';
 
+import { HttpClientModule } from '@angular/common/http';
+import { SQLite } from '@ionic-native/sqlite/ngx';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
-  providers: [Base64ToGallery,DatePicker,{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  imports: [HttpClientModule,BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  providers: [SQLite,Base64ToGallery,DatePicker,{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
