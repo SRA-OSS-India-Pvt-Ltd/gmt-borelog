@@ -44,6 +44,98 @@ export class AndroidDatabaseService {
     '${subageAddr}',
     '${aubAgeLog}')`,[]);
   }
+
+  addBoreLogData(userid: any,orgId: any,projId: any,said: any,refstd: any,strtype: any,bhno: any,
+    bhloca: any,bhchainage: any,bhlat: any,bhlon: any,bhsdate: any,bhrl: any,watertaRl: any,
+    typeOfrig: any,typeOfDrill: any,cirFluid: any,drillOrient: any,bhDia: any,casingDia: any,
+    casingDepth: any,drillDepthFrom: any,drillDepthTo: any,typeOfstara: any,typeOfSample: any,
+    soilDsDepthFrom: any,soilDsDepthTo: any,sptDethFrom: any,sptDepthTo: any,udsDepthFrom: any,
+    udsDepthTo: any,soilSamplColor: any,soilType: any,soilDensity: any,soilVisualClassi: any,
+    soilDrillingBit: any,soilCoreBarrel: any,rockSampletype: any,rockrunLeng: any,rockRunTime: any,
+    rockWaterLoss: any,rockPiecesLength: any,rockPiecse10: any,rockCr: any,rockrqd: any,
+    rockSampleColor: any,rockWaethering: any,rockType: any,depthTermination: any,bhedate: any,
+    rvRepName: any,rvRepSign: any,sarepName: any,saRepSign: any,clientRepName: any,
+    clientRepSign: any,cdate: any,mdate: any,bhlayer: any,bhstatus: any){
+    this.databaseObj.executeSql(`INSERT INTO borelog_data
+    (user_id,org_id,project_id,sa_id,ref_std,struct_type,bh_no,bh_location,bh_chainage,bh_lat,bh_lon,
+      bh_start_date,bh_rl,water_table_rl,type_of_rig,type_of_drilling,circulation_fluid,drill_orientation,
+      bh_dia,casing_dia,casing_depth,drill_depth_from,drill_depth_to,type_of_strata,type_of_sample,
+      soil_ds_depth_from,soil_ds_depth_to,soil_spt_depth_from,soil_spt_depth_to,soil_uds_depth_from,
+      soil_uds_depth_to,soil_sample_color,soil_type,soil_density,soil_visual_classif,soil_drilling_bit,
+      soil_core_barrel,rock_sample_type,rock_run_length,rock_run_time,rock_water_loss,rock_pieces_length,
+      rock_pieces_10,rock_cr,rock_rqd,rock_sample_color,rock_weathering,rock_type,depth_termination,
+      bh_enddate,rv_rep_name,rv_rep_sign,sa_rep_name,sa_rep_sign,client_rep_name,client_rep_sign,
+      created_date,modified_date,bh_layer,bh_status
+      )
+    VALUES
+    ('${userid}',
+    '${orgId}',
+    '${projId}',
+    '${said}',
+    '${refstd}',
+    '${strtype}',
+    '${bhno}',
+    '${bhloca}',
+    '${bhchainage}',
+    '${bhlat}',
+    '${bhlon}',
+    '${bhsdate}',
+    '${bhrl}',
+    '${watertaRl}',
+    '${typeOfrig}',
+    '${typeOfDrill}',
+    '${cirFluid}',
+    '${drillOrient}',
+    '${bhDia}',
+    '${casingDia}',
+    '${casingDepth}',
+    '${drillDepthFrom}',
+    '${drillDepthTo}',
+    '${typeOfstara}',
+    '${typeOfSample}',
+    '${soilDsDepthFrom}',
+    ${soilDsDepthTo}',
+    ${sptDethFrom}',
+    ${sptDepthTo}',
+    ${udsDepthFrom}',
+    ${udsDepthTo}',
+    ${soilSamplColor}',
+    ${soilType}',
+    ${soilDensity}',
+    ${soilVisualClassi}',
+    ${soilDrillingBit}',
+    ${soilCoreBarrel}',
+    ${rockSampletype}',
+    ${rockrunLeng}',
+    ${rockRunTime}',
+    ${rockWaterLoss}',
+    ${rockPiecesLength}',
+    ${rockPiecse10}',
+    ${rockCr}',
+    ${rockrqd}',
+    ${rockSampleColor}',
+    ${rockWaethering}',
+    ${rockType}',
+    ${depthTermination}',
+    ${bhedate}',
+    ${rvRepName}',
+    ${rvRepSign}',
+    ${sarepName}',
+    ${saRepSign}',
+    ${clientRepName}',
+    ${clientRepSign}',
+    ${cdate}',
+    ${mdate}',
+    ${bhlayer}',
+    ${bhstatus}',
+    )`,[]).then((res: any)=>{
+      console.log('adding Borelog');
+    }).catch((error: any)=>{
+      console.log('error on adding Borelog ', JSON.stringify(error));
+
+    });
+  }
+
   updateLayer1(package1: string,noholes: string,sunageName: string,subageAddr: string,aubAgeLog: string, id: string){
 
    // eslint-disable-next-line max-len

@@ -139,8 +139,8 @@
           </ion-item>
         </ion-col>
         <ion-col size="6">
-          <ion-item class="input">{{subAgency}}
-            <ion-select placeholder="Select" (ionChange)="subAgencyChange($event)" value="{{subAgency}}">
+          <ion-item class="input">
+            <ion-select placeholder="Select" (ionChange)="subAgencyChange($event)" value="item.SubAgencyName">
               <ion-select-option  *ngFor="let subAgency1 of subAencyList" [value]="subAgency1" >
                 {{subAgency1.sa_name}}</ion-select-option>
             </ion-select>        </ion-item>
@@ -154,7 +154,8 @@
         </ion-col>
         <ion-col size="6">
           <ion-item class="padding">
-  <ion-label>{{subAgencyAddress}}</ion-label>
+
+            <ion-label>{{subAgencyAddress}}</ion-label>
           </ion-item>
         </ion-col>
       </ion-row>
