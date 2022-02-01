@@ -34,4 +34,13 @@ layer1List: any =[];
     Constants.laYer1Id = id;
     this.router.navigate(['update1']);
   }
+  moveToUpdate2(id: any){
+    Constants.laYer1Id = id;
+    this.router.navigate(['update2']);
+  }
+  moveToUpdate3(id: any){
+    Constants.laYer1Id = id;
+    this.router.navigate(['update3']);
+  }
+
 }

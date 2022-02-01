@@ -66,8 +66,9 @@ boreHoles: any;
       this.toastService.presentError('Please Select SubAgencyName');
 
     }else{
-      this.androiDatabase.addLayer1Details(this.package,this.boreHoles,this.subAgency,this.subAgencyAddress,this.subAgencyLogo);
-      this.router.navigate(['viewlist']);
+      this.androiDatabase.addLayer1Details(this.package,this.boreHoles,this.subAgency,this.subAgencyAddress,this.subAgencyLogo,
+        Constants.userId,Constants.orgName,Constants.projectName,this.subAgency);
+      this.router.navigate(['boreholeinformation']);
 
     }
   }

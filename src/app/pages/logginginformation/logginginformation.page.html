@@ -152,9 +152,9 @@
 </ion-row>
 <ion-row *ngIf="isSPTDepth">
   <ion-col size="3"><ion-item class="input"><ion-input type="number" [(ngModel)]="first"></ion-input></ion-item></ion-col>
-  <ion-col size="3"><ion-item class="input"><ion-input type="number" [(ngModel)]="second"></ion-input></ion-item></ion-col>
-  <ion-col size="3"><ion-item class="input"><ion-input type="number" [(ngModel)]="third"></ion-input></ion-item></ion-col>
-  <ion-col size="3"><ion-item class="input"><ion-input type="number" [(ngModel)]="total"></ion-input></ion-item></ion-col>
+  <ion-col size="3"><ion-item class="input"><ion-input type="number" [(ngModel)]="second" (ionChange)="totalCount()"></ion-input></ion-item></ion-col>
+  <ion-col size="3"><ion-item class="input"><ion-input type="number" [(ngModel)]="third" (ionChange)="totalCount()"></ion-input></ion-item></ion-col>
+  <ion-col size="3"><ion-item class="input"><ion-label>{{total}}</ion-label></ion-item></ion-col>
 
 </ion-row>
 <ion-row *ngIf="isSPTDepth">
@@ -178,9 +178,9 @@
 </ion-row>
 <ion-row *ngIf="isSPTDepth">
 <ion-col size="3"><ion-item class="input"><ion-input type="number" [(ngModel)]="firstB"></ion-input></ion-item></ion-col>
-<ion-col size="3"><ion-item class="input"><ion-input type="number" [(ngModel)]="secondB"></ion-input></ion-item></ion-col>
-<ion-col size="3"><ion-item class="input"><ion-input type="number" [(ngModel)]="thirdB"></ion-input></ion-item></ion-col>
-<ion-col size="3"><ion-item class="input"><ion-input type="number" [(ngModel)]="totalB"></ion-input></ion-item></ion-col>
+<ion-col size="3"><ion-item class="input"><ion-input type="number" [(ngModel)]="secondB" (ionChange)="totalCountB()"></ion-input></ion-item></ion-col>
+<ion-col size="3"><ion-item class="input"><ion-input type="number" [(ngModel)]="thirdB" (ionChange)="totalCountB()"></ion-input></ion-item></ion-col>
+<ion-col size="3"><ion-item class="input"><ion-label>{{totalB}}</ion-label></ion-item></ion-col>
 
 </ion-row>
 
@@ -498,8 +498,21 @@
   </ion-col>
 </ion-row>
 
+<ion-row  >
+  <ion-col size="6">
+    <ion-item class="padding">
+      <ion-label  style="white-space: pre-wrap !important;"><strong>Type Of Rock</strong></ion-label>
+    </ion-item>
+  </ion-col>
+  <ion-col size="6">
+    <ion-item class="input">
+      <ion-input type="text" [(ngModel)]="typeOfRock"></ion-input>
+      </ion-item>
+  </ion-col>
+</ion-row>
+
 
 </ion-grid>
-<ion-button expand="block" style="text-transform: none;" class="button"> Save</ion-button>
+<ion-button expand="block" style="text-transform: none;" class="button" (click)="validation()"> Save</ion-button>
 </ion-list>
 </ion-content>

@@ -1,13 +1,12 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/sidemenu"></ion-back-button>
+      <ion-back-button defaultHref="/viewlist"></ion-back-button>
     </ion-buttons>
-    <ion-title style="white-space: pre-wrap !important;" >Borehole Information</ion-title>
-
-
+    <ion-title style="white-space: pre-wrap !important;" >Borehole Information Edit</ion-title>
   </ion-toolbar>
 </ion-header>
+
 
 <ion-content>
   <ion-list>
@@ -164,7 +163,7 @@
         <ion-col size="6">
           <ion-item class="input">
             <ion-item>
-              <ion-select  placeholder="Select " (ionChange)="rigChange($event)">
+              <ion-select  placeholder="Select " (ionChange)="rigChange($event)" value="{{typeOfRig}}">
                 <ion-select-option value="Mechanical">Mechanical</ion-select-option>
                 <ion-select-option value="Hydraulic">Hydraulic</ion-select-option>
               </ion-select>
@@ -181,7 +180,7 @@
         <ion-col size="6">
           <ion-item class="input">
             <ion-item>
-              <ion-select  placeholder="Select " (ionChange)="drillChange($event)">
+              <ion-select  placeholder="Select " (ionChange)="drillChange($event)" value="{{typeOfDrill}}">
                 <ion-select-option value="Rotary">Rotary</ion-select-option>
                 <ion-select-option value="Auger">Auger</ion-select-option>
                 <ion-select-option value="Bentonite Slurry">Bentonite Slurry</ion-select-option>
@@ -200,7 +199,7 @@
         <ion-col size="6">
           <ion-item class="input">
             <ion-item>
-              <ion-select  placeholder="Select " (ionChange)="circulationChange($event)">
+              <ion-select  placeholder="Select " (ionChange)="circulationChange($event)" value="{{circulationFluid}}">
                 <ion-select-option value="Bentonite Slurry">Bentonite Slurry</ion-select-option>
                 <ion-select-option value="Water">Water</ion-select-option>
                 <ion-select-option value="Polymer Mud System" style="white-space: pre-wrap !important;">Polymer Mud System</ion-select-option>
@@ -219,7 +218,7 @@
         <ion-col size="6">
           <ion-item class="input">
             <ion-item>
-              <ion-select  placeholder="Select " (ionChange)="oriantionChange($event)">
+              <ion-select  placeholder="Select " (ionChange)="oriantionChange($event)" value="{{orientation}}">
                 <ion-select-option value="Vertical">Vertical</ion-select-option>
                 <ion-select-option value="Inclined">Inclined</ion-select-option>
                 <ion-select-option value="Angle with Horizontal" style="white-space: pre-wrap !important;">Polymer Mud System</ion-select-option>
@@ -269,8 +268,19 @@
       </ion-row>
 
       </ion-grid>
-      <ion-button expand="block" style="text-transform: none;" class="button" (click)="validation()">
-        Save
-      </ion-button>
+      <ion-row>
+        <ion-col size="6">
+          <ion-button  expand="block" style="text-transform: none;" (click)="updateLayer2()">
+            Update
+          </ion-button>
+        </ion-col>
+        <ion-col size="6">
+          <ion-button  expand="block" style="text-transform: none;">
+            Cancel
+          </ion-button>
+
+        </ion-col>
+
+      </ion-row>
       </ion-list>
 </ion-content>

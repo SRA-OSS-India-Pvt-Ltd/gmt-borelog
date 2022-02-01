@@ -17,10 +17,19 @@
           <ion-col size="9">
             <ion-label style="white-space: pre-wrap !important;"><strong>Package: {{item.Package}}</strong> </ion-label>
           </ion-col>
-        <ion-col size="3">
+        <ion-col size="1">
           <ion-icon  name="create"  (click)="moveToUpdate(item.Id)"></ion-icon>
 
         </ion-col>
+        <ion-col size="1">
+          <ion-icon  name="create"  (click)="moveToUpdate2(item.Id)"></ion-icon>
+
+        </ion-col>
+        <ion-col size="1">
+          <ion-icon  name="create"  (click)="moveToUpdate3(item.Id)"></ion-icon>
+
+        </ion-col>
+
 
         </ion-row>
       </ion-card-header>

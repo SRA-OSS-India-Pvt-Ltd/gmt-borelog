@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { Constants } from 'src/app/common/constants';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 
 
@@ -16,7 +18,7 @@ export class BoreholeinformationPage implements OnInit {
   boreholeNumber: any;
   boreholeLocation: any;
   boreholeChainage: any;
-  boreholeCoordinates: any;
+
 
   rl: any;
   waterTable: any;
@@ -33,20 +35,37 @@ export class BoreholeinformationPage implements OnInit {
   ref: any;
   latitude: any;
   longitude: any;
+  layer1List: any = [];
 
   date: any;
   constructor(public toastSer: ToastService,
     public androidDatabase: AndroidDatabaseService,
-    private geolocation: Geolocation) {
+    private geolocation: Geolocation,
+    public router: Router ) {
     this.ref = 'IS 1892; IS 2131; IS 2132';
    this.date = new Date().toISOString();
+   this.getLayer1LastId();
 
   }
 
   ngOnInit() {
   }
 
+  getLayer1LastId() {
+    this.androidDatabase.getLastId().then((data) => {
+      this.layer1List = [];
+      console.log('size',data.rows.length);
+      if (data.rows.length > 0) {
+        for (let i = 0; i < data.rows.length; i++) {
+          this.layer1List.push(data.rows.item(i));
+        }
+        console.log('layer1List',this.layer1List);
+        Constants.laYer1Id = this.layer1List[0].Id;
 
+
+      }
+    });
+  }
 
 getLocations(){
   this.geolocation.getCurrentPosition().then((resp) => {
@@ -92,8 +111,8 @@ getLocations(){
     }else if(this.boreholeChainage === undefined ){
       this.toastSer.presentError('Please Enter Borehole Chainage');
 
-    }else if(this.boreholeCoordinates === undefined ){
-      this.toastSer.presentError('Please Enter Borehole Coordinates');
+    }else if(this.latitude === undefined ){
+      this.toastSer.presentError('Please Enter Latitude');
 
     }else if(this.date === undefined ){
       this.toastSer.presentError('Please Enter Borehole Start Date');
@@ -128,11 +147,13 @@ getLocations(){
   }
 
   addDatabase(){
-    this.androidDatabase.addBoreLogData('','','','',this.ref,this.typeOfStructure,this.boreholeNumber,
-    this.boreholeLocation,this.boreholeChainage,this.circulationChange,this.boreholeNumber,this.date,this.rl,
-    this.waterTable,this.typeOfRig,this.typeOfDrill,this.circulationFluid,this.drillChange,this.boreholeDia,
-    this.boreholeCasingDia,this.casingDepth,'','','','','','','','','','','','','','','','','','','','','','',
-    '','','','','','','','','','','','','','','','','',);
+    this.androidDatabase.updateLayer2(this.ref,this.typeOfStructure,this.boreholeNumber,
+      this.boreholeLocation,this.boreholeChainage,this.latitude,this.longitude,this.date,
+      this.rl,this.waterTable,this.typeOfRig,this.typeOfDrill,this.circulationFluid,
+      this.orientation,this.boreholeDia,this.boreholeCasingDia,this.casingDepth,Constants.laYer1Id
+      );
+      this.router.navigate(['logginginformation']);
+
   }
 
 }
