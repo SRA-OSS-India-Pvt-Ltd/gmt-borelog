@@ -267,7 +267,7 @@ layer1List: any =[];
     this.typeOfWeathering,this.typeOfRock,Constants.laYer1Id,this.first,
     this.second,this.third,this.total,this.firstB,this.secondB,this.thirdB,this.totalB);
 
-    this.router.navigate(['viewlist']);
+    this.router.navigate(['layer4']);
   }
   totalCount(){
     if(this.second !== undefined && this.third !== undefined){

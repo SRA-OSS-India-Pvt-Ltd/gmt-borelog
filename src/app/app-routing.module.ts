@@ -47,6 +47,14 @@ const routes: Routes = [
     path: 'update3',
     loadChildren: () => import('./pages/update3/update3.module').then( m => m.Update3PageModule)
   },
+  {
+    path: 'example',
+    loadChildren: () => import('./example/example.module').then( m => m.ExamplePageModule)
+  },
+  {
+    path: 'update4',
+    loadChildren: () => import('./pages/update4/update4.module').then( m => m.Update4PageModule)
+  },
 ];
 
 @NgModule({

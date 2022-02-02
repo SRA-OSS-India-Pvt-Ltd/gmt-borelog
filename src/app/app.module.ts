@@ -14,6 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SQLite } from '@ionic-native/sqlite/ngx';
 
 
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],

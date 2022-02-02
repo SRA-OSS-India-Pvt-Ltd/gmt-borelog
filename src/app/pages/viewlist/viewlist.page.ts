@@ -43,4 +43,9 @@ layer1List: any =[];
     this.router.navigate(['update3']);
   }
 
+  moveToUpdate4(id: any){
+    Constants.laYer1Id = id;
+    this.router.navigate(['update4']);
+  }
+
 }

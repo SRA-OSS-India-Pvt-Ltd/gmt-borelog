@@ -260,6 +260,31 @@ export class AndroidDatabaseService {
       }
 
 
+      updateLayer4(depthTer: any,edate: any,rvrepname: any,
+        rvrepsign: any,sarepname: any,sarepsign: any,clientname: any,clisign: any,id: any){
+          return this.databaseObj.executeSql(`UPDATE borelog_data
+           SET depth_termination = '${depthTer}',
+           bh_enddate = '${edate}',
+           rv_rep_name = '${rvrepname}',
+           rv_rep_sign = '${rvrepsign}',
+           sa_rep_name = '${sarepname}',
+           sa_rep_sign = '${sarepsign}',
+           client_rep_name = '${clientname}',
+           client_rep_sign = '${clisign}'
+           WHERE Id = ${id} `,[])
+          .then((res) => {
+           console.log('Updating Layer4');
+           this.toastSer.presentSuccess('Layer 4 Details Updated');
+           return res;
+         })
+         .catch((e) => {
+           console.log('error on Updating Layer4 ', JSON.stringify(e));
+           return 'error on Updating Layer4 ' + JSON.stringify(e);
+         });
+
+        }
+
+
   getLayer1() {
     return this.databaseObj
       .executeSql(`select * from borelog_data`, [])

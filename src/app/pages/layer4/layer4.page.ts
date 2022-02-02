@@ -1,6 +1,9 @@
-import { Component, OnInit, ViewChild, HostListener, ElementRef, AfterViewInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AndroidDatabaseService } from 'src/app/database/android-database.service';
+import { ToastService } from './../../services/toast.service';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import SignaturePad from 'signature_pad';
-import { Base64ToGallery } from '@ionic-native/base64-to-gallery/ngx';
+import { Constants } from 'src/app/common/constants';
 
 
 @Component({
@@ -8,73 +11,129 @@ import { Base64ToGallery } from '@ionic-native/base64-to-gallery/ngx';
   templateUrl: './layer4.page.html',
   styleUrls: ['./layer4.page.scss'],
 })
-export class Layer4Page implements OnInit, AfterViewInit {
+export class Layer4Page implements  AfterViewInit {
 
-  @ViewChild('canvas', { static: true }) signaturePadElement;
+  @ViewChild('canvas') canvasEl:  ElementRef;
+  @ViewChild('canvas1') canvasEl1:  ElementRef;
+  @ViewChild('canvas2') canvasEl2:  ElementRef;
+
 signaturePad;
+signaturePad1;
+signaturePad2;
+signatureImg: string;
+signatureImg1: string;
+signatureImg2: string;
+base641: any;
+base642: any;
+base643: any;
+
 depthOfTermination: any;
-endDate: any;
+
 date: any;
 aarveRepresName: any;
 subAgencyRepresentivaeName: any;
 clientRepresNaame: any;
-  constructor(private base64ToGallery: Base64ToGallery,
-    private elementRef: ElementRef,) {
+layer1List: any = [];
+  constructor(public toastSer: ToastService,
+    public androidDatabase: AndroidDatabaseService,
+    public router: Router) {
       this.date = new Date().toISOString();
       console.log('date',this.date);
-      this.endDate = this.date;
-
+      this.getLayer1LastId();
      }
-  ngOnInit(): void {
-    this.init();
-  }
+     ngAfterViewInit() {
+      this.signaturePad = new SignaturePad(this.canvasEl.nativeElement);
+      this.signaturePad1 = new SignaturePad(this.canvasEl1.nativeElement);
+      this.signaturePad2 = new SignaturePad(this.canvasEl2.nativeElement);
 
-
-  // eslint-disable-next-line @typescript-eslint/member-ordering
-  @HostListener('window:resize', ['$event'])
-  onResize() {
-    this.init();
-  }
-
-  init() {
-    const canvas: any = this.elementRef.nativeElement.querySelector('canvas');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight - 140;
-    if (this.signaturePad) {
-      this.signaturePad.clear(); // Clear the pad on init
     }
-  }
 
-  public ngAfterViewInit(): void {
-    this.signaturePad = new SignaturePad(this.signaturePadElement.nativeElement);
-    this.signaturePad.clear();
-    this.signaturePad.penColor = 'rgb(56,128,255)';
-  }
+    startDrawing(event: Event) {
+      console.log(event);
+      // works in device not in browser
 
-  save(): void {
-    const img = this.signaturePad.toDataURL();
-    this.base64ToGallery.base64ToGallery(img).then(
-      res => console.log('Saved image to gallery ', res),
-      err => console.log('Error saving image to gallery ', err)
-    );
-  }
-
-  isCanvasBlank(): boolean {
-    if (this.signaturePad) {
-      return this.signaturePad.isEmpty() ? true : false;
     }
-  }
 
-  clear() {
-    this.signaturePad.clear();
-  }
-
-  undo() {
-    const data = this.signaturePad.toData();
-    if (data) {
-      data.pop(); // remove the last dot or line
-      this.signaturePad.fromData(data);
+    moved(event: Event) {
+      // works in device not in browser
     }
-  }
 
-}
+    clearPad() {
+      this.signaturePad.clear();
+      this.signaturePad1.clear();
+      this.signaturePad2.clear();
+
+    }
+
+    savePad() {
+      this.base641 = this.signaturePad.toDataURL();
+      this.signatureImg = this.base641;
+      this.base642 = this.signaturePad1.toDataURL();
+      this.signatureImg1 = this.base642;
+      this.base643 = this.signaturePad2.toDataURL();
+      this.signatureImg2 = this.base643;
+
+
+    }
+     validation(){
+       if(this.depthOfTermination === undefined){
+       this.toastSer.presentError('please give the Depth of Termination');
+       }else if(this.date === undefined){
+        this.toastSer.presentError('please give the Borehole End date');
+
+       }else if(this.aarveRepresName === undefined){
+        this.toastSer.presentError('please give the AARVEE Representative Name');
+
+       }else if(this.signaturePad.toDataURL() === undefined){
+        this.toastSer.presentError('please give the AARVEE Representative Signature');
+
+       }else if(this.subAgencyRepresentivaeName === undefined){
+        this.toastSer.presentError('please give the Sub Agency Representative Name');
+
+       }else if(this.signaturePad1.toDataURL() === undefined){
+        this.toastSer.presentError('please give the Sub Agency Representative Signature');
+
+       }else if(this.clientRepresNaame === undefined){
+        this.toastSer.presentError('please give the Client Representative Name');
+
+       }else if(this.signaturePad2.toDataURL() === undefined){
+        this.toastSer.presentError('please give the Client Representative Signature');
+
+       }else{
+
+
+          this.addDatabase();
+       }
+     }
+
+     getLayer1LastId() {
+      this.androidDatabase.getLastId().then((data) => {
+        this.layer1List = [];
+        console.log('size',data.rows.length);
+        if (data.rows.length > 0) {
+          for (let i = 0; i < data.rows.length; i++) {
+            this.layer1List.push(data.rows.item(i));
+          }
+          console.log('layer1List',this.layer1List);
+          Constants.laYer1Id = this.layer1List[0].Id;
+
+
+        }
+      });
+    }
+
+    addDatabase(){
+      this.base641 = this.signaturePad.toDataURL();
+      this.signatureImg = this.base641;
+      this.base642 = this.signaturePad1.toDataURL();
+      this.signatureImg1 = this.base642;
+      this.base643 = this.signaturePad2.toDataURL();
+      this.signatureImg2 = this.base643;
+console.log(this.base641,this.base642,this.base643);
+      this.androidDatabase.updateLayer4(this.depthOfTermination,this.date,
+        this.aarveRepresName,this.base641,this.subAgencyRepresentivaeName,this.base642,this.clientRepresNaame,this.base643,
+        Constants.laYer1Id);
+        this.router.navigate(['viewlist']);
+    }
+
+  }
