@@ -1,9 +1,183 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>update4</ion-title>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/sidemenu"></ion-back-button>
+    </ion-buttons>
+    <ion-title style="white-space: pre-wrap !important;" >Update 4</ion-title>
+
+
   </ion-toolbar>
 </ion-header>
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-grid fixed>
+      <ion-row >
+        <ion-col size="6">
+          <ion-item class="padding">
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Depth of termination:</strong></ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item class="input">
+            <ion-input type="text" [(ngModel)]="depthOfTermination" ></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
 
-<ion-content>
+        <ion-col size="12">
+          <ion-item class="input">
+            <ion-label><strong>Borehole End Date</strong></ion-label>
+            <ion-input
+              value="{{ date | date: 'dd-MM-yyyy' }}"
+              id="date"
+              class="ion-text-end"
+            ></ion-input>
+            <ion-popover trigger="date" size="cover">
+              <ng-template>
+                <ion-datetime
+                  presentation="date"
+                  [(ngModel)]="date"
+                  locale="sl-SI"
+                ></ion-datetime>
+              </ng-template>
+            </ion-popover>
+          </ion-item>
+              </ion-col>
+      </ion-row>
+
+
+
+      <ion-row >
+        <ion-col size="6">
+          <ion-item class="padding">
+            <ion-label  style="white-space: pre-wrap !important;"><strong>AARVEE Representative Name:</strong></ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item class="input">
+            <ion-input type="text" [(ngModel)]="aarveRepresName" ></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+
+      <ion-row >
+        <ion-col size="12">
+          <ion-item class="padding">
+            <ion-label  style="white-space: pre-wrap !important;"><strong>AARVEE Representative Signature:</strong></ion-label>
+          </ion-item>
+        </ion-col>
+        </ion-row>
+
+
+        <ion-row class="input">
+        <ion-col size="11" class="padding">
+          <div>
+            <canvas #canvas (touchstart)="startDrawing($event)" (touchmove)="moved($event)"></canvas>
+         </div>
+
+        </ion-col>
+        <ion-col size="1">
+          <ion-icon  name="create"  (click)="updateImg1()"></ion-icon>
+
+        </ion-col>
+      </ion-row>
+
+
+
+      <ion-row >
+        <ion-col size="6">
+          <ion-item class="padding">
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Sub Agency Representative Name:</strong></ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item class="input">
+            <ion-input type="text" [(ngModel)]="subAgencyRepresentivaeName" ></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+
+      <ion-row >
+        <ion-col size="12">
+          <ion-item class="padding">
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Sub Agency Representative Signature:</strong></ion-label>
+          </ion-item>
+        </ion-col>
+
+      </ion-row>
+
+      <ion-row >
+        <ion-col size="11" class="padding">
+          <div>
+            <canvas #canvas1 (touchstart)="startDrawing($event)" (touchmove)="moved($event)"></canvas>
+         </div>
+
+        </ion-col>
+        <ion-col size="1">
+          <ion-icon  name="create"  (click)="updateImg2()"></ion-icon>
+
+        </ion-col>
+
+      </ion-row>
+
+
+      <ion-row >
+        <ion-col size="6">
+          <ion-item class="padding">
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Client Representative Name:</strong></ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item class="input">
+            <ion-input type="text" [(ngModel)]="clientRepresNaame" ></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+
+      <ion-row >
+        <ion-col size="12">
+          <ion-item class="padding">
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Client Representative Signature:</strong></ion-label>
+          </ion-item>
+        </ion-col>
+
+      </ion-row>
+
+
+      <ion-row class="input">
+        <ion-col size="11" class="padding">
+          <div>
+            <canvas #canvas2 (touchstart)="startDrawing($event)" (touchmove)="moved($event)"></canvas>
+         </div>
+
+        </ion-col>
+        <ion-col size="1">
+          <ion-icon  name="create"  (click)="updateImg3()"></ion-icon>
+
+        </ion-col>
+
+      </ion-row>
+
+
+        <ion-row>
+          <ion-col size="6">
+            <ion-button  (click)="clearPad()">Clear</ion-button>
+          </ion-col>
+          <ion-col size="6" >
+            <ion-button (click)="addDatabase()" >Update and Submit</ion-button>
+          </ion-col>
+        </ion-row>
+
+
+    </ion-grid>
+
+
+  </ion-list>
+
 
 </ion-content>
+
