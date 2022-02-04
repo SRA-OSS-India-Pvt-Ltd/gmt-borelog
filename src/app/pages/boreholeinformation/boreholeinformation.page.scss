@@ -6,28 +6,29 @@
     width: 100%;
     justify-content: center;
 
-    
+
   }
   .padding{
-      margin: 5px;
+      margin: 2px;
     --border-width: 0;
     --inner-border-width: 0;
   }
   .padding1{
+    margin: 2px;
 
     --border-width: 0;
   --inner-border-width: 0;
 }
   .input{
-    margin: 5px;
+    margin: 2px;
     border: 2px solid;
     border-radius: 4px;
-  
+
     border-color:  #3880ff;
     --border-width: 0;
     --inner-border-width: 0;
-  
-  
+
+
   }
   .card {
     border: 3px solid #0093d2
@@ -39,3 +40,9 @@
   .button{
       margin: 5px;
   }
+  .required-asterisk{
+    color: red;
+    font-weight: bold;
+    margin-left: 3px;
+    font-size: 1.2em;
+}

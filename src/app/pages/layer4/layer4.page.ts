@@ -135,5 +135,15 @@ console.log(this.base641,this.base642,this.base643);
         Constants.laYer1Id);
         this.router.navigate(['viewlist']);
     }
+    clear1(){
+      this.signaturePad.clear();
+    }
+    clear2(){
+      this.signaturePad1.clear();
+    }
+    clear3(){
+      this.signaturePad2.clear();
+    }
+
 
   }

@@ -38,6 +38,8 @@ export class BoreholeinformationPage implements OnInit {
   layer1List: any = [];
 
   date: any;
+  angleWithHorizontal: any;
+  isInclined = false;
   constructor(public toastSer: ToastService,
     public androidDatabase: AndroidDatabaseService,
     private geolocation: Geolocation,
@@ -97,6 +99,9 @@ getLocations(){
     console.log($event.target.value);
 
     this.orientation =$event.target.value;
+    if(this.orientation === 'Inclined'){
+      this.isInclined = true;
+    }
   }
 
   validation(){
@@ -154,6 +159,9 @@ getLocations(){
       );
       this.router.navigate(['logginginformation']);
 
+  }
+  moveToNext(){
+   this.router.navigate(['logginginformation']);
   }
 
 }

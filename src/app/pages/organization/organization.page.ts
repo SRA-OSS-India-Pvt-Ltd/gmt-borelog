@@ -59,6 +59,9 @@ boreHoles: any;
 
 
   }
+  moveToNext(){
+    this.router.navigate(['boreholeinformation']);
+  }
   validation(){
     if(this.package === undefined){
       this.toastService.presentError('Please Select Package');

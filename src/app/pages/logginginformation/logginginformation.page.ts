@@ -51,6 +51,17 @@ typeOfWeathering: any;
 rockSamplColor: any;
 typeOfRock: any;
 layer1List: any =[];
+isSoil = false;
+isRock = false;
+one = false;
+two = false;
+three = false;
+four = false;
+oneB = false;
+twoB = false;
+threeB = false;
+fourB = false;
+
   constructor(public toastSer: ToastService,
     public androidDatabase: AndroidDatabaseService,
     public router: Router) {
@@ -78,6 +89,14 @@ layer1List: any =[];
   strataChange($event){
   this.typeOfstrata= $event.target.value;
   console.log($event.target.value);
+  if(this.typeOfstrata === 'Soil'){
+  this.isSoil = true;
+  this.isRock = false;
+  }else if(this.typeOfstrata === 'Rock'){
+    this.isSoil = false;
+    this.isRock = true;
+
+  }
   }
   sampleChange($event){
     this.typeOfsample= $event.target.value;
@@ -257,6 +276,9 @@ layer1List: any =[];
 
  }
 
+ moveToNext(){
+
+ }
  addDatabse(){
    this.androidDatabase.updateLayer3(this.drillingFrom,this.drillingTo,this.typeOfstrata,
     this.typeOfsample,this.dsDepthFrom,this.dsDepthTo,this.sptDepthFrom,this.sptDepthTo,
@@ -270,13 +292,36 @@ layer1List: any =[];
     this.router.navigate(['layer4']);
   }
   totalCount(){
+    if(this.firstB === 50 && this.first <= 15 ){
+      this.one = true;
+    }
+    if(this.secondB === 50 && this.second <= 15 ){
+      this.two = true;
+    }
+    if(this.thirdB === 50 && this.third <= 15 ){
+      this.three = true;
+    }
+
+
     if(this.second !== undefined && this.third !== undefined){
       this.total = this.second + this.third;
     }
   }
   totalCountB(){
+    if(this.firstB >= 50 && this.first === 15 ){
+      this.oneB = true;
+    }
+    if(this.secondB >= 50 && this.second === 15 ){
+      this.twoB = true;
+    }
+    if(this.thirdB >= 50 && this.third === 15 ){
+      this.threeB = true;
+    }
     if(this.secondB !== undefined && this.thirdB !== undefined){
       this.totalB = this.secondB + this.thirdB;
+      if(this.totalB >= 100 && this.total === 30){
+        this.fourB = true;
+      }
     }
   }
 

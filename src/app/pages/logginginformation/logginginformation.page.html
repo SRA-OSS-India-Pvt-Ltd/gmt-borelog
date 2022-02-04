@@ -23,7 +23,7 @@
     <ion-row>
       <ion-col size="6">
         <ion-item class="padding">
-          <ion-label  style="white-space: pre-wrap !important;"><strong>Drilling From:</strong></ion-label>
+          <ion-label  style="white-space: pre-wrap !important;"><strong>Drilling From (m):</strong><span class="required-asterisk">*</span></ion-label>
         </ion-item>
       </ion-col>
       <ion-col size="6">
@@ -35,7 +35,7 @@
     <ion-row>
       <ion-col size="6">
         <ion-item class="padding">
-          <ion-label  style="white-space: pre-wrap !important;"><strong>Drilling To:</strong></ion-label>
+          <ion-label  style="white-space: pre-wrap !important;"><strong>Drilling To(m):</strong><span class="required-asterisk">*</span></ion-label>
         </ion-item>
       </ion-col>
       <ion-col size="6">
@@ -61,7 +61,7 @@
         </ion-item>
       </ion-col>
     </ion-row>
-    <ion-row>
+    <ion-row *ngIf="isSoil">
       <ion-col size="6">
         <ion-item class="padding">
           <ion-label  style="white-space: pre-wrap !important;"><strong>Type of Sample:</strong></ion-label>
@@ -151,12 +151,21 @@
 
 </ion-row>
 <ion-row *ngIf="isSPTDepth">
-  <ion-col size="3"><ion-item class="input"><ion-input type="number" [(ngModel)]="first"></ion-input></ion-item></ion-col>
+  <ion-col size="3"><ion-item class="input"><ion-input type="number" [(ngModel)]="first"(ionChange)="totalCount()"></ion-input></ion-item></ion-col>
   <ion-col size="3"><ion-item class="input"><ion-input type="number" [(ngModel)]="second" (ionChange)="totalCount()"></ion-input></ion-item></ion-col>
   <ion-col size="3"><ion-item class="input"><ion-input type="number" [(ngModel)]="third" (ionChange)="totalCount()"></ion-input></ion-item></ion-col>
   <ion-col size="3"><ion-item class="input"><ion-label>{{total}}</ion-label></ion-item></ion-col>
 
 </ion-row>
+
+<ion-row *ngIf="isSPTDepth">
+  <ion-col size="3" *ngIf="one"><ion-item class="padding"><ion-label ><strong>Refusal</strong></ion-label></ion-item></ion-col>
+  <ion-col size="3" *ngIf="two"><ion-item class="padding"><ion-label ><strong>Refusal</strong></ion-label></ion-item></ion-col>
+  <ion-col size="3" *ngIf="three"><ion-item class="padding"><ion-label ><strong>Refusal</strong></ion-label></ion-item></ion-col>
+  <ion-col size="3" *ngIf="four"><ion-item class="padding"><ion-label ><strong>Refusal</strong></ion-label></ion-item></ion-col>
+
+</ion-row>
+
 <ion-row *ngIf="isSPTDepth">
   <ion-col size="6">
     <ion-item class="padding">
@@ -177,13 +186,20 @@
 
 </ion-row>
 <ion-row *ngIf="isSPTDepth">
-<ion-col size="3"><ion-item class="input"><ion-input type="number" [(ngModel)]="firstB"></ion-input></ion-item></ion-col>
+<ion-col size="3"><ion-item class="input"><ion-input type="number" [(ngModel)]="firstB" (ionChange)="totalCountB()"></ion-input></ion-item></ion-col>
 <ion-col size="3"><ion-item class="input"><ion-input type="number" [(ngModel)]="secondB" (ionChange)="totalCountB()"></ion-input></ion-item></ion-col>
 <ion-col size="3"><ion-item class="input"><ion-input type="number" [(ngModel)]="thirdB" (ionChange)="totalCountB()"></ion-input></ion-item></ion-col>
 <ion-col size="3"><ion-item class="input"><ion-label>{{totalB}}</ion-label></ion-item></ion-col>
 
 </ion-row>
 
+<ion-row *ngIf="isSPTDepth">
+  <ion-col size="3" *ngIf="oneB"><ion-item class="padding"><ion-label ><strong>Refusal</strong></ion-label></ion-item></ion-col>
+  <ion-col size="3" *ngIf="twoB"><ion-item class="padding"><ion-label ><strong>Refusal</strong></ion-label></ion-item></ion-col>
+  <ion-col size="3" *ngIf="threeB"><ion-item class="padding"><ion-label ><strong>Refusal</strong></ion-label></ion-item></ion-col>
+  <ion-col size="3" *ngIf="fourB"><ion-item class="padding"><ion-label ><strong>Refusal</strong></ion-label></ion-item></ion-col>
+
+</ion-row>
 
 <ion-row *ngIf="isUDSepth">
   <ion-col size="6">
@@ -211,8 +227,8 @@
   </ion-col>
 </ion-row>
 
-<ion-row >
-  <ion-col size="6">
+<ion-row  *ngIf="isSoil">
+  <ion-col size="6" >
     <ion-item class="padding">
       <ion-label  style="white-space: pre-wrap !important;"><strong>Soil Sample Color:</strong></ion-label>
     </ion-item>
@@ -223,7 +239,7 @@
     </ion-item>
   </ion-col>
 </ion-row>
-<ion-row >
+<ion-row  *ngIf="isSoil">
   <ion-col size="6">
     <ion-item class="padding">
       <ion-label  style="white-space: pre-wrap !important;"><strong>Type of Soil:</strong></ion-label>
@@ -285,7 +301,7 @@
   </ion-col>
 </ion-row>
 
-<ion-row  >
+<ion-row *ngIf="isSoil" >
   <ion-col size="6">
     <ion-item class="padding">
       <ion-label  style="white-space: pre-wrap !important;"><strong>Visual Classification of Sample:</strong></ion-label>
@@ -311,10 +327,10 @@
   </ion-col>
 </ion-row>
 
-<ion-row  >
+<ion-row  *ngIf="isSoil" >
   <ion-col size="6">
     <ion-item class="padding">
-      <ion-label  style="white-space: pre-wrap !important;"><strong>Details of Drilling Bit:</strong></ion-label>
+      <ion-label  style="white-space: pre-wrap !important;"><strong>Details of Drilling Bit:</strong><span class="required-asterisk">*</span></ion-label>
     </ion-item>
   </ion-col>
   <ion-col size="6">
@@ -331,10 +347,10 @@
 </ion-row>
 
 
-<ion-row  >
+<ion-row  *ngIf="isSoil">
   <ion-col size="6">
     <ion-item class="padding">
-      <ion-label  style="white-space: pre-wrap !important;"><strong>Details of Core Barrel:</strong></ion-label>
+      <ion-label  style="white-space: pre-wrap !important;"><strong>Details of Core Barrel:</strong><span class="required-asterisk">*</span></ion-label>
     </ion-item>
   </ion-col>
   <ion-col size="6">
@@ -351,7 +367,7 @@
   </ion-col>
 </ion-row>
 
-<ion-row  >
+<ion-row *ngIf="isRock" >
   <ion-col size="6">
     <ion-item class="padding">
       <ion-label  style="white-space: pre-wrap !important;"><strong>Type of Sample (If Rock):</strong></ion-label>
@@ -371,7 +387,7 @@
   </ion-col>
 </ion-row>
 
-<ion-row  >
+<ion-row *ngIf="isRock"  >
   <ion-col size="6">
     <ion-item class="padding">
       <ion-label  style="white-space: pre-wrap !important;"><strong>Run Length:</strong></ion-label>
@@ -385,7 +401,7 @@
 </ion-row>
 
 
-<ion-row  >
+<ion-row  *ngIf="isRock" >
   <ion-col size="6">
     <ion-item class="padding">
       <ion-label  style="white-space: pre-wrap !important;"><strong>Run Time:</strong></ion-label>
@@ -397,7 +413,7 @@
       </ion-item>
   </ion-col>
 </ion-row>
-<ion-row  >
+<ion-row  *ngIf="isRock" >
   <ion-col size="6">
     <ion-item class="padding">
       <ion-label  style="white-space: pre-wrap !important;"><strong>Water Loss:</strong></ion-label>
@@ -410,7 +426,7 @@
   </ion-col>
 </ion-row>
 
-<ion-row  >
+<ion-row *ngIf="isRock" >
   <ion-col size="6">
     <ion-item class="padding">
       <ion-label  style="white-space: pre-wrap !important;"><strong>All Rock Pieces lengths:</strong></ion-label>
@@ -422,7 +438,8 @@
       </ion-item>
   </ion-col>
 </ion-row>
-<ion-row  >
+
+<ion-row *ngIf="isRock" >
   <ion-col size="6">
     <ion-item class="padding">
       <ion-label  style="white-space: pre-wrap !important;"><strong>Rock Pieces length >10 cm:</strong></ion-label>
@@ -435,7 +452,7 @@
   </ion-col>
 </ion-row>
 
-<ion-row  >
+<ion-row  *ngIf="isRock">
   <ion-col size="6">
     <ion-item class="padding">
       <ion-label  style="white-space: pre-wrap !important;"><strong>CR %:</strong></ion-label>
@@ -448,7 +465,7 @@
   </ion-col>
 </ion-row>
 
-<ion-row  >
+<ion-row *ngIf="isRock" >
   <ion-col size="6">
     <ion-item class="padding">
       <ion-label  style="white-space: pre-wrap !important;"><strong>RQD %:</strong></ion-label>
@@ -461,7 +478,7 @@
   </ion-col>
 </ion-row>
 
-<ion-row  >
+<ion-row *ngIf="isRock" >
   <ion-col size="6">
     <ion-item class="padding">
       <ion-label  style="white-space: pre-wrap !important;"><strong>Rock Sample Color</strong></ion-label>
@@ -474,7 +491,7 @@
   </ion-col>
 </ion-row>
 
-<ion-row  >
+<ion-row *ngIf="isRock" >
   <ion-col size="6">
     <ion-item class="padding">
       <ion-label  style="white-space: pre-wrap !important;"><strong>Type of Weathering</strong></ion-label>
@@ -498,7 +515,7 @@
   </ion-col>
 </ion-row>
 
-<ion-row  >
+<ion-row *ngIf="isRock"  >
   <ion-col size="6">
     <ion-item class="padding">
       <ion-label  style="white-space: pre-wrap !important;"><strong>Type Of Rock</strong></ion-label>
@@ -511,8 +528,19 @@
   </ion-col>
 </ion-row>
 
+<ion-row>
+  <ion-col size="6">
+    <ion-button expand="block" style="text-transform: none;" class="button" (click)="validation()"> Save</ion-button>
+
+  </ion-col>
+  <ion-col size="6">
+    <ion-button expand="block" style="text-transform: none;" class="button" (click)="moveToNext()"> Next</ion-button>
+
+  </ion-col>
+
+</ion-row>
 
 </ion-grid>
-<ion-button expand="block" style="text-transform: none;" class="button" (click)="validation()"> Save</ion-button>
+
 </ion-list>
 </ion-content>
