@@ -36,9 +36,11 @@ export class HomePage {
              console.log('response',response.data);
               Constants.userId = response.data.user_id;
               Constants.userName = response.data.user_name;
+              Constants.orgId = response.data.org_id;
               Constants.orgName = response.data.org_name;
               Constants.orgAddre = response.data.org_address;
               Constants.orgLogo = response.data.org_logo;
+              Constants.projectId = response.data.project_id;
               Constants.projectName = response.data.project_name;
               Constants.clentName = response.data.client_name;
               Constants.projectLocation = response.data.project_location;

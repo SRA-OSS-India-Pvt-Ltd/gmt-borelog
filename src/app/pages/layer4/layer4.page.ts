@@ -4,6 +4,8 @@ import { ToastService } from './../../services/toast.service';
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import SignaturePad from 'signature_pad';
 import { Constants } from 'src/app/common/constants';
+import { HttpcallsService } from 'src/app/services/httpcalls.service';
+import { Platform } from '@ionic/angular';
 
 
 @Component({
@@ -34,9 +36,13 @@ aarveRepresName: any;
 subAgencyRepresentivaeName: any;
 clientRepresNaame: any;
 layer1List: any = [];
+bhid: any;
   constructor(public toastSer: ToastService,
     public androidDatabase: AndroidDatabaseService,
-    public router: Router) {
+    public router: Router,
+    public httpService: HttpcallsService,
+    public platform: Platform
+) {
       this.date = new Date().toISOString();
       console.log('date',this.date);
       this.getLayer1LastId();
@@ -129,11 +135,19 @@ layer1List: any = [];
       this.signatureImg1 = this.base642;
       this.base643 = this.signaturePad2.toDataURL();
       this.signatureImg2 = this.base643;
-console.log(this.base641,this.base642,this.base643);
+     console.log(this.base641,this.base642,this.base643);
       this.androidDatabase.updateLayer4(this.depthOfTermination,this.date,
         this.aarveRepresName,this.base641,this.subAgencyRepresentivaeName,this.base642,this.clientRepresNaame,this.base643,
         Constants.laYer1Id);
         this.router.navigate(['viewlist']);
+    }
+
+    submitweb(){
+      this.httpService.submitLayer4(this.bhid,4,this.depthOfTermination,this.date,
+        this.aarveRepresName,this.base641,this.subAgencyRepresentivaeName,this.base642,
+        this.clientRepresNaame,this.base643,'').subscribe((response: any)=>{
+          console.log('response',response);
+        });
     }
     clear1(){
       this.signaturePad.clear();

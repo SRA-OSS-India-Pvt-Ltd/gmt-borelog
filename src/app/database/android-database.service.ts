@@ -323,4 +323,18 @@ export class AndroidDatabaseService {
         return 'error on getting Id ' + JSON.stringify(e);
       });
   }
+
+  deleteRowbyId(id: any) {
+    return this.databaseObj
+      .executeSql(`DELETE FROM borelog_data WHERE Id = '${id}'`, [])
+      .then((res) => {
+        console.log('getting Id');
+        return res;
+      })
+      .catch((e) => {
+        console.log('error on getting Id ', JSON.stringify(e));
+        return 'error on getting Id ' + JSON.stringify(e);
+      });
+  }
+
 }

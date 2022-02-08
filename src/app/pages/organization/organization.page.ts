@@ -3,6 +3,8 @@ import { AndroidDatabaseService } from './../../database/android-database.servic
 import { ToastService } from './../../services/toast.service';
 import { Component, OnInit } from '@angular/core';
 import { Constants } from 'src/app/common/constants';
+import { HttpcallsService } from 'src/app/services/httpcalls.service';
+import { Platform } from '@ionic/angular';
 
 
 @Component({
@@ -21,13 +23,18 @@ packageList: any = [];
 package: any;
 subAencyList: any =[];
 subAgency: any;
+subAgencyId: any;
+
 subAencyListValues: any =[];
 subAgencyAddress: any;
 subAgencyLogo: any;
 boreHoles: any;
   constructor(public toastService: ToastService,
     public androiDatabase: AndroidDatabaseService,
-    public router: Router) {
+    public router: Router,
+    public httpService: HttpcallsService,
+    public platform: Platform
+    ) {
     this.orgName = Constants.orgName;
     this.orgAddrs = Constants.orgAddre;
     this.orgLogo = Constants.orgLogo;
@@ -49,6 +56,8 @@ boreHoles: any;
     this.subAencyListValues = [$event.target.value];
     console.log('array', this.subAencyListValues);
     if(this.subAencyListValues.length>0){
+      this.subAgencyId = this.subAencyListValues[0].sa_id;
+
       this.subAgency = this.subAencyListValues[0].sa_name;
       this.subAgencyAddress = this.subAencyListValues[0].sa_address;
       this.subAgencyLogo = this.subAencyListValues[0].sa_logo;
@@ -69,10 +78,36 @@ boreHoles: any;
       this.toastService.presentError('Please Select SubAgencyName');
 
     }else{
-      this.androiDatabase.addLayer1Details(this.package,this.boreHoles,this.subAgency,this.subAgencyAddress,this.subAgencyLogo,
-        Constants.userId,Constants.orgName,Constants.projectName,this.subAgency);
-      this.router.navigate(['boreholeinformation']);
-
+      this.adding();
     }
+  }
+
+  addDatabase(){
+    this.androiDatabase.addLayer1Details(this.package,this.boreHoles,this.subAgencyId,this.subAgencyAddress,this.subAgencyLogo,
+      Constants.userId,Constants.orgId,Constants.projectId,this.subAgency);
+    this.router.navigate(['boreholeinformation']);
+
+  }
+  submitWeb(){
+    this.httpService.submitLayer1(1,Constants.userId,Constants.orgId,Constants.projectId,
+      this.package,this.subAgencyId).subscribe((response: any)=>{
+       console.log('response',response);
+      });
+  }
+
+  adding(){
+   this. platform.ready().then(() => {
+      if (this.platform.is('android')) {
+      this.addDatabase();
+
+      }else{
+        this.addDatabase();
+
+      //  this.submitWeb();
+      }
+
+
+  });
+
   }
 }

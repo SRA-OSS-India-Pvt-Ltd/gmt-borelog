@@ -1,13 +1,12 @@
 import { Router } from '@angular/router';
 import { Constants } from 'src/app/common/constants';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
-
-
-
 import { AndroidDatabaseService } from './../../database/android-database.service';
 import { ToastService } from './../../services/toast.service';
-
 import { Component, OnInit } from '@angular/core';
+import { HttpcallsService } from 'src/app/services/httpcalls.service';
+import { Platform } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-boreholeinformation',
@@ -40,10 +39,14 @@ export class BoreholeinformationPage implements OnInit {
   date: any;
   angleWithHorizontal: any;
   isInclined = false;
+  bhid: any;
   constructor(public toastSer: ToastService,
     public androidDatabase: AndroidDatabaseService,
     private geolocation: Geolocation,
-    public router: Router ) {
+    public router: Router,
+    public httpService: HttpcallsService,
+    public platform: Platform
+  ) {
     this.ref = 'IS 1892; IS 2131; IS 2132';
    this.date = new Date().toISOString();
    this.getLayer1LastId();
@@ -158,6 +161,15 @@ getLocations(){
       this.orientation,this.boreholeDia,this.boreholeCasingDia,this.casingDepth,Constants.laYer1Id
       );
       this.router.navigate(['logginginformation']);
+
+  }
+  submitWeb(){
+    this.httpService.submitLayer2(this.bhid,2,this.typeOfStructure,this.boreholeNumber,
+      this.boreholeLocation,this.boreholeChainage,this.latitude,this.longitude,this.date,
+      this.rl,this.waterTable,this.typeOfRig,this.typeOfDrill,this.circulationFluid,
+      this.orientation,this.boreholeDia,this.boreholeCasingDia,this.casingDepth).subscribe((response: any)=>{
+       console.log('response',response);
+      });
 
   }
   moveToNext(){
