@@ -110,7 +110,7 @@
       <ion-col size="6">
         <ion-item class="input">
           <ion-select placeholder="Select Project" (ionChange)="packageChange($event)">
-            <ion-select-option  *ngFor="let package of packageList" [value]="package.pkg_name">
+            <ion-select-option  *ngFor="let package of packageList" [value]="package.pkg_id">
               {{package.pkg_name}}</ion-select-option>
           </ion-select>        </ion-item>
       </ion-col>

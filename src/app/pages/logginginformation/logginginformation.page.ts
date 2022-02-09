@@ -268,7 +268,7 @@ bhid: any;
           this.typeOfRock = '';
           this.cr='';
           this.rqd = '';
-          this.addDatabse();
+          this.adding();
 
          }else if(this.typeOfsample === 'SPT'){
           this.dsDepthFrom = '';
@@ -288,7 +288,7 @@ bhid: any;
           this.typeOfRock = '';
           this.cr='';
           this.rqd = '';
-          this.addDatabse();
+          this.adding();
 
          }else if(this.typeOfsample === 'UDS'){
           this.dsDepthFrom = '';
@@ -317,7 +317,7 @@ bhid: any;
           this.typeOfRock = '';
           this.cr='';
           this.rqd = '';
-          this.addDatabse();
+          this.adding();
 
 
          }
@@ -350,6 +350,7 @@ bhid: any;
         this.toastSer.presentError('Please Give the Type of Weathering');
 
        }else{
+         this.typeOfsample = '';
         this.soilSampleColor = '';
         this.typeOfSoil = '';
         this.densityConsistace = '';
@@ -371,7 +372,7 @@ bhid: any;
         this.thirdB = '';
         this.totalB = '';
 
-        this.addDatabse();
+        this.adding();
       }
      }
 
@@ -428,7 +429,7 @@ bhid: any;
     }
   }
   submitweb(){
-    this.httpService.submitLayer3(this.bhid,3,this.drillingFrom,this.drillingTo,this.typeOfstrata,
+    this.httpService.submitLayer3(Constants.webbhid,3,this.drillingFrom,this.drillingTo,this.typeOfstrata,
       this.typeOfsample,this.dsDepthFrom,this.dsDepthTo,this.sptDepthFrom,this.sptDepthTo,
       this.first,this.firstB,
       this.second,this.secondB,
@@ -439,10 +440,26 @@ bhid: any;
       this.rockSample, this.runLength,this.runTime,this.waterLoss,this.allRockPiecesLenth,
       this.rockPicesLengthgrze,this.cr,this.rqd,this.rockSamplColor,
       this.typeOfWeathering,this.typeOfRock).subscribe((response: any)=>{
-        console.log('response',response);
+
         this.toastSer.presentSuccess(response.msg);
-        this.androidDatabase.deleteRowbyId(Constants.laYer1Id);
+        this.router.navigate(['layer4']);
+
       });
+  }
+
+  adding(){
+    this. platform.ready().then(() => {
+       if (this.platform.is('android')) {
+       this.addDatabse();
+
+       }else{
+       //  this.addDatabase();
+
+        this.submitweb();
+       }
+
+
+   });
   }
 
 }

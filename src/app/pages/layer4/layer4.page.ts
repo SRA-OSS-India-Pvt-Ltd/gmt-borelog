@@ -108,7 +108,7 @@ bhid: any;
        }else{
 
 
-          this.addDatabase();
+          this.adding();
        }
      }
 
@@ -143,10 +143,20 @@ bhid: any;
     }
 
     submitweb(){
-      this.httpService.submitLayer4(this.bhid,4,this.depthOfTermination,this.date,
+      this.base641 = this.signaturePad.toDataURL();
+      this.signatureImg = this.base641;
+      this.base642 = this.signaturePad1.toDataURL();
+      this.signatureImg1 = this.base642;
+      this.base643 = this.signaturePad2.toDataURL();
+      this.signatureImg2 = this.base643;
+
+      this.httpService.submitLayer4(Constants.webbhid,4,this.depthOfTermination,this.date,
         this.aarveRepresName,this.base641,this.subAgencyRepresentivaeName,this.base642,
         this.clientRepresNaame,this.base643,'').subscribe((response: any)=>{
           console.log('response',response);
+          this.toastSer.presentSuccess(response.msg);
+          this.router.navigate(['viewlist']);
+
         });
     }
     clear1(){
@@ -159,5 +169,19 @@ bhid: any;
       this.signaturePad2.clear();
     }
 
+
+
+    adding(){
+      this. platform.ready().then(() => {
+         if (this.platform.is('android')) {
+         this.addDatabase();
+
+         }else{
+          this.submitweb();
+         }
+
+
+     });
+    }
 
   }

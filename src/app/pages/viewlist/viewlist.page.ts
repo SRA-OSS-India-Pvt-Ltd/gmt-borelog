@@ -95,6 +95,8 @@ layer1List: any = [];
           this.totalList[0].client_rep_name,this.totalList[0].client_rep_sign,
           this.totalList[0].modified_date).subscribe((response: any)=>{
            console.log('response',response);
+           this.androidDatabase.deleteRowbyId(Constants.laYer1Id);
+
           });
 
       }

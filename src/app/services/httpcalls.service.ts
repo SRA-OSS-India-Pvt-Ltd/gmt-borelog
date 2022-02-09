@@ -55,8 +55,8 @@ export class HttpcallsService {
 
   }
 
-  submitLayer1(bhlaye: any,uid: any,orgid: any,projid: any,packageid: any,said: any){
-    const parameters ={bh_layer:bhlaye,user_id:uid,org_id: orgid,projectid: projid,package_id:packageid,sa_id:said};
+  submitLayer1(bhid: any,bhlaye: any,uid: any,orgid: any,projid: any,packageid: any,said: any){
+    const parameters ={bh_id:bhid,bh_layer:bhlaye,user_id:uid,org_id: orgid,projectid: projid,package_id:packageid,sa_id:said};
     console.log('JSON',JSON.stringify(parameters));
 
     return this.httpClient.post(`${environment.apiUrl}/submitboredata_web`, JSON.stringify(parameters));
@@ -105,7 +105,7 @@ export class HttpcallsService {
   submitLayer4(bhid: any,bhlaye: any,depthTermination: any,bhedate: any,
     rvRepName: any,rvRepSign: any,sarepName: any,saRepSign: any,clientRepName: any,
     clientRepSign: any,mdate: any){
-    const parameters ={bh_id:bhid,bh_layer:bhlaye,depthTermination,bh_enddate:bhedate,
+    const parameters ={bh_id:bhid,bh_layer:bhlaye,depth_termination:depthTermination,bh_enddate:bhedate,
       rv_rep_name:rvRepName,rv_rep_sign:rvRepSign,sa_rep_name:sarepName,sa_rep_sign:saRepSign,
       client_rep_name:clientRepName,client_rep_sign: clientRepSign,modified_date:mdate};
     console.log('JSON',JSON.stringify(parameters));

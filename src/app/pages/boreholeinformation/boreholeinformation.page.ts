@@ -150,7 +150,7 @@ getLocations(){
       this.toastSer.presentError('Please Select Casing Depth');
 
     }else{
-      this.addDatabase();
+      this.adding();
     }
   }
 
@@ -164,16 +164,34 @@ getLocations(){
 
   }
   submitWeb(){
-    this.httpService.submitLayer2(this.bhid,2,this.typeOfStructure,this.boreholeNumber,
+    this.httpService.submitLayer2(Constants.webbhid,2,this.typeOfStructure,this.boreholeNumber,
       this.boreholeLocation,this.boreholeChainage,this.latitude,this.longitude,this.date,
       this.rl,this.waterTable,this.typeOfRig,this.typeOfDrill,this.circulationFluid,
       this.orientation,this.boreholeDia,this.boreholeCasingDia,this.casingDepth).subscribe((response: any)=>{
        console.log('response',response);
+       this.toastSer.presentSuccess(response.msg);
+       this.router.navigate(['logginginformation']);
+
       });
 
   }
   moveToNext(){
    this.router.navigate(['logginginformation']);
   }
+  adding(){
+    this. platform.ready().then(() => {
+       if (this.platform.is('android')) {
+       this.addDatabase();
+
+       }else{
+       //  this.addDatabase();
+
+        this.submitWeb();
+       }
+
+
+   });
+  }
+
 
 }
