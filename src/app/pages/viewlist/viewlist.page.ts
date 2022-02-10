@@ -3,6 +3,7 @@ import { Constants } from 'src/app/common/constants';
 import { AndroidDatabaseService } from './../../database/android-database.service';
 import { Component, OnInit } from '@angular/core';
 import { HttpcallsService } from 'src/app/services/httpcalls.service';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-viewlist',
@@ -14,8 +15,9 @@ totalList: any =[];
 layer1List: any = [];
   constructor(public androidDatabase: AndroidDatabaseService,
     public router: Router,
-    public httpService: HttpcallsService) {
-    this.getLayer1();
+    public httpService: HttpcallsService,
+    public platform: Platform) {
+    this.adding();
   }
 
   ngOnInit() {
@@ -103,5 +105,43 @@ layer1List: any = [];
     });
 
   }
+
+  getPendingBoredata(){
+    this.layer1List = [];
+    this.httpService.getPendingBoredata(Constants.userId).subscribe((response: any)=>{
+      this.layer1List = response.data;
+    });
+  }
+  adding(){
+    this. platform.ready().then(() => {
+       if (this.platform.is('android')) {
+       this.getLayer1();
+
+       }else{
+        this.getPendingBoredata();
+       }
+
+
+   });
+
+   }
+
+
+   moving(id: any,bhid: any){
+    this. platform.ready().then(() => {
+       if (this.platform.is('android')) {
+       this.moveToUpdate(id);
+
+       }else{
+        Constants.laYer1Id = bhid;
+        this.router.navigate(['web1']);
+
+      }
+
+
+   });
+
+   }
+
 
 }

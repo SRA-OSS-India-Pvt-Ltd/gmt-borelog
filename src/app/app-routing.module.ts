@@ -55,6 +55,22 @@ const routes: Routes = [
     path: 'update4',
     loadChildren: () => import('./pages/update4/update4.module').then( m => m.Update4PageModule)
   },
+  {
+    path: 'web1',
+    loadChildren: () => import('./pages/web1/web1.module').then( m => m.Web1PageModule)
+  },
+  {
+    path: 'web2',
+    loadChildren: () => import('./pages/web2/web2.module').then( m => m.Web2PageModule)
+  },
+  {
+    path: 'web3',
+    loadChildren: () => import('./pages/web3/web3.module').then( m => m.Web3PageModule)
+  },
+  {
+    path: 'web4',
+    loadChildren: () => import('./pages/web4/web4.module').then( m => m.Web4PageModule)
+  },
 ];
 
 @NgModule({

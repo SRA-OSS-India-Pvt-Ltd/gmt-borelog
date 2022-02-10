@@ -267,6 +267,46 @@
         </ion-col>
       </ion-row>
 
+      <ion-row  >
+        <ion-col size="6">
+          <ion-item class="padding">
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Details of Drilling Bit:</strong></ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item class="input">
+
+            <ion-select  placeholder="Select" (ionChange)="detailDrillinBitChange($event)" value="{{detailsOfDrillingBit}}">
+               <ion-select-option value="Tungsten Carbide Bit">Tungsten Carbide Bit</ion-select-option>
+               <ion-select-option value="Diamond Bit">Diamond Bit</ion-select-option>
+
+             </ion-select>
+
+            </ion-item>
+        </ion-col>
+      </ion-row>
+
+
+      <ion-row  >
+        <ion-col size="6">
+          <ion-item class="padding">
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Details of Core Barrel:</strong></ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item class="input">
+
+            <ion-select  placeholder="Select" (ionChange)="detailOfCoreBarrel($event)" value="{{detailsOdCoreBarrel}}">
+               <ion-select-option value="Single Tube">Single Tube</ion-select-option>
+               <ion-select-option value="Double Tube">Double Tube</ion-select-option>
+               <ion-select-option value="Triple Tube">Triple Tube</ion-select-option>
+
+             </ion-select>
+
+            </ion-item>
+        </ion-col>
+      </ion-row>
+
       </ion-grid>
       <ion-row>
         <ion-col size="6">

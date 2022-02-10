@@ -1,3 +1,5 @@
+import { HttpcallsService } from 'src/app/services/httpcalls.service';
+import { Platform } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AndroidDatabaseService } from './../database/android-database.service';
 import { Constants } from 'src/app/common/constants';
@@ -26,7 +28,9 @@ boreHoles: any;
 subAgency: any;
 layer1List: any = [];
   constructor(public androidDatabase: AndroidDatabaseService,
-    public router: Router) {
+    public router: Router,
+    public platform: Platform,
+    public httpService: HttpcallsService) {
     this.layer1Id = Constants.laYer1Id;
     this.orgName = Constants.orgName;
     this.orgAddrs = Constants.orgAddre;
@@ -86,6 +90,33 @@ layer1List: any = [];
     // eslint-disable-next-line max-len
     this.androidDatabase.updateLayer1(this.package,this.boreHoles,this.subAgency,this.subAgencyAddress,this.subAgencyLogo,Constants.laYer1Id);
     console.log('updated');
+    this.router.navigate(['update2']);
+
   }
+
+
+  gettingData(){
+    this. platform.ready().then(() => {
+       if (this.platform.is('android')) {
+       this.getLayer1();
+
+       }else{
+        this.getWebData();
+
+      }
+
+
+   });
+
+   }
+
+   getWebData(){
+    this.layer1List = [];
+
+     this.httpService.getBoredetails(Constants.laYer1Id).subscribe((response: any)=>{
+      this.layer1List = response.data;
+
+     });
+   }
 
 }

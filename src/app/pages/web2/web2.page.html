@@ -1,13 +1,12 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/sidemenu"></ion-back-button>
+      <ion-back-button defaultHref="/viewlist"></ion-back-button>
     </ion-buttons>
-    <ion-title style="white-space: pre-wrap !important;" >Borehole Information</ion-title>
-
-
+    <ion-title style="white-space: pre-wrap !important;" >Borehole Information Edit</ion-title>
   </ion-toolbar>
 </ion-header>
+
 
 <ion-content>
   <ion-list>
@@ -37,7 +36,7 @@
       <ion-row>
         <ion-col size="6">
           <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Type of Structure:</strong><span class="required-asterisk">*</span></ion-label>
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Type of Structure:</strong></ion-label>
           </ion-item>
         </ion-col>
         <ion-col size="6">
@@ -50,7 +49,7 @@
       <ion-row>
         <ion-col size="6">
           <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Borehole Number:</strong><span class="required-asterisk">*</span></ion-label>
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Borehole Number:</strong></ion-label>
           </ion-item>
         </ion-col>
         <ion-col size="6">
@@ -62,7 +61,7 @@
       <ion-row>
         <ion-col size="6">
           <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Borehole Location:</strong><span class="required-asterisk">*</span></ion-label>
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Borehole Location:</strong></ion-label>
           </ion-item>
         </ion-col>
         <ion-col size="6">
@@ -75,7 +74,7 @@
        <ion-row>
         <ion-col size="6">
           <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Borehole Coordinates:</strong> <span class="required-asterisk">*</span></ion-label>
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Latttude:</strong></ion-label>
           </ion-item>
         </ion-col>
         <ion-col size="6">
@@ -86,7 +85,7 @@
       </ion-row>      <ion-row>
         <ion-col size="6">
           <ion-item class="padding">
-
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Borehole longitude:</strong></ion-label>
           </ion-item>
         </ion-col>
         <ion-col size="6">
@@ -98,7 +97,7 @@
       <ion-row>
         <ion-col size="6">
           <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Borehole Chainage:</strong><span class="required-asterisk">*</span></ion-label>
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Borehole Chainage:</strong></ion-label>
           </ion-item>
         </ion-col>
         <ion-col size="6">
@@ -117,8 +116,7 @@
               value="{{ date | date: 'dd-MM-yyyy' }}"
               id="date"
               class="ion-text-end"
-            >
-          </ion-input>
+            ></ion-input>
             <ion-popover trigger="date" size="cover">
               <ng-template>
                 <ion-datetime
@@ -134,7 +132,7 @@
       <ion-row>
         <ion-col size="6">
           <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Borehole RL (m):</strong><span class="required-asterisk">*</span></ion-label>
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Borehole RL (m):</strong></ion-label>
           </ion-item>
         </ion-col>
         <ion-col size="6">
@@ -146,7 +144,7 @@
       <ion-row>
         <ion-col size="6">
           <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Water Table RL (m):</strong><span class="required-asterisk">*</span></ion-label>
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Water Table RL (m):</strong></ion-label>
           </ion-item>
         </ion-col>
         <ion-col size="6">
@@ -159,13 +157,13 @@
       <ion-row>
         <ion-col size="6">
           <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Type of Rig:</strong><span class="required-asterisk">*</span></ion-label>
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Type of Rig:</strong></ion-label>
           </ion-item>
         </ion-col>
         <ion-col size="6">
           <ion-item class="input">
             <ion-item>
-              <ion-select  placeholder="Select " (ionChange)="rigChange($event)">
+              <ion-select  placeholder="Select " (ionChange)="rigChange($event)" value="{{typeOfRig}}">
                 <ion-select-option value="Mechanical">Mechanical</ion-select-option>
                 <ion-select-option value="Hydraulic">Hydraulic</ion-select-option>
               </ion-select>
@@ -182,7 +180,7 @@
         <ion-col size="6">
           <ion-item class="input">
             <ion-item>
-              <ion-select  placeholder="Select " (ionChange)="drillChange($event)">
+              <ion-select  placeholder="Select " (ionChange)="drillChange($event)" value="{{typeOfDrill}}">
                 <ion-select-option value="Rotary">Rotary</ion-select-option>
                 <ion-select-option value="Auger">Auger</ion-select-option>
                 <ion-select-option value="Bentonite Slurry">Bentonite Slurry</ion-select-option>
@@ -195,13 +193,13 @@
       <ion-row>
         <ion-col size="6">
           <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Circulation Fluid:</strong><span class="required-asterisk">*</span></ion-label>
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Circulation Fluid:</strong></ion-label>
           </ion-item>
         </ion-col>
         <ion-col size="6">
           <ion-item class="input">
             <ion-item>
-              <ion-select  placeholder="Select " (ionChange)="circulationChange($event)">
+              <ion-select  placeholder="Select " (ionChange)="circulationChange($event)" value="{{circulationFluid}}">
                 <ion-select-option value="Bentonite Slurry">Bentonite Slurry</ion-select-option>
                 <ion-select-option value="Water">Water</ion-select-option>
                 <ion-select-option value="Polymer Mud System" style="white-space: pre-wrap !important;">Polymer Mud System</ion-select-option>
@@ -214,13 +212,13 @@
       <ion-row>
         <ion-col size="6">
           <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Drilling Orientation:</strong><span class="required-asterisk">*</span></ion-label>
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Drilling Orientation:</strong></ion-label>
           </ion-item>
         </ion-col>
         <ion-col size="6">
           <ion-item class="input">
             <ion-item>
-              <ion-select  placeholder="Select " (ionChange)="oriantionChange($event)">
+              <ion-select  placeholder="Select " (ionChange)="oriantionChange($event)" value="{{orientation}}">
                 <ion-select-option value="Vertical">Vertical</ion-select-option>
                 <ion-select-option value="Inclined">Inclined</ion-select-option>
                 <ion-select-option value="Angle with Horizontal" style="white-space: pre-wrap !important;">Polymer Mud System</ion-select-option>
@@ -231,18 +229,6 @@
         </ion-col>
       </ion-row>
 
-      <ion-row *ngIf="isInclined">
-        <ion-col size="6">
-          <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Angle With Horizontal:</strong></ion-label>
-          </ion-item>
-        </ion-col>
-        <ion-col size="6">
-          <ion-item class="input">
-            <ion-input type="text" cass="input" [(ngModel)]="angleWithHorizontal"></ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
 
       <ion-row>
         <ion-col size="6">
@@ -259,7 +245,7 @@
       <ion-row>
         <ion-col size="6">
           <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Casing dia:</strong><span class="required-asterisk">*</span></ion-label>
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Casing dia:</strong></ion-label>
           </ion-item>
         </ion-col>
         <ion-col size="6">
@@ -271,7 +257,7 @@
       <ion-row>
         <ion-col size="6">
           <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Casing Depth:</strong><span class="required-asterisk">*</span></ion-label>
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Casing Depth:</strong></ion-label>
           </ion-item>
         </ion-col>
         <ion-col size="6">
@@ -281,16 +267,16 @@
         </ion-col>
       </ion-row>
 
-      <ion-row   >
+      <ion-row  >
         <ion-col size="6">
           <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Details of Drilling Bit:</strong><span class="required-asterisk">*</span></ion-label>
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Details of Drilling Bit:</strong></ion-label>
           </ion-item>
         </ion-col>
         <ion-col size="6">
           <ion-item class="input">
 
-            <ion-select  placeholder="Select" (ionChange)="detailDrillinBitChange($event)">
+            <ion-select  placeholder="Select" (ionChange)="detailDrillinBitChange($event)" value="{{detailsOfDrillingBit}}">
                <ion-select-option value="Tungsten Carbide Bit">Tungsten Carbide Bit</ion-select-option>
                <ion-select-option value="Diamond Bit">Diamond Bit</ion-select-option>
 
@@ -304,13 +290,13 @@
       <ion-row  >
         <ion-col size="6">
           <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Details of Core Barrel:</strong><span class="required-asterisk">*</span></ion-label>
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Details of Core Barrel:</strong></ion-label>
           </ion-item>
         </ion-col>
         <ion-col size="6">
           <ion-item class="input">
 
-            <ion-select  placeholder="Select" (ionChange)="detailOfCoreBarrel($event)">
+            <ion-select  placeholder="Select" (ionChange)="detailOfCoreBarrel($event)" value="{{detailsOdCoreBarrel}}">
                <ion-select-option value="Single Tube">Single Tube</ion-select-option>
                <ion-select-option value="Double Tube">Double Tube</ion-select-option>
                <ion-select-option value="Triple Tube">Triple Tube</ion-select-option>
@@ -321,24 +307,20 @@
         </ion-col>
       </ion-row>
 
-
+      </ion-grid>
       <ion-row>
         <ion-col size="6">
-          <ion-button expand="block" style="text-transform: none;" class="button" (click)="validation()">
-            Save
+          <ion-button  expand="block" style="text-transform: none;" (click)="updateLayer2()">
+            Update
           </ion-button>
-
         </ion-col>
         <ion-col size="6">
-          <ion-button expand="block" style="text-transform: none;" class="button" (click)="moveToNext()">
+          <ion-button  expand="block" style="text-transform: none;" (click)="onClick()">
             Next
           </ion-button>
 
         </ion-col>
 
       </ion-row>
-      </ion-grid>
-
-
-    </ion-list>
+      </ion-list>
 </ion-content>

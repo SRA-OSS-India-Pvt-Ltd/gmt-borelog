@@ -40,6 +40,8 @@ export class BoreholeinformationPage implements OnInit {
   angleWithHorizontal: any;
   isInclined = false;
   bhid: any;
+  detailsOfDrillingBit: any;
+  detailsOdCoreBarrel: any;
   constructor(public toastSer: ToastService,
     public androidDatabase: AndroidDatabaseService,
     private geolocation: Geolocation,
@@ -149,7 +151,11 @@ getLocations(){
     }else if(this.casingDepth === undefined ){
       this.toastSer.presentError('Please Select Casing Depth');
 
-    }else{
+    }else if( this.detailsOfDrillingBit === undefined){
+      this.toastSer.presentError('Please Give the Details of Drilling Bit*');
+     }else if( this.detailsOdCoreBarrel === undefined){
+      this.toastSer.presentError('Please Give the Details of Core Barrel');
+     }else{
       this.adding();
     }
   }
@@ -158,8 +164,8 @@ getLocations(){
     this.androidDatabase.updateLayer2(this.ref,this.typeOfStructure,this.boreholeNumber,
       this.boreholeLocation,this.boreholeChainage,this.latitude,this.longitude,this.date,
       this.rl,this.waterTable,this.typeOfRig,this.typeOfDrill,this.circulationFluid,
-      this.orientation,this.boreholeDia,this.boreholeCasingDia,this.casingDepth,Constants.laYer1Id
-      );
+      this.orientation,this.boreholeDia,this.boreholeCasingDia,this.casingDepth,Constants.laYer1Id,
+      this.detailsOfDrillingBit,this.detailsOdCoreBarrel);
       this.router.navigate(['logginginformation']);
 
   }
@@ -167,12 +173,23 @@ getLocations(){
     this.httpService.submitLayer2(Constants.webbhid,2,this.typeOfStructure,this.boreholeNumber,
       this.boreholeLocation,this.boreholeChainage,this.latitude,this.longitude,this.date,
       this.rl,this.waterTable,this.typeOfRig,this.typeOfDrill,this.circulationFluid,
-      this.orientation,this.boreholeDia,this.boreholeCasingDia,this.casingDepth).subscribe((response: any)=>{
+      this.orientation,this.boreholeDia,this.boreholeCasingDia,this.casingDepth,
+      this.detailsOfDrillingBit,this.detailsOdCoreBarrel).subscribe((response: any)=>{
        console.log('response',response);
        this.toastSer.presentSuccess(response.msg);
        this.router.navigate(['logginginformation']);
 
       });
+
+  }
+  detailDrillinBitChange($event){
+    this.detailsOfDrillingBit = $event.target.value;
+    console.log($event.target.value);
+
+  }
+  detailOfCoreBarrel($event){
+    this.detailsOdCoreBarrel= $event.target.value;
+    console.log($event.target.value);
 
   }
   moveToNext(){

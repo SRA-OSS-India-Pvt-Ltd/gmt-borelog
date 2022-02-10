@@ -3,16 +3,16 @@ import { Platform } from '@ionic/angular';
 import { Constants } from 'src/app/common/constants';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AndroidDatabaseService } from 'src/app/database/android-database.service';
+
 import { ToastService } from 'src/app/services/toast.service';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 
 @Component({
-  selector: 'app-update2',
-  templateUrl: './update2.page.html',
-  styleUrls: ['./update2.page.scss'],
+  selector: 'app-web2',
+  templateUrl: './web2.page.html',
+  styleUrls: ['./web2.page.scss'],
 })
-export class Update2Page implements OnInit {
+export class Web2Page implements OnInit {
   boreholeNumber: any;
   boreholeLocation: any;
   boreholeChainage: any;
@@ -38,7 +38,6 @@ export class Update2Page implements OnInit {
   date: any;
 
   constructor(public toastSer: ToastService,
-    public androidDatabase: AndroidDatabaseService,
     private geolocation: Geolocation,
     public router: Router,
     public platform: Platform,
@@ -52,13 +51,11 @@ export class Update2Page implements OnInit {
   }
 
   getLayer1() {
-    this.androidDatabase.getLayer1ById(Constants.laYer1Id).then((data) => {
-      this.layer1List = [];
-      console.log('size',data.rows.length);
-      if (data.rows.length > 0) {
-        for (let i = 0; i < data.rows.length; i++) {
-          this.layer1List.push(data.rows.item(i));
-        }
+    this.layer1List = [];
+this.httpService.getBoredetails(Constants.webbhid).subscribe((response: any)=>{
+ this.layer1List = response.data;
+
+
         console.log('layer1List',this.layer1List);
         if(this.layer1List.length>0){
 
@@ -84,7 +81,6 @@ export class Update2Page implements OnInit {
 
         }
 
-      }
     });
   }
 
@@ -100,12 +96,22 @@ export class Update2Page implements OnInit {
   }
 
   updateLayer2(){
-    this.androidDatabase.updateLayer2(this.ref,this.typeOfStructure,this.boreholeNumber,
-      this.boreholeLocation,this.boreholeChainage,this.latitude,this.longitude,this.date,
-      this.rl,this.waterTable,this.typeOfRig,this.typeOfDrill,this.circulationFluid,
-      this.orientation,this.boreholeDia,this.boreholeCasingDia,this.casingDepth,Constants.laYer1Id,
-      this.detailsOfDrillingBit,this.detailsOdCoreBarrel
-      );
+
+      this.httpService.submitLayer2(Constants.webbhid,2,this.typeOfStructure,this.boreholeNumber,
+        this.boreholeLocation,this.boreholeChainage,this.latitude,this.longitude,this.date,
+        this.rl,this.waterTable,this.typeOfRig,this.typeOfDrill,this.circulationFluid,
+        this.orientation,this.boreholeDia,this.boreholeCasingDia,this.casingDepth,
+        this.detailsOfDrillingBit,this.detailsOdCoreBarrel).subscribe((response: any)=>{
+         console.log('response',response);
+         this.toastSer.presentSuccess(response.msg);
+         if(this.layer1List[0].drill_depth_from === ''){
+         this.router.navigate(['logginginformation']);
+         }else{
+          this.router.navigate(['web3']);
+
+         }
+
+        });
 
   }
 getLocations(){
@@ -162,6 +168,15 @@ getLocations(){
       this.layer1List = response.data;
 
      });
+   }
+   onClick(){
+    if(this.layer1List[0].drill_depth_from === ''){
+      this.router.navigate(['logginginformation']);
+      }else{
+       this.router.navigate(['web3']);
+
+      }
+
    }
 
 }

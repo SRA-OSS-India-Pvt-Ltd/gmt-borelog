@@ -40,8 +40,7 @@ isCohessive = false;
 densityConsistace: any;
 isCohesion = false;
 visualClassification: any;
-detailsOfDrillingBit: any;
-detailsOdCoreBarrel: any;
+
 rockSample: any;
 runLength: any;
 runTime: any;
@@ -65,6 +64,8 @@ twoB = false;
 threeB = false;
 fourB = false;
 bhid: any;
+rockDepthTo: any;
+rockDepthFrom: any;
 
   constructor(public toastSer: ToastService,
     public androidDatabase: AndroidDatabaseService,
@@ -151,16 +152,7 @@ bhid: any;
      console.log($event.target.value);
 
    }
-   detailDrillinBitChange($event){
-     this.detailsOfDrillingBit = $event.target.value;
-     console.log($event.target.value);
 
-   }
-   detailOfCoreBarrel($event){
-     this.detailsOdCoreBarrel= $event.target.value;
-     console.log($event.target.value);
-
-   }
    rockSamplechange($event){
      this.rockSample =$event.target.value;
      console.log($event.target.value);
@@ -237,12 +229,9 @@ bhid: any;
         this.toastSer.presentError('Please Give the Density / Consistency');
        }else if( this.visualClassification === undefined){
         this.toastSer.presentError('Please Give the Visual Classification of Sample');
-       }else if( this.detailsOfDrillingBit === undefined){
-        this.toastSer.presentError('Please Give the Details of Drilling Bit*');
-       }else if( this.detailsOdCoreBarrel === undefined){
-        this.toastSer.presentError('Please Give the Details of Core Barrel');
        }else if(this.typeOfsample === 'DS'){
-
+         this.rockDepthFrom ='';
+         this.rockDepthTo = '';
           this.first = '';
           this.second = '';
           this.third = '';
@@ -271,6 +260,9 @@ bhid: any;
           this.adding();
 
          }else if(this.typeOfsample === 'SPT'){
+          this.rockDepthFrom ='';
+          this.rockDepthTo = '';
+
           this.dsDepthFrom = '';
           this.dsDepthTo = '';
           this.udsDepthFrom = '';
@@ -291,6 +283,9 @@ bhid: any;
           this.adding();
 
          }else if(this.typeOfsample === 'UDS'){
+          this.rockDepthFrom ='';
+          this.rockDepthTo = '';
+
           this.dsDepthFrom = '';
           this.dsDepthTo = '';
           this.sptDepthFrom = '';
@@ -355,8 +350,7 @@ bhid: any;
         this.typeOfSoil = '';
         this.densityConsistace = '';
         this.visualClassification = '';
-        this.detailsOfDrillingBit = '';
-        this.detailsOdCoreBarrel = '';
+
         this.dsDepthFrom = '';
         this.dsDepthTo = '';
         this.sptDepthFrom = '';
@@ -387,11 +381,12 @@ bhid: any;
    this.androidDatabase.updateLayer3(this.drillingFrom,this.drillingTo,this.typeOfstrata,
     this.typeOfsample,this.dsDepthFrom,this.dsDepthTo,this.sptDepthFrom,this.sptDepthTo,
     this.udsDepthFrom,this.udsDepthTo,this.soilSampleColor,this.typeOfSoil,this.densityConsistace,
-    this.visualClassification,this.detailsOfDrillingBit,this.detailsOdCoreBarrel,
+    this.visualClassification,
     this.rockSample, this.runLength,this.runTime,this.waterLoss,this.allRockPiecesLenth,
     this.rockPicesLengthgrze,this.cr,this.rqd,this.rockSamplColor,
     this.typeOfWeathering,this.typeOfRock,Constants.laYer1Id,this.first,
-    this.second,this.third,this.total,this.firstB,this.secondB,this.thirdB,this.totalB);
+    this.second,this.third,this.total,this.firstB,this.secondB,this.thirdB,this.totalB,
+    this.rockDepthFrom,this.rockDepthTo);
 
     this.router.navigate(['layer4']);
   }
@@ -436,10 +431,10 @@ bhid: any;
       this.third,this.thirdB,
       this.total,this.totalB,'',
       this.udsDepthFrom,this.udsDepthTo,this.soilSampleColor,this.typeOfSoil,this.densityConsistace,
-      this.visualClassification,this.detailsOfDrillingBit,this.detailsOdCoreBarrel,
-      this.rockSample, this.runLength,this.runTime,this.waterLoss,this.allRockPiecesLenth,
+      this.visualClassification,this.rockSample, this.runLength,this.runTime,this.waterLoss,this.allRockPiecesLenth,
       this.rockPicesLengthgrze,this.cr,this.rqd,this.rockSamplColor,
-      this.typeOfWeathering,this.typeOfRock).subscribe((response: any)=>{
+      this.typeOfWeathering,this.typeOfRock,
+      this.rockDepthFrom,this.rockDepthTo).subscribe((response: any)=>{
 
         this.toastSer.presentSuccess(response.msg);
         this.router.navigate(['layer4']);
@@ -453,8 +448,6 @@ bhid: any;
        this.addDatabse();
 
        }else{
-       //  this.addDatabase();
-
         this.submitweb();
        }
 

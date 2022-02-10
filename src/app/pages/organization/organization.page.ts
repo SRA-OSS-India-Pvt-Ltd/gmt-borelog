@@ -90,7 +90,7 @@ boreHoles: any;
   }
   submitWeb(){
     this.httpService.submitLayer1('',1,Constants.userId,Constants.orgId,Constants.projectId,
-      this.package,this.subAgencyId).subscribe((response: any)=>{
+      this.package,this.boreHoles,this.subAgencyId).subscribe((response: any)=>{
        console.log('response',response);
        Constants.webbhid= response.data.bh_id;
        this.toastService.presentSuccess(response.msg);

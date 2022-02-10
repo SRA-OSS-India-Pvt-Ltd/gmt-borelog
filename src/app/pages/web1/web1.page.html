@@ -10,7 +10,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-list >
+  <ion-list  *ngFor="let item of layer1List">
 
     <ion-item class="padding">
       <ion-label class="label"><strong>Layer1</strong></ion-label>
@@ -140,7 +140,7 @@
         </ion-col>
         <ion-col size="6">
           <ion-item class="input">
-            <ion-select placeholder="Select" (ionChange)="subAgencyChange($event)" value="item.SubAgencyName">
+            <ion-select placeholder="Select" (ionChange)="subAgencyChange($event)" >
               <ion-select-option  *ngFor="let subAgency1 of subAencyList" [value]="subAgency1" >
                 {{subAgency1.sa_name}}</ion-select-option>
             </ion-select>        </ion-item>
@@ -179,8 +179,8 @@
           </ion-button>
         </ion-col>
         <ion-col size="6">
-          <ion-button  expand="block" style="text-transform: none;">
-            Cancel
+          <ion-button  expand="block" style="text-transform: none;" (click)="onClick()">
+            next
           </ion-button>
 
         </ion-col>

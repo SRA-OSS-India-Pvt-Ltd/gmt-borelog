@@ -37,8 +37,6 @@ isCohessive = false;
 densityConsistace: any;
 isCohesion = false;
 visualClassification: any;
-detailsOfDrillingBit: any;
-detailsOdCoreBarrel: any;
 rockSample: any;
 runLength: any;
 runTime: any;
@@ -51,6 +49,10 @@ typeOfWeathering: any;
 rockSamplColor: any;
 typeOfRock: any;
 layer1List: any =[];
+isRock = false;
+rockDepthTo: any;
+rockDepthFrom: any;
+isSoil = false;
 
   constructor(public toastSer: ToastService,
     public androidDatabase: AndroidDatabaseService,
@@ -63,7 +65,16 @@ layer1List: any =[];
   strataChange($event){
     this.typeOfstrata= $event.target.value;
     console.log($event.target.value);
+    if(this.typeOfstrata === 'Soil'){
+    this.isSoil = true;
+    this.isRock = false;
+    }else if(this.typeOfstrata === 'Rock'){
+      this.isSoil = false;
+      this.isRock = true;
+
     }
+    }
+
     sampleChange($event){
       this.typeOfsample= $event.target.value;
       console.log($event.target.value);
@@ -107,16 +118,6 @@ layer1List: any =[];
      }
      visualChange($event){
        this.visualClassification = $event.target.value;
-       console.log($event.target.value);
-
-     }
-     detailDrillinBitChange($event){
-       this.detailDrillinBitChange = $event.target.value;
-       console.log($event.target.value);
-
-     }
-     detailOfCoreBarrel($event){
-       this.detailsOdCoreBarrel= $event.target.value;
        console.log($event.target.value);
 
      }
@@ -174,8 +175,6 @@ layer1List: any =[];
            this.typeOfSoil = this.layer1List[0].soil_type;
            this.densityConsiChange = this.layer1List[0].soil_density;
            this.visualClassification = this.layer1List[0].soil_visual_classif;
-           this.detailsOfDrillingBit = this.layer1List[0].soil_drilling_bit;
-           this.detailsOdCoreBarrel = this.layer1List[0].soil_core_barrel;
            this.rockSample = this.layer1List[0].rock_sample_type;
            this.runLength = this.layer1List[0].rock_run_length;
            this.runTime = this.layer1List[0].rock_run_time;
@@ -195,6 +194,8 @@ layer1List: any =[];
            this.secondB = this.layer1List[0].secondB;
            this.thirdB = this.layer1List[0].thirdB;
            this.totalB = this.layer1List[0].totalB;
+           this.rockDepthFrom = this.layer1List[0].rock_depth_from;
+           this.rockDepthTo = this.layer1List[0].rock_depth_to;
 
           }
 
@@ -205,11 +206,12 @@ layer1List: any =[];
       this.androidDatabase.updateLayer3(this.drillingFrom,this.drillingTo,this.typeOfstrata,
         this.typeOfsample,this.dsDepthFrom,this.dsDepthTo,this.sptDepthFrom,this.sptDepthTo,
         this.udsDepthFrom,this.udsDepthTo,this.soilSampleColor,this.typeOfSoil,this.densityConsiChange,
-        this.visualClassification,this.detailDrillinBitChange,this.detailsOdCoreBarrel,
+        this.visualClassification,
         this.rockSample, this.runLength,this.runTime,this.waterLoss,this.allRockPiecesLenth,
         this.rockPicesLengthgrze,this.cr,this.rqd,this.rockSamplColor,
         this.typeOfWeathering,this.typeOfRock,Constants.laYer1Id,this.first,
-        this.second,this.third,this.total,this.firstB,this.secondB,this.thirdB,this.totalB);
+        this.second,this.third,this.total,this.firstB,this.secondB,this.thirdB,this.totalB,this.rockDepthFrom,
+        this.rockDepthTo);
         }
 
 
