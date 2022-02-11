@@ -15,6 +15,7 @@ export abstract class Constants {
   public static projectId: any;
   public static orgId: any;
   public static webbhid: any;
+  public static usertype: any;
   //ionic build --prod -- --base-href /dailydiaryweb/
 //        classpath 'com.android.tools.build:gradle:4.0.0'
 

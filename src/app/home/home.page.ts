@@ -46,11 +46,17 @@ export class HomePage {
               Constants.projectLocation = response.data.project_location;
               Constants.packageList = response.data.packages;
               Constants.subAgencyList = response.data.subagencies;
+              Constants.usertype = response.data.user_type;
 
 
              this.postData.employeeid = '';
              this.postData.epassword = '';
+             if(Constants.usertype === 'staff'){
              this.router.navigate(['sidemenu']);
+             }else{
+              this.router.navigate(['admindashboard']);
+
+             }
 
         }else{
           this.toastSer.presentError('Invalid Credentials');

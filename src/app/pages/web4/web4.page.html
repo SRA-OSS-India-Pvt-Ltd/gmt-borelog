@@ -101,23 +101,25 @@
 
 
       <ion-row >
-        <ion-col size="12">
+        <ion-col size="10">
           <ion-item class="padding">
             <ion-label  style="white-space: pre-wrap !important;"><strong>Sub Agency Representative Signature:</strong></ion-label>
           </ion-item>
         </ion-col>
 
+        <ion-col size="2">
+          <ion-icon  name="create"  (click)="updateImg2()"></ion-icon>
+
+        </ion-col>
+
+
       </ion-row>
 
       <ion-row >
-        <ion-col size="11" class="padding">
+        <ion-col size="12" class="padding">
           <div>
             <canvas #canvas1 (touchstart)="startDrawing($event)" (touchmove)="moved($event)"></canvas>
          </div>
-
-        </ion-col>
-        <ion-col size="1">
-          <ion-icon  name="create"  (click)="updateImg2()"></ion-icon>
 
         </ion-col>
 
@@ -139,24 +141,25 @@
 
 
       <ion-row >
-        <ion-col size="12">
+        <ion-col size="10">
           <ion-item class="padding">
             <ion-label  style="white-space: pre-wrap !important;"><strong>Client Representative Signature:</strong></ion-label>
           </ion-item>
         </ion-col>
+        <ion-col size="2">
+          <ion-icon  name="create"  (click)="updateImg3()"></ion-icon>
+
+        </ion-col>
+
 
       </ion-row>
 
 
       <ion-row class="input">
-        <ion-col size="10" class="padding">
+        <ion-col size="12" class="padding">
           <div>
             <canvas #canvas2 (touchstart)="startDrawing($event)" (touchmove)="moved($event)"></canvas>
          </div>
-
-        </ion-col>
-        <ion-col size="2">
-          <ion-icon  name="create"  (click)="updateImg3()"></ion-icon>
 
         </ion-col>
 

@@ -1,3 +1,4 @@
+import { ToastService } from './../../services/toast.service';
 import { Router } from '@angular/router';
 import { Constants } from 'src/app/common/constants';
 import { AndroidDatabaseService } from './../../database/android-database.service';
@@ -16,7 +17,8 @@ layer1List: any = [];
   constructor(public androidDatabase: AndroidDatabaseService,
     public router: Router,
     public httpService: HttpcallsService,
-    public platform: Platform) {
+    public platform: Platform,
+    public toastser: ToastService) {
     this.adding();
   }
 
@@ -123,6 +125,26 @@ layer1List: any = [];
 
 
    });
+
+   }
+
+
+   datasubmit(id: any,bhid: any){
+    this. platform.ready().then(() => {
+      if (this.platform.is('android')) {
+      this.submitboredata(id);
+
+      }else{
+
+        this.httpService.submitall('all',bhid).subscribe((response: any)=>{
+          console.log('respons',response);
+          this.toastser.presentSuccess(response.msg);
+        });
+     }
+
+
+  });
+
 
    }
 

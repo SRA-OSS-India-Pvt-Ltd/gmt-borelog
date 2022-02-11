@@ -132,4 +132,13 @@ export class HttpcallsService {
   }
 
 
+  submitall(bhlayer: any,bhid: any){
+    const parameters ={bh_layer:bhlayer,bh_id:bhid};
+    console.log('JSON',JSON.stringify(parameters));
+
+    return this.httpClient.post(`${environment.apiUrl}/submitboredata_web`, JSON.stringify(parameters));
+
+  }
+
+
 }

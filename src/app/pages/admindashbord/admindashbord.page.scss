@@ -1,0 +1,41 @@
+
+
+.class-name {
+  --ion-background-color:#3880ff;
+}
+.input{
+  margin-top: 5px;
+  border: 2px solid;
+  border-radius: 4px;
+
+  border-color:  #fff;
+  --border-width: 0;
+  --inner-border-width: 0;
+
+}
+.padding{
+  --border-width: 0;
+  --inner-border-width: 0;
+
+}
+.alignment {
+  text-align: left;
+}
+.ion-title{
+  -webkit-padding-start: 0;
+  padding-inline-start: 0;
+}
+.ion-card {
+  border-bottom: 3px solid #fff;
+
+}
+.image-center{
+  margin:0 auto;
+  }
+
+  .ion-item {
+
+    --border-width: 0;
+    --inner-border-width: 0;
+}
+

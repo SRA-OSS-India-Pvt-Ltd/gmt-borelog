@@ -71,6 +71,30 @@ const routes: Routes = [
     path: 'web4',
     loadChildren: () => import('./pages/web4/web4.module').then( m => m.Web4PageModule)
   },
+  {
+    path: 'nonedit1',
+    loadChildren: () => import('./pages/nonedit1/nonedit1.module').then( m => m.Nonedit1PageModule)
+  },
+  {
+    path: 'nonedit2',
+    loadChildren: () => import('./pages/nonedit2/nonedit2.module').then( m => m.Nonedit2PageModule)
+  },
+  {
+    path: 'nonedit3',
+    loadChildren: () => import('./pages/nonedit3/nonedit3.module').then( m => m.Nonedit3PageModule)
+  },
+  {
+    path: 'nonedit4',
+    loadChildren: () => import('./pages/nonedit4/nonedit4.module').then( m => m.Nonedit4PageModule)
+  },
+  {
+    path: 'admindashbord',
+    loadChildren: () => import('./pages/admindashbord/admindashbord.module').then( m => m.AdmindashbordPageModule)
+  },
+  {
+    path: 'viewlist1',
+    loadChildren: () => import('./pages/viewlist1/viewlist1.module').then( m => m.Viewlist1PageModule)
+  },
 ];
 
 @NgModule({

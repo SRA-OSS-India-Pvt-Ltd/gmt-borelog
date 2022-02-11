@@ -65,9 +65,7 @@ bhid: any;
     }
 
     clearPad() {
-      this.signaturePad.clear();
-      this.signaturePad1.clear();
-      this.signaturePad2.clear();
+      this.router.navigate(['viewlist']);
 
     }
 
@@ -175,12 +173,9 @@ bhid: any;
       this. platform.ready().then(() => {
          if (this.platform.is('android')) {
          this.addDatabase();
-
          }else{
           this.submitweb();
          }
-
-
      });
     }
 
