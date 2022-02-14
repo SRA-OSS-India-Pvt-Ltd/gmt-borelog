@@ -17,14 +17,14 @@ export class Viewlist1Page implements OnInit {
     public router: Router,
     public httpService: HttpcallsService,
     public toastser: ToastService) {
-    this.getPendingBoredata();
+    this.getSubmittedBoredata();
   }
 
   ngOnInit() {
   }
-  getPendingBoredata(){
+  getSubmittedBoredata(){
     this.layer1List = [];
-    this.httpService.getPendingBoredata(Constants.userId).subscribe((response: any)=>{
+    this.httpService.getSubmittedBoredata(Constants.userId,Constants.usertype).subscribe((response: any)=>{
       this.layer1List = response.data;
     });
   }

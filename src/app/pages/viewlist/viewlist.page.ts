@@ -37,9 +37,10 @@ layer1List: any = [];
       }
     });
   }
-  moveToUpdate(id: any){
+  moveToUpdate(id: any,status: any){
     Constants.laYer1Id = id;
     this.router.navigate(['update1']);
+
   }
   moveToUpdate2(id: any){
     Constants.laYer1Id = id;
@@ -149,14 +150,19 @@ layer1List: any = [];
    }
 
 
-   moving(id: any,bhid: any){
+   moving(id: any,bhid: any,bhstatus: any){
     this. platform.ready().then(() => {
        if (this.platform.is('android')) {
-       this.moveToUpdate(id);
+       this.moveToUpdate(id,bhstatus);
 
        }else{
         Constants.laYer1Id = bhid;
+        if(bhstatus === '0'){
         this.router.navigate(['web1']);
+        }else{
+          this.router.navigate(['nonedit1']);
+
+        }
 
       }
 

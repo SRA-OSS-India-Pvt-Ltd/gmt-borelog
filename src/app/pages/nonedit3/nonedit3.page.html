@@ -20,6 +20,7 @@
     <ion-item class="padding1">
       <ion-label class="label"><strong>Logging Information</strong></ion-label>
     </ion-item>
+
     <ion-grid fixed>
       <ion-row>
         <ion-col size="6">
@@ -29,10 +30,11 @@
         </ion-col>
         <ion-col size="6">
           <ion-item class="input">
-            <ion-label type="text" [(ngModel)]="drillingFrom" ></ion-label>
+            <ion-label type="text"  >{{drillingFrom}}</ion-label>
           </ion-item>
         </ion-col>
       </ion-row>
+
       <ion-row>
         <ion-col size="6">
           <ion-item class="padding">
@@ -41,10 +43,11 @@
         </ion-col>
         <ion-col size="6">
           <ion-item class="input">
-            <ion-label type="text" [(ngModel)]="drillingTo" ></ion-label>
+            <ion-label type="text" >{{drillingTo}}</ion-label>
           </ion-item>
         </ion-col>
       </ion-row>
+
       <ion-row>
         <ion-col size="6">
           <ion-item class="padding">
@@ -53,15 +56,11 @@
         </ion-col>
         <ion-col size="6">
           <ion-item class="input">
-            <ion-item>
-              <ion-select  placeholder="Select " (ionChange)="strataChange($event)" value="{{typeOfstrata}}">
-                <ion-select-option value="Soil">Soil</ion-select-option>
-                <ion-select-option value="Rock">Rock</ion-select-option>
-              </ion-select>
-            </ion-item>
+            <ion-label>{{typeOfstrata}}</ion-label>
           </ion-item>
         </ion-col>
       </ion-row>
+
       <ion-row *ngIf="isSoil">
         <ion-col size="6">
           <ion-item class="padding">
@@ -71,17 +70,13 @@
         <ion-col size="6">
           <ion-item class="input">
             <ion-item>
-              <ion-select  placeholder="Select " (ionChange)="sampleChange($event)" value="{{typeOfsample}}">
-                <ion-select-option value="DS">DS</ion-select-option>
-                <ion-select-option value="SPT">SPT</ion-select-option>
-                <ion-select-option value="UDS">UDS</ion-select-option>
-                <ion-select-option value="WS">WS</ion-select-option>
+              <ion-label>{{typeOfsample}}</ion-label>
 
-              </ion-select>
             </ion-item>
           </ion-item>
         </ion-col>
       </ion-row>
+
       <ion-row *ngIf="isdsDepth">
         <ion-col size="6">
           <ion-item class="padding">
@@ -90,10 +85,11 @@
         </ion-col>
         <ion-col size="6">
           <ion-item class="input">
-            <ion-label type="text" [(ngModel)]="dsDepthFrom" ></ion-label>
+            <ion-label type="text" >{{dsDepthFrom}}</ion-label>
           </ion-item>
         </ion-col>
       </ion-row>
+
       <ion-row *ngIf="isdsDepth">
         <ion-col size="6">
           <ion-item class="padding">
@@ -102,7 +98,7 @@
         </ion-col>
         <ion-col size="6">
           <ion-item class="input">
-            <ion-label type="text" [(ngModel)]="dsDepthTo" ></ion-label>
+            <ion-label type="text" >{{dsDepthTo}}</ion-label>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -116,10 +112,11 @@
         </ion-col>
         <ion-col size="6">
           <ion-item class="input">
-            <ion-label type="text" [(ngModel)]="sptDepthFrom" ></ion-label>
+            <ion-label type="text"  >{{sptDepthFrom}}</ion-label>
           </ion-item>
         </ion-col>
       </ion-row>
+
       <ion-row *ngIf="isSPTDepth">
         <ion-col size="6">
           <ion-item class="padding">
@@ -128,10 +125,11 @@
         </ion-col>
         <ion-col size="6">
           <ion-item class="input">
-            <ion-label type="text" [(ngModel)]="sptDepthTo" ></ion-label>
+            <ion-label type="text"  >{{sptDepthTo}}</ion-label>
           </ion-item>
         </ion-col>
       </ion-row>
+      
       <ion-row *ngIf="isSPTDepth">
         <ion-col size="6">
           <ion-item class="padding">
@@ -145,6 +143,7 @@
         </ion-col>
       </ion-row>
   <ion-row *ngIf="isSPTDepth">
+
     <ion-col size="3"><ion-item class="padding"><ion-label ><strong>1st</strong></ion-label></ion-item></ion-col>
     <ion-col size="3"><ion-item class="padding"><ion-label ><strong>2nd</strong></ion-label></ion-item></ion-col>
     <ion-col size="3"><ion-item class="padding"><ion-label ><strong>3rd</strong></ion-label></ion-item></ion-col>
@@ -152,9 +151,9 @@
 
   </ion-row>
   <ion-row *ngIf="isSPTDepth">
-    <ion-col size="3"><ion-item class="input"><ion-label type="number" [(ngModel)]="first"></ion-label></ion-item></ion-col>
-    <ion-col size="3"><ion-item class="input"><ion-label type="number" [(ngModel)]="second" (ionChange)="totalCount()"></ion-label></ion-item></ion-col>
-    <ion-col size="3"><ion-item class="input"><ion-label type="number" [(ngModel)]="third" (ionChange)="totalCount()"></ion-label></ion-item></ion-col>
+    <ion-col size="3"><ion-item class="input"><ion-label type="number" >{{first}}</ion-label></ion-item></ion-col>
+    <ion-col size="3"><ion-item class="input"><ion-label type="number"  (ionChange)="totalCount()">{{second}}</ion-label></ion-item></ion-col>
+    <ion-col size="3"><ion-item class="input"><ion-label type="number"  (ionChange)="totalCount()">{{third}}</ion-label></ion-item></ion-col>
     <ion-col size="3"><ion-item class="input"><ion-label>{{total}}</ion-label></ion-item></ion-col>
 
   </ion-row>
@@ -178,11 +177,15 @@
 
   </ion-row>
   <ion-row *ngIf="isSPTDepth">
-  <ion-col size="3"><ion-item class="input"><ion-label type="number" [(ngModel)]="firstB"></ion-label></ion-item></ion-col>
-  <ion-col size="3"><ion-item class="input"><ion-label type="number" [(ngModel)]="secondB" (ionChange)="totalCountB()"></ion-label></ion-item></ion-col>
-  <ion-col size="3"><ion-item class="input"><ion-label type="number" [(ngModel)]="thirdB" (ionChange)="totalCountB()"></ion-label></ion-item></ion-col>
+  <ion-col size="3"><ion-item class="input"><ion-label type="number" ></ion-label>{{firstB}}</ion-item></ion-col>
+  <ion-col size="3"><ion-item class="input"><ion-label type="number"  (ionChange)="totalCountB()">{{secondB}}</ion-label></ion-item></ion-col>
+  <ion-col size="3"><ion-item class="input"><ion-label type="number"  (ionChange)="totalCountB()">{{thirdB}}</ion-label></ion-item></ion-col>
   <ion-col size="3"><ion-item class="input"><ion-label>{{totalB}}</ion-label></ion-item></ion-col>
 
+  </ion-row>
+
+  <ion-row *ngIf="isSPTDepth">
+    <ion-col size="12" *ngIf="oneB"><ion-item class="padding"><ion-label class="redtext"><strong>Refusal</strong></ion-label></ion-item></ion-col>
   </ion-row>
 
 
@@ -194,7 +197,7 @@
     </ion-col>
     <ion-col size="6">
       <ion-item class="input">
-        <ion-label type="text" [(ngModel)]="udsDepthFrom" ></ion-label>
+        <ion-label type="text"  >{{udsDepthFrom}}</ion-label>
       </ion-item>
     </ion-col>
   </ion-row>
@@ -207,7 +210,7 @@
     </ion-col>
     <ion-col size="6">
       <ion-item class="input">
-        <ion-label type="text" [(ngModel)]="udsDepthTo" ></ion-label>
+        <ion-label type="text"  >{{udsDepthTo}}</ion-label>
       </ion-item>
     </ion-col>
   </ion-row>
@@ -220,7 +223,7 @@
     </ion-col>
     <ion-col size="6">
       <ion-item class="input">
-        <ion-label type="text" [(ngModel)]="soilSampleColor" ></ion-label>
+        <ion-label type="text"  >{{soilSampleColor}}</ion-label>
       </ion-item>
     </ion-col>
   </ion-row>
@@ -233,10 +236,8 @@
     <ion-col size="6">
       <ion-item class="input">
 
-        <ion-select  placeholder="Select" (ionChange)="typeOfSoilChange($event)" value="{{typeOfSoil}}">
-           <ion-select-option value="Cohesive">Cohesive</ion-select-option>
-           <ion-select-option value="Cohesion less">Cohesion less</ion-select-option>
-         </ion-select>
+        <ion-label>{{typeOfSoil}}</ion-label>
+
 
         </ion-item>
     </ion-col>
@@ -251,15 +252,8 @@
     <ion-col size="6">
       <ion-item class="input">
 
-        <ion-select  placeholder="Select" (ionChange)="densityConsiChange($event)" value="{{densityConsiChange}}">
-           <ion-select-option value="Very soft">Very soft</ion-select-option>
-           <ion-select-option value="Soft">Soft</ion-select-option>
-           <ion-select-option value="Medium">Medium</ion-select-option>
-           <ion-select-option value="Stiff">Stiff</ion-select-option>
-           <ion-select-option value="Very Stiff">Very Stiff</ion-select-option>
-           <ion-select-option value="Hard">Hard</ion-select-option>
+        <ion-label>{{densityConsiChange}}</ion-label>
 
-         </ion-select>
 
         </ion-item>
     </ion-col>
@@ -272,15 +266,8 @@
     </ion-col>
     <ion-col size="6">
       <ion-item class="input">
+<ion-label>{{densityConsiChange}}</ion-label>
 
-        <ion-select  placeholder="Select" (ionChange)="densityConsiChange1($event)" value="{{densityConsiChange}}">
-           <ion-select-option value="Very loose">Very loose</ion-select-option>
-           <ion-select-option value="Loose">Loose</ion-select-option>
-           <ion-select-option value="Medium">Medium</ion-select-option>
-           <ion-select-option value="Dense">Dense</ion-select-option>
-           <ion-select-option value="Very Dense">Very Dense</ion-select-option>
-
-         </ion-select>
 
         </ion-item>
     </ion-col>
@@ -295,18 +282,8 @@
     <ion-col size="6">
       <ion-item class="input">
 
-        <ion-select  placeholder="Select" (ionChange)="visualChange($event)" value="{{visualClassification}}">
-           <ion-select-option value="Sand">Sand</ion-select-option>
-           <ion-select-option value="Gravel">Gravel</ion-select-option>
-           <ion-select-option value="Silty">Silty</ion-select-option>
-           <ion-select-option value="Clay">Clay</ion-select-option>
-           <ion-select-option value="Gravelly">Gravelly</ion-select-option>
-           <ion-select-option value="Sand">Sand</ion-select-option>
-           <ion-select-option value="Sandy Gravel">Sandy Gravel</ion-select-option>
-           <ion-select-option value="Moorum">Moorum</ion-select-option>
-           <ion-select-option value="Other">Other</ion-select-option>
+        <ion-label>{{visualClassification}}</ion-label>
 
-         </ion-select>
 
         </ion-item>
     </ion-col>
@@ -322,14 +299,9 @@
     <ion-col size="6">
       <ion-item class="input">
 
-        <ion-select  placeholder="Select" (ionChange)="rockSamplechange($event)" value="{{rockSample}}">
-           <ion-select-option value="Wash Sample">Wash Sample</ion-select-option>
-           <ion-select-option value="Core Sample">Core Sample</ion-select-option>
+        <ion-label>{{rockSample}}</ion-label>
 
-
-         </ion-select>
-
-        </ion-item>
+      </ion-item>
     </ion-col>
   </ion-row>
   <ion-row *ngIf="isRock">
@@ -340,7 +312,7 @@
     </ion-col>
     <ion-col size="6">
       <ion-item class="input">
-        <ion-label type="text" [(ngModel)]="rockDepthFrom" ></ion-label>
+        <ion-label type="text"  >{{rockDepthFrom}}</ion-label>
       </ion-item>
     </ion-col>
   </ion-row>
@@ -352,7 +324,7 @@
     </ion-col>
     <ion-col size="6">
       <ion-item class="input">
-        <ion-label type="text" [(ngModel)]="rockDepthTo" ></ion-label>
+        <ion-label type="text" >{{rockDepthTo}}</ion-label>
       </ion-item>
     </ion-col>
   </ion-row>
@@ -366,7 +338,7 @@
     </ion-col>
     <ion-col size="6">
       <ion-item class="input">
-           <ion-label type="number" [(ngModel)]="runLength" (ionChange)="crCaliculation()"></ion-label>
+           <ion-label type="number" (ionChange)="crCaliculation()">{{runLength}}</ion-label>
         </ion-item>
     </ion-col>
   </ion-row>
@@ -380,7 +352,7 @@
     </ion-col>
     <ion-col size="6">
       <ion-item class="input">
-           <ion-label type="number" [(ngModel)]="runTime"></ion-label>
+           <ion-label type="number" >{{runTime}}</ion-label>
         </ion-item>
     </ion-col>
   </ion-row>
@@ -392,7 +364,7 @@
     </ion-col>
     <ion-col size="6">
       <ion-item class="input">
-           <ion-label type="number" [(ngModel)]="waterLoss"></ion-label>
+           <ion-label type="number" >{{waterLoss}}</ion-label>
         </ion-item>
     </ion-col>
   </ion-row>
@@ -405,7 +377,7 @@
     </ion-col>
     <ion-col size="6">
       <ion-item class="input">
-           <ion-label type="number" [(ngModel)]="allRockPiecesLenth" (ionChange)="crCaliculation()"></ion-label>
+           <ion-label type="number"  (ionChange)="crCaliculation()">{{allRockPiecesLenth}}</ion-label>
         </ion-item>
     </ion-col>
   </ion-row>
@@ -417,7 +389,7 @@
     </ion-col>
     <ion-col size="6">
       <ion-item class="input">
-           <ion-label type="number" [(ngModel)]="rockPicesLengthgrze" (ionChange)="crCaliculation()" ></ion-label>
+           <ion-label type="number"  (ionChange)="crCaliculation()" >{{rockPicesLengthgrze}}</ion-label>
         </ion-item>
     </ion-col>
   </ion-row>
@@ -456,7 +428,7 @@
     </ion-col>
     <ion-col size="6">
       <ion-item class="input">
-        <ion-label type="text" [(ngModel)]="rockSamplColor"></ion-label>
+        <ion-label type="text" >{{rockSamplColor}}</ion-label>
         </ion-item>
     </ion-col>
   </ion-row>
@@ -469,18 +441,7 @@
     </ion-col>
     <ion-col size="6">
       <ion-item class="input">
-  <ion-item>
-    <ion-select  placeholder="Select " (ionChange)="weatheringChange($event)" value="{{typeOfWeathering}}">
-      <ion-select-option value="Residual Soil">Residual Soil</ion-select-option>
-      <ion-select-option value="Completely Weathered">Completely Weathered</ion-select-option>
-      <ion-select-option value="Highly Weathered">Highly Weathered</ion-select-option>
-      <ion-select-option value="Moderately Weathered ">Moderately Weathered </ion-select-option>
-      <ion-select-option value="Slightly Weathered">Slightly Weathered</ion-select-option>
-      <ion-select-option value="Fresh">Fresh</ion-select-option>
-
-
-    </ion-select>
-  </ion-item>
+        <ion-label>{{typeOfWeathering}}</ion-label>
       </ion-item>
     </ion-col>
   </ion-row>
@@ -493,7 +454,7 @@
     </ion-col>
     <ion-col size="6">
       <ion-item class="input">
-        <ion-label type="text" [(ngModel)]="typeOfRock"></ion-label>
+        <ion-label type="text" >{{typeOfRock}}</ion-label>
         </ion-item>
     </ion-col>
   </ion-row>
@@ -512,3 +473,4 @@
 
 </ion-list>
 </ion-content>
+

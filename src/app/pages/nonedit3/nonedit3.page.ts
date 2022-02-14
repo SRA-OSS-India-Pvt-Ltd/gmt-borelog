@@ -29,6 +29,7 @@ export class Nonedit3Page implements OnInit {
   secondB: any;
   thirdB: any;
   totalB: any;
+  oneB= false;
   isUDSepth = false;
   udsDepthFrom: any;
   udsDepthTo: any;
@@ -54,6 +55,7 @@ isRock = false;
 rockDepthTo: any;
 rockDepthFrom: any;
 isSoil = false;
+sptstatus: any;
 constructor(public toastSer: ToastService,
   public httpService: HttpcallsService,
   public router: Router) {
@@ -62,6 +64,54 @@ constructor(public toastSer: ToastService,
 
 ngOnInit() {
 }
+totalCount(){
+  if(this.firstB === 50 && this.first <= 15 ){
+    this.oneB = true;
+    this.sptstatus = 'Refusal';
+  }if(this.secondB === 50 && this.second <= 15 ){
+    this.oneB = true;
+    this.sptstatus = 'Refusal';
+
+  }
+  if(this.thirdB === 50 && this.third <= 15 ){
+    this.oneB = true;
+    this.sptstatus = 'Refusal';
+
+  }
+
+
+  if(this.second !== undefined && this.third !== undefined){
+    this.total = this.second + this.third;
+    this.sptstatus = 'Refusal';
+
+  }
+}
+totalCountB(){
+  if(this.firstB >= 50 && this.first === 15 ){
+    this.oneB = true;
+    this.sptstatus = 'Refusal';
+
+  }
+  if(this.secondB >= 50 && this.second === 15 ){
+    this.oneB = true;
+    this.sptstatus = 'Refusal';
+
+  }
+  if(this.thirdB >= 50 && this.third === 15 ){
+    this.oneB = true;
+    this.sptstatus = 'Refusal';
+
+  }
+  if(this.secondB !== undefined && this.thirdB !== undefined){
+    this.totalB = this.secondB + this.thirdB;
+    if(this.totalB >= 100 && this.total === 30){
+      this.oneB = true;
+      this.sptstatus = 'Refusal';
+
+    }
+  }
+}
+
 strataChange($event){
   this.typeOfstrata= $event.target.value;
   console.log($event.target.value);
@@ -140,16 +190,6 @@ strataChange($event){
      console.log($event.target.value);
 
    }
-   totalCount(){
-    if(this.second !== undefined && this.third !== undefined){
-      this.total = this.second + this.third;
-    }
-  }
-  totalCountB(){
-    if(this.secondB !== undefined && this.thirdB !== undefined){
-      this.totalB = this.secondB + this.thirdB;
-    }
-  }
   getLayer1() {
     this.layer1List = [];
 this.httpService.getBoredetails(Constants.webbhid).subscribe((response: any)=>{
@@ -161,6 +201,11 @@ this.httpService.getBoredetails(Constants.webbhid).subscribe((response: any)=>{
          this.drillingFrom = this.layer1List[0].drill_depth_from;
          this.drillingTo = this.layer1List[0].drill_depth_to;
          this.typeOfstrata = this.layer1List[0].type_of_strata;
+         if(this.typeOfstrata === 'Soil'){
+           this.isSoil = true;
+         }else{
+           this.isRock = true;
+         }
          this.typeOfsample = this.layer1List[0].type_of_sample;
          this.dsDepthFrom = this.layer1List[0].soil_ds_depth_from;
          this.dsDepthTo = this.layer1List[0].soil_ds_depth_to;
@@ -193,6 +238,7 @@ this.httpService.getBoredetails(Constants.webbhid).subscribe((response: any)=>{
          this.totalB = this.layer1List[0].totalB;
          this.rockDepthFrom = this.layer1List[0].rock_depth_from;
          this.rockDepthTo = this.layer1List[0].rock_depth_to;
+         this.sptstatus = this.layer1List[0].soil_spt_depth_status;
 
         }
 
@@ -205,7 +251,7 @@ this.httpService.getBoredetails(Constants.webbhid).subscribe((response: any)=>{
       this.first,this.firstB,
       this.second,this.secondB,
       this.third,this.thirdB,
-      this.total,this.totalB,'',
+      this.total,this.totalB,this.sptstatus,
       this.udsDepthFrom,this.udsDepthTo,this.soilSampleColor,this.typeOfSoil,this.densityConsistace,
       this.visualClassification,this.rockSample, this.runLength,this.runTime,this.waterLoss,this.allRockPiecesLenth,
       this.rockPicesLengthgrze,this.cr,this.rqd,this.rockSamplColor,
@@ -230,7 +276,7 @@ onClick(){
     this.router.navigate(['layer4']);
 
   }else{
-    this.router.navigate(['web4']);
+    this.router.navigate(['nonedit4']);
 
   }
 

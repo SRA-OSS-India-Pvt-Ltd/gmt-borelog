@@ -106,27 +106,6 @@ if(this.layer1List[0].sa_id === '1'){
        });
      }
 
-
-     updateLayer1(){
-      this.httpService.submitLayer1(Constants.laYer1Id,1,Constants.userId,Constants.orgId,Constants.projectId,
-        this.package,this.boreHoles,this.subAgencyId).subscribe((response: any)=>{
-         console.log('response',response);
-         Constants.webbhid= response.data.bh_id;
-         this.toastService.presentSuccess(response.msg);
-         console.log('structtype',this.layer1List[0].struct_type);
-         if(this.layer1List[0].struct_type === ''){
-         this.router.navigate(['boreholeinformation']);
-
-         Constants.webbhid = Constants.laYer1Id;
-         }else{
-          this.router.navigate(['web2']);
-          Constants.webbhid = Constants.laYer1Id;
-
-         }
-
-        });
-    }
-
     onClick(){
       this.router.navigate(['nonedit2']);
       Constants.webbhid = Constants.laYer1Id;

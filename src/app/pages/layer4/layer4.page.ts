@@ -45,8 +45,18 @@ bhid: any;
 ) {
       this.date = new Date().toISOString();
       console.log('date',this.date);
-      this.getLayer1LastId();
-     }
+      platform.ready().then(() => {
+        if (this.platform.is('android')) {
+          this.getLayer1LastId();
+
+        }else{
+
+
+        }
+
+
+      });
+         }
      ngAfterViewInit() {
       this.signaturePad = new SignaturePad(this.canvasEl.nativeElement);
       this.signaturePad1 = new SignaturePad(this.canvasEl1.nativeElement);

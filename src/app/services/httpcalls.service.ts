@@ -139,6 +139,14 @@ export class HttpcallsService {
     return this.httpClient.post(`${environment.apiUrl}/submitboredata_web`, JSON.stringify(parameters));
 
   }
+  getSubmittedBoredata(bhid: any,usertpe: any){
+    const parameters ={bh_id:bhid,user_type:usertpe};
+    console.log('JSON',JSON.stringify(parameters));
+
+    return this.httpClient.post(`${environment.apiUrl}/getSubmittedBoredata`, JSON.stringify(parameters));
+
+  }
+
 
 
 }

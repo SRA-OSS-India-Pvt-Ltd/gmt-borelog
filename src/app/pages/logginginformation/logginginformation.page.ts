@@ -66,6 +66,7 @@ fourB = false;
 bhid: any;
 rockDepthTo: any;
 rockDepthFrom: any;
+sptstatus: any;
 
   constructor(public toastSer: ToastService,
     public androidDatabase: AndroidDatabaseService,
@@ -73,7 +74,17 @@ rockDepthFrom: any;
     public httpService: HttpcallsService,
     public platform: Platform
 ) {
+  platform.ready().then(() => {
+    if (this.platform.is('android')) {
       this.getLayer1LastId();
+
+    }else{
+
+
+    }
+
+
+  });
     }
 
   ngOnInit() {
@@ -386,40 +397,54 @@ rockDepthFrom: any;
     this.rockPicesLengthgrze,this.cr,this.rqd,this.rockSamplColor,
     this.typeOfWeathering,this.typeOfRock,Constants.laYer1Id,this.first,
     this.second,this.third,this.total,this.firstB,this.secondB,this.thirdB,this.totalB,
-    this.rockDepthFrom,this.rockDepthTo);
+    this.rockDepthFrom,this.rockDepthTo,this.sptstatus);
 
     this.router.navigate(['layer4']);
   }
   totalCount(){
     if(this.firstB === 50 && this.first <= 15 ){
-      this.one = true;
-    }
-    if(this.secondB === 50 && this.second <= 15 ){
-      this.two = true;
+      this.oneB = true;
+      this.sptstatus = 'Refusal';
+    }if(this.secondB === 50 && this.second <= 15 ){
+      this.oneB = true;
+      this.sptstatus = 'Refusal';
+
     }
     if(this.thirdB === 50 && this.third <= 15 ){
-      this.three = true;
+      this.oneB = true;
+      this.sptstatus = 'Refusal';
+
     }
 
 
     if(this.second !== undefined && this.third !== undefined){
       this.total = this.second + this.third;
+      this.sptstatus = 'Refusal';
+
     }
   }
   totalCountB(){
     if(this.firstB >= 50 && this.first === 15 ){
       this.oneB = true;
+      this.sptstatus = 'Refusal';
+
     }
     if(this.secondB >= 50 && this.second === 15 ){
-      this.twoB = true;
+      this.oneB = true;
+      this.sptstatus = 'Refusal';
+
     }
     if(this.thirdB >= 50 && this.third === 15 ){
-      this.threeB = true;
+      this.oneB = true;
+      this.sptstatus = 'Refusal';
+
     }
     if(this.secondB !== undefined && this.thirdB !== undefined){
       this.totalB = this.secondB + this.thirdB;
       if(this.totalB >= 100 && this.total === 30){
-        this.fourB = true;
+        this.oneB = true;
+        this.sptstatus = 'Refusal';
+
       }
     }
   }
@@ -429,7 +454,7 @@ rockDepthFrom: any;
       this.first,this.firstB,
       this.second,this.secondB,
       this.third,this.thirdB,
-      this.total,this.totalB,'',
+      this.total,this.totalB,this.sptstatus,
       this.udsDepthFrom,this.udsDepthTo,this.soilSampleColor,this.typeOfSoil,this.densityConsistace,
       this.visualClassification,this.rockSample, this.runLength,this.runTime,this.waterLoss,this.allRockPiecesLenth,
       this.rockPicesLengthgrze,this.cr,this.rqd,this.rockSamplColor,

@@ -53,6 +53,8 @@ isRock = false;
 rockDepthTo: any;
 rockDepthFrom: any;
 isSoil = false;
+oneB = false;
+sptstatus: any;
 
   constructor(public toastSer: ToastService,
     public androidDatabase: AndroidDatabaseService,
@@ -62,6 +64,54 @@ isSoil = false;
 
   ngOnInit() {
   }
+  totalCount(){
+    if(this.firstB === 50 && this.first <= 15 ){
+      this.oneB = true;
+      this.sptstatus = 'Refusal';
+    }if(this.secondB === 50 && this.second <= 15 ){
+      this.oneB = true;
+      this.sptstatus = 'Refusal';
+
+    }
+    if(this.thirdB === 50 && this.third <= 15 ){
+      this.oneB = true;
+      this.sptstatus = 'Refusal';
+
+    }
+
+
+    if(this.second !== undefined && this.third !== undefined){
+      this.total = this.second + this.third;
+      this.sptstatus = 'Refusal';
+
+    }
+  }
+  totalCountB(){
+    if(this.firstB >= 50 && this.first === 15 ){
+      this.oneB = true;
+      this.sptstatus = 'Refusal';
+
+    }
+    if(this.secondB >= 50 && this.second === 15 ){
+      this.oneB = true;
+      this.sptstatus = 'Refusal';
+
+    }
+    if(this.thirdB >= 50 && this.third === 15 ){
+      this.oneB = true;
+      this.sptstatus = 'Refusal';
+
+    }
+    if(this.secondB !== undefined && this.thirdB !== undefined){
+      this.totalB = this.secondB + this.thirdB;
+      if(this.totalB >= 100 && this.total === 30){
+        this.oneB = true;
+        this.sptstatus = 'Refusal';
+
+      }
+    }
+  }
+
   strataChange($event){
     this.typeOfstrata= $event.target.value;
     console.log($event.target.value);
@@ -140,17 +190,8 @@ isSoil = false;
        console.log($event.target.value);
 
      }
-     totalCount(){
-      if(this.second !== undefined && this.third !== undefined){
-        this.total = this.second + this.third;
-      }
-    }
-    totalCountB(){
-      if(this.secondB !== undefined && this.thirdB !== undefined){
-        this.totalB = this.secondB + this.thirdB;
-      }
-    }
-    getLayer1() {
+
+     getLayer1() {
       this.androidDatabase.getLayer1ById(Constants.laYer1Id).then((data) => {
         this.layer1List = [];
         console.log('size',data.rows.length);
@@ -196,6 +237,7 @@ isSoil = false;
            this.totalB = this.layer1List[0].totalB;
            this.rockDepthFrom = this.layer1List[0].rock_depth_from;
            this.rockDepthTo = this.layer1List[0].rock_depth_to;
+           this.sptstatus = this.layer1List[0].soil_spt_depth_status;
 
           }
 
@@ -211,7 +253,7 @@ isSoil = false;
         this.rockPicesLengthgrze,this.cr,this.rqd,this.rockSamplColor,
         this.typeOfWeathering,this.typeOfRock,Constants.laYer1Id,this.first,
         this.second,this.third,this.total,this.firstB,this.secondB,this.thirdB,this.totalB,this.rockDepthFrom,
-        this.rockDepthTo);
+        this.rockDepthTo,this.sptstatus);
         }
 
 

@@ -19,32 +19,26 @@
         </ion-col>
         <ion-col size="6">
           <ion-item class="input">
-            <ion-input type="text" [(ngModel)]="depthOfTermination" ></ion-input>
+            <ion-label type="text" >{{depthOfTermination}}</ion-label>
           </ion-item>
         </ion-col>
       </ion-row>
-      <ion-row>
 
-        <ion-col size="12">
-          <ion-item class="input">
-            <ion-label><strong>Borehole End Date</strong></ion-label>
-            <ion-input
-              value="{{ date | date: 'dd-MM-yyyy' }}"
-              id="date"
-              class="ion-text-end"
-            ></ion-input>
-            <ion-popover trigger="date" size="cover">
-              <ng-template>
-                <ion-datetime
-                  presentation="date"
-                  [(ngModel)]="date"
-                  locale="sl-SI"
-                ></ion-datetime>
-              </ng-template>
-            </ion-popover>
-          </ion-item>
-              </ion-col>
-      </ion-row>
+      
+        <ion-row >
+          <ion-col size="6">
+            <ion-item class="padding">
+              <ion-label  style="white-space: pre-wrap !important;"><strong>Borehole End Date:</strong></ion-label>
+            </ion-item>
+          </ion-col>
+          <ion-col size="6">
+            <ion-item class="input">
+              <ion-label type="text" >{{date}}</ion-label>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+
 
 
 
@@ -56,7 +50,7 @@
         </ion-col>
         <ion-col size="6">
           <ion-item class="input">
-            <ion-input type="text" [(ngModel)]="aarveRepresName" ></ion-input>
+            <ion-label type="text"  >{{aarveRepresName}}</ion-label>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -94,7 +88,7 @@
         </ion-col>
         <ion-col size="6">
           <ion-item class="input">
-            <ion-input type="text" [(ngModel)]="subAgencyRepresentivaeName" ></ion-input>
+            <ion-label type="text" [(ngModel)]="subAgencyRepresentivaeName" ></ion-label>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -134,7 +128,7 @@
         </ion-col>
         <ion-col size="6">
           <ion-item class="input">
-            <ion-input type="text" [(ngModel)]="clientRepresNaame" ></ion-input>
+            <ion-label type="text" [(ngModel)]="clientRepresNaame" ></ion-label>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -162,8 +156,23 @@
          </div>
 
         </ion-col>
+        </ion-row>
 
-      </ion-row>
+        <ion-row >
+          <ion-col size="6">
+            <ion-item class="padding">
+              <ion-label  style="white-space: pre-wrap !important;"><strong>PDF:</strong></ion-label>
+            </ion-item>
+          </ion-col>
+          <ion-col size="6">
+            <ion-item class="input">
+           <ion-icon slot="start" name="document"(click)="onClick(pdf)"></ion-icon>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+
+
 
 
         <ion-row>

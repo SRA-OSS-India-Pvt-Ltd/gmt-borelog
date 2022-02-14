@@ -23,11 +23,9 @@ export class SidemenuPage implements OnInit {
       platform.ready().then(() => {
         if (this.platform.is('android')) {
          this.androidDatabase.createDatabase();
-        this.toaseSer.presentSuccess('Android');
-         }else{
-          this.androidDatabase.createDatabase();
 
-         this.toaseSer.presentError('Else');
+        }else{
+
 
         }
 

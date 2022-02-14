@@ -51,7 +51,17 @@ export class BoreholeinformationPage implements OnInit {
   ) {
     this.ref = 'IS 1892; IS 2131; IS 2132';
    this.date = new Date().toISOString();
-   this.getLayer1LastId();
+   platform.ready().then(() => {
+    if (this.platform.is('android')) {
+      this.getLayer1LastId();
+
+    }else{
+
+
+    }
+
+
+  });
 
   }
 
@@ -59,6 +69,7 @@ export class BoreholeinformationPage implements OnInit {
   }
 
   getLayer1LastId() {
+
     this.androidDatabase.getLastId().then((data) => {
       this.layer1List = [];
       console.log('size',data.rows.length);

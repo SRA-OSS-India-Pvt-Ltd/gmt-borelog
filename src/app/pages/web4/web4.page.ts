@@ -25,6 +25,7 @@ signatureImg2: string;
 base641: any;
 base642: any;
 base643: any;
+pdf: any;
 
 depthOfTermination: any;
 
@@ -95,6 +96,7 @@ constructor(public toastSer: ToastService,
          this.signaturePad.fromDataURL(this.base641);
          this.signaturePad1.fromDataURL(this.base642);
          this.signaturePad2.fromDataURL(this.base643);
+         this.pdf = this.layer1List[0].pdfreport;
 
 
 
@@ -134,5 +136,8 @@ this.signaturePad.clear();
       });
   }
 
+  onClick(url: any){
+    window.open(url);
+  }
 
 }

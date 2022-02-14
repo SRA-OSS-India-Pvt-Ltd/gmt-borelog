@@ -42,6 +42,8 @@ rockSample: any;
 runLength: any;
 runTime: any;
 waterLoss: any;
+oneB= false;
+sptstatus: any;
 allRockPiecesLenth: any;
 rockPicesLengthgrze: any;
 cr: any;
@@ -62,6 +64,54 @@ constructor(public toastSer: ToastService,
 
 ngOnInit() {
 }
+totalCount(){
+  if(this.firstB === 50 && this.first <= 15 ){
+    this.oneB = true;
+    this.sptstatus = 'Refusal';
+  }if(this.secondB === 50 && this.second <= 15 ){
+    this.oneB = true;
+    this.sptstatus = 'Refusal';
+
+  }
+  if(this.thirdB === 50 && this.third <= 15 ){
+    this.oneB = true;
+    this.sptstatus = 'Refusal';
+
+  }
+
+
+  if(this.second !== undefined && this.third !== undefined){
+    this.total = this.second + this.third;
+    this.sptstatus = 'Refusal';
+
+  }
+}
+totalCountB(){
+  if(this.firstB >= 50 && this.first === 15 ){
+    this.oneB = true;
+    this.sptstatus = 'Refusal';
+
+  }
+  if(this.secondB >= 50 && this.second === 15 ){
+    this.oneB = true;
+    this.sptstatus = 'Refusal';
+
+  }
+  if(this.thirdB >= 50 && this.third === 15 ){
+    this.oneB = true;
+    this.sptstatus = 'Refusal';
+
+  }
+  if(this.secondB !== undefined && this.thirdB !== undefined){
+    this.totalB = this.secondB + this.thirdB;
+    if(this.totalB >= 100 && this.total === 30){
+      this.oneB = true;
+      this.sptstatus = 'Refusal';
+
+    }
+  }
+}
+
 strataChange($event){
   this.typeOfstrata= $event.target.value;
   console.log($event.target.value);
@@ -140,17 +190,8 @@ strataChange($event){
      console.log($event.target.value);
 
    }
-   totalCount(){
-    if(this.second !== undefined && this.third !== undefined){
-      this.total = this.second + this.third;
-    }
-  }
-  totalCountB(){
-    if(this.secondB !== undefined && this.thirdB !== undefined){
-      this.totalB = this.secondB + this.thirdB;
-    }
-  }
-  getLayer1() {
+
+   getLayer1() {
     this.layer1List = [];
 this.httpService.getBoredetails(Constants.webbhid).subscribe((response: any)=>{
   this.layer1List = response.data;
@@ -193,6 +234,7 @@ this.httpService.getBoredetails(Constants.webbhid).subscribe((response: any)=>{
          this.totalB = this.layer1List[0].totalB;
          this.rockDepthFrom = this.layer1List[0].rock_depth_from;
          this.rockDepthTo = this.layer1List[0].rock_depth_to;
+         this.sptstatus = this.layer1List[0].soil_spt_depth_status;
 
         }
 
@@ -205,7 +247,7 @@ this.httpService.getBoredetails(Constants.webbhid).subscribe((response: any)=>{
       this.first,this.firstB,
       this.second,this.secondB,
       this.third,this.thirdB,
-      this.total,this.totalB,'',
+      this.total,this.totalB,this.sptstatus,
       this.udsDepthFrom,this.udsDepthTo,this.soilSampleColor,this.typeOfSoil,this.densityConsistace,
       this.visualClassification,this.rockSample, this.runLength,this.runTime,this.waterLoss,this.allRockPiecesLenth,
       this.rockPicesLengthgrze,this.cr,this.rqd,this.rockSamplColor,

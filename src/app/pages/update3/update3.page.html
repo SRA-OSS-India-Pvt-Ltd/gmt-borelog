@@ -152,7 +152,7 @@
 
   </ion-row>
   <ion-row *ngIf="isSPTDepth">
-    <ion-col size="3"><ion-item class="input"><ion-input type="number" [(ngModel)]="first"></ion-input></ion-item></ion-col>
+    <ion-col size="3"><ion-item class="input"><ion-input type="number" [(ngModel)]="first" ></ion-input></ion-item></ion-col>
     <ion-col size="3"><ion-item class="input"><ion-input type="number" [(ngModel)]="second" (ionChange)="totalCount()"></ion-input></ion-item></ion-col>
     <ion-col size="3"><ion-item class="input"><ion-input type="number" [(ngModel)]="third" (ionChange)="totalCount()"></ion-input></ion-item></ion-col>
     <ion-col size="3"><ion-item class="input"><ion-label>{{total}}</ion-label></ion-item></ion-col>
@@ -183,6 +183,9 @@
   <ion-col size="3"><ion-item class="input"><ion-input type="number" [(ngModel)]="thirdB" (ionChange)="totalCountB()"></ion-input></ion-item></ion-col>
   <ion-col size="3"><ion-item class="input"><ion-label>{{totalB}}</ion-label></ion-item></ion-col>
 
+  </ion-row>
+  <ion-row *ngIf="isSPTDepth">
+    <ion-col size="12" *ngIf="oneB"><ion-item class="padding"><ion-label class="redtext"><strong>Refusal</strong></ion-label></ion-item></ion-col>
   </ion-row>
 
 

@@ -33,6 +33,7 @@ aarveRepresName: any;
 subAgencyRepresentivaeName: any;
 clientRepresNaame: any;
 layer1List: any = [];
+pdf: any;
 
 constructor(public toastSer: ToastService,
     public httpService: HttpcallsService,
@@ -95,6 +96,8 @@ constructor(public toastSer: ToastService,
          this.signaturePad.fromDataURL(this.base641);
          this.signaturePad1.fromDataURL(this.base642);
          this.signaturePad2.fromDataURL(this.base643);
+         this.pdf = this.layer1List[0].pdfreport;
+
 
 
 
@@ -118,6 +121,10 @@ this.signaturePad.clear();
 
   submitweb(){
     this.router.navigate(['viewlist']);
+  }
+
+  onClick(url: any){
+    window.open(url);
   }
 
 

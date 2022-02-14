@@ -54,7 +54,7 @@ export class HomePage {
              if(Constants.usertype === 'staff'){
              this.router.navigate(['sidemenu']);
              }else{
-              this.router.navigate(['admindashboard']);
+              this.router.navigate(['admindashbord']);
 
              }
 

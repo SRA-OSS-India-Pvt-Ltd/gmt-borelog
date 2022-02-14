@@ -1,14 +1,15 @@
 <ion-app>
   <ion-header>
     <ion-toolbar color="primary">
-      <ion-buttons slot="start" (click)="openSideNav()">
-        <ion-icon slot="start" name="menu-outline"></ion-icon>
-      </ion-buttons>
+
       <ion-title color="light">Digital Borelog</ion-title>
+      <ion-buttons slot="end" (click)="logOut()">
+        <ion-icon slot="end" name="exit"></ion-icon>
+      </ion-buttons>
 
     </ion-toolbar>
   </ion-header>
-  <ion-menu class="class-name" contentId="menu-content" menuId="menu-content" side="start" type="overlay" >
+  <!-- <ion-menu class="class-name" contentId="menu-content" menuId="menu-content" side="start" type="overlay" >
     <ion-header>
       <ion-toolbar>
         <ion-title color="light">Digital Borelog <strong></strong></ion-title>
@@ -52,7 +53,7 @@
       </ion-list>
     </ion-content>
   </ion-menu>
-  <ion-router-outlet id="menu-content"></ion-router-outlet>
+  <ion-router-outlet id="menu-content"></ion-router-outlet> -->
 <ion-content>
 
   <ion-grid fixed>
