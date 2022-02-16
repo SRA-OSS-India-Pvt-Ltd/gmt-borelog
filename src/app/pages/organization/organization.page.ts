@@ -77,7 +77,8 @@ boreHoles: any;
     }else if(this.subAgency === undefined){
       this.toastService.presentError('Please Select SubAgencyName');
 
-    }else{
+    }
+    else{
       this.adding();
     }
   }
@@ -87,8 +88,11 @@ boreHoles: any;
       Constants.userId,Constants.orgId,Constants.projectId,this.subAgency);
     this.router.navigate(['boreholeinformation']);
 
+
   }
   submitWeb(){
+    if(this.boreHoles === undefined){
+         this.boreHoles = null;}
     this.httpService.submitLayer1('',1,Constants.userId,Constants.orgId,Constants.projectId,
       this.package,this.boreHoles,this.subAgencyId).subscribe((response: any)=>{
        console.log('response',response);
@@ -97,7 +101,9 @@ boreHoles: any;
        this.router.navigate(['boreholeinformation']);
 
       });
-  }
+    }
+
+
 
   adding(){
    this. platform.ready().then(() => {

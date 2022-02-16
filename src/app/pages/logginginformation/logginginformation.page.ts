@@ -185,61 +185,61 @@ sptstatus: any;
    }
    validation(){
      if(this.drillingFrom === undefined){
-       this.toastSer.presentError('Please Give the Drilling From');
+       this.toastSer.presentError('Please Enter  Drilling From');
      }else if(this.drillingTo === undefined){
-      this.toastSer.presentError('Please Give the Drilling To');
+      this.toastSer.presentError('Please Enter  Drilling To');
 
      }else if(this.typeOfstrata === undefined){
-      this.toastSer.presentError('Please Give the Type of Strata');
+      this.toastSer.presentError('Please Select  Type of Strata');
 
      }else if(this.typeOfstrata === 'Soil'){
 
        if(this.typeOfsample === undefined){
-        this.toastSer.presentError('Please Give the Type of Sample');
+        this.toastSer.presentError('Please Select  Type of Sample');
 
        }else if(this.typeOfsample === 'DS' && this.dsDepthFrom === undefined){
-        this.toastSer.presentError('Please Give the Ds Depth From');
+        this.toastSer.presentError('Please Enter  Ds Depth From');
 
        }else if(this.typeOfsample === 'DS' && this.dsDepthTo === undefined){
-        this.toastSer.presentError('Please Give the Ds Depth To');
+        this.toastSer.presentError('Please Enter  Ds Depth To');
 
        }else if(this.typeOfsample === 'SPT' && this.sptDepthFrom === undefined){
-        this.toastSer.presentError('Please Give the SPT Depth From');
+        this.toastSer.presentError('Please Enter  SPT Depth From');
 
        }else if(this.typeOfsample === 'SPT' && this.sptDepthTo === undefined){
-        this.toastSer.presentError('Please Give the SPT Depth To');
+        this.toastSer.presentError('Please Enter  SPT Depth To');
 
        }else if(this.typeOfsample === 'SPT' && this.first === undefined){
-        this.toastSer.presentError('Please Give the Penetration From First');
+        this.toastSer.presentError('Please Enter  Penetration From First');
        }else if(this.typeOfsample === 'SPT' && this.second === undefined){
-        this.toastSer.presentError('Please Give the Penetration From Second');
+        this.toastSer.presentError('Please Enter  Penetration From Second');
        }else if(this.typeOfsample === 'SPT' && this.third === undefined){
-        this.toastSer.presentError('Please Give the Penetration From Third');
+        this.toastSer.presentError('Please Enter  Penetration From Third');
 
        }else if(this.typeOfsample === 'SPT' && this.firstB === undefined){
-        this.toastSer.presentError('Please Give the Blows - N From First');
+        this.toastSer.presentError('Please Enter  Blows - N From First');
 
        }else if(this.typeOfsample === 'SPT' && this.secondB === undefined){
-        this.toastSer.presentError('Please Give the Blows - N From Second');
+        this.toastSer.presentError('Please Enter  Blows - N From Second');
 
        }else if(this.typeOfsample === 'SPT' && this.thirdB === undefined){
-        this.toastSer.presentError('Please Give the Blows - N From Third');
+        this.toastSer.presentError('Please Enter  Blows - N From Third');
 
        }else if(this.typeOfsample === 'UDS' && this.udsDepthFrom === undefined){
-        this.toastSer.presentError('Please Give the UDS Depth From');
+        this.toastSer.presentError('Please Enter  UDS Depth From');
 
        }else if(this.typeOfsample === 'UDS' && this.udsDepthTo === undefined){
-        this.toastSer.presentError('Please Give the UDS Depth To');
+        this.toastSer.presentError('Please Enter  UDS Depth To');
          }else if(this.soilSampleColor === undefined){
-        this.toastSer.presentError('Please Give  the Soil Sample Color');
+        this.toastSer.presentError('Please Enter   Soil Sample Color');
 
        }else if(this.typeOfSoil === undefined){
-        this.toastSer.presentError('Please Select  the Type Of soil');
+        this.toastSer.presentError('Please Select   Type Of soil');
 
        }else if( this.densityConsistace === undefined){
-        this.toastSer.presentError('Please Give the Density / Consistency');
+        this.toastSer.presentError('Please Enter  Density / Consistency');
        }else if( this.visualClassification === undefined){
-        this.toastSer.presentError('Please Give the Visual Classification of Sample');
+        this.toastSer.presentError('Please Enter  Visual Classification of Sample');
        }else if(this.typeOfsample === 'DS'){
          this.rockDepthFrom ='';
          this.rockDepthTo = '';
@@ -330,30 +330,38 @@ sptstatus: any;
 
      }else if(this.typeOfstrata === 'Rock'){
        if( this.rockSample === undefined){
-        this.toastSer.presentError('Please Give the Type of Sample (If Rock)');
-       }else if( this.runLength === undefined){
-        this.toastSer.presentError('Please Give the Run Length');
+        this.toastSer.presentError('Please Enter  Type of Sample (If Rock)');
+       }
+       else if( this.rockDepthFrom === undefined){
+        this.toastSer.presentError('Please Enter  Rock depth from');
+
+       }else if( this.rockDepthTo === undefined){
+        this.toastSer.presentError('Please Enter  Rock depth to');
+
+       }
+       else if( this.runLength === undefined){
+        this.toastSer.presentError('Please Enter  Run Length');
 
        }else if( this.runTime === undefined){
-        this.toastSer.presentError('Please Give the Run Time');
+        this.toastSer.presentError('Please Enter  Run Time');
 
        }else if( this.waterLoss === undefined){
-        this.toastSer.presentError('Please Give the Water Loss');
+        this.toastSer.presentError('Please Enter  Water Loss');
 
        }else if( this.allRockPiecesLenth === undefined){
-        this.toastSer.presentError('Please Give the All Rock Pieces lengths');
+        this.toastSer.presentError('Please Enter  All Rock Pieces lengths');
 
        }else if( this.rockPicesLengthgrze === undefined){
-        this.toastSer.presentError('Please Give the Rock Pieces length >10 cm');
+        this.toastSer.presentError('Please Enter  Rock Pieces length >10 cm');
 
        }else if( this.rockSamplColor === undefined){
-        this.toastSer.presentError('Please Give the Rock Sample Color');
+        this.toastSer.presentError('Please Enter  Rock Sample Color');
 
        }else if( this.typeOfWeathering === undefined){
-        this.toastSer.presentError('Please Give the Type of Weathering');
+        this.toastSer.presentError('Please Select  Type of Weathering');
 
        }else if( this.typeOfRock === undefined){
-        this.toastSer.presentError('Please Give the Type of Weathering');
+        this.toastSer.presentError('Please Enter  Type of Rock');
 
        }else{
          this.typeOfsample = '';

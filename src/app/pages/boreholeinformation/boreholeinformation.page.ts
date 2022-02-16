@@ -117,32 +117,34 @@ getLocations(){
     this.orientation =$event.target.value;
     if(this.orientation === 'Inclined'){
       this.isInclined = true;
+    }else{
+      this.isInclined = false;
     }
   }
 
   validation(){
     if(this.typeOfStructure === undefined){
-      this.toastSer.presentError('Please Give Type of Structure');
+      this.toastSer.presentError('Please Enter Type of Structure');
     }else if(this.boreholeNumber === undefined){
-      this.toastSer.presentError('Please Give Borehole Number');
+      this.toastSer.presentError('Please Enter Borehole Number');
 
     }else if(this.boreholeLocation === undefined ){
-      this.toastSer.presentError('Please Give Borehole Number');
+      this.toastSer.presentError('Please Enter Borehole Number');
 
     }else if(this.boreholeChainage === undefined ){
-      this.toastSer.presentError('Please Give Borehole Chainage');
+      this.toastSer.presentError('Please Enter Borehole Chainage');
 
     }else if(this.latitude === undefined ){
-      this.toastSer.presentError('Please Give Latitude');
+      this.toastSer.presentError('Please Enter Latitude');
 
     }else if(this.date === undefined ){
-      this.toastSer.presentError('Please Give Borehole Start Date');
+      this.toastSer.presentError('Please Enter Borehole Start Date');
 
     }else if(this.rl === undefined ){
-      this.toastSer.presentError('Please Give Borehole RL (m)');
+      this.toastSer.presentError('Please Enter Borehole RL (m)');
 
     }else if(this.waterTable === undefined ){
-      this.toastSer.presentError('Please Give Water Table RL (m)');
+      this.toastSer.presentError('Please Enter Water Table RL (m)');
 
     }else if(this.typeOfRig === undefined ){
       this.toastSer.presentError('Please Select Type of Rig');
@@ -157,15 +159,15 @@ getLocations(){
       this.toastSer.presentError('Please Select Drilling Orientation');
 
     }else if(this.boreholeCasingDia === undefined ){
-      this.toastSer.presentError('Please Select Casing Dia');
+      this.toastSer.presentError('Please Enter Casing Dia');
 
     }else if(this.casingDepth === undefined ){
-      this.toastSer.presentError('Please Select Casing Depth');
+      this.toastSer.presentError('Please Enter Casing Depth');
 
     }else if( this.detailsOfDrillingBit === undefined){
-      this.toastSer.presentError('Please Give the Details of Drilling Bit*');
+      this.toastSer.presentError('Please Select the Details of Drilling Bit*');
      }else if( this.detailsOdCoreBarrel === undefined){
-      this.toastSer.presentError('Please Give the Details of Core Barrel');
+      this.toastSer.presentError('Please Select the Details of Core Barrel');
      }else{
       this.adding();
     }

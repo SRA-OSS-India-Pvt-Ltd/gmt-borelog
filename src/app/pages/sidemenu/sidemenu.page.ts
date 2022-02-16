@@ -83,6 +83,7 @@ export class SidemenuPage implements OnInit {
   }
   movetoLayer1(){
     this.router.navigate(['organization']);
+  //  this.router.navigate(['layer4']);
 
   }
   movetoList(){

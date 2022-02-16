@@ -16,10 +16,10 @@ export abstract class Constants {
   public static orgId: any;
   public static webbhid: any;
   public static usertype: any;
-  //ionic build --prod -- --base-href /dailydiaryweb/
+  //ionic build --prod -- --base-href /borelogweb_testing/
 //        classpath 'com.android.tools.build:gradle:4.0.0'
 
-
+//http://sraossinc.net:7071/borelogweb_testing/
 
 
 }

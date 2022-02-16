@@ -106,6 +106,9 @@ constructor(public toastSer: ToastService,
     });
   }
 
+  home(){
+    this.router.navigate(['sidemenu']);
+  }
   updateImg1(){
 this.signaturePad.clear();
   }
@@ -131,7 +134,7 @@ this.signaturePad.clear();
       this.clientRepresNaame,this.base643,'').subscribe((response: any)=>{
         console.log('response',response);
         this.toastSer.presentSuccess(response.msg);
-        this.router.navigate(['viewlist']);
+        this.router.navigate(['sidemenu']);
 
       });
   }

@@ -31,6 +31,9 @@ export class Viewlist1Page implements OnInit {
       this.layer1List = response.data;
     });
   }
+  onClick(){
+    this.router.navigate(['admindashbord']);
+  }
   moving(bhid: any){
 
 

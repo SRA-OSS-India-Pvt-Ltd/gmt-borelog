@@ -150,6 +150,8 @@ project: any;
         this.httpService.submitall('all',bhid).subscribe((response: any)=>{
           console.log('respons',response);
           this.toastser.presentSuccess(response.msg);
+          this.router.navigate(['sidemenu']);
+
         });
      }
 
@@ -179,6 +181,9 @@ project: any;
 
    });
 
+   }
+   onClick(){
+     this.router.navigate(['sidemenu']);
    }
 
 

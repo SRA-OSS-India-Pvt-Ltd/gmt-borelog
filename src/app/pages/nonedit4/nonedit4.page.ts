@@ -120,7 +120,7 @@ this.signaturePad.clear();
   }
 
   submitweb(){
-    this.router.navigate(['viewlist1']);
+    this.router.navigate(['admindashbord']);
   }
 
   onClick(url: any){
