@@ -50,7 +50,9 @@ export class Update2Page implements OnInit {
 
   ngOnInit() {
   }
-
+  onClick(){
+    this.router.navigate(['update3']);
+  }
   getLayer1() {
     this.androidDatabase.getLayer1ById(Constants.laYer1Id).then((data) => {
       this.layer1List = [];

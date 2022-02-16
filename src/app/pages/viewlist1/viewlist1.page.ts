@@ -13,11 +13,14 @@ import { HttpcallsService } from 'src/app/services/httpcalls.service';
 })
 export class Viewlist1Page implements OnInit {
   layer1List: any = [];
+  project: any;
   constructor(public androidDatabase: AndroidDatabaseService,
     public router: Router,
     public httpService: HttpcallsService,
     public toastser: ToastService) {
     this.getSubmittedBoredata();
+    this.project = 'DFCCIL';
+
   }
 
   ngOnInit() {
@@ -36,7 +39,9 @@ export class Viewlist1Page implements OnInit {
 
       }
 
-
+open(url: any){
+  window.open(url);
+}
 
 
 

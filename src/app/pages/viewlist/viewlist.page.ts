@@ -14,12 +14,14 @@ import { Platform } from '@ionic/angular';
 export class ViewlistPage implements OnInit {
 totalList: any =[];
 layer1List: any = [];
+project: any;
   constructor(public androidDatabase: AndroidDatabaseService,
     public router: Router,
     public httpService: HttpcallsService,
     public platform: Platform,
     public toastser: ToastService) {
     this.adding();
+    this.project = 'DFCCIL';
   }
 
   ngOnInit() {
@@ -37,6 +39,10 @@ layer1List: any = [];
       }
     });
   }
+  open(url: any){
+    window.open(url);
+  }
+
   moveToUpdate(id: any,status: any){
     Constants.laYer1Id = id;
     this.router.navigate(['update1']);
@@ -82,13 +88,13 @@ layer1List: any = [];
           this.totalList[0].second,this.totalList[0].secondB,
           this.totalList[0].third,this.totalList[0].thirdB,
           this.totalList[0].total,this.totalList[0].totalB,
-          this.totalList[0].user_id,
+          this.totalList[0].soil_spt_depth_status,
           this.totalList[0].soil_uds_depth_from,
           this.totalList[0].soil_uds_depth_to,
           this.totalList[0].soil_sample_color,this.totalList[0].soil_type,
           this.totalList[0].soil_density,
-          this.totalList[0].soil_visual_classif,this.totalList[0].soil_drilling_bit,
-          this.totalList[0].soil_core_barrel,this.totalList[0].rock_sample_type,
+          this.totalList[0].soil_visual_classif,this.totalList[0].drilling_bit,
+          this.totalList[0].core_barrel,this.totalList[0].rock_sample_type,
           this.totalList[0].rock_run_length,this.totalList[0].rock_run_time,
           this.totalList[0].rock_water_loss,this.totalList[0].rock_pieces_length,
           this.totalList[0].rock_pieces_10,this.totalList[0].rock_cr,
@@ -98,7 +104,9 @@ layer1List: any = [];
           this.totalList[0].rv_rep_name,this.totalList[0].rv_rep_sign,
           this.totalList[0].sa_rep_name,this.totalList[0].sa_rep_sign,
           this.totalList[0].client_rep_name,this.totalList[0].client_rep_sign,
-          this.totalList[0].modified_date).subscribe((response: any)=>{
+          this.totalList[0].modified_date,
+          this.totalList[0].rock_depth_from,this.totalList[0].rock_depth_to,
+          ).subscribe((response: any)=>{
            console.log('response',response);
            this.androidDatabase.deleteRowbyId(Constants.laYer1Id);
 
@@ -121,6 +129,8 @@ layer1List: any = [];
        this.getLayer1();
 
        }else{
+       // this.getLayer1();
+
         this.getPendingBoredata();
        }
 

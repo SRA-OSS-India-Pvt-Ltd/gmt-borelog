@@ -473,6 +473,8 @@ sptstatus: any;
        this.addDatabse();
 
        }else{
+      //  this.addDatabse();
+
         this.submitweb();
        }
 

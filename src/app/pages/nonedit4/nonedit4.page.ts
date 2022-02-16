@@ -120,7 +120,7 @@ this.signaturePad.clear();
   }
 
   submitweb(){
-    this.router.navigate(['viewlist']);
+    this.router.navigate(['viewlist1']);
   }
 
   onClick(url: any){

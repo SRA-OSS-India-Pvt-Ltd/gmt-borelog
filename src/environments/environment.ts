@@ -3,9 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  apiUrl: 'http://sraossinc.net:7071/borelogapi/'
-  
+  production: true,
+  apiUrl: 'http://sraossinc.net:7071/borelogapi_testing/'
+
 };
 
 /*

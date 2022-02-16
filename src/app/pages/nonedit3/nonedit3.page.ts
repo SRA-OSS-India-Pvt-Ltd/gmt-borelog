@@ -207,6 +207,14 @@ this.httpService.getBoredetails(Constants.webbhid).subscribe((response: any)=>{
            this.isRock = true;
          }
          this.typeOfsample = this.layer1List[0].type_of_sample;
+         if(this.typeOfsample === 'DS'){
+          this.isdsDepth = true;
+        }else if(this.typeOfsample === 'SPT'){
+          this.isSPTDepth = true;
+        }else if(this.typeOfsample === 'UDS'){
+          this.isUDSepth = true;
+        }
+
          this.dsDepthFrom = this.layer1List[0].soil_ds_depth_from;
          this.dsDepthTo = this.layer1List[0].soil_ds_depth_to;
          this.sptDepthFrom = this.layer1List[0].soil_spt_depth_from;

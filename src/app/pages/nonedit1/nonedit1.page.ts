@@ -76,6 +76,14 @@ export class Nonedit1Page implements OnInit {
         this.layer1List = response.data;
         console.log('list',this.layer1List);
         this.boreHoles = this.layer1List[0].no_of_bh;
+        if(this.layer1List[0].org_id === '1'){
+          this.orgName = 'Aarvee Associates';
+          this.orgAddrs = 'Hyderabad';
+          this.orgLogo = 'http:\/\/sraossinc.net:7071\/borelogapi\/images\/aarvee-icon.png';
+          this.projName ='DFCCIL';
+          this.clientName = 'DFCCIL';
+          this.projLocation = 'Hyderabad';
+        }
          if(this.layer1List[0].package_id === '1'){
            console.log('pack');
            this.package = 'DFCCIL Package-1';
@@ -85,7 +93,7 @@ export class Nonedit1Page implements OnInit {
           this.package = 'DFCCIL Package-3';
         }
 
-if(this.layer1List[0].sa_id === '1'){
+         if(this.layer1List[0].sa_id === '1'){
 
   this.subAgencyId = '1';
 

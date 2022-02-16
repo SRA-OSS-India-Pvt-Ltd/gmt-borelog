@@ -29,7 +29,7 @@ export class HttpcallsService {
     rockWaterLoss: any,rockPiecesLength: any,rockPiecse10: any,rockCr: any,rockrqd: any,
     rockSampleColor: any,rockWaethering: any,rockType: any,depthTermination: any,bhedate: any,
     rvRepName: any,rvRepSign: any,sarepName: any,saRepSign: any,clientRepName: any,
-    clientRepSign: any,mdate: any){
+    clientRepSign: any,mdate: any,rockdepthfrom: any,rockdepthto: any){
     const parameters ={user_id: uid,org_id:orgid,projectid:proId,package_id:packageId,sa_id:said,
       struct_type:structType,bh_no:bhno,bh_location:bhlocation,bh_chainage:bhchainage,bh_lat:bhlat,
       bh_lon:bhlon,bh_start_date:bhsadte,bh_rl:bhrl,water_table_rl:watertabe,type_of_rig:typeofrig,
@@ -42,13 +42,14 @@ export class HttpcallsService {
       soil_spt_blow_n_3:thirdB,soil_spt_penetration_total:total,soil_spt_blow_n_total: totalB,
       soil_spt_depth_status: sptDepthstatus,soil_uds_depth_from:udsDepthFrom,
       soil_uds_depth_to:udsDepthTo,soil_sample_color: soilSamplColor,soil_type:soilType,soil_density:soilDensity,
-      soil_visual_classif:soilVisualClassi,soil_drilling_bit:soilDrillingBit,
-      soil_core_barrel:soilCoreBarrel,rock_sample_type:rockSampletype,rock_run_length: rockrunLeng,
+      soil_visual_classif:soilVisualClassi,drilling_bit:soilDrillingBit,
+      core_barrel:soilCoreBarrel,rock_sample_type:rockSampletype,rock_run_length: rockrunLeng,
       rock_run_time:rockRunTime,rock_water_loss:rockWaterLoss,rock_pieces_length:rockPiecesLength,
       rock_pieces_10:rockPiecse10,rock_cr:rockCr,rock_rqd:rockrqd,rock_sample_color:rockSampleColor,
       rock_weathering:rockWaethering,rock_type:rockType,depth_termination:depthTermination,bh_enddate:bhedate,
       rv_rep_name:rvRepName,rv_rep_sign:rvRepSign,sa_rep_name:sarepName,sa_rep_sign:saRepSign,
-      client_rep_name:clientRepName,client_rep_sign: clientRepSign,modified_date:mdate};
+      client_rep_name:clientRepName,client_rep_sign: clientRepSign,modified_date:mdate,
+      rock_depth_from: rockdepthfrom,rock_depth_to: rockdepthto};
     console.log('JSON',JSON.stringify(parameters));
 
     return this.httpClient.post(`${environment.apiUrl}/submitboredata`, JSON.stringify(parameters));

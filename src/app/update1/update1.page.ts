@@ -86,6 +86,9 @@ layer1List: any = [];
     });
   }
 
+  onClick(){
+    this.router.navigate(['update2']);
+  }
   updateLayer1(){
     // eslint-disable-next-line max-len
     this.androidDatabase.updateLayer1(this.package,this.boreHoles,this.subAgency,this.subAgencyAddress,this.subAgencyLogo,Constants.laYer1Id);

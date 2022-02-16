@@ -191,6 +191,11 @@ sptstatus: any;
 
      }
 
+     onClick(){
+      this.router.navigate(['update4']);
+    }
+
+
      getLayer1() {
       this.androidDatabase.getLayer1ById(Constants.laYer1Id).then((data) => {
         this.layer1List = [];
@@ -205,7 +210,21 @@ sptstatus: any;
            this.drillingFrom = this.layer1List[0].drill_depth_from;
            this.drillingTo = this.layer1List[0].drill_depth_to;
            this.typeOfstrata = this.layer1List[0].type_of_strata;
+           if(this.typeOfstrata === 'Soil'){
+            this.isSoil = true;
+          }else{
+            this.isRock = true;
+          }
+
            this.typeOfsample = this.layer1List[0].type_of_sample;
+           if(this.typeOfsample === 'DS'){
+            this.isdsDepth = true;
+          }else if(this.typeOfsample === 'SPT'){
+            this.isSPTDepth = true;
+          }else if(this.typeOfsample === 'UDS'){
+            this.isUDSepth = true;
+          }
+
            this.dsDepthFrom = this.layer1List[0].soil_ds_depth_from;
            this.dsDepthTo = this.layer1List[0].soil_ds_depth_to;
            this.sptDepthFrom = this.layer1List[0].soil_spt_depth_from;

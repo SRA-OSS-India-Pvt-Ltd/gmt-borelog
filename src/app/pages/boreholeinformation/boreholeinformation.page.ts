@@ -122,27 +122,27 @@ getLocations(){
 
   validation(){
     if(this.typeOfStructure === undefined){
-      this.toastSer.presentError('Please Enter Type of Structure');
+      this.toastSer.presentError('Please Give Type of Structure');
     }else if(this.boreholeNumber === undefined){
-      this.toastSer.presentError('Please Enter Borehole Number');
+      this.toastSer.presentError('Please Give Borehole Number');
 
     }else if(this.boreholeLocation === undefined ){
-      this.toastSer.presentError('Please Enter Borehole Number');
+      this.toastSer.presentError('Please Give Borehole Number');
 
     }else if(this.boreholeChainage === undefined ){
-      this.toastSer.presentError('Please Enter Borehole Chainage');
+      this.toastSer.presentError('Please Give Borehole Chainage');
 
     }else if(this.latitude === undefined ){
-      this.toastSer.presentError('Please Enter Latitude');
+      this.toastSer.presentError('Please Give Latitude');
 
     }else if(this.date === undefined ){
-      this.toastSer.presentError('Please Enter Borehole Start Date');
+      this.toastSer.presentError('Please Give Borehole Start Date');
 
     }else if(this.rl === undefined ){
-      this.toastSer.presentError('Please Enter Borehole RL (m)');
+      this.toastSer.presentError('Please Give Borehole RL (m)');
 
     }else if(this.waterTable === undefined ){
-      this.toastSer.presentError('Please Enter Water Table RL (m)');
+      this.toastSer.presentError('Please Give Water Table RL (m)');
 
     }else if(this.typeOfRig === undefined ){
       this.toastSer.presentError('Please Select Type of Rig');

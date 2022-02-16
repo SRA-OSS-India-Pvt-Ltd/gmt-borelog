@@ -103,6 +103,10 @@ constructor(public toastSer: ToastService,
       }
     });
   }
+  onClick(){
+    this.router.navigate(['viewlist']);
+  }
+
 
   updateImg1(){
 this.signaturePad.clear();

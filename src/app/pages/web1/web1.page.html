@@ -106,7 +106,7 @@
         </ion-col>
         <ion-col size="6">
           <ion-item class="input">
-            <ion-select placeholder="Select Project" (ionChange)="packageChange($event)" value="{{package}}">
+            <ion-select placeholder="{{package}}" (ionChange)="packageChange($event)" value="{{package}}">
               <ion-select-option  *ngFor="let package of packageList" [value]="package.pkg_id">
                 {{package.pkg_name}}</ion-select-option>
               </ion-select>        </ion-item>
@@ -140,7 +140,7 @@
         </ion-col>
         <ion-col size="6">
           <ion-item class="input">
-            <ion-select placeholder="Select" (ionChange)="subAgencyChange($event)" >
+            <ion-select placeholder="{{subAgency}}" (ionChange)="subAgencyChange($event)" value="{{subAgency}}" >
               <ion-select-option  *ngFor="let subAgency1 of subAencyList" [value]="subAgency1" >
                 {{subAgency1.sa_name}}</ion-select-option>
             </ion-select>        </ion-item>

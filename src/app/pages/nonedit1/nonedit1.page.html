@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/viewlist1"></ion-back-button>
     </ion-buttons>
-    <ion-title style="white-space: pre-wrap !important;" >Organization Edit</ion-title>
+    <ion-title style="white-space: pre-wrap !important;" >Organization </ion-title>
 
 
   </ion-toolbar>
@@ -52,7 +52,7 @@
           </ion-item>
         </ion-col>
         <ion-col size="6">
-      <img src="{{orgLogo}}" alt="app icon" class="img2" />
+      <img src="{{orgLogo}}" alt="app icon"  />
     </ion-col>
       </ion-row>
 
@@ -106,10 +106,8 @@
         </ion-col>
         <ion-col size="6">
           <ion-item class="input">
-            <ion-select placeholder="Select Project" (ionChange)="packageChange($event)" value="{{package}}">
-              <ion-select-option  *ngFor="let package of packageList" [value]="package.pkg_id">
-                {{package.pkg_name}}</ion-select-option>
-              </ion-select>        </ion-item>
+            <ion-label>{{package}}</ion-label>
+      </ion-item>
         </ion-col>
       </ion-row>
 
@@ -121,7 +119,7 @@
         </ion-col>
         <ion-col size="6">
           <ion-item class="input">
-            <ion-label type="Number" cass="input" [(ngModel)]="boreHoles"></ion-label>
+            <ion-label type="Number" cass="input" >{{boreHoles}}</ion-label>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -140,10 +138,8 @@
         </ion-col>
         <ion-col size="6">
           <ion-item class="input">
-            <ion-select placeholder="Select" (ionChange)="subAgencyChange($event)" >
-              <ion-select-option  *ngFor="let subAgency1 of subAencyList" [value]="subAgency1" >
-                {{subAgency1.sa_name}}</ion-select-option>
-            </ion-select>        </ion-item>
+               <ion-label>{{subAgency}}</ion-label>
+                </ion-item>
         </ion-col>
       </ion-row>
       <ion-row>
@@ -167,7 +163,7 @@
           </ion-item>
         </ion-col>
         <ion-col size="6">
-          <img src="{{subAgencyLogo}}" alt="app icon" class="img2" />
+          <img src="{{subAgencyLogo}}" alt="app icon"  />
         </ion-col>
       </ion-row>
 
