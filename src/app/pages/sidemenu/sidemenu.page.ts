@@ -1,3 +1,4 @@
+import { Constants } from 'src/app/common/constants';
 import { AndroidDatabaseService } from './../../database/android-database.service';
 import { ToastService } from './../../services/toast.service';
 import { Router } from '@angular/router';
@@ -12,7 +13,7 @@ import { Platform } from '@ionic/angular';
   styleUrls: ['./sidemenu.page.scss'],
 })
 export class SidemenuPage implements OnInit {
-
+empName: any;
   constructor(private router: Router,
     private menu: MenuController,
     public platform: Platform,
@@ -31,6 +32,7 @@ export class SidemenuPage implements OnInit {
 
 
     });
+    this.empName = Constants.userName;
 
     }
 

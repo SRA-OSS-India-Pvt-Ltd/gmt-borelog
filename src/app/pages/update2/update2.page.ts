@@ -108,6 +108,8 @@ export class Update2Page implements OnInit {
       this.orientation,this.boreholeDia,this.boreholeCasingDia,this.casingDepth,Constants.laYer1Id,
       this.detailsOfDrillingBit,this.detailsOdCoreBarrel
       );
+      this.router.navigate(['update3']);
+
 
   }
 getLocations(){

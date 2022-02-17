@@ -177,7 +177,7 @@ console.log('base64',this.base641);
       this.androidDatabase.updateLayer4(this.depthOfTermination,this.date,
         this.aarveRepresName,this.base641,this.subAgencyRepresentivaeName,this.base642,this.clientRepresNaame,this.base643,
         Constants.laYer1Id);
-        this.router.navigate(['viewlist']);
+        this.router.navigate(['sidemenu']);
     }
     addDatabase1(){
       console.log(this.base641,this.base642,this.base643);

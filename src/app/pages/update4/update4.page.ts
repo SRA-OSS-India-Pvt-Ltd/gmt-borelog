@@ -104,7 +104,7 @@ constructor(public toastSer: ToastService,
     });
   }
   onClick(){
-    this.router.navigate(['viewlist']);
+    this.router.navigate(['sidemenu']);
   }
 
 

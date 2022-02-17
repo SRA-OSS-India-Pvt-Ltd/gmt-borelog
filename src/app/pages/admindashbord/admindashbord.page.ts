@@ -1,6 +1,7 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
+import { Constants } from 'src/app/common/constants';
 
 @Component({
   selector: 'app-admindashbord',
@@ -8,10 +9,13 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./admindashbord.page.scss'],
 })
 export class AdmindashbordPage implements OnInit {
-
+  empName: any;
   constructor(public router: Router,
     public alertCtrl: AlertController,
-    ) { }
+    ) {
+      this.empName = Constants.userName;
+
+     }
 
   ngOnInit() {
   }

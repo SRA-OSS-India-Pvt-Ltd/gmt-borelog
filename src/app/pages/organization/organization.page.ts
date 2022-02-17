@@ -85,7 +85,7 @@ boreHoles: any;
 
   addDatabase(){
     this.androiDatabase.addLayer1Details(this.package,this.boreHoles,this.subAgencyId,this.subAgencyAddress,this.subAgencyLogo,
-      Constants.userId,Constants.orgId,Constants.projectId,this.subAgency);
+      Constants.userId,Constants.orgId,Constants.projectId,this.subAgencyId);
     this.router.navigate(['boreholeinformation']);
 
 

@@ -27,6 +27,7 @@ subAgencyLogo: any;
 boreHoles: any;
 subAgency: any;
 layer1List: any = [];
+subAgencyId: any;
   constructor(public androidDatabase: AndroidDatabaseService,
     public router: Router,
     public platform: Platform,
@@ -54,6 +55,8 @@ layer1List: any = [];
     this.subAencyListValues = [$event.target.value];
     console.log('array', this.subAencyListValues);
     if(this.subAencyListValues.length>0){
+      this.subAgencyId = this.subAencyListValues[0].sa_id;
+
       this.subAgency = this.subAencyListValues[0].sa_name;
       this.subAgencyAddress = this.subAencyListValues[0].sa_address;
       this.subAgencyLogo = this.subAencyListValues[0].sa_logo;
@@ -62,7 +65,7 @@ layer1List: any = [];
 
     }
   }
-  getLayer1() {
+getLayer1() {
     this.androidDatabase.getLayer1ById(this.layer1Id).then((data) => {
       this.layer1List = [];
       console.log('size',data.rows.length);
@@ -72,12 +75,29 @@ layer1List: any = [];
         }
         console.log('layer1List',this.layer1List);
         if(this.layer1List.length>0){
-          this.subAgency = this.layer1List[0].SubAgencyName;
-          this.subAgencyAddress = this.layer1List[0].SubAgencyAddress;
-          this.subAgencyLogo = this.layer1List[0].SubAgencyLogo;
+
           this.package = this.layer1List[0].Package;
 
           this.boreHoles = this.layer1List[0].NoofBoreHoles;
+          console.log('said',this.layer1List[0].SubAgencyName);
+
+          if(this.layer1List[0].SubAgencyName === '1'){
+console.log('one',1);
+            this.subAgencyId = '1';
+
+            this.subAgency = 'SubAgency-1';
+            this.subAgencyAddress = 'Hyderabad';
+            this.subAgencyLogo = 'http://sraossinc.net:7071/borelogapi/images/subagency.png';
+          }else if(this.layer1List[0].SubAgencyName === '2'){
+            console.log('two',1);
+
+            this.subAgencyId = '2';
+
+            this.subAgency = 'SubAgency-2';
+            this.subAgencyAddress = 'Hyderabad';
+            this.subAgencyLogo = 'http://sraossinc.net:7071/borelogapi/images/subagency2.png';
+          }
+
 
 
         }
@@ -91,7 +111,7 @@ layer1List: any = [];
   }
   updateLayer1(){
     // eslint-disable-next-line max-len
-    this.androidDatabase.updateLayer1(this.package,this.boreHoles,this.subAgency,this.subAgencyAddress,this.subAgencyLogo,Constants.laYer1Id);
+    this.androidDatabase.updateLayer1(this.package,this.boreHoles,this.subAgencyId,this.subAgencyAddress,this.subAgencyLogo,Constants.laYer1Id);
     console.log('updated');
     this.router.navigate(['update2']);
 

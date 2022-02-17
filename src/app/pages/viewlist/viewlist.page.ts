@@ -22,6 +22,7 @@ project: any;
     public toastser: ToastService) {
     this.adding();
     this.project = 'DFCCIL';
+
   }
 
   ngOnInit() {
@@ -168,6 +169,8 @@ project: any;
        this.moveToUpdate(id,bhstatus);
 
        }else{
+
+
         Constants.laYer1Id = bhid;
         if(bhstatus === '0'){
         this.router.navigate(['web1']);

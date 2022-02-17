@@ -20,9 +20,9 @@ export class HomePage {
    public httpService: HttpcallsService) {}
   callloginservice(){
     if(this.postData.employeeid.length<=0){
-      this.toastSer.presentError('Please Give the Username');
+      this.toastSer.presentError('Please enter  Username');
     }else if(this.postData.epassword.length <=0){
-      this.toastSer.presentError('Please Give the Password');
+      this.toastSer.presentError('Please enter  Password');
 
     }else{
       Constants.loginUserName = this.postData.employeeid;
