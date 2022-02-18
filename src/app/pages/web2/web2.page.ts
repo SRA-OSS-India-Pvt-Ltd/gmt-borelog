@@ -36,7 +36,8 @@ export class Web2Page implements OnInit {
   layer1List: any = [];
 
   date: any;
-
+  isInclined = false;
+  angleWithHorizontal: any;
   constructor(public toastSer: ToastService,
     private geolocation: Geolocation,
     public router: Router,
@@ -85,7 +86,7 @@ this.httpService.getBoredetails(Constants.webbhid).subscribe((response: any)=>{
   }
 
   detailDrillinBitChange($event){
-    this.detailDrillinBitChange = $event.target.value;
+    this.detailsOfDrillingBit = $event.target.value;
     console.log($event.target.value);
 
   }
@@ -113,6 +114,62 @@ this.httpService.getBoredetails(Constants.webbhid).subscribe((response: any)=>{
 
         });
 
+  }
+  validation(){
+    console.log('typeOfStuct',this.typeOfStructure);
+    if(this.typeOfStructure === ''){
+      this.toastSer.presentError('Please Enter Type of Structure');
+    }else if(this.boreholeNumber === ''){
+      this.toastSer.presentError('Please Enter Borehole Number');
+
+    }else if(this.boreholeLocation === '' ){
+      this.toastSer.presentError('Please Enter Borehole Location');
+
+    }else if(this.latitude === '' ){
+      this.toastSer.presentError('Please Enter Latitude');
+
+    }
+    else if(this.longitude === '' ){
+      this.toastSer.presentError('Please Enter longitude');
+
+    }else if(this.boreholeChainage === '' ){
+      this.toastSer.presentError('Please Enter Borehole Chainage');
+
+    }
+    else if(this.date === '' ){
+      this.toastSer.presentError('Please Enter Borehole Start Date');
+
+    }else if(this.rl === '' ){
+      this.toastSer.presentError('Please Enter Borehole RL (m)');
+
+    }else if(this.waterTable === '' ){
+      this.toastSer.presentError('Please Enter Water Table RL (m)');
+
+    }else if(this.typeOfRig === '' ){
+      this.toastSer.presentError('Please Select Type of Rig');
+
+    }else if(this.typeOfDrill === '' ){
+      this.toastSer.presentError('Please Select Type of Drilling');
+
+    }else if(this.circulationFluid === '' ){
+      this.toastSer.presentError('Please Select Circulation Fluid');
+
+    }else if(this.orientation === '' ){
+      this.toastSer.presentError('Please Select Drilling Orientation');
+
+    }else if(this.boreholeCasingDia === '' ){
+      this.toastSer.presentError('Please Enter Casing Dia');
+
+    }else if(this.casingDepth === '' ){
+      this.toastSer.presentError('Please Enter Casing Depth');
+
+    }else if( this.detailsOfDrillingBit === ''){
+      this.toastSer.presentError('Please Select the Details of Drilling Bit*');
+     }else if( this.detailsOdCoreBarrel === ''){
+      this.toastSer.presentError('Please Select the Details of Core Barrel');
+     }else{
+      this.updateLayer2();
+    }
   }
 getLocations(){
   this.geolocation.getCurrentPosition().then((resp) => {
@@ -144,7 +201,13 @@ getLocations(){
     console.log($event.target.value);
 
     this.orientation =$event.target.value;
+    if(this.orientation === 'Inclined'){
+      this.isInclined = true;
+    }else{
+      this.isInclined = false;
+    }
   }
+
 
   gettingData(){
     this. platform.ready().then(() => {

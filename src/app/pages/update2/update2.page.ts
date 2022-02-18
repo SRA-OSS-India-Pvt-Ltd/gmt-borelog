@@ -36,6 +36,8 @@ export class Update2Page implements OnInit {
   layer1List: any = [];
 
   date: any;
+  isInclined = false;
+  angleWithHorizontal: any;
 
   constructor(public toastSer: ToastService,
     public androidDatabase: AndroidDatabaseService,
@@ -50,9 +52,69 @@ export class Update2Page implements OnInit {
 
   ngOnInit() {
   }
-  onClick(){
-    this.router.navigate(['update3']);
+  validation(){
+    if(this.typeOfStructure === ''){
+      this.toastSer.presentError('Please Enter Type of Structure');
+    }else if(this.boreholeNumber === ''){
+      this.toastSer.presentError('Please Enter Borehole Number');
+
+    }else if(this.boreholeLocation === '' ){
+      this.toastSer.presentError('Please Enter Borehole Location');
+
+    }else if(this.latitude === '' ){
+      this.toastSer.presentError('Please Enter Latitude');
+
+    }else if(this.longitude === '' ){
+      this.toastSer.presentError('Please Enter longitude');
+
+    }else if(this.boreholeChainage === '' ){
+      this.toastSer.presentError('Please Enter Borehole Chainage');
+
+    }
+    else if(this.date === '' ){
+      this.toastSer.presentError('Please Enter Borehole Start Date');
+
+    }else if(this.rl === '' ){
+      this.toastSer.presentError('Please Enter Borehole RL (m)');
+
+    }else if(this.waterTable === '' ){
+      this.toastSer.presentError('Please Enter Water Table RL (m)');
+
+    }else if(this.typeOfRig === '' ){
+      this.toastSer.presentError('Please Select Type of Rig');
+
+    }else if(this.typeOfDrill === '' ){
+      this.toastSer.presentError('Please Select Type of Drilling');
+
+    }else if(this.circulationFluid === '' ){
+      this.toastSer.presentError('Please Select Circulation Fluid');
+
+    }else if(this.orientation === '' ){
+      this.toastSer.presentError('Please Select Drilling Orientation');
+
+    }else if(this.boreholeCasingDia === '' ){
+      this.toastSer.presentError('Please Enter Casing Dia');
+
+    }else if(this.casingDepth === '' ){
+      this.toastSer.presentError('Please Enter Casing Depth');
+
+    }else if( this.detailsOfDrillingBit === ''){
+      this.toastSer.presentError('Please Select the Details of Drilling Bit*');
+     }else if( this.detailsOdCoreBarrel === ''){
+      this.toastSer.presentError('Please Select the Details of Core Barrel');
+     }else{
+      this.updateLayer2();
+    }
   }
+
+  onClick(){
+    if(this.layer1List[0].drill_depth_from === ''){
+      this.router.navigate(['logginginformation']);
+      }else{
+        this.router.navigate(['update3']);
+
+      }
+}
   getLayer1() {
     this.androidDatabase.getLayer1ById(Constants.laYer1Id).then((data) => {
       this.layer1List = [];
@@ -79,6 +141,9 @@ export class Update2Page implements OnInit {
          this.orientation = this.layer1List[0].drill_orientation;
          this.boreholeDia = this.layer1List[0].bh_dia;
          this.boreholeCasingDia = this.layer1List[0].casing_dia;
+         if(this.layer1List[0].casing_dia === undefined){
+           this.boreholeCasingDia = '';
+         }
          this.casingDepth = this.layer1List[0].casing_depth;
          this.detailsOfDrillingBit = this.layer1List[0].drilling_bit;
          this.detailsOdCoreBarrel = this.layer1List[0].core_barrel;
@@ -91,7 +156,7 @@ export class Update2Page implements OnInit {
   }
 
   detailDrillinBitChange($event){
-    this.detailDrillinBitChange = $event.target.value;
+    this.detailsOfDrillingBit = $event.target.value;
     console.log($event.target.value);
 
   }
@@ -108,7 +173,15 @@ export class Update2Page implements OnInit {
       this.orientation,this.boreholeDia,this.boreholeCasingDia,this.casingDepth,Constants.laYer1Id,
       this.detailsOfDrillingBit,this.detailsOdCoreBarrel
       );
-      this.router.navigate(['update3']);
+
+
+      if(this.layer1List[0].drill_depth_from === ''){
+        this.router.navigate(['logginginformation']);
+        }else{
+          this.router.navigate(['update3']);
+
+        }
+
 
 
   }
@@ -142,6 +215,11 @@ getLocations(){
     console.log($event.target.value);
 
     this.orientation =$event.target.value;
+    if(this.orientation === 'Inclined'){
+      this.isInclined = true;
+    }else{
+      this.isInclined = false;
+    }
   }
 
   gettingData(){

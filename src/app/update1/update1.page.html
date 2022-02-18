@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/viewlist"></ion-back-button>
     </ion-buttons>
-    <ion-title style="white-space: pre-wrap !important;" >Layer1 View/Edit</ion-title>
+    <ion-title style="white-space: pre-wrap !important;" >Layer1 - View/Edit</ion-title>
 
 
   </ion-toolbar>
@@ -23,7 +23,7 @@
       <ion-row>
         <ion-col size="6">
           <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Organization Name:</strong></ion-label>
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Organization Name:</strong><span class="required-asterisk">*</span></ion-label>
           </ion-item>
         </ion-col>
         <ion-col size="6">
@@ -36,7 +36,7 @@
       <ion-row>
         <ion-col size="6">
           <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Organization Address:</strong></ion-label>
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Organization Address:</strong><span class="required-asterisk">*</span></ion-label>
           </ion-item>
         </ion-col>
         <ion-col size="6">
@@ -48,7 +48,7 @@
       <ion-row>
         <ion-col size="6">
           <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Organization Logo</strong></ion-label>
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Organization Logo</strong><span class="required-asterisk">*</span></ion-label>
           </ion-item>
         </ion-col>
         <ion-col size="6">
@@ -64,7 +64,7 @@
       <ion-row>
         <ion-col size="6">
           <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Project Name:</strong></ion-label>
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Project Name:</strong><span class="required-asterisk">*</span></ion-label>
           </ion-item>
         </ion-col>
         <ion-col size="6">
@@ -76,7 +76,7 @@
       <ion-row>
         <ion-col size="6">
           <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Client Name:</strong></ion-label>
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Client Name:</strong><span class="required-asterisk">*</span></ion-label>
           </ion-item>
         </ion-col>
         <ion-col size="6">
@@ -89,7 +89,7 @@
       <ion-row>
         <ion-col size="6">
           <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Project Location:</strong></ion-label>
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Project Location:</strong><span class="required-asterisk">*</span></ion-label>
           </ion-item>
         </ion-col>
         <ion-col size="6">
@@ -101,7 +101,7 @@
       <ion-row>
        <ion-col size="6">
           <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Package:</strong></ion-label>
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Package:</strong><span class="required-asterisk">*</span></ion-label>
           </ion-item>
         </ion-col>
         <ion-col size="6">
@@ -135,7 +135,7 @@
       <ion-row>
         <ion-col size="6">
           <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Sub Agency Name:</strong></ion-label>
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Sub Agency Name:</strong><span class="required-asterisk">*</span></ion-label>
           </ion-item>
         </ion-col>
         <ion-col size="6">
@@ -150,7 +150,7 @@
       <ion-row>
         <ion-col size="6">
           <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Sub Agency Address:</strong></ion-label>
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Sub Agency Address:</strong><span class="required-asterisk">*</span></ion-label>
           </ion-item>
         </ion-col>
         <ion-col size="6">
@@ -164,7 +164,7 @@
       <ion-row>
         <ion-col size="6">
           <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Sub Agency Logo:</strong></ion-label>
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Sub Agency Logo:</strong><span class="required-asterisk">*</span></ion-label>
           </ion-item>
         </ion-col>
         <ion-col size="6">
@@ -174,7 +174,7 @@
 
       <ion-row>
         <ion-col size="6">
-          <ion-button  expand="block" style="text-transform: none;" (click)="updateLayer1()">
+          <ion-button  expand="block" style="text-transform: none;" (click)="validation()">
             Update and Proceed
           </ion-button>
         </ion-col>

@@ -71,8 +71,11 @@ project: any;
           this.totalList.push(data.rows.item(i));
         }
         console.log('totalList',this.totalList);
-        this.httpService.submitboredata(this.totalList[0].user_id,this.totalList[0].org_id,this.totalList[0].project_id,
-          this.totalList[0].Package,this.totalList[0].SubAgencyName,this.totalList[0].struct_type,
+        this.httpService.submitboredata(this.totalList[0].user_id,
+          this.totalList[0].org_id,this.totalList[0].project_id,
+          this.totalList[0].Package,this.totalList[0].SubAgencyName,
+          this.totalList[0].NoofBoreHoles,
+          this.totalList[0].struct_type,
           this.totalList[0].bh_no,
           this.totalList[0].bh_location,this.totalList[0].bh_chainage,this.totalList[0].bh_lat,
           this.totalList[0].bh_lon,
@@ -96,6 +99,7 @@ project: any;
           this.totalList[0].soil_density,
           this.totalList[0].soil_visual_classif,this.totalList[0].drilling_bit,
           this.totalList[0].core_barrel,this.totalList[0].rock_sample_type,
+          this.totalList[0].rock_depth_from,this.totalList[0].rock_depth_to,
           this.totalList[0].rock_run_length,this.totalList[0].rock_run_time,
           this.totalList[0].rock_water_loss,this.totalList[0].rock_pieces_length,
           this.totalList[0].rock_pieces_10,this.totalList[0].rock_cr,
@@ -105,11 +109,13 @@ project: any;
           this.totalList[0].rv_rep_name,this.totalList[0].rv_rep_sign,
           this.totalList[0].sa_rep_name,this.totalList[0].sa_rep_sign,
           this.totalList[0].client_rep_name,this.totalList[0].client_rep_sign,
-          this.totalList[0].modified_date,
-          this.totalList[0].rock_depth_from,this.totalList[0].rock_depth_to,
+          this.totalList[0].modified_date
+
           ).subscribe((response: any)=>{
            console.log('response',response);
            this.androidDatabase.deleteRowbyId(Constants.laYer1Id);
+           this.router.navigate(['sidemenu']);
+
 
           });
 
@@ -130,9 +136,8 @@ project: any;
        this.getLayer1();
 
        }else{
-       // this.getLayer1();
 
-        this.getPendingBoredata();
+         this.getPendingBoredata();
        }
 
 
@@ -169,7 +174,6 @@ project: any;
        this.moveToUpdate(id,bhstatus);
 
        }else{
-
 
         Constants.laYer1Id = bhid;
         if(bhstatus === '0'){

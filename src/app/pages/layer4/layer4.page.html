@@ -14,12 +14,12 @@
       <ion-row >
         <ion-col size="6">
           <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Depth of termination:</strong></ion-label>
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Depth of termination (m):</strong></ion-label>
           </ion-item>
         </ion-col>
         <ion-col size="6">
           <ion-item class="input">
-            <ion-input type="text" [(ngModel)]="depthOfTermination" ></ion-input>
+            <ion-input type="number" [(ngModel)]="depthOfTermination" ></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -172,7 +172,7 @@
             <ion-button expand="block" (click)="validation()" style="text-transform: none;">Save</ion-button>
           </ion-col>
           <ion-col size="6">
-            <ion-button expand="block" (click)="validation1()" style="text-transform: none;">Home</ion-button>
+            <ion-button expand="block" (click)="validation()" style="text-transform: none;">Home</ion-button>
           </ion-col>
 
         </ion-row>

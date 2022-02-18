@@ -129,15 +129,19 @@ getLocations(){
       this.toastSer.presentError('Please Enter Borehole Number');
 
     }else if(this.boreholeLocation === undefined ){
-      this.toastSer.presentError('Please Enter Borehole Number');
-
-    }else if(this.boreholeChainage === undefined ){
-      this.toastSer.presentError('Please Enter Borehole Chainage');
+      this.toastSer.presentError('Please Enter Borehole Location');
 
     }else if(this.latitude === undefined ){
       this.toastSer.presentError('Please Enter Latitude');
 
-    }else if(this.date === undefined ){
+    }else if(this.longitude === undefined ){
+      this.toastSer.presentError('Please Enter longitude');
+
+    }else if(this.boreholeChainage === undefined ){
+      this.toastSer.presentError('Please Enter Borehole Chainage');
+
+    }
+    else if(this.date === undefined ){
       this.toastSer.presentError('Please Enter Borehole Start Date');
 
     }else if(this.rl === undefined ){
@@ -165,10 +169,109 @@ getLocations(){
       this.toastSer.presentError('Please Enter Casing Depth');
 
     }else if( this.detailsOfDrillingBit === undefined){
-      this.toastSer.presentError('Please Select the Details of Drilling Bit*');
+      this.toastSer.presentError('Please Select the Details of Drilling Bit');
      }else if( this.detailsOdCoreBarrel === undefined){
       this.toastSer.presentError('Please Select the Details of Core Barrel');
-     }else{
+     }else if(this.typeOfStructure === ''){
+      this.toastSer.presentError('Please Enter Type of Structure');
+    }else if(this.boreholeNumber === ''){
+      this.toastSer.presentError('Please Enter Borehole Number');
+
+    }else if(this.boreholeLocation === '' ){
+      this.toastSer.presentError('Please Enter Borehole Location');
+
+    }else if(this.latitude === '' ){
+      this.toastSer.presentError('Please Enter Latitude');
+
+    }else if(this.longitude === '' ){
+      this.toastSer.presentError('Please Enter longitude');
+
+    }else if(this.boreholeChainage === '' ){
+      this.toastSer.presentError('Please Enter Borehole Chainage');
+
+    }
+    else if(this.date === '' ){
+      this.toastSer.presentError('Please Enter Borehole Start Date');
+
+    }else if(this.rl === '' ){
+      this.toastSer.presentError('Please Enter Borehole RL (m)');
+
+    }else if(this.waterTable === '' ){
+      this.toastSer.presentError('Please Enter Water Table RL (m)');
+
+    }else if(this.typeOfRig === '' ){
+      this.toastSer.presentError('Please Select Type of Rig');
+
+    }else if(this.typeOfDrill === '' ){
+      this.toastSer.presentError('Please Select Type of Drilling');
+
+    }else if(this.circulationFluid === '' ){
+      this.toastSer.presentError('Please Select Circulation Fluid');
+
+    }else if(this.orientation === '' ){
+      this.toastSer.presentError('Please Select Drilling Orientation');
+
+    }else if(this.boreholeCasingDia === '' ){
+      this.toastSer.presentError('Please Enter Casing Dia');
+
+    }else if(this.casingDepth === '' ){
+      this.toastSer.presentError('Please Enter Casing Depth');
+
+    }else if( this.detailsOfDrillingBit === ''){
+      this.toastSer.presentError('Please Select the Details of Drilling Bit');
+     }else if( this.detailsOdCoreBarrel === ''){
+      this.toastSer.presentError('Please Select the Details of Core Barrel');
+     }else if(this.typeOfStructure === null){
+      this.toastSer.presentError('Please Enter Type of Structure');
+    }else if(this.boreholeNumber === null){
+      this.toastSer.presentError('Please Enter Borehole Number');
+
+    }else if(this.boreholeLocation === null ){
+      this.toastSer.presentError('Please Enter Borehole Location');
+
+    }else if(this.latitude === null ){
+      this.toastSer.presentError('Please Enter Latitude');
+
+    }else if(this.longitude === null ){
+      this.toastSer.presentError('Please Enter longitude');
+
+    }else if(this.boreholeChainage === null ){
+      this.toastSer.presentError('Please Enter Borehole Chainage');
+
+    }
+    else if(this.date === null ){
+      this.toastSer.presentError('Please Enter Borehole Start Date');
+
+    }else if(this.rl === null ){
+      this.toastSer.presentError('Please Enter Borehole RL (m)');
+
+    }else if(this.waterTable === null ){
+      this.toastSer.presentError('Please Enter Water Table RL (m)');
+
+    }else if(this.typeOfRig === null){
+      this.toastSer.presentError('Please Select Type of Rig');
+
+    }else if(this.typeOfDrill === null ){
+      this.toastSer.presentError('Please Select Type of Drilling');
+
+    }else if(this.circulationFluid === null ){
+      this.toastSer.presentError('Please Select Circulation Fluid');
+
+    }else if(this.orientation === null ){
+      this.toastSer.presentError('Please Select Drilling Orientation');
+
+    }else if(this.boreholeCasingDia === null ){
+      this.toastSer.presentError('Please Enter Casing Dia');
+
+    }else if(this.casingDepth === null ){
+      this.toastSer.presentError('Please Enter Casing Depth');
+
+    }else if( this.detailsOfDrillingBit === null){
+      this.toastSer.presentError('Please Select the Details of Drilling Bit');
+     }else if( this.detailsOdCoreBarrel === null){
+      this.toastSer.presentError('Please Select the Details of Core Barrel');
+     }
+     else{
       this.adding();
     }
   }

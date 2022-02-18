@@ -13,7 +13,7 @@
 <ion-content>
 <ion-list>
   <ion-item class="padding1">
-    <ion-label class="label"><strong>Layer3</strong></ion-label>
+    <ion-label class="label"><strong>Layer 3</strong></ion-label>
   </ion-item>
 
   <ion-item class="padding1">
@@ -84,24 +84,24 @@
     <ion-row *ngIf="isdsDepth">
       <ion-col size="6">
         <ion-item class="padding">
-          <ion-label  style="white-space: pre-wrap !important;"><strong>DS Depth From:</strong><span class="required-asterisk">*</span></ion-label>
+          <ion-label  style="white-space: pre-wrap !important;"><strong>DS Depth From (m):</strong><span class="required-asterisk">*</span></ion-label>
         </ion-item>
       </ion-col>
       <ion-col size="6">
         <ion-item class="input">
-          <ion-input type="text" [(ngModel)]="dsDepthFrom" ></ion-input>
+          <ion-input type="number" [(ngModel)]="dsDepthFrom" ></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
     <ion-row *ngIf="isdsDepth">
       <ion-col size="6">
         <ion-item class="padding">
-          <ion-label  style="white-space: pre-wrap !important;"><strong>DS Depth To:</strong><span class="required-asterisk">*</span></ion-label>
+          <ion-label  style="white-space: pre-wrap !important;"><strong>DS Depth To (m):</strong><span class="required-asterisk">*</span></ion-label>
         </ion-item>
       </ion-col>
       <ion-col size="6">
         <ion-item class="input">
-          <ion-input type="text" [(ngModel)]="dsDepthTo" ></ion-input>
+          <ion-input type="number" [(ngModel)]="dsDepthTo" ></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -110,24 +110,24 @@
     <ion-row *ngIf="isSPTDepth">
       <ion-col size="6">
         <ion-item class="padding">
-          <ion-label  style="white-space: pre-wrap !important;"><strong>SPT Depth From:</strong><span class="required-asterisk">*</span></ion-label>
+          <ion-label  style="white-space: pre-wrap !important;"><strong>SPT Depth From (m):</strong><span class="required-asterisk">*</span></ion-label>
         </ion-item>
       </ion-col>
       <ion-col size="6">
         <ion-item class="input">
-          <ion-input type="text" [(ngModel)]="sptDepthFrom" ></ion-input>
+          <ion-input type="number" [(ngModel)]="sptDepthFrom" ></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
     <ion-row *ngIf="isSPTDepth">
       <ion-col size="6">
         <ion-item class="padding">
-          <ion-label  style="white-space: pre-wrap !important;"><strong>SPT Depth To:</strong><span class="required-asterisk">*</span></ion-label>
+          <ion-label  style="white-space: pre-wrap !important;"><strong>SPT Depth To (m):</strong><span class="required-asterisk">*</span></ion-label>
         </ion-item>
       </ion-col>
       <ion-col size="6">
         <ion-item class="input">
-          <ion-input type="text" [(ngModel)]="sptDepthTo" ></ion-input>
+          <ion-input type="number" [(ngModel)]="sptDepthTo" ></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -180,9 +180,9 @@
 
 </ion-row>
 <ion-row *ngIf="isSPTDepth">
-<ion-col size="3"><ion-item class="input"><ion-input type="number" [(ngModel)]="firstB" (ionChange)="totalCountB()"></ion-input></ion-item></ion-col>
-<ion-col size="3"><ion-item class="input"><ion-input type="number" [(ngModel)]="secondB" (ionChange)="totalCountB()"></ion-input></ion-item></ion-col>
-<ion-col size="3"><ion-item class="input"><ion-input type="number" [(ngModel)]="thirdB" (ionChange)="totalCountB()"></ion-input></ion-item></ion-col>
+<ion-col size="3"><ion-item class="input"><ion-input type="number" [(ngModel)]="firstB" (ionChange)="totalCount()"></ion-input></ion-item></ion-col>
+<ion-col size="3"><ion-item class="input"><ion-input type="number" [(ngModel)]="secondB" (ionChange)="totalCount()"></ion-input></ion-item></ion-col>
+<ion-col size="3"><ion-item class="input"><ion-input type="number" [(ngModel)]="thirdB" (ionChange)="totalCount()"></ion-input></ion-item></ion-col>
 <ion-col size="3"><ion-item class="input"><ion-label>{{totalB}}</ion-label></ion-item></ion-col>
 
 </ion-row>
@@ -194,12 +194,12 @@
 <ion-row *ngIf="isUDSepth">
   <ion-col size="6">
     <ion-item class="padding">
-      <ion-label  style="white-space: pre-wrap !important;"><strong>UDS Depth From:</strong><span class="required-asterisk">*</span></ion-label>
+      <ion-label  style="white-space: pre-wrap !important;"><strong>UDS Depth From (m):</strong><span class="required-asterisk">*</span></ion-label>
     </ion-item>
   </ion-col>
   <ion-col size="6">
     <ion-item class="input">
-      <ion-input type="text" [(ngModel)]="udsDepthFrom" ></ion-input>
+      <ion-input type="number" [(ngModel)]="udsDepthFrom" ></ion-input>
     </ion-item>
   </ion-col>
 </ion-row>
@@ -207,12 +207,12 @@
 <ion-row *ngIf="isUDSepth">
   <ion-col size="6">
     <ion-item class="padding">
-      <ion-label  style="white-space: pre-wrap !important;"><strong>UDS Depth To:</strong><span class="required-asterisk">*</span></ion-label>
+      <ion-label  style="white-space: pre-wrap !important;"><strong>UDS Depth To (m):</strong><span class="required-asterisk">*</span></ion-label>
     </ion-item>
   </ion-col>
   <ion-col size="6">
     <ion-item class="input">
-      <ion-input type="text" [(ngModel)]="udsDepthTo" ></ion-input>
+      <ion-input type="number" [(ngModel)]="udsDepthTo" ></ion-input>
     </ion-item>
   </ion-col>
 </ion-row>
@@ -340,24 +340,24 @@
 <ion-row *ngIf="isRock">
   <ion-col size="6">
     <ion-item class="padding">
-      <ion-label  style="white-space: pre-wrap !important;"><strong>Rock Depth From:</strong><span class="required-asterisk">*</span></ion-label>
+      <ion-label  style="white-space: pre-wrap !important;"><strong>Rock Depth From (m):</strong><span class="required-asterisk">*</span></ion-label>
     </ion-item>
   </ion-col>
   <ion-col size="6">
     <ion-item class="input">
-      <ion-input type="text" [(ngModel)]="rockDepthFrom" ></ion-input>
+      <ion-input type="number" [(ngModel)]="rockDepthFrom" ></ion-input>
     </ion-item>
   </ion-col>
 </ion-row>
 <ion-row *ngIf="isRock">
   <ion-col size="6">
     <ion-item class="padding">
-      <ion-label  style="white-space: pre-wrap !important;"><strong>Rock Depth To:</strong><span class="required-asterisk">*</span></ion-label>
+      <ion-label  style="white-space: pre-wrap !important;"><strong>Rock Depth To (m):</strong><span class="required-asterisk">*</span></ion-label>
     </ion-item>
   </ion-col>
   <ion-col size="6">
     <ion-item class="input">
-      <ion-input type="text" [(ngModel)]="rockDepthTo" ></ion-input>
+      <ion-input type="number" [(ngModel)]="rockDepthTo" ></ion-input>
     </ion-item>
   </ion-col>
 </ion-row>
@@ -366,7 +366,7 @@
 <ion-row *ngIf="isRock"  >
   <ion-col size="6">
     <ion-item class="padding">
-      <ion-label  style="white-space: pre-wrap !important;"><strong>Run Length:</strong> <span class="required-asterisk">*</span></ion-label>
+      <ion-label  style="white-space: pre-wrap !important;"><strong>Run Length (m):</strong> <span class="required-asterisk">*</span></ion-label>
     </ion-item>
   </ion-col>
   <ion-col size="6">
@@ -380,7 +380,7 @@
 <ion-row  *ngIf="isRock" >
   <ion-col size="6">
     <ion-item class="padding">
-      <ion-label  style="white-space: pre-wrap !important;"><strong>Run Time:</strong><span class="required-asterisk">*</span></ion-label>
+      <ion-label  style="white-space: pre-wrap !important;"><strong>Run Time (hr):</strong><span class="required-asterisk">*</span></ion-label>
     </ion-item>
   </ion-col>
   <ion-col size="6">
@@ -392,7 +392,7 @@
 <ion-row  *ngIf="isRock" >
   <ion-col size="6">
     <ion-item class="padding">
-      <ion-label  style="white-space: pre-wrap !important;"><strong>Water Loss:</strong><span class="required-asterisk">*</span></ion-label>
+      <ion-label  style="white-space: pre-wrap !important;"><strong>Water Loss (%):</strong><span class="required-asterisk">*</span></ion-label>
     </ion-item>
   </ion-col>
   <ion-col size="6">

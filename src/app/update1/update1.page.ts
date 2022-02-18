@@ -1,3 +1,4 @@
+import { ToastService } from 'src/app/services/toast.service';
 import { HttpcallsService } from 'src/app/services/httpcalls.service';
 import { Platform } from '@ionic/angular';
 import { Router } from '@angular/router';
@@ -31,7 +32,8 @@ subAgencyId: any;
   constructor(public androidDatabase: AndroidDatabaseService,
     public router: Router,
     public platform: Platform,
-    public httpService: HttpcallsService) {
+    public httpService: HttpcallsService,
+    public toastService: ToastService) {
     this.layer1Id = Constants.laYer1Id;
     this.orgName = Constants.orgName;
     this.orgAddrs = Constants.orgAddre;
@@ -107,15 +109,49 @@ console.log('one',1);
   }
 
   onClick(){
+    if(this.layer1List[0].struct_type === ''){
+      this.router.navigate(['boreholeinformation']);
+
+      Constants.webbhid = Constants.laYer1Id;
+      }else{
+        this.router.navigate(['update2']);
+        Constants.webbhid = Constants.laYer1Id;
+
+      }
+
     this.router.navigate(['update2']);
   }
   updateLayer1(){
     // eslint-disable-next-line max-len
-    this.androidDatabase.updateLayer1(this.package,this.boreHoles,this.subAgencyId,this.subAgencyAddress,this.subAgencyLogo,Constants.laYer1Id);
+    this.androidDatabase.updateLayer1(this.package,this.boreHoles,this.subAgencyId,
+      this.subAgencyAddress,this.subAgencyLogo,Constants.laYer1Id);
     console.log('updated');
-    this.router.navigate(['update2']);
+
+
+    if(this.layer1List[0].struct_type === ''){
+      this.router.navigate(['boreholeinformation']);
+
+      Constants.webbhid = Constants.laYer1Id;
+      }else{
+        this.router.navigate(['update2']);
+        Constants.webbhid = Constants.laYer1Id;
+
+      }
+
 
   }
+  validation(){
+    if(this.package === ''){
+      this.toastService.presentError('Please Select Package');
+    }else if(this.subAgency === ''){
+      this.toastService.presentError('Please Select SubAgencyName');
+
+    }
+    else{
+      this.updateLayer1();
+    }
+  }
+
 
 
   gettingData(){

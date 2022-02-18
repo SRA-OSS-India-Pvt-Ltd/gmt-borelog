@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/sidemenu"></ion-back-button>
     </ion-buttons>
-    <ion-title style="white-space: pre-wrap !important;" >layer4 View/Edit</ion-title>
+    <ion-title style="white-space: pre-wrap !important;" >layer4 - View/Edit</ion-title>
 
 
   </ion-toolbar>
@@ -14,12 +14,12 @@
       <ion-row >
         <ion-col size="6">
           <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Depth of termination:</strong></ion-label>
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Depth of termination (m):</strong><span class="required-asterisk">*</span></ion-label>
           </ion-item>
         </ion-col>
         <ion-col size="6">
           <ion-item class="input">
-            <ion-input type="text" [(ngModel)]="depthOfTermination" ></ion-input>
+            <ion-input type="number" [(ngModel)]="depthOfTermination" ></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -27,7 +27,7 @@
 
         <ion-col size="12">
           <ion-item class="input">
-            <ion-label><strong>Borehole End Date</strong></ion-label>
+            <ion-label><strong>Borehole End Date</strong><span class="required-asterisk">*</span></ion-label>
             <ion-input
               value="{{ date | date: 'dd-MM-yyyy' }}"
               id="date"
@@ -51,7 +51,7 @@
       <ion-row >
         <ion-col size="6">
           <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>AARVEE Representative Name:</strong></ion-label>
+            <ion-label  style="white-space: pre-wrap !important;"><strong>AARVEE Representative Name:</strong><span class="required-asterisk">*</span></ion-label>
           </ion-item>
         </ion-col>
         <ion-col size="6">
@@ -65,7 +65,7 @@
       <ion-row >
         <ion-col size="10">
           <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>AARVEE Representative Signature:</strong></ion-label>
+            <ion-label  style="white-space: pre-wrap !important;"><strong>AARVEE Representative Signature:</strong><span class="required-asterisk">*</span></ion-label>
           </ion-item>
         </ion-col>
         <ion-col size="1">
@@ -90,7 +90,7 @@
       <ion-row >
         <ion-col size="6">
           <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Sub Agency Representative Name:</strong></ion-label>
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Sub Agency Representative Name:</strong><span class="required-asterisk">*</span></ion-label>
           </ion-item>
         </ion-col>
         <ion-col size="6">
@@ -104,7 +104,7 @@
       <ion-row >
         <ion-col size="10">
           <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Sub Agency Representative Signature:</strong></ion-label>
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Sub Agency Representative Signature:</strong><span class="required-asterisk">*</span></ion-label>
           </ion-item>
         </ion-col>
         <ion-col size="2">
@@ -129,7 +129,7 @@
       <ion-row >
         <ion-col size="6">
           <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Client Representative Name:</strong></ion-label>
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Client Representative Name:</strong><span class="required-asterisk">*</span></ion-label>
           </ion-item>
         </ion-col>
         <ion-col size="6">
@@ -143,7 +143,7 @@
       <ion-row >
         <ion-col size="10">
           <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Client Representative Signature:</strong></ion-label>
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Client Representative Signature:</strong><span class="required-asterisk">*</span></ion-label>
           </ion-item>
         </ion-col>
         <ion-col size="2">
@@ -167,11 +167,12 @@
 
 
         <ion-row>
-          <ion-col size="6">
-            <ion-button  (click)="onClick()">Home</ion-button>
-          </ion-col>
+
           <ion-col size="6" >
-            <ion-button (click)="addDatabase()" >Update </ion-button>
+            <ion-button (click)="validation()" expand="block">Update </ion-button>
+          </ion-col>
+          <ion-col size="6">
+            <ion-button expand="block" (click)="validationhome()">Home</ion-button>
           </ion-col>
         </ion-row>
 

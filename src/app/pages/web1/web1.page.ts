@@ -128,6 +128,18 @@ if(this.layer1List[0].sa_id === '1'){
         });
     }
 
+    validation(){
+      if(this.package === ''){
+        this.toastService.presentError('Please Select Package');
+      }else if(this.subAgency === ''){
+        this.toastService.presentError('Please Select SubAgencyName');
+
+      }
+      else{
+        this.updateLayer1();
+      }
+    }
+
     onClick(){
       if(this.layer1List[0].struct_type === ''){
         this.router.navigate(['boreholeinformation']);

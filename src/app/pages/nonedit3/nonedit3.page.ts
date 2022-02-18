@@ -236,17 +236,21 @@ this.httpService.getBoredetails(Constants.webbhid).subscribe((response: any)=>{
          this.rockSamplColor = this.layer1List[0].rock_sample_color;
          this.typeOfWeathering = this.layer1List[0].rock_weathering;
          this.typeOfRock = this.layer1List[0].rock_type;
-         this.first = this.layer1List[0].first;
-         this.second = this.layer1List[0].second;
-         this.third = this.layer1List[0].third;
-         this.total = this.layer1List[0].total;
-         this.firstB = this.layer1List[0].firstB;
-         this.secondB = this.layer1List[0].secondB;
-         this.thirdB = this.layer1List[0].thirdB;
-         this.totalB = this.layer1List[0].totalB;
+         this.first = this.layer1List[0].soil_spt_penetration_1;
+         this.second = this.layer1List[0].soil_spt_penetration_2;
+         this.third = this.layer1List[0].soil_spt_penetration_3;
+         this.total = this.layer1List[0].soil_spt_penetration_total;
+         this.firstB = this.layer1List[0].soil_spt_blow_n_1;
+         this.secondB = this.layer1List[0].soil_spt_blow_n_2;
+         this.thirdB = this.layer1List[0].soil_spt_blow_n_3;
+         this.totalB = this.layer1List[0].soil_spt_blow_n_total;
          this.rockDepthFrom = this.layer1List[0].rock_depth_from;
          this.rockDepthTo = this.layer1List[0].rock_depth_to;
          this.sptstatus = this.layer1List[0].soil_spt_depth_status;
+         if(this.layer1List[0].soil_spt_depth_status === 'Refusal'){
+
+          this.oneB = true;
+         }
 
         }
 

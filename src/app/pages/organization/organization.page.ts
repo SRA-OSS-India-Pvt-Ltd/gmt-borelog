@@ -29,6 +29,7 @@ subAencyListValues: any =[];
 subAgencyAddress: any;
 subAgencyLogo: any;
 boreHoles: any;
+isimg = false;
   constructor(public toastService: ToastService,
     public androiDatabase: AndroidDatabaseService,
     public router: Router,
@@ -56,6 +57,7 @@ boreHoles: any;
     this.subAencyListValues = [$event.target.value];
     console.log('array', this.subAencyListValues);
     if(this.subAencyListValues.length>0){
+      this.isimg = true;
       this.subAgencyId = this.subAencyListValues[0].sa_id;
 
       this.subAgency = this.subAencyListValues[0].sa_name;
@@ -75,6 +77,11 @@ boreHoles: any;
     if(this.package === undefined){
       this.toastService.presentError('Please Select Package');
     }else if(this.subAgency === undefined){
+      this.toastService.presentError('Please Select SubAgencyName');
+
+    }else if(this.package === ''){
+      this.toastService.presentError('Please Select Package');
+    }else if(this.subAgency === ''){
       this.toastService.presentError('Please Select SubAgencyName');
 
     }
@@ -111,8 +118,6 @@ boreHoles: any;
       this.addDatabase();
 
       }else{
-      //  this.addDatabase();
-
        this.submitWeb();
       }
 
