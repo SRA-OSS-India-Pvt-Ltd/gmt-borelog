@@ -64,53 +64,7 @@ constructor(public toastSer: ToastService,
 
 ngOnInit() {
 }
-totalCount(){
-  if(this.firstB === 50 && this.first <= 15 ){
-    this.oneB = true;
-    this.sptstatus = 'Refusal';
-  }if(this.secondB === 50 && this.second <= 15 ){
-    this.oneB = true;
-    this.sptstatus = 'Refusal';
 
-  }
-  if(this.thirdB === 50 && this.third <= 15 ){
-    this.oneB = true;
-    this.sptstatus = 'Refusal';
-
-  }
-
-
-  if(this.second !== undefined && this.third !== undefined){
-    this.total = this.second + this.third;
-    this.sptstatus = 'Refusal';
-
-  }
-}
-totalCountB(){
-  if(this.firstB >= 50 && this.first === 15 ){
-    this.oneB = true;
-    this.sptstatus = 'Refusal';
-
-  }
-  if(this.secondB >= 50 && this.second === 15 ){
-    this.oneB = true;
-    this.sptstatus = 'Refusal';
-
-  }
-  if(this.thirdB >= 50 && this.third === 15 ){
-    this.oneB = true;
-    this.sptstatus = 'Refusal';
-
-  }
-  if(this.secondB !== undefined && this.thirdB !== undefined){
-    this.totalB = this.secondB + this.thirdB;
-    if(this.totalB >= 100 && this.total === 30){
-      this.oneB = true;
-      this.sptstatus = 'Refusal';
-
-    }
-  }
-}
 
 strataChange($event){
   this.typeOfstrata= $event.target.value;

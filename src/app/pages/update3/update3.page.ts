@@ -32,6 +32,7 @@ export class Update3Page implements OnInit {
   isUDSepth = false;
   udsDepthFrom: any;
   udsDepthTo: any;
+  isshow = false;
   soilSampleColor: any;
 typeOfSoil: any;
 isCohessive = false;
@@ -78,14 +79,17 @@ sptstatus: any;
     if(this.firstB === 50 && this.first < 15 && this.secondB === 50 && this.second < 15 && this.thirdB === 50 && this.third < 15  ){
       this.oneB = true;
       this.sptstatus = 'Refusal';
+      this.isshow = false;
     }else if(this.firstB > 50 && this.first === 15 && this.secondB > 50 && this.second === 15 && this.thirdB > 50 && this.third === 15 ){
       this.oneB = true;
       this.sptstatus = 'Refusal';
+      this.isshow = false;
+
     }else if(this. total === 30 && this.totalB > 100){
       this.oneB = true;
       this.sptstatus = 'Refusal';
-
-    }else{
+      this.isshow = false;
+    } else{
       this.oneB = false;
       this.sptstatus = '';
 
@@ -404,6 +408,12 @@ sptstatus: any;
           }
           console.log('layer1List',this.layer1List);
           if(this.layer1List.length>0){
+
+            if(this.layer1List[0].soil_spt_depth_status === 'Refusal'){
+              this.isshow = true;
+
+              this.oneB = true;
+             }
 
            this.drillingFrom = this.layer1List[0].drill_depth_from;
            this.drillingTo = this.layer1List[0].drill_depth_to;

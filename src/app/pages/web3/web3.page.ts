@@ -34,6 +34,7 @@ export class Web3Page implements OnInit {
   udsDepthFrom: any;
   udsDepthTo: any;
   soilSampleColor: any;
+  isshow = false;
 typeOfSoil: any;
 isCohessive = false;
 densityConsistace: any;
@@ -78,12 +79,17 @@ totalCount(){
   if(this.firstB === 50 && this.first < 15 && this.secondB === 50 && this.second < 15 && this.thirdB === 50 && this.third < 15  ){
     this.oneB = true;
     this.sptstatus = 'Refusal';
+    this.isshow = false;
   }else if(this.firstB > 50 && this.first === 15 && this.secondB > 50 && this.second === 15 && this.thirdB > 50 && this.third === 15 ){
     this.oneB = true;
     this.sptstatus = 'Refusal';
+    this.isshow = false;
+
   }else if(this. total === 30 && this.totalB > 100){
     this.oneB = true;
     this.sptstatus = 'Refusal';
+    this.isshow = false;
+
 
   }else{
     this.oneB = false;
@@ -182,6 +188,12 @@ this.httpService.getBoredetails(Constants.webbhid).subscribe((response: any)=>{
         console.log('layer1List',this.layer1List);
         if(this.layer1List.length>0){
 
+          if(this.layer1List[0].soil_spt_depth_status === 'Refusal'){
+            this.isshow = true;
+
+            this.oneB = true;
+           }
+
          this.drillingFrom = this.layer1List[0].drill_depth_from;
          this.drillingTo = this.layer1List[0].drill_depth_to;
          this.typeOfstrata = this.layer1List[0].type_of_strata;
@@ -256,10 +268,7 @@ this.httpService.getBoredetails(Constants.webbhid).subscribe((response: any)=>{
         if(this.layer1List[0].soil_spt_blow_n_total === '0'){
           this. totalB = '';
         }
-        if(this.layer1List[0].soil_spt_depth_status === 'Refusal'){
-
-          this.oneB = true;
-         }
+        console.log(this.sptstatus);
 
 
 
