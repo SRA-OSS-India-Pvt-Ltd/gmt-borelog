@@ -1,6 +1,6 @@
 import { ToastService } from 'src/app/services/toast.service';
 import { HttpcallsService } from 'src/app/services/httpcalls.service';
-import { Platform } from '@ionic/angular';
+
 import { Router } from '@angular/router';
 
 import { Constants } from 'src/app/common/constants';
@@ -30,8 +30,7 @@ export class Nonedit1Page implements OnInit {
   subAgencyId: any;
   constructor(
     public router: Router,
-    public platform: Platform,
-    public httpService: HttpcallsService,
+        public httpService: HttpcallsService,
     public toastService: ToastService) {
       this.layer1Id = Constants.laYer1Id;
       this.orgName = Constants.orgName;

@@ -20,24 +20,30 @@ export class HttpcallsService {
   submitboredata(uid: any,orgid: any,proId: any,packageId: any,said: any,noofbh: any,
     structType: any,
     bhno: any,bhlocation: any,
-    bhchainage: any,bhlat: any,bhlon: any,bhsadte: any,bhrl: any,watertabe: any,typeofrig: any,
-    typeofdrill: any,circulafliuid: any,drillOrient: any,bhDia: any,casingDia: any,
-    casingDepth: any,drillDepthFrom: any,drillDepthTo: any,typeOfstara: any,typeOfSample: any,
+    bhlat: any,bhlon: any,
+    bhchainage: any,
+    bhsadte: any,bhrl: any,watertabe: any,typeofrig: any,
+    typeofdrill: any,circulafliuid: any,drillOrient: any,anglewithHorizontal: any,
+    bhDia: any,casingDia: any,
+    casingDepth: any,soilDrillingBit: any,soilCoreBarrel: any,
+    drillDepthFrom: any,drillDepthTo: any,typeOfstara: any,typeOfSample: any,
     soilDsDepthFrom: any,soilDsDepthTo: any,sptDethFrom: any,sptDepthTo: any,
     first: any,firstB: any,second: any,secondB: any,third: any,thirdB: any,total: any,totalB: any,
     sptDepthstatus: any,udsDepthFrom: any,
     udsDepthTo: any,soilSamplColor: any,soilType: any,soilDensity: any,soilVisualClassi: any,
-    soilDrillingBit: any,soilCoreBarrel: any,rockSampletype: any,rockrunLeng: any,rockRunTime: any,
+    rockSampletype: any,rockdepthfrom: any,rockdepthto: any,
+    rockrunLeng: any,rockRunTime: any,
     rockWaterLoss: any,rockPiecesLength: any,rockPiecse10: any,rockCr: any,rockrqd: any,
     rockSampleColor: any,rockWaethering: any,rockType: any,depthTermination: any,bhedate: any,
     rvRepName: any,rvRepSign: any,sarepName: any,saRepSign: any,clientRepName: any,
-    clientRepSign: any,mdate: any,rockdepthfrom: any,rockdepthto: any,){
+    clientRepSign: any,mdate: any,){
     const parameters ={user_id: uid,org_id:orgid,projectid:proId,package_id:packageId,sa_id:said,
       no_of_bh:noofbh,
       struct_type:structType,bh_no:bhno,bh_location:bhlocation,bh_chainage:bhchainage,bh_lat:bhlat,
       bh_lon:bhlon,bh_start_date:bhsadte,bh_rl:bhrl,water_table_rl:watertabe,type_of_rig:typeofrig,
       type_of_drilling:typeofdrill,circulation_fluid:circulafliuid,drill_orientation:drillOrient,
-      bh_dia:bhDia,casing_dia:casingDia,casing_depth:casingDepth,drill_depth_from:drillDepthFrom,
+      bh_dia:bhDia,casing_dia:casingDia,angle_horizontal: anglewithHorizontal,
+      casing_depth:casingDepth,drill_depth_from:drillDepthFrom,
       drill_depth_to: drillDepthTo,type_of_strata:typeOfstara,type_of_sample:typeOfSample,
       soil_ds_depth_from:soilDsDepthFrom,soil_ds_depth_to:soilDsDepthTo,soil_spt_depth_from:sptDethFrom,
       soil_spt_depth_to:sptDepthTo,soil_spt_penetration_1:first,soil_spt_blow_n_1:firstB,
@@ -71,12 +77,12 @@ export class HttpcallsService {
   submitLayer2(bhid: any,bhlayer: any,structType: any,bhno: any,bhlocation: any,
     bhchainage: any,bhlat: any,bhlon: any,bhsadte: any,bhrl: any,watertabe: any,typeofrig: any,
     typeofdrill: any,circulafliuid: any,drillOrient: any,bhDia: any,casingDia: any,
-    casingDepth: any,drillbit: any,corebarrel: any){
+    casingDepth: any,drillbit: any,corebarrel: any,angleHorizontal: any){
     const parameters ={bh_id:bhid,bh_layer:bhlayer,struct_type:structType,bh_no:bhno,bh_location:bhlocation,
       bh_chainage:bhchainage,bh_lat:bhlat,bh_lon:bhlon,bh_start_date:bhsadte,bh_rl:bhrl,water_table_rl:watertabe,type_of_rig:typeofrig,
       type_of_drilling:typeofdrill,circulation_fluid:circulafliuid,drill_orientation:drillOrient,
       bh_dia:bhDia,casing_dia:casingDia,casing_depth:casingDepth,
-      drilling_bit:drillbit,core_barrel:corebarrel};
+      drilling_bit:drillbit,core_barrel:corebarrel,angle_horizontal: angleHorizontal};
     console.log('JSON',JSON.stringify(parameters));
 
     return this.httpClient.post(`${environment.apiUrl}/submitboredata_web`, JSON.stringify(parameters));

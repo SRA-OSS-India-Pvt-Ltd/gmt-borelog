@@ -133,7 +133,10 @@ bhid: any;
           }else if(this.clientRepresNaame === null){
            this.toastSer.presentError('please Enter the Client Representative Name');
 
-          }else{
+          }else if(this.depthOfTermination === 0){
+            this.toastSer.presentError('please Enter the Depth of Termination, It should not be a zero');
+            }
+          else{
         this.base641 = this.signaturePad.toDataURL();
         this.signatureImg = this.base641;
         this.base642 = this.signaturePad1.toDataURL();

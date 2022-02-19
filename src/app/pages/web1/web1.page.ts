@@ -29,6 +29,7 @@ export class Web1Page implements OnInit {
   subAgency: any;
   layer1List: any = [];
   subAgencyId: any;
+  pid: any;
   constructor(
     public router: Router,
     public platform: Platform,
@@ -49,7 +50,7 @@ export class Web1Page implements OnInit {
     }
 
     packageChange($event){
-      this.package = $event.target.value;
+      this.pid = $event.target.value;
       console.log($event.target.value);
      }
 
@@ -80,10 +81,13 @@ export class Web1Page implements OnInit {
          if(this.layer1List[0].package_id === '1'){
            console.log('pack');
            this.package = 'DFCCIL Package-1';
+           this.pid = 1;
          }else if(this.layer1List[0].package_id === '2'){
           this.package = 'DFCCIL Package-2';
+          this.pid = 2;
         }else if(this.layer1List[0].package_id === '3'){
           this.package = 'DFCCIL Package-3';
+          this.pid = 3
         }
 
 if(this.layer1List[0].sa_id === '1'){
@@ -110,7 +114,7 @@ if(this.layer1List[0].sa_id === '1'){
 
      updateLayer1(){
       this.httpService.submitLayer1(Constants.laYer1Id,1,Constants.userId,Constants.orgId,Constants.projectId,
-        this.package,this.boreHoles,this.subAgencyId).subscribe((response: any)=>{
+        this.pid,this.boreHoles,this.subAgencyId).subscribe((response: any)=>{
          console.log('response',response);
          Constants.webbhid= response.data.bh_id;
          this.toastService.presentSuccess(response.msg);

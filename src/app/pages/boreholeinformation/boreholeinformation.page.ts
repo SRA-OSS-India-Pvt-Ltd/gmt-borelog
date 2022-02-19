@@ -119,6 +119,7 @@ getLocations(){
       this.isInclined = true;
     }else{
       this.isInclined = false;
+      this.angleWithHorizontal = '';
     }
   }
 
@@ -248,6 +249,13 @@ getLocations(){
     }else if(this.waterTable === null ){
       this.toastSer.presentError('Please Enter Water Table RL (m)');
 
+    }
+    else if(this.rl ===  0 ){
+      this.toastSer.presentError('Please EnterProper Borehole RL (m), it should not be zero');
+
+    }else if(this.waterTable === 0 ){
+      this.toastSer.presentError('Please Enter Proper Water Table RL it should not be zero (m)');
+
     }else if(this.typeOfRig === null){
       this.toastSer.presentError('Please Select Type of Rig');
 
@@ -270,6 +278,13 @@ getLocations(){
       this.toastSer.presentError('Please Select the Details of Drilling Bit');
      }else if( this.detailsOdCoreBarrel === null){
       this.toastSer.presentError('Please Select the Details of Core Barrel');
+     }else if( this.orientation === 'Inclined' && this.angleWithHorizontal === ''){
+      this.toastSer.presentError('Please enter angle with horizontal');
+     }
+     else if( this.orientation === 'Inclined' && this.angleWithHorizontal === null){
+      this.toastSer.presentError('Please enter angle with horizontal');
+     }else if( this.orientation === 'Inclined' && this.angleWithHorizontal === undefined){
+      this.toastSer.presentError('Please enter angle with horizontal');
      }
      else{
       this.adding();
@@ -281,7 +296,7 @@ getLocations(){
       this.boreholeLocation,this.boreholeChainage,this.latitude,this.longitude,this.date,
       this.rl,this.waterTable,this.typeOfRig,this.typeOfDrill,this.circulationFluid,
       this.orientation,this.boreholeDia,this.boreholeCasingDia,this.casingDepth,Constants.laYer1Id,
-      this.detailsOfDrillingBit,this.detailsOdCoreBarrel);
+      this.detailsOfDrillingBit,this.detailsOdCoreBarrel,this.angleWithHorizontal);
       this.router.navigate(['logginginformation']);
 
   }
@@ -290,7 +305,7 @@ getLocations(){
       this.boreholeLocation,this.boreholeChainage,this.latitude,this.longitude,this.date,
       this.rl,this.waterTable,this.typeOfRig,this.typeOfDrill,this.circulationFluid,
       this.orientation,this.boreholeDia,this.boreholeCasingDia,this.casingDepth,
-      this.detailsOfDrillingBit,this.detailsOdCoreBarrel).subscribe((response: any)=>{
+      this.detailsOfDrillingBit,this.detailsOdCoreBarrel,this.angleWithHorizontal).subscribe((response: any)=>{
        console.log('response',response);
        this.toastSer.presentSuccess(response.msg);
        this.router.navigate(['logginginformation']);

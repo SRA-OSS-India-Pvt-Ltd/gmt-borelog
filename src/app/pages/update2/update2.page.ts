@@ -80,7 +80,20 @@ export class Update2Page implements OnInit {
     }else if(this.waterTable === '' ){
       this.toastSer.presentError('Please Enter Water Table RL (m)');
 
-    }else if(this.typeOfRig === '' ){
+    } else if(this.rl ===  0 ){
+      this.toastSer.presentError('Please Enter Proper Borehole RL (m), it should not be zero');
+
+    }else if(this.waterTable === 0 ){
+      this.toastSer.presentError('Please Enter Proper Water Table RL it should not be zero (m)');
+
+    }else if(this.rl ===  null ){
+      this.toastSer.presentError('Please Enter Borehole RL (m)');
+
+    }else if(this.waterTable === null ){
+      this.toastSer.presentError('Please Enter  Water Table RL ');
+
+    }
+    else if(this.typeOfRig === '' ){
       this.toastSer.presentError('Please Select Type of Rig');
 
     }else if(this.typeOfDrill === '' ){
@@ -102,7 +115,11 @@ export class Update2Page implements OnInit {
       this.toastSer.presentError('Please Select the Details of Drilling Bit*');
      }else if( this.detailsOdCoreBarrel === ''){
       this.toastSer.presentError('Please Select the Details of Core Barrel');
-     }else{
+     }
+     else if( this.orientation === 'Inclined' && this.angleWithHorizontal === ''){
+      this.toastSer.presentError('Please enter angle with horizontal');
+     }
+     else{
       this.updateLayer2();
     }
   }
@@ -141,12 +158,25 @@ export class Update2Page implements OnInit {
          this.orientation = this.layer1List[0].drill_orientation;
          this.boreholeDia = this.layer1List[0].bh_dia;
          this.boreholeCasingDia = this.layer1List[0].casing_dia;
-         if(this.layer1List[0].casing_dia === undefined){
-           this.boreholeCasingDia = '';
+         if(this.layer1List[0].bh_dia === 'undefined'){
+           this.boreholeDia = '';
          }
+         if(this.layer1List[0].bh_dia === undefined){
+          this.boreholeDia = '';
+        }
+
          this.casingDepth = this.layer1List[0].casing_depth;
          this.detailsOfDrillingBit = this.layer1List[0].drilling_bit;
          this.detailsOdCoreBarrel = this.layer1List[0].core_barrel;
+         this.angleWithHorizontal = this.layer1List[0].angle_horizontal;
+
+         if(this.layer1List[0].drill_orientation === 'Inclined'){
+          this.isInclined = true;
+        }else{
+          this.isInclined = false;
+        }
+
+
 
 
         }
@@ -171,7 +201,7 @@ export class Update2Page implements OnInit {
       this.boreholeLocation,this.boreholeChainage,this.latitude,this.longitude,this.date,
       this.rl,this.waterTable,this.typeOfRig,this.typeOfDrill,this.circulationFluid,
       this.orientation,this.boreholeDia,this.boreholeCasingDia,this.casingDepth,Constants.laYer1Id,
-      this.detailsOfDrillingBit,this.detailsOdCoreBarrel
+      this.detailsOfDrillingBit,this.detailsOdCoreBarrel,this.angleWithHorizontal
       );
 
 
@@ -219,6 +249,8 @@ getLocations(){
       this.isInclined = true;
     }else{
       this.isInclined = false;
+      this.angleWithHorizontal = '';
+
     }
   }
 

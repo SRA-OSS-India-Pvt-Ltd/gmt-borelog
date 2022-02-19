@@ -1,5 +1,5 @@
 import { HttpcallsService } from 'src/app/services/httpcalls.service';
-import { Platform } from '@ionic/angular';
+
 import { Constants } from 'src/app/common/constants';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -19,6 +19,7 @@ export class Nonedit2Page implements OnInit {
   detailsOfDrillingBit: any;
   detailsOdCoreBarrel: any;
   rl: any;
+  isInclined = false;
   waterTable: any;
   today: any;
   typeOfRig: any;
@@ -34,13 +35,12 @@ export class Nonedit2Page implements OnInit {
   latitude: any;
   longitude: any;
   layer1List: any = [];
-
+  angleWithHorizontal: any;
   date: any;
 
   constructor(public toastSer: ToastService,
     private geolocation: Geolocation,
     public router: Router,
-    public platform: Platform,
     public httpService: HttpcallsService) {
       this.ref = 'IS 1892; IS 2131; IS 2132';
       this.date = new Date().toISOString();
@@ -77,6 +77,21 @@ this.httpService.getBoredetails(Constants.webbhid).subscribe((response: any)=>{
          this.casingDepth = this.layer1List[0].casing_depth;
          this.detailsOfDrillingBit = this.layer1List[0].drilling_bit;
          this.detailsOdCoreBarrel = this.layer1List[0].core_barrel;
+         this.angleWithHorizontal = this.layer1List[0].angle_horizontal;
+
+         if(this.layer1List[0].bh_dia === 'undefined'){
+          this.boreholeDia = '';
+        }
+        if(this.layer1List[0].bh_dia === undefined){
+         this.boreholeDia = '';
+       }
+
+         if(this.layer1List[0].drill_orientation === 'Inclined'){
+           this.isInclined = true;
+         }else{
+           this.isInclined = false;
+         }
+
 
 
         }
@@ -95,25 +110,8 @@ this.httpService.getBoredetails(Constants.webbhid).subscribe((response: any)=>{
 
   }
 
-  updateLayer2(){
 
-      this.httpService.submitLayer2(Constants.webbhid,2,this.typeOfStructure,this.boreholeNumber,
-        this.boreholeLocation,this.boreholeChainage,this.latitude,this.longitude,this.date,
-        this.rl,this.waterTable,this.typeOfRig,this.typeOfDrill,this.circulationFluid,
-        this.orientation,this.boreholeDia,this.boreholeCasingDia,this.casingDepth,
-        this.detailsOfDrillingBit,this.detailsOdCoreBarrel).subscribe((response: any)=>{
-         console.log('response',response);
-         this.toastSer.presentSuccess(response.msg);
-         if(this.layer1List[0].drill_depth_from === ''){
-         this.router.navigate(['logginginformation']);
-         }else{
-          this.router.navigate(['web3']);
 
-         }
-
-        });
-
-  }
 getLocations(){
   this.geolocation.getCurrentPosition().then((resp) => {
     this.latitude= resp.coords.latitude;
@@ -147,29 +145,14 @@ getLocations(){
   }
 
   gettingData(){
-    this. platform.ready().then(() => {
-       if (this.platform.is('android')) {
-       this.getLayer1();
 
-       }else{
-        this.getWebData();
+    this.getLayer1();
 
-      }
-
-
-   });
 
   }
 
-  getWebData(){
-    this.layer1List = [];
 
-     this.httpService.getBoredetails(Constants.laYer1Id).subscribe((response: any)=>{
-      this.layer1List = response.data;
-
-     });
-   }
-   onClick(){
+  onClick(){
 
        this.router.navigate(['nonedit3']);
 

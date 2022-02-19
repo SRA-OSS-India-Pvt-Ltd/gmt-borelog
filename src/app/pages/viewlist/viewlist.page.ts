@@ -28,7 +28,7 @@ project: any;
   ngOnInit() {
   }
   getLayer1() {
-    this.androidDatabase.getLayer1().then((data) => {
+    this.androidDatabase.getLayer1(Constants.userId).then((data) => {
       this.layer1List = [];
       console.log('size',data.rows.length);
       if (data.rows.length > 0) {
@@ -72,49 +72,89 @@ project: any;
         }
         console.log('totalList',this.totalList);
         this.httpService.submitboredata(this.totalList[0].user_id,
-          this.totalList[0].org_id,this.totalList[0].project_id,
-          this.totalList[0].Package,this.totalList[0].SubAgencyName,
+          this.totalList[0].org_id,
+          this.totalList[0].project_id,
+          this.totalList[0].Package,
+          this.totalList[0].SubAgencyName,
           this.totalList[0].NoofBoreHoles,
           this.totalList[0].struct_type,
           this.totalList[0].bh_no,
-          this.totalList[0].bh_location,this.totalList[0].bh_chainage,this.totalList[0].bh_lat,
+          this.totalList[0].bh_location,
+          this.totalList[0].bh_lat,
           this.totalList[0].bh_lon,
-          this.totalList[0].bh_start_date,this.totalList[0].bh_rl,this.totalList[0].water_table_rl,
+          this.totalList[0].bh_chainage,
+          this.totalList[0].bh_start_date,
+          this.totalList[0].bh_rl,
+          this.totalList[0].water_table_rl,
           this.totalList[0].type_of_rig,
-          this.totalList[0].type_of_drilling,this.totalList[0].circulation_fluid,
-          this.totalList[0].drill_orientation,this.totalList[0].bh_dia,
-          this.totalList[0].casing_dia,this.totalList[0].casing_depth,this.totalList[0].drill_depth_from,
+          this.totalList[0].type_of_drilling,
+          this.totalList[0].circulation_fluid,
+          this.totalList[0].drill_orientation,
+          this.totalList[0].angle_horizontal,
+          this.totalList[0].bh_dia,
+          this.totalList[0].casing_dia,
+          this.totalList[0].casing_depth,
+          this.totalList[0].drilling_bit,
+          this.totalList[0].core_barrel,
+
+          this.totalList[0].drill_depth_from,
           this.totalList[0].drill_depth_to,
-          this.totalList[0].type_of_strata,this.totalList[0].type_of_sample,this.totalList[0].soil_ds_depth_from,
+          this.totalList[0].type_of_strata,
+          this.totalList[0].type_of_sample,
+          this.totalList[0].soil_ds_depth_from,
           this.totalList[0].soil_ds_depth_to,
-          this.totalList[0].soil_spt_depth_from,this.totalList[0].soil_spt_depth_to,
-          this.totalList[0].first,this.totalList[0].firstB,
-          this.totalList[0].second,this.totalList[0].secondB,
-          this.totalList[0].third,this.totalList[0].thirdB,
-          this.totalList[0].total,this.totalList[0].totalB,
+          this.totalList[0].soil_spt_depth_from,
+          this.totalList[0].soil_spt_depth_to,
+          this.totalList[0].first,
+          this.totalList[0].firstB,
+          this.totalList[0].second,
+          this.totalList[0].secondB,
+          this.totalList[0].third,
+          this.totalList[0].thirdB,
+          this.totalList[0].total,
+          this.totalList[0].totalB,
           this.totalList[0].soil_spt_depth_status,
           this.totalList[0].soil_uds_depth_from,
           this.totalList[0].soil_uds_depth_to,
-          this.totalList[0].soil_sample_color,this.totalList[0].soil_type,
+          this.totalList[0].soil_sample_color,
+          this.totalList[0].soil_type,
           this.totalList[0].soil_density,
-          this.totalList[0].soil_visual_classif,this.totalList[0].drilling_bit,
-          this.totalList[0].core_barrel,this.totalList[0].rock_sample_type,
-          this.totalList[0].rock_depth_from,this.totalList[0].rock_depth_to,
-          this.totalList[0].rock_run_length,this.totalList[0].rock_run_time,
-          this.totalList[0].rock_water_loss,this.totalList[0].rock_pieces_length,
-          this.totalList[0].rock_pieces_10,this.totalList[0].rock_cr,
-          this.totalList[0].rock_rqd,this.totalList[0].rock_sample_color,
-          this.totalList[0].rock_weathering,this.totalList[0].rock_type,
-          this.totalList[0].depth_termination,this.totalList[0].bh_enddate,
-          this.totalList[0].rv_rep_name,this.totalList[0].rv_rep_sign,
-          this.totalList[0].sa_rep_name,this.totalList[0].sa_rep_sign,
-          this.totalList[0].client_rep_name,this.totalList[0].client_rep_sign,
+          this.totalList[0].soil_visual_classif,
+          this.totalList[0].rock_sample_type,
+          this.totalList[0].rock_depth_from,
+          this.totalList[0].rock_depth_to,
+          this.totalList[0].rock_run_length,
+          this.totalList[0].rock_run_time,
+          this.totalList[0].rock_water_loss,
+          this.totalList[0].rock_pieces_length,
+          this.totalList[0].rock_pieces_10,
+          this.totalList[0].rock_cr,
+          this.totalList[0].rock_rqd,
+          this.totalList[0].rock_sample_color,
+          this.totalList[0].rock_weathering,
+          this.totalList[0].rock_type,
+          this.totalList[0].depth_termination,
+          this.totalList[0].bh_enddate,
+          this.totalList[0].rv_rep_name,
+          this.totalList[0].rv_rep_sign,
+          this.totalList[0].sa_rep_name,
+          this.totalList[0].sa_rep_sign,
+          this.totalList[0].client_rep_name,
+          this.totalList[0].client_rep_sign,
           this.totalList[0].modified_date
+
 
           ).subscribe((response: any)=>{
            console.log('response',response);
-           this.androidDatabase.deleteRowbyId(Constants.laYer1Id);
+           if(response.error === true){
+            this.toastser.presentSuccess(response.msg);
+
+           }else{
+            this.androidDatabase.deleteRowbyId(Constants.laYer1Id);
+
+           this.toastser.presentSuccess(response.msg);
            this.router.navigate(['sidemenu']);
+           }
 
 
           });
