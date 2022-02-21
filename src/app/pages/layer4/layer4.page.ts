@@ -134,7 +134,7 @@ bhid: any;
            this.toastSer.presentError('please Enter the Client Representative Name');
 
           }else if(this.depthOfTermination === 0){
-            this.toastSer.presentError('please Enter the Depth of Termination, It should not be a zero');
+            this.toastSer.presentError('please Enter the Depth of Termination, It should not be zero');
             }
           else{
         this.base641 = this.signaturePad.toDataURL();
@@ -189,8 +189,12 @@ console.log('base64',this.base641);
         this.aarveRepresName,this.base641,this.subAgencyRepresentivaeName,this.base642,
         this.clientRepresNaame,this.base643,'').subscribe((response: any)=>{
           console.log('response',response);
-          this.toastSer.presentSuccess(response.msg);
-          this.router.navigate(['sidemenu']);
+          if(response.error === true){
+            this.toastSer.presentError(response.msg);
+          }else{
+
+              this.router.navigate(['sidemenu']);
+          }
 
         });
     }

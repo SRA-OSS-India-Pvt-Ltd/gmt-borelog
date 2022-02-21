@@ -21,6 +21,9 @@ empName: any;
     public toaseSer: ToastService,
     public androidDatabase: AndroidDatabaseService
     ) {
+      Constants.webbhid = '';
+      Constants.laYer1Id = '';
+
       platform.ready().then(() => {
         if (this.platform.is('android')) {
          this.androidDatabase.createDatabase();
@@ -36,7 +39,16 @@ empName: any;
     }
 
   ngOnInit() {
+    Constants.webbhid = '';
+    Constants.laYer1Id = '';
+
   }
+  ionViewDidEnter(){
+    Constants.webbhid = '';
+    Constants.laYer1Id = '';
+
+  }
+
   openSideNav() {
     this.menu.enable(true, 'menu-content');
     this.menu.open('menu-content');

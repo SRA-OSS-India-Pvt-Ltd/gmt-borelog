@@ -147,7 +147,7 @@ project: any;
           ).subscribe((response: any)=>{
            console.log('response',response);
            if(response.error === true){
-            this.toastser.presentSuccess(response.msg);
+            this.toastser.presentError(response.msg);
 
            }else{
             this.androidDatabase.deleteRowbyId(Constants.laYer1Id);

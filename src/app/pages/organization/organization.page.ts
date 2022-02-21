@@ -29,6 +29,7 @@ subAencyListValues: any =[];
 subAgencyAddress: any;
 subAgencyLogo: any;
 boreHoles: any;
+layer1List: any = [];
 isimg = false;
   constructor(public toastService: ToastService,
     public androiDatabase: AndroidDatabaseService,
@@ -91,23 +92,79 @@ isimg = false;
   }
 
   addDatabase(){
-    this.androiDatabase.addLayer1Details(this.package,this.boreHoles,this.subAgencyId,this.subAgencyAddress,this.subAgencyLogo,
-      Constants.userId,Constants.orgId,Constants.projectId,this.subAgencyId);
-    this.router.navigate(['boreholeinformation']);
+    if(Constants.laYer1Id === ''){
+      this.androiDatabase.addLayer1Details(this.package,this.boreHoles,this.subAgencyId,this.subAgencyAddress,this.subAgencyLogo,
+        Constants.userId,Constants.orgId,Constants.projectId,this.subAgencyId);
+        this.getLayer1LastId();
+
+      this.router.navigate(['boreholeinformation']);
+
+
+    }else{
+      this.androiDatabase.updateLayer1(this.package,this.boreHoles,this.subAgencyId,
+        this.subAgencyAddress,this.subAgencyLogo,Constants.laYer1Id);
+        this.router.navigate(['boreholeinformation']);
+        this.getLayer1();
+
+    }
 
 
   }
+  getLayer1LastId() {
+
+    this.androiDatabase.getLastId().then((data) => {
+      this.layer1List = [];
+      console.log('size',data.rows.length);
+      if (data.rows.length > 0) {
+        for (let i = 0; i < data.rows.length; i++) {
+          this.layer1List.push(data.rows.item(i));
+        }
+        console.log('layer1List',this.layer1List);
+        Constants.laYer1Id = this.layer1List[0].Id;
+
+
+      }
+    });
+  }
+
   submitWeb(){
     if(this.boreHoles === undefined){
-         this.boreHoles = null;}
-    this.httpService.submitLayer1('',1,Constants.userId,Constants.orgId,Constants.projectId,
+         this.boreHoles = null;
+        }
+        console.log('webid',Constants.webbhid);
+      if(Constants.webbhid === ''){
+        console.log('ifffffffffffffff');
+     this.httpService.submitLayer1('',1,Constants.userId,Constants.orgId,Constants.projectId,
       this.package,this.boreHoles,this.subAgencyId).subscribe((response: any)=>{
        console.log('response',response);
-       Constants.webbhid= response.data.bh_id;
-       this.toastService.presentSuccess(response.msg);
-       this.router.navigate(['boreholeinformation']);
+       if(response.error === true){
+         this.toastService.presentError(response.msg);
+       }else{
+        Constants.webbhid= response.data.bh_id;
+        console.log('webbhid',Constants.webbhid);
+        this.toastService.presentSuccess(response.msg);
+        this.router.navigate(['boreholeinformation']);
+
+       }
 
       });
+    }else{
+      console.log('elseeeeee');
+
+      this.httpService.submitLayer1(Constants.webbhid,1,Constants.userId,Constants.orgId,Constants.projectId,
+        this.package,this.boreHoles,this.subAgencyId).subscribe((response: any)=>{
+         console.log('response',response);
+         if(response.error === true){
+          this.toastService.presentError(response.msg);
+        }else{
+
+         this.toastService.presentSuccess(response.msg);
+           this.getWebData();
+        }
+        });
+
+
+    }
     }
 
 
@@ -124,5 +181,46 @@ isimg = false;
 
   });
 
+  }
+
+  getWebData(){
+    this.layer1List = [];
+
+     this.httpService.getBoredetails(Constants.webbhid).subscribe((response: any)=>{
+      this.layer1List = response.data;
+      console.log('list',this.layer1List);
+      if(this.layer1List[0].struct_type === ''){
+       this.router.navigate(['boreholeinformation']);
+
+       }else{
+        this.router.navigate(['web2']);
+
+       }
+
+
+     });
+   }
+
+   getLayer1() {
+    this.androiDatabase.getLayer1ById(Constants.laYer1Id).then((data) => {
+      this.layer1List = [];
+      console.log('size',data.rows.length);
+      if (data.rows.length > 0) {
+        for (let i = 0; i < data.rows.length; i++) {
+          this.layer1List.push(data.rows.item(i));
+        }
+        console.log('layer1List',this.layer1List);
+        if(this.layer1List[0].struct_type === ''){
+          this.router.navigate(['boreholeinformation']);
+
+          Constants.webbhid = Constants.laYer1Id;
+          }else{
+            this.router.navigate(['update2']);
+            Constants.webbhid = Constants.laYer1Id;
+
+          }
+
+      }
+    });
   }
 }

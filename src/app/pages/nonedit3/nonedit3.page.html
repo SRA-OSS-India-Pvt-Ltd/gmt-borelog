@@ -243,7 +243,7 @@
     </ion-col>
   </ion-row>
 
-  <ion-row *ngIf="isCohessive" >
+  <ion-row *ngIf="isSoil" >
     <ion-col size="6">
       <ion-item class="padding">
         <ion-label  style="white-space: pre-wrap !important;"><strong>Density / Consistency:</strong></ion-label>
@@ -258,20 +258,7 @@
         </ion-item>
     </ion-col>
   </ion-row>
-  <ion-row *ngIf="isCohesion" >
-    <ion-col size="6">
-      <ion-item class="padding">
-        <ion-label  style="white-space: pre-wrap !important;"><strong>Density / Consistency:</strong></ion-label>
-      </ion-item>
-    </ion-col>
-    <ion-col size="6">
-      <ion-item class="input">
-<ion-label>{{densityConsiChange}}</ion-label>
 
-
-        </ion-item>
-    </ion-col>
-  </ion-row>
 
   <ion-row *ngIf="isSoil" >
     <ion-col size="6">

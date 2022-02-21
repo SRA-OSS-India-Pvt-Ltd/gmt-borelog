@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable radix */
 import { Constants } from 'src/app/common/constants';
 import { Component, OnInit } from '@angular/core';
@@ -182,6 +184,9 @@ sptstatus: any;
       this.secondB = '';
       this.thirdB = '';
       this.totalB = '';
+      this.isCohesion = false;
+      this.isCohessive = false;
+
 
 
 
@@ -513,9 +518,9 @@ validation(){
    this.toastSer.presentError('Please Select  Type of Strata');
 
   }else if(this.drillingFrom === 0){
-    this.toastSer.presentError('Please Enter  Drilling From, It should not be a Zero');
+    this.toastSer.presentError('Please Enter  Drilling From, It should not be Zero');
   }else if(this.drillingTo === 0){
-   this.toastSer.presentError('Please Enter  Drilling To,It should not be a Zero');
+   this.toastSer.presentError('Please Enter  Drilling To,It should not be Zero');
 
   }else if(this.drillingFrom === null){
     this.toastSer.presentError('Please Enter  Drilling From');
@@ -572,38 +577,38 @@ validation(){
     }else if( this.visualClassification === ''){
      this.toastSer.presentError('Please Enter  Visual Classification of Sample');
     }else if(this.typeOfsample === 'DS' && this.dsDepthFrom === 0){
-      this.toastSer.presentError('Please Enter  Ds Depth From, It should not be a Zero');
+      this.toastSer.presentError('Please Enter  Ds Depth From, It should not be Zero');
 
      }else if(this.typeOfsample === 'DS' && this.dsDepthTo === 0){
-      this.toastSer.presentError('Please Enter  Ds Depth To,It should not be a Zero');
+      this.toastSer.presentError('Please Enter  Ds Depth To,It should not be Zero');
 
      }else if(this.typeOfsample === 'SPT' && this.sptDepthFrom === 0){
-      this.toastSer.presentError('Please Enter  SPT Depth From,It should not be a Zero');
+      this.toastSer.presentError('Please Enter  SPT Depth From,It should not be Zero');
 
      }else if(this.typeOfsample === 'SPT' && this.sptDepthTo === 0){
-      this.toastSer.presentError('Please Enter  SPT Depth To,It should not be a Zero');
+      this.toastSer.presentError('Please Enter  SPT Depth To,It should not be Zero');
 
      }else if(this.typeOfsample === 'SPT' && this.first === 0){
-      this.toastSer.presentError('Please Enter  Penetration From First,It should not be a Zero');
+      this.toastSer.presentError('Please Enter  Penetration From First,It should not be Zero');
      }else if(this.typeOfsample === 'SPT' && this.second === 0){
-      this.toastSer.presentError('Please Enter  Penetration From Second,It should not be a Zero');
+      this.toastSer.presentError('Please Enter  Penetration From Second,It should not be Zero');
      }else if(this.typeOfsample === 'SPT' && this.third === 0){
-      this.toastSer.presentError('Please Enter  Penetration From Third,It should not be a Zero');
+      this.toastSer.presentError('Please Enter  Penetration From Third,It should not be Zero');
 
      }else if(this.typeOfsample === 'SPT' && this.firstB === 0){
-      this.toastSer.presentError('Please Enter  Blows - N From First,It should not be a Zero');
+      this.toastSer.presentError('Please Enter  Blows - N From First,It should not be Zero');
 
      }else if(this.typeOfsample === 'SPT' && this.secondB === 0){
-      this.toastSer.presentError('Please Enter  Blows - N From Second,It should not be a Zero');
+      this.toastSer.presentError('Please Enter  Blows - N From Second,It should not be Zero');
 
      }else if(this.typeOfsample === 'SPT' && this.thirdB === 0){
-      this.toastSer.presentError('Please Enter  Blows - N From Third,It should not be a Zero');
+      this.toastSer.presentError('Please Enter  Blows - N From Third,It should not be Zero');
 
      }else if(this.typeOfsample === 'UDS' && this.udsDepthFrom === 0){
-      this.toastSer.presentError('Please Enter  UDS Depth From,It should not be a Zero');
+      this.toastSer.presentError('Please Enter  UDS Depth From,It should not be Zero');
 
      }else if(this.typeOfsample === 'UDS' && this.udsDepthTo === 0){
-      this.toastSer.presentError('Please Enter  UDS Depth To,It should not be a Zero');
+      this.toastSer.presentError('Please Enter  UDS Depth To,It should not be Zero');
     }
     else if(this.typeOfsample === 'DS' && this.dsDepthFrom === null){
       this.toastSer.presentError('Please Enter  Ds Depth From');

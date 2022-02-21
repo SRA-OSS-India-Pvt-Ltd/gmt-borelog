@@ -119,7 +119,6 @@ console.log('one',1);
 
       }
 
-    this.router.navigate(['update2']);
   }
   updateLayer1(){
     // eslint-disable-next-line max-len

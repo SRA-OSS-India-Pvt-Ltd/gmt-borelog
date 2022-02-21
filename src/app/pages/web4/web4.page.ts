@@ -212,7 +212,7 @@ this.signaturePad.clear();
      this.toastSer.presentError('please Enter the Client Representative Signature');
 
     }else if(this.depthOfTermination === 0){
-      this.toastSer.presentError('please Enter the Depth of Termination, It should not be a zero');
+      this.toastSer.presentError('please Enter the Depth of Termination, It should not be zero');
       }else if(this.depthOfTermination === null){
         this.toastSer.presentError('please Enter the Depth of Termination');
         }

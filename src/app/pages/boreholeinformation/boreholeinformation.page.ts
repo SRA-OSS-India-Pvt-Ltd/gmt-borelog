@@ -297,7 +297,8 @@ getLocations(){
       this.rl,this.waterTable,this.typeOfRig,this.typeOfDrill,this.circulationFluid,
       this.orientation,this.boreholeDia,this.boreholeCasingDia,this.casingDepth,Constants.laYer1Id,
       this.detailsOfDrillingBit,this.detailsOdCoreBarrel,this.angleWithHorizontal);
-      this.router.navigate(['logginginformation']);
+      //this.router.navigate(['logginginformation']);
+      this.getLayer1();
 
   }
   submitWeb(){
@@ -307,8 +308,14 @@ getLocations(){
       this.orientation,this.boreholeDia,this.boreholeCasingDia,this.casingDepth,
       this.detailsOfDrillingBit,this.detailsOdCoreBarrel,this.angleWithHorizontal).subscribe((response: any)=>{
        console.log('response',response);
+       if(response.error === true){
+        this.toastSer.presentError(response.msg);
+      }else{
+
        this.toastSer.presentSuccess(response.msg);
-       this.router.navigate(['logginginformation']);
+     //  this.router.navigate(['logginginformation']);
+     this.getWebData();
+      }
 
       });
 
@@ -341,5 +348,42 @@ getLocations(){
    });
   }
 
+  getWebData(){
+    this.layer1List = [];
+
+     this.httpService.getBoredetails(Constants.webbhid).subscribe((response: any)=>{
+      this.layer1List = response.data;
+      console.log('list',this.layer1List);
+      if(this.layer1List[0].drill_depth_from === ''){
+        this.router.navigate(['logginginformation']);
+        }else{
+         this.router.navigate(['web3']);
+
+        }
+
+
+     });
+   }
+
+   getLayer1() {
+    this.androidDatabase.getLayer1ById(Constants.laYer1Id).then((data) => {
+      this.layer1List = [];
+      console.log('size',data.rows.length);
+      if (data.rows.length > 0) {
+        for (let i = 0; i < data.rows.length; i++) {
+          this.layer1List.push(data.rows.item(i));
+        }
+        console.log('layer1List',this.layer1List);
+        if(this.layer1List[0].drill_depth_from === ''){
+          this.router.navigate(['logginginformation']);
+          }else{
+           this.router.navigate(['web3']);
+
+          }
+
+
+      }
+    });
+  }
 
 }

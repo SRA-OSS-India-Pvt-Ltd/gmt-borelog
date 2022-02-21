@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable radix */
 import { Router } from '@angular/router';
 import { Constants } from 'src/app/common/constants';
@@ -153,6 +155,10 @@ sptstatus: any;
     this.secondB = '';
     this.thirdB = '';
     this.totalB = '';
+    this.isCohesion = false;
+    this.isCohessive = false;
+
+
 
 
 
@@ -242,15 +248,17 @@ sptstatus: any;
 
    }
    crCaliculation(){
-     if(this.allRockPiecesLenth !== undefined && this.runLength !== undefined){
-     this.cr= this.allRockPiecesLenth/this.runLength;
+    if(this.allRockPiecesLenth !== undefined && this.runLength !== undefined &&
+     this.allRockPiecesLenth !== 0 && this.runLength !== 0){
+    this.cr= this.allRockPiecesLenth/this.runLength;
+    }
+    if(this.rockPicesLengthgrze !== undefined && this.runLength !== undefined &&
+     this.rockPicesLengthgrze !== 0 && this.runLength !== 0){
+     this.rqd= this.rockPicesLengthgrze/this.runLength;
      }
-     if(this.rockPicesLengthgrze !== undefined && this.runLength !== undefined){
-      this.rqd= this.rockPicesLengthgrze/this.runLength;
-      }
 
-   }
-   weatheringChange($event){
+  }
+ weatheringChange($event){
      this.typeOfWeathering = $event.target.value;
      console.log($event.target.value);
 
@@ -281,9 +289,9 @@ sptstatus: any;
      this.toastSer.presentError('Please Select  Type of Strata');
 
     }else if(this.drillingFrom === 0){
-      this.toastSer.presentError('Please Enter  Drilling From, It should not be a Zero');
+      this.toastSer.presentError('Please Enter  Drilling From, It should not  Zero');
     }else if(this.drillingTo === 0){
-     this.toastSer.presentError('Please Enter  Drilling To,It should not be a Zero');
+     this.toastSer.presentError('Please Enter  Drilling To,It should not  Zero');
 
     }
     else if(this.typeOfstrata === 'Soil'){
@@ -429,38 +437,38 @@ sptstatus: any;
        }else if( this.visualClassification === null){
         this.toastSer.presentError('Please Enter  Visual Classification of Sample');
        }else if(this.typeOfsample === 'DS' && this.dsDepthFrom === 0){
-        this.toastSer.presentError('Please Enter  Ds Depth From, It should not be a Zero');
+        this.toastSer.presentError('Please Enter  Ds Depth From, It should not  Zero');
 
        }else if(this.typeOfsample === 'DS' && this.dsDepthTo === 0){
-        this.toastSer.presentError('Please Enter  Ds Depth To,It should not be a Zero');
+        this.toastSer.presentError('Please Enter  Ds Depth To,It should not  Zero');
 
        }else if(this.typeOfsample === 'SPT' && this.sptDepthFrom === 0){
-        this.toastSer.presentError('Please Enter  SPT Depth From,It should not be a Zero');
+        this.toastSer.presentError('Please Enter  SPT Depth From,It should not  Zero');
 
        }else if(this.typeOfsample === 'SPT' && this.sptDepthTo === 0){
-        this.toastSer.presentError('Please Enter  SPT Depth To,It should not be a Zero');
+        this.toastSer.presentError('Please Enter  SPT Depth To,It should not  Zero');
 
        }else if(this.typeOfsample === 'SPT' && this.first === 0){
-        this.toastSer.presentError('Please Enter  Penetration From First,It should not be a Zero');
+        this.toastSer.presentError('Please Enter  Penetration From First,It should not  Zero');
        }else if(this.typeOfsample === 'SPT' && this.second === 0){
-        this.toastSer.presentError('Please Enter  Penetration From Second,It should not be a Zero');
+        this.toastSer.presentError('Please Enter  Penetration From Second,It should not  Zero');
        }else if(this.typeOfsample === 'SPT' && this.third === 0){
-        this.toastSer.presentError('Please Enter  Penetration From Third,It should not be a Zero');
+        this.toastSer.presentError('Please Enter  Penetration From Third,It should not  Zero');
 
        }else if(this.typeOfsample === 'SPT' && this.firstB === 0){
-        this.toastSer.presentError('Please Enter  Blows - N From First,It should not be a Zero');
+        this.toastSer.presentError('Please Enter  Blows - N From First,It should not  Zero');
 
        }else if(this.typeOfsample === 'SPT' && this.secondB === 0){
-        this.toastSer.presentError('Please Enter  Blows - N From Second,It should not be a Zero');
+        this.toastSer.presentError('Please Enter  Blows - N From Second,It should not  Zero');
 
        }else if(this.typeOfsample === 'SPT' && this.thirdB === 0){
-        this.toastSer.presentError('Please Enter  Blows - N From Third,It should not be a Zero');
+        this.toastSer.presentError('Please Enter  Blows - N From Third,It should not  Zero');
 
        }else if(this.typeOfsample === 'UDS' && this.udsDepthFrom === 0){
-        this.toastSer.presentError('Please Enter  UDS Depth From,It should not be a Zero');
+        this.toastSer.presentError('Please Enter  UDS Depth From,It should not  Zero');
 
        }else if(this.typeOfsample === 'UDS' && this.udsDepthTo === 0){
-        this.toastSer.presentError('Please Enter  UDS Depth To,It should not be a Zero');
+        this.toastSer.presentError('Please Enter  UDS Depth To,It should not  Zero');
       }
        else if(this.typeOfsample === 'DS'){
          this.rockDepthFrom ='';
@@ -724,7 +732,9 @@ sptstatus: any;
     this.second,this.third,this.total,this.firstB,this.secondB,this.thirdB,this.totalB,
     this.rockDepthFrom,this.rockDepthTo,this.sptstatus);
 
-    this.router.navigate(['layer4']);
+   // this.router.navigate(['layer4']);
+   this.getLayer1();
+
   }
   totalCount(){
     if(this.second !== undefined && this.third !== undefined){
@@ -767,8 +777,13 @@ sptstatus: any;
       this.typeOfWeathering,this.typeOfRock,
       this.rockDepthFrom,this.rockDepthTo).subscribe((response: any)=>{
 
-        this.toastSer.presentSuccess(response.msg);
-        this.router.navigate(['layer4']);
+        if(response.error === true){
+          this.toastSer.presentError(response.msg);
+        }else{
+
+        //  this.router.navigate(['layer4']);
+      this.getWebData();
+        }
 
       });
   }
@@ -786,6 +801,45 @@ sptstatus: any;
 
 
    });
+  }
+
+  getWebData(){
+    this.layer1List = [];
+
+     this.httpService.getBoredetails(Constants.webbhid).subscribe((response: any)=>{
+      this.layer1List = response.data;
+      console.log('list',this.layer1List);
+      if(this.layer1List[0].depth_termination === ''){
+        this.router.navigate(['layer4']);
+
+      }else{
+        this.router.navigate(['update4']);
+
+      }
+
+
+     });
+   }
+
+   getLayer1() {
+    this.androidDatabase.getLayer1ById(Constants.laYer1Id).then((data) => {
+      this.layer1List = [];
+      console.log('size',data.rows.length);
+      if (data.rows.length > 0) {
+        for (let i = 0; i < data.rows.length; i++) {
+          this.layer1List.push(data.rows.item(i));
+        }
+        console.log('layer1List',this.layer1List);
+        if(this.layer1List[0].depth_termination === ''){
+          this.router.navigate(['layer4']);
+
+        }else{
+          this.router.navigate(['update4']);
+
+        }
+
+      }
+    });
   }
 
 }

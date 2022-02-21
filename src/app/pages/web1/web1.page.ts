@@ -87,7 +87,7 @@ export class Web1Page implements OnInit {
           this.pid = 2;
         }else if(this.layer1List[0].package_id === '3'){
           this.package = 'DFCCIL Package-3';
-          this.pid = 3
+          this.pid = 3;
         }
 
 if(this.layer1List[0].sa_id === '1'){
@@ -120,9 +120,10 @@ if(this.layer1List[0].sa_id === '1'){
          this.toastService.presentSuccess(response.msg);
          console.log('structtype',this.layer1List[0].struct_type);
          if(this.layer1List[0].struct_type === ''){
+          Constants.webbhid = Constants.laYer1Id;
+
          this.router.navigate(['boreholeinformation']);
 
-         Constants.webbhid = Constants.laYer1Id;
          }else{
           this.router.navigate(['web2']);
           Constants.webbhid = Constants.laYer1Id;
