@@ -109,7 +109,10 @@ console.log('one',1);
   }
 
   onClick(){
-    if(this.layer1List[0].struct_type === ''){
+    if(this.layer1List[0].struct_type === 'null' ||
+    this.layer1List[0].struct_type === null ||
+    this.layer1List[0].struct_type === 'undefined' ||
+    this.layer1List[0].struct_type === undefined ){
       this.router.navigate(['boreholeinformation']);
 
       Constants.webbhid = Constants.laYer1Id;
@@ -127,7 +130,10 @@ console.log('one',1);
     console.log('updated');
 
 
-    if(this.layer1List[0].struct_type === ''){
+           if(this.layer1List[0].struct_type === 'null' ||
+    this.layer1List[0].struct_type === null ||
+    this.layer1List[0].struct_type === 'undefined' ||
+    this.layer1List[0].struct_type === undefined ){
       this.router.navigate(['boreholeinformation']);
 
       Constants.webbhid = Constants.laYer1Id;

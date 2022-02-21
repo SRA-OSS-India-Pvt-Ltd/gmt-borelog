@@ -125,12 +125,16 @@ export class Update2Page implements OnInit {
   }
 
   onClick(){
-    if(this.layer1List[0].drill_depth_from === ''){
-      this.router.navigate(['logginginformation']);
-      }else{
-        this.router.navigate(['update3']);
+    if(this.layer1List[0].drill_depth_from === null ||
+      this.layer1List[0].drill_depth_from === 'null' ||
+      this.layer1List[0].drill_depth_from === undefined ||
+      this.layer1List[0].drill_depth_from === 'undefined'  ){
+     this.router.navigate(['logginginformation']);
+     }else{
+      this.router.navigate(['update3']);
 
-      }
+     }
+
 }
   getLayer1() {
     this.androidDatabase.getLayer1ById(Constants.laYer1Id).then((data) => {
@@ -205,12 +209,17 @@ export class Update2Page implements OnInit {
       );
 
 
-      if(this.layer1List[0].drill_depth_from === ''){
-        this.router.navigate(['logginginformation']);
-        }else{
-          this.router.navigate(['update3']);
+        if(this.layer1List[0].drill_depth_from === null ||
+        this.layer1List[0].drill_depth_from === 'null' ||
+        this.layer1List[0].drill_depth_from === undefined ||
+        this.layer1List[0].drill_depth_from === 'undefined'  ){
+       this.router.navigate(['logginginformation']);
+       }else{
+        this.router.navigate(['update3']);
 
-        }
+       }
+
+
 
 
 

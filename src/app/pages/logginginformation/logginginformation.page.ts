@@ -813,7 +813,7 @@ sptstatus: any;
         this.router.navigate(['layer4']);
 
       }else{
-        this.router.navigate(['update4']);
+        this.router.navigate(['web4']);
 
       }
 
@@ -830,7 +830,10 @@ sptstatus: any;
           this.layer1List.push(data.rows.item(i));
         }
         console.log('layer1List',this.layer1List);
-        if(this.layer1List[0].depth_termination === ''){
+        if(this.layer1List[0].depth_termination === undefined ||
+          this.layer1List[0].depth_termination === 'undefined' ||
+          this.layer1List[0].depth_termination === null ||
+          this.layer1List[0].depth_termination === 'null' ){
           this.router.navigate(['layer4']);
 
         }else{

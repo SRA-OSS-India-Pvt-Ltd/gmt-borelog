@@ -5,6 +5,7 @@ import { AndroidDatabaseService } from './../../database/android-database.servic
 import { Component, OnInit } from '@angular/core';
 import { HttpcallsService } from 'src/app/services/httpcalls.service';
 import { Platform } from '@ionic/angular';
+import { identity } from 'rxjs';
 
 @Component({
   selector: 'app-viewlist',
@@ -150,9 +151,10 @@ project: any;
             this.toastser.presentError(response.msg);
 
            }else{
-            this.androidDatabase.deleteRowbyId(Constants.laYer1Id);
-
+         console.log('Idddddddd',id);
            this.toastser.presentSuccess(response.msg);
+           this.androidDatabase.deleteRowbyId(id);
+
            this.router.navigate(['sidemenu']);
            }
 

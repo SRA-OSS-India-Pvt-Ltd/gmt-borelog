@@ -373,11 +373,14 @@ getLocations(){
         for (let i = 0; i < data.rows.length; i++) {
           this.layer1List.push(data.rows.item(i));
         }
-        console.log('layer1List',this.layer1List);
-        if(this.layer1List[0].drill_depth_from === ''){
+        console.log('layer1List',this.layer1List[0].drill_depth_from);
+        if(this.layer1List[0].drill_depth_from === null ||
+           this.layer1List[0].drill_depth_from === 'null' ||
+           this.layer1List[0].drill_depth_from === undefined ||
+           this.layer1List[0].drill_depth_from === 'undefined'  ){
           this.router.navigate(['logginginformation']);
           }else{
-           this.router.navigate(['web3']);
+           this.router.navigate(['update3']);
 
           }
 

@@ -209,8 +209,11 @@ isimg = false;
         for (let i = 0; i < data.rows.length; i++) {
           this.layer1List.push(data.rows.item(i));
         }
-        console.log('layer1List',this.layer1List);
-        if(this.layer1List[0].struct_type === ''){
+        console.log('layer1List',this.layer1List[0].struct_type);
+        if(this.layer1List[0].struct_type === 'null' ||
+        this.layer1List[0].struct_type === null ||
+        this.layer1List[0].struct_type === 'undefined' ||
+        this.layer1List[0].struct_type === undefined ){
           this.router.navigate(['boreholeinformation']);
 
           Constants.webbhid = Constants.laYer1Id;

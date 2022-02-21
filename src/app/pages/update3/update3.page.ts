@@ -290,13 +290,17 @@ sptstatus: any;
      }
 
      onClick(){
-      if(this.layer1List[0].depth_termination === ''){
+      if(this.layer1List[0].depth_termination === undefined ||
+        this.layer1List[0].depth_termination === 'undefined' ||
+        this.layer1List[0].depth_termination === null ||
+        this.layer1List[0].depth_termination === 'null' ){
         this.router.navigate(['layer4']);
 
       }else{
         this.router.navigate(['update4']);
 
       }
+
   }
 
 //   validation(){
@@ -963,7 +967,10 @@ validation(){
         this.rockDepthTo,this.sptstatus);
 
 
-        if(this.layer1List[0].depth_termination === ''){
+        if(this.layer1List[0].depth_termination === undefined ||
+          this.layer1List[0].depth_termination === 'undefined' ||
+          this.layer1List[0].depth_termination === null ||
+          this.layer1List[0].depth_termination === 'null' ){
           this.router.navigate(['layer4']);
 
         }else{
