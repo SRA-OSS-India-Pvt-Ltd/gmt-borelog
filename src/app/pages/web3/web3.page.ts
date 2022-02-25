@@ -35,7 +35,6 @@ export class Web3Page implements OnInit {
   udsDepthFrom: any;
   udsDepthTo: any;
   soilSampleColor: any;
-  isshow = false;
 typeOfSoil: any;
 isCohessive = false;
 densityConsistace: any;
@@ -59,6 +58,7 @@ isRock = false;
 rockDepthTo: any;
 rockDepthFrom: any;
 isSoil = false;
+increme: number;
 constructor(public toastSer: ToastService,
   public httpService: HttpcallsService,
   public router: Router) {
@@ -68,32 +68,64 @@ constructor(public toastSer: ToastService,
 ngOnInit() {
 }
 totalCount(){
-  if(this.second !== undefined && this.third !== undefined){
+  if(this.second !== undefined && this.third !== undefined &&
+    this.second !== 0 && this.third !== 0 ){
     this.total = parseInt(this.second) + parseInt(this.third);
 
   }
-  if(this.secondB !== undefined && this.thirdB !== undefined){
+  if(this.secondB !== undefined && this.thirdB !== undefined &&
+    this.secondB !== 0 && this.thirdB !== 0){
     this.totalB = parseInt(this.secondB) + parseInt(this.thirdB);
   }
 
 
   if((this.firstB === 50 && this.first < 15) || (this.secondB === 50 && this.second < 15) || (this.thirdB === 50 && this.third < 15)  ){
+
+
     this.oneB = true;
+
     this.sptstatus = 'Refusal';
+    console.log('Iff1');
+
+
+
   }else if((this.firstB > 50 && this.first === 15) || (this.secondB > 50 && this.second === 15) || (this.thirdB > 50 && this.third === 15) ){
+
+
     this.oneB = true;
     this.sptstatus = 'Refusal';
+    console.log('Iff2');
+
+
+
   }else if(this. total === 30 && this.totalB > 100){
+
+
     this.oneB = true;
     this.sptstatus = 'Refusal';
+    console.log('Iff3');
+
 
   }else{
-    this.oneB = false;
-    this.sptstatus = '';
+    this.increme = this.increme+1;
+    console.log('incre', this.increme);
+    if(this.layer1List[0].soil_spt_depth_status === 'Refusal' &&  this.increme === 6){
+      this.oneB = true;
+    console.log(' iff4Refusalto');
+
+    }else{
+      this.oneB = false;
+      this.sptstatus = '';
+      console.log('Iff5');
+
+    }
+
+
 
   }
 
 }
+
 
 
   // strataChange($event){
@@ -141,6 +173,8 @@ totalCount(){
     if(this.typeOfstrata === 'Soil'){
     this.isSoil = true;
     this.isRock = false;
+    this.oneB= false;
+
     // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     this.rockDepthFrom = '',
     this.rockDepthTo = '';
@@ -158,6 +192,8 @@ totalCount(){
 
 
     }else if(this.typeOfstrata === 'Rock'){
+      this.oneB= false;
+
       this.isCohesion = false;
       this.isCohessive = false;
 
@@ -201,6 +237,7 @@ totalCount(){
         this.isdsDepth = true;
         this.isSPTDepth = false;
         this.isUDSepth = false;
+        this.oneB = false;
         this.first = '';
         this.second = '';
         this.third = '';
@@ -217,6 +254,8 @@ totalCount(){
       }else if(this.typeOfsample === 'SPT'){
         this.isdsDepth = false;
         this.isSPTDepth = true;
+                this.oneB = false;
+
         this.isUDSepth = false;
         this.dsDepthFrom = '';
         this.dsDepthTo = '';
@@ -228,6 +267,8 @@ totalCount(){
         this.isdsDepth = false;
         this.isSPTDepth = false;
         this.isUDSepth = true;
+        this.oneB = false;
+
         this.dsDepthFrom = '';
         this.dsDepthTo = '';
         this.first = '';
@@ -251,19 +292,22 @@ totalCount(){
    if(this.typeOfSoil === 'Cohesive'){
      this.isCohessive = true;
      this.isCohesion = false;
+     this.densityConsistace = '';
 
    }else{
      this.isCohesion = true;
      this.isCohessive = false;
+     this.densityConsistace = '';
+
 
    }
   }
   densityConsiChange($event){
-   this.densityConsiChange =$event.target.value;
+   this.densityConsistace =$event.target.value;
    console.log($event.target.value);
   }
   densityConsiChange1($event){
-    this.densityConsiChange =$event.target.value;
+    this.densityConsistace =$event.target.value;
     console.log($event.target.value);
    }
    visualChange($event){
@@ -301,9 +345,8 @@ this.httpService.getBoredetails(Constants.webbhid).subscribe((response: any)=>{
         if(this.layer1List.length>0){
 
           if(this.layer1List[0].soil_spt_depth_status === 'Refusal'){
-            this.isshow = true;
-
-            this.oneB = true;
+            console.log('Iff block executed');
+            this.increme = 0;
            }
 
          this.drillingFrom = this.layer1List[0].drill_depth_from;
@@ -331,7 +374,7 @@ this.httpService.getBoredetails(Constants.webbhid).subscribe((response: any)=>{
          this.udsDepthTo = this.layer1List[0].soil_uds_depth_to;
          this.soilSampleColor = this.layer1List[0].soil_sample_color;
          this.typeOfSoil = this.layer1List[0].soil_type;
-         this.densityConsiChange = this.layer1List[0].soil_density;
+         this.densityConsistace = this.layer1List[0].soil_density;
          this.visualClassification = this.layer1List[0].soil_visual_classif;
          this.rockSample = this.layer1List[0].rock_sample_type;
          this.runLength = this.layer1List[0].rock_run_length;
@@ -408,6 +451,11 @@ this.httpService.getBoredetails(Constants.webbhid).subscribe((response: any)=>{
       this.typeOfWeathering,this.typeOfRock,
       this.rockDepthFrom,this.rockDepthTo).subscribe((response: any)=>{
 
+        if(response.error === true){
+          this.toastSer.presentError(response.msg);
+
+         }else{
+
         this.toastSer.presentSuccess(response.msg);
         if(this.layer1List[0].depth_termination === ''){
           this.router.navigate(['layer4']);
@@ -416,7 +464,7 @@ this.httpService.getBoredetails(Constants.webbhid).subscribe((response: any)=>{
           this.router.navigate(['web4']);
 
         }
-
+      }
 
       });
 

@@ -134,8 +134,14 @@ this.signaturePad.clear();
       this.aarveRepresName,this.base641,this.subAgencyRepresentivaeName,this.base642,
       this.clientRepresNaame,this.base643,'').subscribe((response: any)=>{
         console.log('response',response);
+        if(response.error === true){
+          this.toastSer.presentError(response.msg);
+
+         }else{
+
         this.toastSer.presentSuccess(response.msg);
         this.router.navigate(['sidemenu']);
+         }
 
       });
   }

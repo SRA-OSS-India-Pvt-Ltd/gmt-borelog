@@ -221,11 +221,12 @@ sptstatus: any;
    if(this.typeOfSoil === 'Cohesive'){
      this.isCohessive = true;
      this.isCohesion = false;
+     this.densityConsistace = '';
 
    }else{
      this.isCohesion = true;
      this.isCohessive = false;
-
+      this.densityConsistace = '';
    }
   }
   densityConsiChange($event){
@@ -737,11 +738,13 @@ sptstatus: any;
 
   }
   totalCount(){
-    if(this.second !== undefined && this.third !== undefined){
+    if(this.second !== undefined && this.third !== undefined &&
+      this.second !== 0 && this.third !== 0 ){
       this.total = parseInt(this.second) + parseInt(this.third);
 
     }
-    if(this.secondB !== undefined && this.thirdB !== undefined){
+    if(this.secondB !== undefined && this.thirdB !== undefined &&
+      this.secondB !== 0 && this.thirdB !== 0){
       this.totalB = parseInt(this.secondB) + parseInt(this.thirdB);
     }
 

@@ -5,7 +5,9 @@ import { AndroidDatabaseService } from './../../database/android-database.servic
 import { Component, OnInit } from '@angular/core';
 import { HttpcallsService } from 'src/app/services/httpcalls.service';
 import { Platform } from '@ionic/angular';
-import { identity } from 'rxjs';
+
+
+
 
 @Component({
   selector: 'app-viewlist',
@@ -16,6 +18,9 @@ export class ViewlistPage implements OnInit {
 totalList: any =[];
 layer1List: any = [];
 project: any;
+disconnectSubscription: any;
+ timeout: any;
+
   constructor(public androidDatabase: AndroidDatabaseService,
     public router: Router,
     public httpService: HttpcallsService,
@@ -27,6 +32,11 @@ project: any;
   }
 
   ngOnInit() {
+  }
+  ionViewDidEnter(){
+    this.adding();
+    this.project = 'DFCCIL';
+
   }
   getLayer1() {
     this.androidDatabase.getLayer1(Constants.userId).then((data) => {
@@ -72,6 +82,7 @@ project: any;
           this.totalList.push(data.rows.item(i));
         }
         console.log('totalList',this.totalList);
+
         this.httpService.submitboredata(this.totalList[0].user_id,
           this.totalList[0].org_id,
           this.totalList[0].project_id,
@@ -145,13 +156,14 @@ project: any;
           this.totalList[0].modified_date
 
 
-          ).subscribe((response: any)=>{
+          )
+           .subscribe((response: any)=>{
            console.log('response',response);
            if(response.error === true){
             this.toastser.presentError(response.msg);
 
            }else{
-         console.log('Idddddddd',id);
+           console.log('Idddddddd',id);
            this.toastser.presentSuccess(response.msg);
            this.androidDatabase.deleteRowbyId(id);
 
@@ -160,10 +172,17 @@ project: any;
 
 
           });
-
-      }
+        }
     });
 
+  }
+
+   myFunction() {
+    this.timeout = setTimeout(this.alertFunc, 30000);
+  }
+
+   alertFunc() {
+     this.toastser.presentError('Please check your internet Connection');
   }
 
   getPendingBoredata(){
@@ -189,16 +208,33 @@ project: any;
 
 
    datasubmit(id: any,bhid: any){
+
+
+
+
     this. platform.ready().then(() => {
       if (this.platform.is('android')) {
-      this.submitboredata(id);
+        if(window.navigator.connection.type === 'none'){
+          this.toastser.presentError('Please check your internet connection');
+
+         }else{
+          this.submitboredata(id);
+
+         }
+
 
       }else{
 
         this.httpService.submitall('all',bhid).subscribe((response: any)=>{
           console.log('respons',response);
+          if(response.error === true){
+            this.toastser.presentError(response.msg);
+
+           }else{
+
           this.toastser.presentSuccess(response.msg);
           this.router.navigate(['sidemenu']);
+           }
 
         });
      }

@@ -1,8 +1,10 @@
+/* eslint-disable no-var */
 import { HttpcallsService } from './../services/httpcalls.service';
 import { ToastService } from './../services/toast.service';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Constants } from '../common/constants';
+
 
 @Component({
   selector: 'app-home',
@@ -27,9 +29,17 @@ export class HomePage {
     }else{
       Constants.loginUserName = this.postData.employeeid;
       Constants.loginPassword = this.postData.epassword;
-       this.serviceCall(this.postData.employeeid,this.postData.epassword);
+
+      this.serviceCall(this.postData.employeeid,this.postData.epassword);
+
+
+
+
+
+
     }
   }
+
   serviceCall(userid: any, password: any){
      this.httpService.logionService(userid,password).subscribe((response: any)=>{
         if(response.error === false){

@@ -187,9 +187,6 @@
   <ion-row *ngIf="oneB" >
     <ion-col size="12" ><ion-item class="padding"><ion-label class="redtext"><strong>Refusal</strong></ion-label></ion-item></ion-col>
   </ion-row>
-  <ion-row *ngIf="isshow" >
-    <ion-col size="12" ><ion-item class="padding"><ion-label class="redtext"><strong>Refusal</strong></ion-label></ion-item></ion-col>
-  </ion-row>
 
 
 
@@ -258,7 +255,7 @@
     <ion-col size="6">
       <ion-item class="input">
 
-        <ion-select  placeholder="Select" (ionChange)="densityConsiChange($event)" value="{{densityConsiChange}}">
+        <ion-select  placeholder="Select" (ionChange)="densityConsiChange($event)" value="{{densityConsistace}}">
            <ion-select-option value="Very soft">Very soft</ion-select-option>
            <ion-select-option value="Soft">Soft</ion-select-option>
            <ion-select-option value="Medium">Medium</ion-select-option>
@@ -280,7 +277,7 @@
     <ion-col size="6">
       <ion-item class="input">
 
-        <ion-select  placeholder="Select" (ionChange)="densityConsiChange1($event)" value="{{densityConsiChange}}">
+        <ion-select  placeholder="Select" (ionChange)="densityConsiChange1($event)" value="{{densityConsistace}}">
            <ion-select-option value="Very loose">Very loose</ion-select-option>
            <ion-select-option value="Loose">Loose</ion-select-option>
            <ion-select-option value="Medium">Medium</ion-select-option>

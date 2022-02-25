@@ -110,6 +110,10 @@ this.httpService.getBoredetails(Constants.webbhid).subscribe((response: any)=>{
         this.orientation,this.boreholeDia,this.boreholeCasingDia,this.casingDepth,
         this.detailsOfDrillingBit,this.detailsOdCoreBarrel,this.angleWithHorizontal).subscribe((response: any)=>{
          console.log('response',response);
+         if(response.error === true){
+          this.toastSer.presentError(response.msg);
+
+         }else{
          this.toastSer.presentSuccess(response.msg);
          if(this.layer1List[0].drill_depth_from === ''){
          this.router.navigate(['logginginformation']);
@@ -117,6 +121,7 @@ this.httpService.getBoredetails(Constants.webbhid).subscribe((response: any)=>{
           this.router.navigate(['web3']);
 
          }
+        }
 
         });
 

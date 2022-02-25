@@ -116,7 +116,12 @@ if(this.layer1List[0].sa_id === '1'){
       this.httpService.submitLayer1(Constants.laYer1Id,1,Constants.userId,Constants.orgId,Constants.projectId,
         this.pid,this.boreHoles,this.subAgencyId).subscribe((response: any)=>{
          console.log('response',response);
-         Constants.webbhid= response.data.bh_id;
+         if(response.error === true){
+          this.toastService.presentError(response.msg);
+
+         }else{
+        //  Constants.webbhid= response.data.bh_id;
+
          this.toastService.presentSuccess(response.msg);
          console.log('structtype',this.layer1List[0].struct_type);
          if(this.layer1List[0].struct_type === ''){
@@ -129,6 +134,7 @@ if(this.layer1List[0].sa_id === '1'){
           Constants.webbhid = Constants.laYer1Id;
 
          }
+        }
 
         });
     }

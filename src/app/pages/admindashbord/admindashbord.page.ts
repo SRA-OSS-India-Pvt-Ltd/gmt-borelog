@@ -29,7 +29,7 @@ export class AdmindashbordPage implements OnInit {
   async callalert() {
     const alert = await this.alertCtrl.create({
       header: 'Log out',
-      subHeader: 'Are you Sure want to logout ?',
+      subHeader: 'Are you sure want to logout ?',
       buttons: [
         {
           text: 'Yes',
