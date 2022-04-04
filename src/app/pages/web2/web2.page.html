@@ -23,12 +23,12 @@
       <ion-row>
         <ion-col size="6">
           <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Reference Standard Used:</strong><span class="required-asterisk">*</span></ion-label>
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Reference Standard Used:</strong></ion-label>
           </ion-item>
         </ion-col>
         <ion-col size="6">
           <ion-item class="input">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>IS 1892; IS 2131; IS 2132</strong><span class="required-asterisk">*</span></ion-label>
+            <ion-label  style="white-space: pre-wrap !important;"><strong>IS 4464; IS 6926; IS 5313</strong> </ion-label>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -41,7 +41,14 @@
         </ion-col>
         <ion-col size="6">
           <ion-item class="input">
-            <ion-input type="text" cass="input" [(ngModel)]="typeOfStructure"></ion-input>
+           <ion-item>
+
+            <ion-select  placeholder="Select " (ionChange)="typeOfStructureChange($event)" value="{{typeOfStructure}}">
+               <ion-select-option value="OWG">OWG</ion-select-option>
+               <ion-select-option value="Composite Girder">Composite Girder</ion-select-option>
+                 <ion-select-option value="PSC Slab">PSC Slab</ion-select-option>
+             </ion-select>
+           </ion-item>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -61,7 +68,7 @@
       <ion-row>
         <ion-col size="6">
           <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Borehole Location:</strong><span class="required-asterisk">*</span></ion-label>
+            <ion-label  style="white-space: pre-wrap !important;"><strong> Location:</strong><span class="required-asterisk">*</span></ion-label>
           </ion-item>
         </ion-col>
         <ion-col size="6">
@@ -71,29 +78,7 @@
         </ion-col>
       </ion-row>
 
-       <ion-row>
-        <ion-col size="6">
-          <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Latitude:</strong><span class="required-asterisk">*</span></ion-label>
-          </ion-item>
-        </ion-col>
-        <ion-col size="6">
-          <ion-item class="input" (click)="getLocations()">
-            <ion-input type="text" cass="input" [(ngModel)]="latitude" ></ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>      <ion-row>
-        <ion-col size="6">
-          <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Borehole longitude:</strong><span class="required-asterisk">*</span></ion-label>
-          </ion-item>
-        </ion-col>
-        <ion-col size="6">
-          <ion-item class="input">
-            <ion-input type="text" cass="input" [(ngModel)]="longitude"></ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
+
       <ion-row>
         <ion-col size="6">
           <ion-item class="padding">
@@ -106,6 +91,31 @@
           </ion-item>
         </ion-col>
       </ion-row>
+
+       <ion-row>
+        <ion-col size="6">
+          <ion-item class="padding">
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Easting:</strong><span class="required-asterisk">*</span></ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item class="input" (click)="getLocations()">
+            <ion-input type="text" cass="input" [(ngModel)]="latitude" ></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>      <ion-row>
+        <ion-col size="6">
+          <ion-item class="padding">
+            <ion-label  style="white-space: pre-wrap !important;"><strong> Northing:</strong><span class="required-asterisk">*</span></ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item class="input">
+            <ion-input type="text" cass="input" [(ngModel)]="longitude"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
 
       <ion-row>
 
@@ -144,7 +154,7 @@
       <ion-row>
         <ion-col size="6">
           <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Water Table RL (m):</strong><span class="required-asterisk">*</span></ion-label>
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Depth of Water Table RL (m):</strong><span class="required-asterisk">*</span></ion-label>
           </ion-item>
         </ion-col>
         <ion-col size="6">
@@ -157,58 +167,39 @@
       <ion-row>
         <ion-col size="6">
           <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Type of Rig:</strong><span class="required-asterisk">*</span></ion-label>
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Method of Drilling:</strong><span class="required-asterisk">*</span></ion-label>
           </ion-item>
         </ion-col>
         <ion-col size="6">
           <ion-item class="input">
             <ion-item>
               <ion-select  placeholder="Select " (ionChange)="rigChange($event)" value="{{typeOfRig}}">
-                <ion-select-option value="Mechanical">Mechanical</ion-select-option>
-                <ion-select-option value="Hydraulic">Hydraulic</ion-select-option>
+                <ion-select-option value="Mechanical">Rotary drilling with Mud Circulation</ion-select-option>
+                <ion-select-option value="Hydraulic">Other</ion-select-option>
               </ion-select>
             </ion-item>
           </ion-item>
         </ion-col>
       </ion-row>
+
       <ion-row>
         <ion-col size="6">
           <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Type of Drilling:</strong><span class="required-asterisk">*</span></ion-label>
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Other:</strong><span class="required-asterisk">*</span></ion-label>
           </ion-item>
         </ion-col>
         <ion-col size="6">
           <ion-item class="input">
-            <ion-item>
-              <ion-select  placeholder="Select " (ionChange)="drillChange($event)" value="{{typeOfDrill}}">
-                <ion-select-option value="Rotary">Rotary</ion-select-option>
-                <ion-select-option value="Auger">Auger</ion-select-option>
-                <ion-select-option value="Bentonite Slurry">Bentonite Slurry</ion-select-option>
-
-              </ion-select>
-            </ion-item>
+            <ion-input type="text" cass="input" [(ngModel)]="rigOther"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
-      <ion-row>
-        <ion-col size="6">
-          <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Circulation Fluid:</strong><span class="required-asterisk">*</span></ion-label>
-          </ion-item>
-        </ion-col>
-        <ion-col size="6">
-          <ion-item class="input">
-            <ion-item>
-              <ion-select  placeholder="Select " (ionChange)="circulationChange($event)" value="{{circulationFluid}}">
-                <ion-select-option value="Bentonite Slurry">Bentonite Slurry</ion-select-option>
-                <ion-select-option value="Water">Water</ion-select-option>
-                <ion-select-option value="Polymer Mud System" style="white-space: pre-wrap !important;">Polymer Mud System</ion-select-option>
 
-              </ion-select>
-            </ion-item>
-          </ion-item>
-        </ion-col>
-      </ion-row>
+
+
+
+      
+
       <ion-row>
         <ion-col size="6">
           <ion-item class="padding">

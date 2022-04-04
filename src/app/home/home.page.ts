@@ -1,3 +1,4 @@
+
 /* eslint-disable no-var */
 import { HttpcallsService } from './../services/httpcalls.service';
 import { ToastService } from './../services/toast.service';
@@ -55,6 +56,7 @@ export class HomePage {
               Constants.clentName = response.data.client_name;
               Constants.projectLocation = response.data.project_location;
               Constants.packageList = response.data.packages;
+
               Constants.subAgencyList = response.data.subagencies;
               Constants.usertype = response.data.user_type;
 

@@ -121,9 +121,19 @@
         </ion-col>
         <ion-col size="6">
           <ion-item class="input">
-            <ion-input type="Number" cass="input" [(ngModel)]="boreHoles"></ion-input>
-          </ion-item>
-        </ion-col>
+
+
+            <ion-select  interface="popover" placeholder="Select Section" (ionChange)="sectionChange($event)" value="{{section}}" >
+
+
+              <ion-select-option  *ngFor="let section of sectionList" [value]="section.section_id">
+
+                {{section.section_name}}
+              </ion-select-option>
+            </ion-select>
+
+
+          </ion-item>        </ion-col>
       </ion-row>
 
     </ion-grid>

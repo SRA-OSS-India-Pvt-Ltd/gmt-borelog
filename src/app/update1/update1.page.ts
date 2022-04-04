@@ -29,6 +29,9 @@ boreHoles: any;
 subAgency: any;
 layer1List: any = [];
 subAgencyId: any;
+sectionId: any;
+section: any;
+sectionList: any = []
   constructor(public androidDatabase: AndroidDatabaseService,
     public router: Router,
     public platform: Platform,
@@ -49,7 +52,48 @@ subAgencyId: any;
   packageChange($event){
     this.package = $event.target.value;
     console.log($event.target.value);
+
+
+    if(this.package === '1' ){
+     this.sectionList =[{"section_id":"1","project_id":"1","package_id":"1","section_name":"Section1"},
+     {"section_id":"4","project_id":"1","package_id":"1","section_name":"Section2"},
+     {"section_id":"5","project_id":"1","package_id":"1","section_name":"Section3"},
+     {"section_id":"6","project_id":"1","package_id":"1","section_name":"Section4"},
+     {"section_id":"7","project_id":"1","package_id":"1","section_name":"Section5"},
+     {"section_id":"8","project_id":"1","package_id":"1","section_name":"Section6"},
+     {"section_id":"9","project_id":"1","package_id":"1","section_name":"Section7"},
+     {"section_id":"10","project_id":"1","package_id":"1","section_name":"Section8"}]
+   }else if(this.package === '2'){
+     this.sectionList =[{"section_id":"2","project_id":"1","package_id":"2","section_name":"Section1"},
+     {"section_id":"11","project_id":"1","package_id":"2","section_name":"Section2"},
+     {"section_id":"12","project_id":"1","package_id":"2","section_name":"Section3"},
+     {"section_id":"13","project_id":"1","package_id":"2","section_name":"Section4"},
+     {"section_id":"14","project_id":"1","package_id":"2","section_name":"Section5"},
+     {"section_id":"15","project_id":"1","package_id":"2","section_name":"Section6"},
+     {"section_id":"16","project_id":"1","package_id":"2","section_name":"Section7"},
+     {"section_id":"17","project_id":"1","package_id":"2","section_name":"Section8"},
+     {"section_id":"18","project_id":"1","package_id":"2","section_name":"Section9"},
+     {"section_id":"19","project_id":"1","package_id":"2","section_name":"Section10"},
+     {"section_id":"20","project_id":"1","package_id":"2","section_name":"Section11"},
+     {"section_id":"21","project_id":"1","package_id":"2","section_name":"Section12"},
+     {"section_id":"22","project_id":"1","package_id":"2","section_name":"Section13"}]
+   }else if(this.package === '3'){
+
+     this.sectionList = [{"section_id":"3","project_id":"1","package_id":"3","section_name":"Section1"},
+     {"section_id":"23","project_id":"1","package_id":"3","section_name":"Section2"},
+     {"section_id":"24","project_id":"1","package_id":"3","section_name":"Section3"},
+     {"section_id":"25","project_id":"1","package_id":"3","section_name":"Section4"},
+     {"section_id":"26","project_id":"1","package_id":"3","section_name":"Section5"},
+     {"section_id":"27","project_id":"1","package_id":"3","section_name":"Section6"},
+     {"section_id":"28","project_id":"1","package_id":"3","section_name":"Section7"}]
    }
+   }
+
+   sectionChange($event){
+    this.sectionId= $event.target.value;
+   console.log($event.target.value);
+  }
+
 
   ngOnInit() {
   }
@@ -79,12 +123,13 @@ getLayer1() {
         if(this.layer1List.length>0){
 
           this.package = this.layer1List[0].Package;
+          this.section = this.layer1List[0].section_id
 
           this.boreHoles = this.layer1List[0].NoofBoreHoles;
           console.log('said',this.layer1List[0].SubAgencyName);
 
           if(this.layer1List[0].SubAgencyName === '1'){
-console.log('one',1);
+           console.log('one',1);
             this.subAgencyId = '1';
 
             this.subAgency = 'SubAgency-1';
@@ -126,7 +171,7 @@ console.log('one',1);
   updateLayer1(){
     // eslint-disable-next-line max-len
     this.androidDatabase.updateLayer1(this.package,this.boreHoles,this.subAgencyId,
-      this.subAgencyAddress,this.subAgencyLogo,Constants.laYer1Id);
+      this.subAgencyAddress,this.subAgencyLogo,Constants.laYer1Id,this.sectionId);
     console.log('updated');
 
 

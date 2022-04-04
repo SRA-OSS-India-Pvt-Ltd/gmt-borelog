@@ -10,6 +10,8 @@ export abstract class Constants {
   public static clentName: any;
   public static projectLocation: any;
   public static packageList: any =[];
+  public static chainagesBySectionIDList: any =[];
+
   public static subAgencyList: any =[];
   public static laYer1Id: any;
   public static projectId: any;

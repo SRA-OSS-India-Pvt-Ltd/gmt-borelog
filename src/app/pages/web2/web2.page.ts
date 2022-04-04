@@ -28,7 +28,7 @@ export class Web2Page implements OnInit {
   boreholeDia: any;
   boreholeCasingDia: any;
   casingDepth: any;
-
+  rigOther: any;
   typeOfStructure: any;
   ref: any;
   latitude: any;
@@ -126,6 +126,11 @@ this.httpService.getBoredetails(Constants.webbhid).subscribe((response: any)=>{
         });
 
   }
+  typeOfStructureChange($event){
+    this.typeOfStructure = $event.target.value;
+    console.log('typeOfStructure: ',this.typeOfStructure);
+  }
+
   validation(){
     console.log('typeOfStuct',this.typeOfStructure);
     if(this.typeOfStructure === ''){
@@ -150,10 +155,8 @@ this.httpService.getBoredetails(Constants.webbhid).subscribe((response: any)=>{
     else if(this.date === '' ){
       this.toastSer.presentError('Please Enter Borehole Start Date');
 
-    }else if(this.rl === '' ){
-      this.toastSer.presentError('Please Enter Borehole RL (m)');
-
-    }else if(this.waterTable === '' ){
+    }
+    else if(this.waterTable === '' ){
       this.toastSer.presentError('Please Enter Water Table RL (m)');
 
     }    else if(this.rl ===  0 ){
@@ -162,23 +165,19 @@ this.httpService.getBoredetails(Constants.webbhid).subscribe((response: any)=>{
     }else if(this.waterTable === 0 ){
       this.toastSer.presentError('Please Enter Proper Water Table RL it should not be zero (m)');
 
-    }else if(this.rl ===  null ){
-      this.toastSer.presentError('Please Enter Borehole RL (m)');
-
-    }else if(this.waterTable === null ){
+    }
+    else if(this.waterTable === null ){
       this.toastSer.presentError('Please Enter  Water Table RL ');
 
     }
     else if(this.typeOfRig === '' ){
-      this.toastSer.presentError('Please Select Type of Rig');
+      this.toastSer.presentError('Please Select Method of Drilling');
 
-    }else if(this.typeOfDrill === '' ){
-      this.toastSer.presentError('Please Select Type of Drilling');
+    }else if(this.typeOfRig === 'Other' && this.rigOther === ''){
+      this.toastSer.presentError('Please Enter Other for Method of Drilling');
 
-    }else if(this.circulationFluid === '' ){
-      this.toastSer.presentError('Please Select Circulation Fluid');
-
-    }else if(this.orientation === '' ){
+    }
+   else if(this.orientation === '' ){
       this.toastSer.presentError('Please Select Drilling Orientation');
 
     }else if(this.boreholeCasingDia === '' ){

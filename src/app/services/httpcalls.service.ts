@@ -66,9 +66,9 @@ export class HttpcallsService {
 
   }
 
-  submitLayer1(bhid: any,bhlaye: any,uid: any,orgid: any,projid: any,packageid: any,noholes: any,said: any){
+  submitLayer1(bhid: any,bhlaye: any,uid: any,orgid: any,projid: any,packageid: any,noholes: any,said: any,secId: any){
     const parameters ={bh_id:bhid,bh_layer:bhlaye,user_id:uid,org_id: orgid,projectid: projid,package_id:packageid,
-      no_of_bh:noholes,sa_id:said};
+      no_of_bh:noholes,sa_id:said,section_id: secId};
     console.log('JSON',JSON.stringify(parameters));
 
     return this.httpClient.post(`${environment.apiUrl}/submitboredata_web`, JSON.stringify(parameters));
@@ -157,6 +157,16 @@ export class HttpcallsService {
     return this.httpClient.post(`${environment.apiUrl}/getSubmittedBoredata`, JSON.stringify(parameters));
 
   }
+
+
+  getAllChainagesBySectionID(sectionId: any){
+    const parameters ={section_id: sectionId};
+    console.log('JSON',JSON.stringify(parameters));
+
+    return this.httpClient.post(`${environment.apiUrl}/getAllChainagesBySectionID`, JSON.stringify(parameters));
+
+  }
+
 
 
 

@@ -42,6 +42,8 @@ export class BoreholeinformationPage implements OnInit {
   bhid: any;
   detailsOfDrillingBit: any;
   detailsOdCoreBarrel: any;
+  rigOther: any;
+  chaingeList: any;
   constructor(public toastSer: ToastService,
     public androidDatabase: AndroidDatabaseService,
     private geolocation: Geolocation,
@@ -56,8 +58,8 @@ export class BoreholeinformationPage implements OnInit {
       this.getLayer1LastId();
 
     }else{
-
-
+ this.chaingeList = Constants.chainagesBySectionIDList;
+console.log('chaingeList',this.chaingeList);
     }
 
 
@@ -145,22 +147,18 @@ getLocations(){
     else if(this.date === undefined ){
       this.toastSer.presentError('Please Enter Borehole Start Date');
 
-    }else if(this.rl === undefined ){
-      this.toastSer.presentError('Please Enter Borehole RL (m)');
-
-    }else if(this.waterTable === undefined ){
+    }
+    else if(this.waterTable === undefined ){
       this.toastSer.presentError('Please Enter Water Table RL (m)');
 
     }else if(this.typeOfRig === undefined ){
-      this.toastSer.presentError('Please Select Type of Rig');
+      this.toastSer.presentError('Please Select Method of Drilling');
 
-    }else if(this.typeOfDrill === undefined ){
-      this.toastSer.presentError('Please Select Type of Drilling');
+    }else if(this.typeOfRig === 'Other' && this.rigOther === undefined){
+      this.toastSer.presentError('Please Enter Other for Method of Drilling');
 
-    }else if(this.circulationFluid === undefined ){
-      this.toastSer.presentError('Please Select Circulation Fluid');
-
-    }else if(this.orientation === undefined ){
+    }
+    else if(this.orientation === undefined ){
       this.toastSer.presentError('Please Select Drilling Orientation');
 
     }else if(this.boreholeCasingDia === undefined ){
@@ -194,22 +192,19 @@ getLocations(){
     else if(this.date === '' ){
       this.toastSer.presentError('Please Enter Borehole Start Date');
 
-    }else if(this.rl === '' ){
-      this.toastSer.presentError('Please Enter Borehole RL (m)');
-
-    }else if(this.waterTable === '' ){
+    }
+    else if(this.waterTable === '' ){
       this.toastSer.presentError('Please Enter Water Table RL (m)');
 
     }else if(this.typeOfRig === '' ){
-      this.toastSer.presentError('Please Select Type of Rig');
+      this.toastSer.presentError('Please Select Method of Drilling');
 
-    }else if(this.typeOfDrill === '' ){
-      this.toastSer.presentError('Please Select Type of Drilling');
+    }else if(this.typeOfRig === 'Other' && this.rigOther === ''){
+      this.toastSer.presentError('Please Enter Other for Method of Drilling');
 
-    }else if(this.circulationFluid === '' ){
-      this.toastSer.presentError('Please Select Circulation Fluid');
+    }
 
-    }else if(this.orientation === '' ){
+    else if(this.orientation === '' ){
       this.toastSer.presentError('Please Select Drilling Orientation');
 
     }else if(this.boreholeCasingDia === '' ){
@@ -243,10 +238,8 @@ getLocations(){
     else if(this.date === null ){
       this.toastSer.presentError('Please Enter Borehole Start Date');
 
-    }else if(this.rl === null ){
-      this.toastSer.presentError('Please Enter Borehole RL (m)');
-
-    }else if(this.waterTable === null ){
+    }
+    else if(this.waterTable === null ){
       this.toastSer.presentError('Please Enter Water Table RL (m)');
 
     }
@@ -257,15 +250,14 @@ getLocations(){
       this.toastSer.presentError('Please Enter Proper Water Table RL it should not be zero (m)');
 
     }else if(this.typeOfRig === null){
-      this.toastSer.presentError('Please Select Type of Rig');
+      this.toastSer.presentError('Please Select Method of Drilling');
 
-    }else if(this.typeOfDrill === null ){
-      this.toastSer.presentError('Please Select Type of Drilling');
+    }else if(this.typeOfRig === 'Other' && this.rigOther === null){
+      this.toastSer.presentError('Please Enter Other for Method of Drilling');
 
-    }else if(this.circulationFluid === null ){
-      this.toastSer.presentError('Please Select Circulation Fluid');
+    }
 
-    }else if(this.orientation === null ){
+    else if(this.orientation === null ){
       this.toastSer.presentError('Please Select Drilling Orientation');
 
     }else if(this.boreholeCasingDia === null ){
@@ -387,6 +379,11 @@ getLocations(){
 
       }
     });
+  }
+
+  typeOfStructureChange($event){
+    this.typeOfStructure = $event.target.value;
+    console.log('typeOfStructure: ',this.typeOfStructure);
   }
 
 }

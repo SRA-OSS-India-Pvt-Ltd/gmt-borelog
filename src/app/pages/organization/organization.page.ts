@@ -20,15 +20,19 @@ projName: any;
 clientName: any;
 projLocation: any;
 packageList: any = [];
+sectionList: any = [];
+
 package: any;
 subAencyList: any =[];
 subAgency: any;
 subAgencyId: any;
+sections: any;
+sectionId: any;
 
 subAencyListValues: any =[];
 subAgencyAddress: any;
 subAgencyLogo: any;
-boreHoles: any;
+
 layer1List: any = [];
 isimg = false;
   constructor(public toastService: ToastService,
@@ -43,6 +47,7 @@ isimg = false;
     this.projName = Constants.projectName;
     this.clientName = Constants.clentName;
     this.projLocation = Constants.projectLocation;
+
     this.packageList = Constants.packageList;
     this.subAencyList = Constants.subAgencyList;
 
@@ -52,6 +57,45 @@ isimg = false;
   }
   packageChange($event){
    this.package = $event.target.value;
+   console.log($event.target.value);
+
+
+   if(this.package === '1' ){
+    this.sectionList =[{"section_id":"1","project_id":"1","package_id":"1","section_name":"Section1"},
+    {"section_id":"4","project_id":"1","package_id":"1","section_name":"Section2"},
+    {"section_id":"5","project_id":"1","package_id":"1","section_name":"Section3"},
+    {"section_id":"6","project_id":"1","package_id":"1","section_name":"Section4"},
+    {"section_id":"7","project_id":"1","package_id":"1","section_name":"Section5"},
+    {"section_id":"8","project_id":"1","package_id":"1","section_name":"Section6"},
+    {"section_id":"9","project_id":"1","package_id":"1","section_name":"Section7"},
+    {"section_id":"10","project_id":"1","package_id":"1","section_name":"Section8"}]
+  }else if(this.package === '2'){
+    this.sectionList =[{"section_id":"2","project_id":"1","package_id":"2","section_name":"Section1"},
+    {"section_id":"11","project_id":"1","package_id":"2","section_name":"Section2"},
+    {"section_id":"12","project_id":"1","package_id":"2","section_name":"Section3"},
+    {"section_id":"13","project_id":"1","package_id":"2","section_name":"Section4"},
+    {"section_id":"14","project_id":"1","package_id":"2","section_name":"Section5"},
+    {"section_id":"15","project_id":"1","package_id":"2","section_name":"Section6"},
+    {"section_id":"16","project_id":"1","package_id":"2","section_name":"Section7"},
+    {"section_id":"17","project_id":"1","package_id":"2","section_name":"Section8"},
+    {"section_id":"18","project_id":"1","package_id":"2","section_name":"Section9"},
+    {"section_id":"19","project_id":"1","package_id":"2","section_name":"Section10"},
+    {"section_id":"20","project_id":"1","package_id":"2","section_name":"Section11"},
+    {"section_id":"21","project_id":"1","package_id":"2","section_name":"Section12"},
+    {"section_id":"22","project_id":"1","package_id":"2","section_name":"Section13"}]
+  }else if(this.package === '3'){
+
+    this.sectionList = [{"section_id":"3","project_id":"1","package_id":"3","section_name":"Section1"},
+    {"section_id":"23","project_id":"1","package_id":"3","section_name":"Section2"},
+    {"section_id":"24","project_id":"1","package_id":"3","section_name":"Section3"},
+    {"section_id":"25","project_id":"1","package_id":"3","section_name":"Section4"},
+    {"section_id":"26","project_id":"1","package_id":"3","section_name":"Section5"},
+    {"section_id":"27","project_id":"1","package_id":"3","section_name":"Section6"},
+    {"section_id":"28","project_id":"1","package_id":"3","section_name":"Section7"}]
+  }
+  }
+  sectionChange($event){
+    this.sectionId= $event.target.value;
    console.log($event.target.value);
   }
   subAgencyChange($event){
@@ -93,16 +137,16 @@ isimg = false;
 
   addDatabase(){
     if(Constants.laYer1Id === ''){
-      this.androiDatabase.addLayer1Details(this.package,this.boreHoles,this.subAgencyId,this.subAgencyAddress,this.subAgencyLogo,
-        Constants.userId,Constants.orgId,Constants.projectId,this.subAgencyId);
+      this.androiDatabase.addLayer1Details(this.package,this.sectionId,this.subAgencyId,this.subAgencyAddress,this.subAgencyLogo,
+        Constants.userId,Constants.orgId,Constants.projectId,this.subAgencyId,this.sectionId);
         this.getLayer1LastId();
 
       this.router.navigate(['boreholeinformation']);
 
 
     }else{
-      this.androiDatabase.updateLayer1(this.package,this.boreHoles,this.subAgencyId,
-        this.subAgencyAddress,this.subAgencyLogo,Constants.laYer1Id);
+      this.androiDatabase.updateLayer1(this.package,this.sections,this.subAgencyId,
+        this.subAgencyAddress,this.subAgencyLogo,Constants.laYer1Id,this.sectionId);
         this.router.navigate(['boreholeinformation']);
         this.getLayer1();
 
@@ -128,14 +172,12 @@ isimg = false;
   }
 
   submitWeb(){
-    if(this.boreHoles === undefined){
-         this.boreHoles = null;
-        }
-        console.log('webid',Constants.webbhid);
+
+    console.log('webid',Constants.webbhid);
       if(Constants.webbhid === ''){
         console.log('ifffffffffffffff');
-     this.httpService.submitLayer1('',1,Constants.userId,Constants.orgId,Constants.projectId,
-      this.package,this.boreHoles,this.subAgencyId).subscribe((response: any)=>{
+       this.httpService.submitLayer1('',1,Constants.userId,Constants.orgId,Constants.projectId,
+      this.package,'',this.subAgencyId,this.sectionId).subscribe((response: any)=>{
        console.log('response',response);
        if(response.error === true){
          this.toastService.presentError(response.msg);
@@ -148,11 +190,11 @@ isimg = false;
        }
 
       });
-    }else{
+      }else{
       console.log('elseeeeee');
 
       this.httpService.submitLayer1(Constants.webbhid,1,Constants.userId,Constants.orgId,Constants.projectId,
-        this.package,this.boreHoles,this.subAgencyId).subscribe((response: any)=>{
+        this.package,'',this.subAgencyId,this.sectionId).subscribe((response: any)=>{
          console.log('response',response);
          if(response.error === true){
           this.toastService.presentError(response.msg);
@@ -165,6 +207,13 @@ isimg = false;
 
 
     }
+
+    this.httpService.getAllChainagesBySectionID(this.sectionId).subscribe((response34: any)=>{
+      console.log('response34',response34)
+      if(response34.error === false){
+        Constants.chainagesBySectionIDList = response34.data;
+      }
+    })
     }
 
 
