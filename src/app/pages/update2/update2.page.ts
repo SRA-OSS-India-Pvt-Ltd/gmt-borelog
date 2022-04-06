@@ -15,30 +15,38 @@ import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 export class Update2Page implements OnInit {
   boreholeNumber: any;
   boreholeLocation: any;
-  boreholeChainage: any;
+
   detailsOfDrillingBit: any;
   detailsOdCoreBarrel: any;
   rl: any;
   waterTable: any;
   today: any;
   typeOfRig: any;
-  typeOfDrill: any;
-  circulationFluid: any;
+  chainage: any;
+  chainageId: any;
+  drillBitOther: any;
+
   orientation: any;
   boreholeDia: any;
   boreholeCasingDia: any;
   casingDepth: any;
-
+  rigOther: any;
   typeOfStructure: any;
   ref: any;
   latitude: any;
   longitude: any;
+  typeOfCrossing: any;
+  typeOfBridge: any;
   layer1List: any = [];
+  chaingeList: any;
+  selectedItem: any;
 
   date: any;
   isInclined = false;
   angleWithHorizontal: any;
-  rigOther: any;
+  isDrillOther = false;
+  isRigOther = false;
+
   constructor(public toastSer: ToastService,
     public androidDatabase: AndroidDatabaseService,
     private geolocation: Geolocation,
@@ -47,74 +55,83 @@ export class Update2Page implements OnInit {
     public httpService: HttpcallsService) {
       this.ref = 'IS 1892; IS 2131; IS 2132';
       this.date = new Date().toISOString();
+      this.chaingeList = Constants.chaingeListAndroid11;
+      console.log('chaingeList', this.chaingeList);
+
       this.getLayer1();
     }
 
   ngOnInit() {
   }
-  validation(){
-    if(this.typeOfStructure === ''){
+  validation() {
+    console.log('typeOfStuct', this.typeOfStructure);
+    if (this.typeOfStructure === '') {
       this.toastSer.presentError('Please Enter Type of Structure');
-    }else if(this.boreholeNumber === ''){
+    } else if (this.boreholeNumber === '') {
       this.toastSer.presentError('Please Enter Borehole Number');
-
-    }else if(this.boreholeLocation === '' ){
+    } else if (this.boreholeLocation === '') {
       this.toastSer.presentError('Please Enter Borehole Location');
-
-    }else if(this.latitude === '' ){
+    } else if (this.latitude === '') {
       this.toastSer.presentError('Please Enter Latitude');
-
-    }else if(this.longitude === '' ){
+    } else if (this.longitude === '') {
       this.toastSer.presentError('Please Enter longitude');
-
-    }else if(this.boreholeChainage === '' ){
+    } else if (this.chainage === '') {
       this.toastSer.presentError('Please Enter Borehole Chainage');
-
-    }
-    else if(this.date === '' ){
+    } else if (this.date === '') {
       this.toastSer.presentError('Please Enter Borehole Start Date');
-
-    }
-    else if(this.waterTable === '' ){
+    } else if (this.waterTable === '') {
       this.toastSer.presentError('Please Enter Water Table RL (m)');
-
-    }else if(this.typeOfRig === 'Other' && this.rigOther === ''){
-      this.toastSer.presentError('Please Enter Other for Method of Drilling');
-
-    }
-    else if(this.rl ===  0 ){
-      this.toastSer.presentError('Please Enter Proper Borehole RL (m), it should not be zero');
-
-    }else if(this.waterTable === 0 ){
-      this.toastSer.presentError('Please Enter Proper Water Table RL it should not be zero (m)');
-
-    }
-    else if(this.waterTable === null ){
+    } else if (this.rl === 0) {
+      this.toastSer.presentError(
+        'Please Enter Proper Borehole RL (m), it should not be zero'
+      );
+    } else if (this.waterTable === 0) {
+      this.toastSer.presentError(
+        'Please Enter Proper Water Table RL it should not be zero (m)'
+      );
+    } else if (this.waterTable === null) {
       this.toastSer.presentError('Please Enter  Water Table RL ');
-
-    }
-    else if(this.typeOfRig === '' ){
+    } else if (this.typeOfRig === '') {
       this.toastSer.presentError('Please Select Method of Drilling');
-
-    }
-    else if(this.orientation === '' ){
+    } else if (this.typeOfRig === 'Other' && this.rigOther === '') {
+      this.toastSer.presentError('Please Enter Other for Method of Drilling');
+    } else if (this.orientation === '') {
       this.toastSer.presentError('Please Select Drilling Orientation');
-
-    }else if(this.boreholeCasingDia === '' ){
+    } else if (this.boreholeCasingDia === '') {
       this.toastSer.presentError('Please Enter Casing Dia');
-
-    }else if(this.casingDepth === '' ){
+    } else if (this.casingDepth === '') {
       this.toastSer.presentError('Please Enter Casing Depth');
-
-    }else if( this.detailsOfDrillingBit === ''){
+    } else if (this.detailsOfDrillingBit === '') {
       this.toastSer.presentError('Please Select the Details of Drilling Bit*');
-     }else if( this.detailsOdCoreBarrel === ''){
+    } else if (this.detailsOdCoreBarrel === '') {
       this.toastSer.presentError('Please Select the Details of Core Barrel');
-     }
-     else if( this.orientation === 'Inclined' && this.angleWithHorizontal === ''){
+    } else if (
+      this.orientation === 'Inclined' &&
+      this.angleWithHorizontal === ''
+    ) {
       this.toastSer.presentError('Please enter angle with horizontal');
-     }
-     else{
+    } else if (this.typeOfRig === 'Other' && this.rigOther === '') {
+      this.toastSer.presentError('Please Enter Other for Method of Drilling');
+    } else if (
+      this.detailsOfDrillingBit === 'Other' &&
+      this.drillBitOther === ''
+    ) {
+      this.toastSer.presentError('Please Enter Other for Method of Drilling');
+    } else if (this.typeOfRig === 'Other' && this.rigOther === null) {
+      this.toastSer.presentError('Please Enter Other for Method of Drilling');
+    } else if (
+      this.detailsOfDrillingBit === 'Other' &&
+      this.drillBitOther === null
+    ) {
+      this.toastSer.presentError('Please Enter Other for Method of Drilling');
+    } else if (this.typeOfRig === 'Other' && this.rigOther === undefined) {
+      this.toastSer.presentError('Please Enter Other for Method of Drilling');
+    } else if (
+      this.detailsOfDrillingBit === 'Other' &&
+      this.drillBitOther === undefined
+    ) {
+      this.toastSer.presentError('Please Enter Other for Method of Drilling');
+    } else {
       this.updateLayer2();
     }
   }
@@ -142,39 +159,39 @@ export class Update2Page implements OnInit {
         console.log('layer1List',this.layer1List);
         if(this.layer1List.length>0){
 
-         this.typeOfStructure = this.layer1List[0].struct_type;
-         this.boreholeNumber = this.layer1List[0].bh_no;
-         this.boreholeLocation = this.layer1List[0].bh_location;
-         this.latitude = this.layer1List[0].bh_lat;
-         this.longitude = this.layer1List[0].bh_lon;
-         this.boreholeChainage = this.layer1List[0].bh_chainage;
-         this.date = this.layer1List[0].bh_start_date;
-         this.rl = this.layer1List[0].bh_rl;
-         this.waterTable = this.layer1List[0].water_table_rl;
-         this.typeOfRig = this.layer1List[0].type_of_rig;
-         this.typeOfDrill = this.layer1List[0].type_of_drilling;
-         this.circulationFluid = this.layer1List[0].circulation_fluid;
-         this.orientation = this.layer1List[0].drill_orientation;
-         this.boreholeDia = this.layer1List[0].bh_dia;
-         this.boreholeCasingDia = this.layer1List[0].casing_dia;
-         if(this.layer1List[0].bh_dia === 'undefined'){
-           this.boreholeDia = '';
-         }
-         if(this.layer1List[0].bh_dia === undefined){
-          this.boreholeDia = '';
-        }
 
-         this.casingDepth = this.layer1List[0].casing_depth;
-         this.detailsOfDrillingBit = this.layer1List[0].drilling_bit;
-         this.detailsOdCoreBarrel = this.layer1List[0].core_barrel;
-         this.angleWithHorizontal = this.layer1List[0].angle_horizontal;
+          this.boreholeNumber = this.layer1List[0].bh_no;
+          this.boreholeLocation = this.layer1List[0].bh_location;
+          this.chainage = this.layer1List[0].chainage;
+          this.chainageId = this.layer1List[0].chainage_id;
+          this.latitude = this.layer1List[0].easting;
+          this.longitude = this.layer1List[0].northing;
 
-         if(this.layer1List[0].drill_orientation === 'Inclined'){
-          this.isInclined = true;
-        }else{
-          this.isInclined = false;
-        }
+          this.typeOfStructure = this.layer1List[0].type_of_structure;
+          this.typeOfCrossing = this.layer1List[0].type_of_crossing;
+          this.typeOfBridge = this.layer1List[0].type_of_bridge;
 
+          this.date = this.layer1List[0].bh_start_date;
+
+          this.rl = this.layer1List[0].bh_rl;
+          this.waterTable = this.layer1List[0].water_table_rl;
+          this.typeOfRig = this.layer1List[0].type_of_rig;
+
+          this.rigOther = this.layer1List[0].type_of_rig_other;
+
+          this.orientation = this.layer1List[0].drill_orientation;
+          this.boreholeDia = this.layer1List[0].bh_dia;
+          this.boreholeCasingDia = this.layer1List[0].casing_dia;
+          this.casingDepth = this.layer1List[0].casing_depth;
+          this.detailsOfDrillingBit = this.layer1List[0].drilling_bit;
+          this.drillBitOther = this.layer1List[0].drilling_bit_other;
+          this.detailsOdCoreBarrel = this.layer1List[0].core_barrel;
+
+          if(this.layer1List[0].drill_orientation === 'Inclined'){
+            this.isInclined = true;
+          }else{
+            this.isInclined = false;
+          }
 
 
 
@@ -184,10 +201,14 @@ export class Update2Page implements OnInit {
     });
   }
 
-  detailDrillinBitChange($event){
+  detailDrillinBitChange($event) {
     this.detailsOfDrillingBit = $event.target.value;
     console.log($event.target.value);
-
+    if (this.detailsOfDrillingBit === 'Other') {
+      this.isDrillOther = true;
+    } else {
+      this.isDrillOther = false;
+    }
   }
   detailOfCoreBarrel($event){
     this.detailsOdCoreBarrel= $event.target.value;
@@ -196,11 +217,17 @@ export class Update2Page implements OnInit {
   }
 
   updateLayer2(){
-    this.androidDatabase.updateLayer2(this.ref,this.typeOfStructure,this.boreholeNumber,
-      this.boreholeLocation,this.boreholeChainage,this.latitude,this.longitude,this.date,
-      this.rl,this.waterTable,this.typeOfRig,this.typeOfDrill,this.circulationFluid,
-      this.orientation,this.boreholeDia,this.boreholeCasingDia,this.casingDepth,Constants.laYer1Id,
-      this.detailsOfDrillingBit,this.detailsOdCoreBarrel,this.angleWithHorizontal
+    this.androidDatabase.updateLayer2(this.ref,this.boreholeNumber,
+      this.boreholeLocation,this.latitude,this.longitude,this.chainage,this.chainageId,
+      this.typeOfCrossing,this.typeOfStructure,this.typeOfBridge,
+      this.date,
+      this.rl,this.waterTable,this.typeOfRig,
+      this.rigOther,
+      this.orientation,
+      this.boreholeDia,this.boreholeCasingDia,this.casingDepth,Constants.laYer1Id,
+      this.detailsOfDrillingBit,
+      this.drillBitOther,
+      this.detailsOdCoreBarrel
       );
 
 
@@ -237,31 +264,26 @@ getLocations(){
 
 
   getResopnseWithDates(){}
-  rigChange($event){
+  rigChange($event) {
     console.log($event.target.value);
 
-    this.typeOfRig =$event.target.value;
+    this.typeOfRig = $event.target.value;
+    if (this.typeOfRig === 'Other') {
+      this.isRigOther = true;
+    } else {
+      this.isRigOther = false;
+    }
   }
-  drillChange($event){
+
+  oriantionChange($event) {
     console.log($event.target.value);
 
-    this.typeOfDrill =$event.target.value;
-  }
-  circulationChange($event){
-    console.log($event.target.value);
-
-    this.circulationFluid =$event.target.value;
-  }
-  oriantionChange($event){
-    console.log($event.target.value);
-
-    this.orientation =$event.target.value;
-    if(this.orientation === 'Inclined'){
+    this.orientation = $event.target.value;
+    if (this.orientation === 'Inclined') {
       this.isInclined = true;
-    }else{
+    } else {
       this.isInclined = false;
       this.angleWithHorizontal = '';
-
     }
   }
 
@@ -288,5 +310,23 @@ getLocations(){
 
      });
    }
+
+   selected(item) {
+    console.log('selected items : ', item);
+    this.selectedItem = this.chaingeList.filter((user: any) =>
+      user.chainage.includes(item)
+    );
+    console.log('selected item : ', this.selectedItem);
+
+    if (this.selectedItem.length > 0) {
+
+      this.typeOfBridge = this.selectedItem[0].type_of_bridge;
+      this.typeOfCrossing = this.selectedItem[0].type_of_crossing;
+      this.typeOfStructure = this.selectedItem[0].type_of_structure;
+      this.chainageId = this.selectedItem[0].chainage_id;
+      console.log('typeOfStructure : ', this.typeOfStructure);
+    }
+  }
+
 
 }

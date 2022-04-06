@@ -82,7 +82,7 @@
     <ion-row *ngIf="isdsDepth">
       <ion-col size="6">
         <ion-item class="padding">
-          <ion-label  style="white-space: pre-wrap !important;"><strong>DS Depth From (m):</strong><span class="required-asterisk">*</span></ion-label>
+          <ion-label  style="white-space: pre-wrap !important;"><strong>DS Depth (m):</strong><span class="required-asterisk">*</span></ion-label>
         </ion-item>
       </ion-col>
       <ion-col size="6">
@@ -91,24 +91,13 @@
         </ion-item>
       </ion-col>
     </ion-row>
-    <ion-row *ngIf="isdsDepth">
-      <ion-col size="6">
-        <ion-item class="padding">
-          <ion-label  style="white-space: pre-wrap !important;"><strong>DS Depth To (m):</strong><span class="required-asterisk">*</span></ion-label>
-        </ion-item>
-      </ion-col>
-      <ion-col size="6">
-        <ion-item class="input">
-          <ion-input type="number" [(ngModel)]="dsDepthTo" ></ion-input>
-        </ion-item>
-      </ion-col>
-    </ion-row>
+
 
 
     <ion-row *ngIf="isSPTDepth">
       <ion-col size="6">
         <ion-item class="padding">
-          <ion-label  style="white-space: pre-wrap !important;"><strong>SPT Depth From (m):</strong><span class="required-asterisk">*</span></ion-label>
+          <ion-label  style="white-space: pre-wrap !important;"><strong>SPT Depth (m):</strong><span class="required-asterisk">*</span></ion-label>
         </ion-item>
       </ion-col>
       <ion-col size="6">
@@ -117,18 +106,9 @@
         </ion-item>
       </ion-col>
     </ion-row>
-    <ion-row *ngIf="isSPTDepth">
-      <ion-col size="6">
-        <ion-item class="padding">
-          <ion-label  style="white-space: pre-wrap !important;"><strong>SPT Depth To (m):</strong><span class="required-asterisk">*</span></ion-label>
-        </ion-item>
-      </ion-col>
-      <ion-col size="6">
-        <ion-item class="input">
-          <ion-input type="number" [(ngModel)]="sptDepthTo" ></ion-input>
-        </ion-item>
-      </ion-col>
-    </ion-row>
+
+
+
     <ion-row *ngIf="isSPTDepth">
       <ion-col size="6">
         <ion-item class="padding">
@@ -192,7 +172,7 @@
 <ion-row *ngIf="isUDSepth">
   <ion-col size="6">
     <ion-item class="padding">
-      <ion-label  style="white-space: pre-wrap !important;"><strong>UDS Depth From (m):</strong><span class="required-asterisk">*</span></ion-label>
+      <ion-label  style="white-space: pre-wrap !important;"><strong>UDS Depth  (m):</strong><span class="required-asterisk">*</span></ion-label>
     </ion-item>
   </ion-col>
   <ion-col size="6">
@@ -202,18 +182,7 @@
   </ion-col>
 </ion-row>
 
-<ion-row *ngIf="isUDSepth">
-  <ion-col size="6">
-    <ion-item class="padding">
-      <ion-label  style="white-space: pre-wrap !important;"><strong>UDS Depth To (m):</strong><span class="required-asterisk">*</span></ion-label>
-    </ion-item>
-  </ion-col>
-  <ion-col size="6">
-    <ion-item class="input">
-      <ion-input type="number" [(ngModel)]="udsDepthTo" ></ion-input>
-    </ion-item>
-  </ion-col>
-</ion-row>
+
 
 <ion-row  *ngIf="isSoil">
   <ion-col size="6" >
@@ -227,67 +196,11 @@
     </ion-item>
   </ion-col>
 </ion-row>
-<ion-row  *ngIf="isSoil">
-  <ion-col size="6">
-    <ion-item class="padding">
-      <ion-label  style="white-space: pre-wrap !important;"><strong>Type of Soil:</strong><span class="required-asterisk">*</span></ion-label>
-    </ion-item>
-  </ion-col>
-  <ion-col size="6">
-    <ion-item class="input">
 
-      <ion-select  placeholder="Select" (ionChange)="typeOfSoilChange($event)">
-         <ion-select-option value="Cohesive">Cohesive</ion-select-option>
-         <ion-select-option value="Cohesion less">Cohesion less</ion-select-option>
-       </ion-select>
 
-      </ion-item>
-  </ion-col>
-</ion-row>
 
-<ion-row *ngIf="isCohessive" >
-  <ion-col size="6">
-    <ion-item class="padding">
-      <ion-label  style="white-space: pre-wrap !important;"><strong>Density / Consistency:</strong><span class="required-asterisk">*</span></ion-label>
-    </ion-item>
-  </ion-col>
-  <ion-col size="6">
-    <ion-item class="input">
 
-      <ion-select  placeholder="Select" (ionChange)="densityConsiChange($event)">
-         <ion-select-option value="Very soft">Very soft</ion-select-option>
-         <ion-select-option value="Soft">Soft</ion-select-option>
-         <ion-select-option value="Medium">Medium</ion-select-option>
-         <ion-select-option value="Stiff">Stiff</ion-select-option>
-         <ion-select-option value="Very Stiff">Very Stiff</ion-select-option>
-         <ion-select-option value="Hard">Hard</ion-select-option>
 
-       </ion-select>
-
-      </ion-item>
-  </ion-col>
-</ion-row>
-<ion-row *ngIf="isCohesion" >
-  <ion-col size="6">
-    <ion-item class="padding">
-      <ion-label  style="white-space: pre-wrap !important;"><strong>Density / Consistency:</strong><span class="required-asterisk">*</span></ion-label>
-    </ion-item>
-  </ion-col>
-  <ion-col size="6">
-    <ion-item class="input">
-
-      <ion-select  placeholder="Select" (ionChange)="densityConsiChange1($event)">
-         <ion-select-option value="Very loose">Very loose</ion-select-option>
-         <ion-select-option value="Loose">Loose</ion-select-option>
-         <ion-select-option value="Medium">Medium</ion-select-option>
-         <ion-select-option value="Dense">Dense</ion-select-option>
-         <ion-select-option value="Very Dense">Very Dense</ion-select-option>
-
-       </ion-select>
-
-      </ion-item>
-  </ion-col>
-</ion-row>
 
 <ion-row *ngIf="isSoil" >
   <ion-col size="6">

@@ -13,7 +13,7 @@
 
 
     <ion-item class="padding1">
-      <ion-label class="label"><strong>Layer2</strong><span class="required-asterisk">*</span></ion-label>
+      <ion-label class="label"><strong>Layer 2</strong><span class="required-asterisk">*</span></ion-label>
     </ion-item>
 
     <ion-item class="padding1">
@@ -28,7 +28,78 @@
         </ion-col>
         <ion-col size="6">
           <ion-item class="input">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>IS 4464; IS 6926; IS 5313</strong></ion-label>
+            <ion-label  style="white-space: pre-wrap !important;"><strong>IS 4464; IS 6926; IS 5313</strong> </ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+
+
+
+
+      <!-- <input type="number"  list="chainList" [(ngModel)]='boreholeChainage'
+      (change)="selected(boreholeChainage)" /> -->
+
+
+      <ion-row>
+        <ion-col size="6">
+          <ion-item class="padding">
+            <ion-label  style="white-space: pre-wrap !important;"><strong> Chainage:</strong><span class="required-asterisk">*</span></ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item class="input">
+            <input type="number"  list="chainList" [(ngModel)]='chainage'
+            (change)="selected(chainage)" />
+
+
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <datalist id="chainList">
+        <option *ngFor="let series of chaingeList" [value]="series.chainage">
+          {{ series.chainage }}
+
+        </option>
+      </datalist>
+
+
+
+
+
+      <ion-row>
+        <ion-col size="6">
+          <ion-item class="padding">
+            <ion-label style="white-space: pre-wrap !important;"><strong>Type of Structure:</strong><span
+                class="required-asterisk">*</span></ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item class="input">
+            <ion-item>
+              <ion-label>{{typeOfStructure}}</ion-label>
+
+            </ion-item>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+
+
+      <ion-row>
+        <ion-col size="6">
+          <ion-item class="padding">
+            <ion-label style="white-space: pre-wrap !important;"><strong>Type of Bridge:</strong><span
+                class="required-asterisk">*</span></ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item class="input">
+            <ion-item>
+              <ion-label>{{typeOfBridge}}</ion-label>
+
+            </ion-item>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -36,23 +107,19 @@
       <ion-row>
         <ion-col size="6">
           <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Type of Structure:</strong><span class="required-asterisk">*</span></ion-label>
+            <ion-label style="white-space: pre-wrap !important;"><strong>Type of Crossing:</strong><span
+                class="required-asterisk">*</span></ion-label>
           </ion-item>
         </ion-col>
         <ion-col size="6">
           <ion-item class="input">
-           <ion-item>
+            <ion-item>
+              <ion-label>{{typeOfCrossing}}</ion-label>
 
-            <ion-select  placeholder="Select " (ionChange)="typeOfStructureChange($event)" value="{{typeOfStructure}}">
-               <ion-select-option value="OWG">OWG</ion-select-option>
-               <ion-select-option value="Composite Girder">Composite Girder</ion-select-option>
-                 <ion-select-option value="PSC Slab">PSC Slab</ion-select-option>
-             </ion-select>
-           </ion-item>
+            </ion-item>
           </ion-item>
         </ion-col>
       </ion-row>
-
 
       <ion-row>
         <ion-col size="6">
@@ -83,19 +150,6 @@
       <ion-row>
         <ion-col size="6">
           <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Borehole Chainage:</strong><span class="required-asterisk">*</span></ion-label>
-          </ion-item>
-        </ion-col>
-        <ion-col size="6">
-          <ion-item class="input">
-            <ion-input type="text" cass="input" [(ngModel)]="boreholeChainage"></ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-
-       <ion-row>
-        <ion-col size="6">
-          <ion-item class="padding">
             <ion-label  style="white-space: pre-wrap !important;"><strong>Easting:</strong><span class="required-asterisk">*</span></ion-label>
           </ion-item>
         </ion-col>
@@ -116,6 +170,8 @@
           </ion-item>
         </ion-col>
       </ion-row>
+
+
 
 
       <ion-row>
@@ -143,7 +199,7 @@
       <ion-row>
         <ion-col size="6">
           <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Borehole RL (m):</strong></ion-label>
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Borehole RL (m):</strong><span class="required-asterisk">*</span></ion-label>
           </ion-item>
         </ion-col>
         <ion-col size="6">
@@ -174,15 +230,16 @@
         <ion-col size="6">
           <ion-item class="input">
             <ion-item>
-              <ion-select  placeholder="Select " (ionChange)="rigChange($event)" value="{{typeOfRig}}">
-                <ion-select-option value="Mechanical">Rotary drilling with Mud Circulation</ion-select-option>
-                <ion-select-option value="Hydraulic">Other</ion-select-option></ion-select>
+              <ion-select interface="popover" placeholder="Select " (ionChange)="rigChange($event)" value="{{typeOfRig}}">
+                <ion-select-option value="Rotary drilling with Mud Circulation">Rotary drilling with Mud Circulation</ion-select-option>
+                <ion-select-option value="Other">Other</ion-select-option>
+              </ion-select>
             </ion-item>
           </ion-item>
         </ion-col>
       </ion-row>
 
-      <ion-row>
+      <ion-row *ngIf="isRigOther">
         <ion-col size="6">
           <ion-item class="padding">
             <ion-label  style="white-space: pre-wrap !important;"><strong>Other:</strong><span class="required-asterisk">*</span></ion-label>
@@ -198,11 +255,9 @@
 
 
 
-      
 
 
       <ion-row>
-
         <ion-col size="6">
           <ion-item class="padding">
             <ion-label  style="white-space: pre-wrap !important;"><strong>Drilling Orientation:</strong><span class="required-asterisk">*</span></ion-label>
@@ -211,7 +266,7 @@
         <ion-col size="6">
           <ion-item class="input">
             <ion-item>
-              <ion-select  placeholder="Select " (ionChange)="oriantionChange($event)" value="{{orientation}}">
+              <ion-select interface="popover"  placeholder="Select " (ionChange)="oriantionChange($event)" value="{{orientation}}">
                 <ion-select-option value="Vertical">Vertical</ion-select-option>
                 <ion-select-option value="Inclined">Inclined</ion-select-option>
 
@@ -221,7 +276,6 @@
           </ion-item>
         </ion-col>
       </ion-row>
-
       <ion-row *ngIf="isInclined">
         <ion-col size="6">
           <ion-item class="padding">
@@ -234,6 +288,7 @@
           </ion-item>
         </ion-col>
       </ion-row>
+
 
       <ion-row>
         <ion-col size="6">
@@ -281,15 +336,30 @@
         <ion-col size="6">
           <ion-item class="input">
 
-            <ion-select  placeholder="Select" (ionChange)="detailDrillinBitChange($event)" value="{{detailsOfDrillingBit}}">
+            <ion-select  interface="popover" placeholder="Select" (ionChange)="detailDrillinBitChange($event)" value="{{detailsOfDrillingBit}}">
                <ion-select-option value="Tungsten Carbide Bit">Tungsten Carbide Bit</ion-select-option>
                <ion-select-option value="Diamond Bit">Diamond Bit</ion-select-option>
+               <ion-select-option value="Other">Other</ion-select-option>
 
              </ion-select>
 
             </ion-item>
         </ion-col>
       </ion-row>
+
+      <ion-row *ngIf="isDrillOther">
+        <ion-col size="6">
+          <ion-item class="padding">
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Other:</strong><span class="required-asterisk">*</span></ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item class="input">
+            <ion-input type="text" cass="input" [(ngModel)]="rigOther"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
 
 
       <ion-row  >
@@ -301,7 +371,7 @@
         <ion-col size="6">
           <ion-item class="input">
 
-            <ion-select  placeholder="Select" (ionChange)="detailOfCoreBarrel($event)" value="{{detailsOdCoreBarrel}}">
+            <ion-select  interface="popover" placeholder="Select" (ionChange)="detailOfCoreBarrel($event)" value="{{detailsOdCoreBarrel}}">
                <ion-select-option value="Single Tube">Single Tube</ion-select-option>
                <ion-select-option value="Double Tube">Double Tube</ion-select-option>
                <ion-select-option value="Triple Tube">Triple Tube</ion-select-option>

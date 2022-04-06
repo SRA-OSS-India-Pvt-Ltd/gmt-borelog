@@ -22,10 +22,10 @@ export class LogginginformationPage implements OnInit {
   typeOfsample: any;
   isdsDepth = false;
   dsDepthFrom: any;
-  dsDepthTo: any;
+
   isSPTDepth = false;
   sptDepthFrom: any;
-  sptDepthTo: any;
+
   first: any;
   second: any;
   third: any;
@@ -36,7 +36,7 @@ export class LogginginformationPage implements OnInit {
   totalB: any;
   isUDSepth = false;
   udsDepthFrom: any;
-  udsDepthTo: any;
+
   soilSampleColor: any;
 typeOfSoil: any;
 isCohessive = false;
@@ -142,11 +142,11 @@ sptstatus: any;
     this.visualClassification = '';
 
     this.dsDepthFrom = '';
-    this.dsDepthTo = '';
+
     this.sptDepthFrom = '';
-    this.sptDepthTo = '';
+
     this.udsDepthFrom = '';
-    this.udsDepthTo = '';
+
     this.first = '';
     this.second = '';
     this.third = '';
@@ -180,18 +180,18 @@ sptstatus: any;
       this.thirdB = '';
       this.totalB = '';
       this.sptDepthFrom = '';
-      this.sptDepthTo = '';
+
       this.udsDepthFrom = '';
-      this.udsDepthTo = '';
+
 
     }else if(this.typeOfsample === 'SPT'){
       this.isdsDepth = false;
       this.isSPTDepth = true;
       this.isUDSepth = false;
       this.dsDepthFrom = '';
-      this.dsDepthTo = '';
+
       this.udsDepthFrom = '';
-      this.udsDepthTo = '';
+
 
 
     }else if(this.typeOfsample === 'UDS'){
@@ -199,7 +199,7 @@ sptstatus: any;
       this.isSPTDepth = false;
       this.isUDSepth = true;
       this.dsDepthFrom = '';
-      this.dsDepthTo = '';
+
       this.first = '';
       this.second = '';
       this.third = '';
@@ -209,7 +209,7 @@ sptstatus: any;
       this.thirdB = '';
       this.totalB = '';
       this.sptDepthFrom = '';
-      this.sptDepthTo = '';
+
 
 
     }
@@ -301,16 +301,10 @@ sptstatus: any;
         this.toastSer.presentError('Please Select  Type of Sample');
 
        }else if(this.typeOfsample === 'DS' && this.dsDepthFrom === undefined){
-        this.toastSer.presentError('Please Enter  Ds Depth From');
-
-       }else if(this.typeOfsample === 'DS' && this.dsDepthTo === undefined){
-        this.toastSer.presentError('Please Enter  Ds Depth To');
+        this.toastSer.presentError('Please Enter  Ds Depth ');
 
        }else if(this.typeOfsample === 'SPT' && this.sptDepthFrom === undefined){
-        this.toastSer.presentError('Please Enter  SPT Depth From');
-
-       }else if(this.typeOfsample === 'SPT' && this.sptDepthTo === undefined){
-        this.toastSer.presentError('Please Enter  SPT Depth To');
+        this.toastSer.presentError('Please Enter  SPT Depth ');
 
        }else if(this.typeOfsample === 'SPT' && this.first === undefined){
         this.toastSer.presentError('Please Enter  Penetration From First');
@@ -329,35 +323,25 @@ sptstatus: any;
         this.toastSer.presentError('Please Enter  Blows - N From Third');
 
        }else if(this.typeOfsample === 'UDS' && this.udsDepthFrom === undefined){
-        this.toastSer.presentError('Please Enter  UDS Depth From');
+        this.toastSer.presentError('Please Enter  UDS Depth ');
 
-       }else if(this.typeOfsample === 'UDS' && this.udsDepthTo === undefined){
-        this.toastSer.presentError('Please Enter  UDS Depth To');
-      }else if(this.soilSampleColor === undefined){
+       }
+       else if(this.soilSampleColor === undefined){
         this.toastSer.presentError('Please Enter   Soil Sample Color');
 
-       }else if(this.typeOfSoil === undefined){
-        this.toastSer.presentError('Please Enter   Type Of soil');
-
-       }else if( this.densityConsistace === undefined){
-        this.toastSer.presentError('Please Enter  Density / Consistency');
-       }else if( this.visualClassification === undefined){
+       }
+       else if( this.visualClassification === undefined){
         this.toastSer.presentError('Please Enter  Visual Classification of Sample');
        }
        else if(this.typeOfsample === ''){
         this.toastSer.presentError('Please Select  Type of Sample');
 
        }else if(this.typeOfsample === 'DS' && this.dsDepthFrom === ''){
-        this.toastSer.presentError('Please Enter  Ds Depth From');
+        this.toastSer.presentError('Please Enter  Ds Depth ');
 
-       }else if(this.typeOfsample === 'DS' && this.dsDepthTo === ''){
-        this.toastSer.presentError('Please Enter  Ds Depth To');
-
-       }else if(this.typeOfsample === 'SPT' && this.sptDepthFrom === ''){
-        this.toastSer.presentError('Please Enter  SPT Depth From');
-
-       }else if(this.typeOfsample === 'SPT' && this.sptDepthTo === ''){
-        this.toastSer.presentError('Please Enter  SPT Depth To');
+       }
+       else if(this.typeOfsample === 'SPT' && this.sptDepthFrom === ''){
+        this.toastSer.presentError('Please Enter  SPT Depth ');
 
        }else if(this.typeOfsample === 'SPT' && this.first === ''){
         this.toastSer.presentError('Please Enter  Penetration From First');
@@ -376,35 +360,23 @@ sptstatus: any;
         this.toastSer.presentError('Please Enter  Blows - N From Third');
 
        }else if(this.typeOfsample === 'UDS' && this.udsDepthFrom === ''){
-        this.toastSer.presentError('Please Enter  UDS Depth From');
+        this.toastSer.presentError('Please Enter  UDS Depth ');
 
-       }else if(this.typeOfsample === 'UDS' && this.udsDepthTo === ''){
-        this.toastSer.presentError('Please Enter  UDS Depth To');
-         }else if(this.soilSampleColor === ''){
+       }else if(this.soilSampleColor === ''){
         this.toastSer.presentError('Please Enter   Soil Sample Color');
 
-       }else if(this.typeOfSoil === ''){
-        this.toastSer.presentError('Please Select   Type Of soil');
-
-       }else if( this.densityConsistace === ''){
-        this.toastSer.presentError('Please Enter  Density / Consistency');
-       }else if( this.visualClassification === ''){
+       }
+       else if( this.visualClassification === ''){
         this.toastSer.presentError('Please Enter  Visual Classification of Sample');
        }
        else if(this.typeOfsample === null){
         this.toastSer.presentError('Please Select  Type of Sample');
 
        }else if(this.typeOfsample === 'DS' && this.dsDepthFrom === null){
-        this.toastSer.presentError('Please Enter  Ds Depth From');
-
-       }else if(this.typeOfsample === 'DS' && this.dsDepthTo === null){
-        this.toastSer.presentError('Please Enter  Ds Depth To');
+        this.toastSer.presentError('Please Enter  Ds Depth ');
 
        }else if(this.typeOfsample === 'SPT' && this.sptDepthFrom === null){
-        this.toastSer.presentError('Please Enter  SPT Depth From');
-
-       }else if(this.typeOfsample === 'SPT' && this.sptDepthTo === null){
-        this.toastSer.presentError('Please Enter  SPT Depth To');
+        this.toastSer.presentError('Please Enter  SPT Depth ');
 
        }else if(this.typeOfsample === 'SPT' && this.first === null){
         this.toastSer.presentError('Please Enter  Penetration From First');
@@ -423,33 +395,21 @@ sptstatus: any;
         this.toastSer.presentError('Please Enter  Blows - N From Third');
 
        }else if(this.typeOfsample === 'UDS' && this.udsDepthFrom === null){
-        this.toastSer.presentError('Please Enter  UDS Depth From');
+        this.toastSer.presentError('Please Enter  UDS Depth ');
 
-       }else if(this.typeOfsample === 'UDS' && this.udsDepthTo === null){
-        this.toastSer.presentError('Please Enter  UDS Depth To');
-         }else if(this.soilSampleColor === null){
+       }else if(this.soilSampleColor === null){
         this.toastSer.presentError('Please Enter   Soil Sample Color');
 
-       }else if(this.typeOfSoil === null){
-        this.toastSer.presentError('Please Select   Type Of soil');
-
-       }else if( this.densityConsistace === null){
-        this.toastSer.presentError('Please Enter  Density / Consistency');
        }else if( this.visualClassification === null){
         this.toastSer.presentError('Please Enter  Visual Classification of Sample');
        }else if(this.typeOfsample === 'DS' && this.dsDepthFrom === 0){
-        this.toastSer.presentError('Please Enter  Ds Depth From, It should not  Zero');
-
-       }else if(this.typeOfsample === 'DS' && this.dsDepthTo === 0){
-        this.toastSer.presentError('Please Enter  Ds Depth To,It should not  Zero');
+        this.toastSer.presentError('Please Enter  Ds Depth , It should not  Zero');
 
        }else if(this.typeOfsample === 'SPT' && this.sptDepthFrom === 0){
-        this.toastSer.presentError('Please Enter  SPT Depth From,It should not  Zero');
+        this.toastSer.presentError('Please Enter  SPT Depth ,It should not  Zero');
 
-       }else if(this.typeOfsample === 'SPT' && this.sptDepthTo === 0){
-        this.toastSer.presentError('Please Enter  SPT Depth To,It should not  Zero');
-
-       }else if(this.typeOfsample === 'SPT' && this.first === 0){
+       }
+       else if(this.typeOfsample === 'SPT' && this.first === 0){
         this.toastSer.presentError('Please Enter  Penetration From First,It should not  Zero');
        }else if(this.typeOfsample === 'SPT' && this.second === 0){
         this.toastSer.presentError('Please Enter  Penetration From Second,It should not  Zero');
@@ -466,11 +426,9 @@ sptstatus: any;
         this.toastSer.presentError('Please Enter  Blows - N From Third,It should not  Zero');
 
        }else if(this.typeOfsample === 'UDS' && this.udsDepthFrom === 0){
-        this.toastSer.presentError('Please Enter  UDS Depth From,It should not  Zero');
+        this.toastSer.presentError('Please Enter  UDS Depth ,It should not  Zero');
 
-       }else if(this.typeOfsample === 'UDS' && this.udsDepthTo === 0){
-        this.toastSer.presentError('Please Enter  UDS Depth To,It should not  Zero');
-      }
+       }
        else if(this.typeOfsample === 'DS'){
          this.rockDepthFrom ='';
          this.rockDepthTo = '';
@@ -483,9 +441,9 @@ sptstatus: any;
           this.thirdB = '';
           this.totalB = '';
           this.sptDepthFrom = '';
-          this.sptDepthTo = '';
+
           this.udsDepthFrom = '';
-          this.udsDepthTo = '';
+
           this.sptstatus = '';
 
           console.log('ds');
@@ -508,9 +466,9 @@ sptstatus: any;
           this.rockDepthTo = '';
 
           this.dsDepthFrom = '';
-          this.dsDepthTo = '';
+
           this.udsDepthFrom = '';
-          this.udsDepthTo = '';
+
           console.log('spt');
 
           this.rockSample = '';
@@ -531,9 +489,9 @@ sptstatus: any;
           this.rockDepthTo = '';
 
           this.dsDepthFrom = '';
-          this.dsDepthTo = '';
+
           this.sptDepthFrom = '';
-          this.sptDepthTo = '';
+
           this.first = '';
           this.second = '';
           this.third = '';
@@ -690,16 +648,16 @@ sptstatus: any;
        }else{
          this.typeOfsample = '';
         this.soilSampleColor = '';
-        this.typeOfSoil = '';
+
         this.densityConsistace = '';
         this.visualClassification = '';
 
         this.dsDepthFrom = '';
-        this.dsDepthTo = '';
+
         this.sptDepthFrom = '';
-        this.sptDepthTo = '';
+
         this.udsDepthFrom = '';
-        this.udsDepthTo = '';
+
         this.first = '';
         this.second = '';
         this.third = '';
@@ -724,8 +682,8 @@ sptstatus: any;
  }
  addDatabse(){
    this.androidDatabase.updateLayer3(this.drillingFrom,this.drillingTo,this.typeOfstrata,
-    this.typeOfsample,this.dsDepthFrom,this.dsDepthTo,this.sptDepthFrom,this.sptDepthTo,
-    this.udsDepthFrom,this.udsDepthTo,this.soilSampleColor,this.typeOfSoil,this.densityConsistace,
+    this.typeOfsample,this.dsDepthFrom,'',this.sptDepthFrom,'',
+    this.udsDepthFrom,'',this.soilSampleColor,'','',
     this.visualClassification,
     this.rockSample, this.runLength,this.runTime,this.waterLoss,this.allRockPiecesLenth,
     this.rockPicesLengthgrze,this.cr,this.rqd,this.rockSamplColor,
@@ -769,12 +727,12 @@ sptstatus: any;
 
   submitweb(){
     this.httpService.submitLayer3(Constants.webbhid,3,this.drillingFrom,this.drillingTo,this.typeOfstrata,
-      this.typeOfsample,this.dsDepthFrom,this.dsDepthTo,this.sptDepthFrom,this.sptDepthTo,
+      this.typeOfsample,this.dsDepthFrom,'',this.sptDepthFrom,'',
       this.first,this.firstB,
       this.second,this.secondB,
       this.third,this.thirdB,
       this.total,this.totalB,this.sptstatus,
-      this.udsDepthFrom,this.udsDepthTo,this.soilSampleColor,this.typeOfSoil,this.densityConsistace,
+      this.udsDepthFrom,'',this.soilSampleColor,'','',
       this.visualClassification,this.rockSample, this.runLength,this.runTime,this.waterLoss,this.allRockPiecesLenth,
       this.rockPicesLengthgrze,this.cr,this.rqd,this.rockSamplColor,
       this.typeOfWeathering,this.typeOfRock,

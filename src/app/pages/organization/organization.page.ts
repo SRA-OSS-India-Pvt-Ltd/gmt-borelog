@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/naming-convention */
+/* eslint-disable @typescript-eslint/quotes */
+/* eslint-disable quote-props */
 import { Router } from '@angular/router';
 import { AndroidDatabaseService } from './../../database/android-database.service';
 import { ToastService } from './../../services/toast.service';
@@ -21,6 +24,7 @@ clientName: any;
 projLocation: any;
 packageList: any = [];
 sectionList: any = [];
+chainageListExample1: any = [];
 
 package: any;
 subAencyList: any =[];
@@ -61,14 +65,14 @@ isimg = false;
 
 
    if(this.package === '1' ){
-    this.sectionList =[{"section_id":"1","project_id":"1","package_id":"1","section_name":"Section1"},
+    this.sectionList =[{"section_id":'1',"project_id":"1","package_id":"1","section_name":"Section1"},
     {"section_id":"4","project_id":"1","package_id":"1","section_name":"Section2"},
     {"section_id":"5","project_id":"1","package_id":"1","section_name":"Section3"},
     {"section_id":"6","project_id":"1","package_id":"1","section_name":"Section4"},
     {"section_id":"7","project_id":"1","package_id":"1","section_name":"Section5"},
     {"section_id":"8","project_id":"1","package_id":"1","section_name":"Section6"},
     {"section_id":"9","project_id":"1","package_id":"1","section_name":"Section7"},
-    {"section_id":"10","project_id":"1","package_id":"1","section_name":"Section8"}]
+    {"section_id":"10","project_id":"1","package_id":"1","section_name":"Section8"}];
   }else if(this.package === '2'){
     this.sectionList =[{"section_id":"2","project_id":"1","package_id":"2","section_name":"Section1"},
     {"section_id":"11","project_id":"1","package_id":"2","section_name":"Section2"},
@@ -82,7 +86,7 @@ isimg = false;
     {"section_id":"19","project_id":"1","package_id":"2","section_name":"Section10"},
     {"section_id":"20","project_id":"1","package_id":"2","section_name":"Section11"},
     {"section_id":"21","project_id":"1","package_id":"2","section_name":"Section12"},
-    {"section_id":"22","project_id":"1","package_id":"2","section_name":"Section13"}]
+    {"section_id":"22","project_id":"1","package_id":"2","section_name":"Section13"}];
   }else if(this.package === '3'){
 
     this.sectionList = [{"section_id":"3","project_id":"1","package_id":"3","section_name":"Section1"},
@@ -91,7 +95,7 @@ isimg = false;
     {"section_id":"25","project_id":"1","package_id":"3","section_name":"Section4"},
     {"section_id":"26","project_id":"1","package_id":"3","section_name":"Section5"},
     {"section_id":"27","project_id":"1","package_id":"3","section_name":"Section6"},
-    {"section_id":"28","project_id":"1","package_id":"3","section_name":"Section7"}]
+    {"section_id":"28","project_id":"1","package_id":"3","section_name":"Section7"}];
   }
   }
   sectionChange($event){
@@ -137,6 +141,8 @@ isimg = false;
 
   addDatabase(){
     if(Constants.laYer1Id === ''){
+      this.selected(this.sectionId);
+
       this.androiDatabase.addLayer1Details(this.package,this.sectionId,this.subAgencyId,this.subAgencyAddress,this.subAgencyLogo,
         Constants.userId,Constants.orgId,Constants.projectId,this.subAgencyId,this.sectionId);
         this.getLayer1LastId();
@@ -145,6 +151,8 @@ isimg = false;
 
 
     }else{
+      this.selected(this.sectionId);
+
       this.androiDatabase.updateLayer1(this.package,this.sections,this.subAgencyId,
         this.subAgencyAddress,this.subAgencyLogo,Constants.laYer1Id,this.sectionId);
         this.router.navigate(['boreholeinformation']);
@@ -179,13 +187,24 @@ isimg = false;
        this.httpService.submitLayer1('',1,Constants.userId,Constants.orgId,Constants.projectId,
       this.package,'',this.subAgencyId,this.sectionId).subscribe((response: any)=>{
        console.log('response',response);
+
        if(response.error === true){
          this.toastService.presentError(response.msg);
        }else{
-        Constants.webbhid= response.data.bh_id;
-        console.log('webbhid',Constants.webbhid);
-        this.toastService.presentSuccess(response.msg);
-        this.router.navigate(['boreholeinformation']);
+
+        this.httpService.getAllChainagesBySectionID(this.sectionId).subscribe((response34: any)=>{
+          console.log('response34',response34);
+          if(response34.error === false){
+            Constants.chainagesBySectionIDList = response34.data;
+
+            Constants.webbhid= response.data.bh_id;
+            console.log('webbhid',Constants.webbhid);
+            this.toastService.presentSuccess(response.msg);
+            this.router.navigate(['boreholeinformation']);
+
+          }
+        });
+
 
        }
 
@@ -208,13 +227,18 @@ isimg = false;
 
     }
 
-    this.httpService.getAllChainagesBySectionID(this.sectionId).subscribe((response34: any)=>{
-      console.log('response34',response34)
-      if(response34.error === false){
-        Constants.chainagesBySectionIDList = response34.data;
-      }
-    })
-    }
+
+  }
+
+
+  selected(item){
+    console.log('selected items : ',item);
+
+     Constants.chaingeListAndroid11 = Constants.chaingeListAndroid.filter((user: any)=>user.chainage.includes(item));
+     console.log('chainageListExample1 : ',Constants.chaingeListAndroid11);
+
+  }
+
 
 
 
@@ -224,7 +248,8 @@ isimg = false;
       this.addDatabase();
 
       }else{
-       this.submitWeb();
+
+         this.submitWeb();
       }
 
 

@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/quotes */
+/* eslint-disable @typescript-eslint/naming-convention */
+/* eslint-disable quote-props */
 import { ToastService } from 'src/app/services/toast.service';
 import { HttpcallsService } from 'src/app/services/httpcalls.service';
 import { Platform } from '@ionic/angular';
@@ -31,7 +34,7 @@ layer1List: any = [];
 subAgencyId: any;
 sectionId: any;
 section: any;
-sectionList: any = []
+sectionList: any = [];
   constructor(public androidDatabase: AndroidDatabaseService,
     public router: Router,
     public platform: Platform,
@@ -62,7 +65,7 @@ sectionList: any = []
      {"section_id":"7","project_id":"1","package_id":"1","section_name":"Section5"},
      {"section_id":"8","project_id":"1","package_id":"1","section_name":"Section6"},
      {"section_id":"9","project_id":"1","package_id":"1","section_name":"Section7"},
-     {"section_id":"10","project_id":"1","package_id":"1","section_name":"Section8"}]
+     {"section_id":"10","project_id":"1","package_id":"1","section_name":"Section8"}];
    }else if(this.package === '2'){
      this.sectionList =[{"section_id":"2","project_id":"1","package_id":"2","section_name":"Section1"},
      {"section_id":"11","project_id":"1","package_id":"2","section_name":"Section2"},
@@ -76,7 +79,7 @@ sectionList: any = []
      {"section_id":"19","project_id":"1","package_id":"2","section_name":"Section10"},
      {"section_id":"20","project_id":"1","package_id":"2","section_name":"Section11"},
      {"section_id":"21","project_id":"1","package_id":"2","section_name":"Section12"},
-     {"section_id":"22","project_id":"1","package_id":"2","section_name":"Section13"}]
+     {"section_id":"22","project_id":"1","package_id":"2","section_name":"Section13"}];
    }else if(this.package === '3'){
 
      this.sectionList = [{"section_id":"3","project_id":"1","package_id":"3","section_name":"Section1"},
@@ -85,7 +88,7 @@ sectionList: any = []
      {"section_id":"25","project_id":"1","package_id":"3","section_name":"Section4"},
      {"section_id":"26","project_id":"1","package_id":"3","section_name":"Section5"},
      {"section_id":"27","project_id":"1","package_id":"3","section_name":"Section6"},
-     {"section_id":"28","project_id":"1","package_id":"3","section_name":"Section7"}]
+     {"section_id":"28","project_id":"1","package_id":"3","section_name":"Section7"}];
    }
    }
 
@@ -123,7 +126,7 @@ getLayer1() {
         if(this.layer1List.length>0){
 
           this.package = this.layer1List[0].Package;
-          this.section = this.layer1List[0].section_id
+          this.section = this.layer1List[0].section_id;
 
           this.boreHoles = this.layer1List[0].NoofBoreHoles;
           console.log('said',this.layer1List[0].SubAgencyName);
@@ -154,10 +157,10 @@ getLayer1() {
   }
 
   onClick(){
-    if(this.layer1List[0].struct_type === 'null' ||
-    this.layer1List[0].struct_type === null ||
-    this.layer1List[0].struct_type === 'undefined' ||
-    this.layer1List[0].struct_type === undefined ){
+    if(this.layer1List[0].type_of_structure === 'null' ||
+    this.layer1List[0].type_of_structure === null ||
+    this.layer1List[0].type_of_structure === 'undefined' ||
+    this.layer1List[0].type_of_structure === undefined ){
       this.router.navigate(['boreholeinformation']);
 
       Constants.webbhid = Constants.laYer1Id;
@@ -169,16 +172,18 @@ getLayer1() {
 
   }
   updateLayer1(){
+    this.selected(this.sectionId);
+
     // eslint-disable-next-line max-len
     this.androidDatabase.updateLayer1(this.package,this.boreHoles,this.subAgencyId,
       this.subAgencyAddress,this.subAgencyLogo,Constants.laYer1Id,this.sectionId);
     console.log('updated');
 
 
-           if(this.layer1List[0].struct_type === 'null' ||
-    this.layer1List[0].struct_type === null ||
-    this.layer1List[0].struct_type === 'undefined' ||
-    this.layer1List[0].struct_type === undefined ){
+           if(this.layer1List[0].type_of_structure === 'null' ||
+    this.layer1List[0].type_of_structure === null ||
+    this.layer1List[0].type_of_structure === 'undefined' ||
+    this.layer1List[0].type_of_structure === undefined ){
       this.router.navigate(['boreholeinformation']);
 
       Constants.webbhid = Constants.laYer1Id;
@@ -218,6 +223,14 @@ getLayer1() {
    });
 
    }
+   selected(item){
+    console.log('selected items : ',item);
+
+     Constants.chaingeListAndroid11 = Constants.chaingeListAndroid.filter((user: any)=>user.chainage.includes(item));
+     console.log('chainageListExample1 : ',Constants.chaingeListAndroid11);
+
+  }
+
 
    getWebData(){
     this.layer1List = [];

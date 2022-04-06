@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/naming-convention */
+/* eslint-disable @typescript-eslint/quotes */
+/* eslint-disable quote-props */
 import { ToastService } from 'src/app/services/toast.service';
 import { HttpcallsService } from 'src/app/services/httpcalls.service';
 import { Platform } from '@ionic/angular';
@@ -32,7 +35,7 @@ export class Web1Page implements OnInit {
   pid: any;
   section: any;
   sectionId: any;
-  sectionList: any = []
+  sectionList: any = [];
   constructor(
     public router: Router,
     public platform: Platform,
@@ -58,14 +61,15 @@ export class Web1Page implements OnInit {
 
 
       if(this.pid === '1' ){
-       this.sectionList =[{"section_id":"1","project_id":"1","package_id":"1","section_name":"Section1"},
+
+        this.sectionList =[{"section_id":"1","project_id":"1","package_id":"1","section_name":"Section1"},
        {"section_id":"4","project_id":"1","package_id":"1","section_name":"Section2"},
        {"section_id":"5","project_id":"1","package_id":"1","section_name":"Section3"},
        {"section_id":"6","project_id":"1","package_id":"1","section_name":"Section4"},
        {"section_id":"7","project_id":"1","package_id":"1","section_name":"Section5"},
        {"section_id":"8","project_id":"1","package_id":"1","section_name":"Section6"},
        {"section_id":"9","project_id":"1","package_id":"1","section_name":"Section7"},
-       {"section_id":"10","project_id":"1","package_id":"1","section_name":"Section8"}]
+       {"section_id":"10","project_id":"1","package_id":"1","section_name":"Section8"}];
      }else if(this.pid === '2'){
        this.sectionList =[{"section_id":"2","project_id":"1","package_id":"2","section_name":"Section1"},
        {"section_id":"11","project_id":"1","package_id":"2","section_name":"Section2"},
@@ -79,7 +83,7 @@ export class Web1Page implements OnInit {
        {"section_id":"19","project_id":"1","package_id":"2","section_name":"Section10"},
        {"section_id":"20","project_id":"1","package_id":"2","section_name":"Section11"},
        {"section_id":"21","project_id":"1","package_id":"2","section_name":"Section12"},
-       {"section_id":"22","project_id":"1","package_id":"2","section_name":"Section13"}]
+       {"section_id":"22","project_id":"1","package_id":"2","section_name":"Section13"}];
      }else if(this.pid === '3'){
 
        this.sectionList = [{"section_id":"3","project_id":"1","package_id":"3","section_name":"Section1"},
@@ -88,7 +92,7 @@ export class Web1Page implements OnInit {
        {"section_id":"25","project_id":"1","package_id":"3","section_name":"Section4"},
        {"section_id":"26","project_id":"1","package_id":"3","section_name":"Section5"},
        {"section_id":"27","project_id":"1","package_id":"3","section_name":"Section6"},
-       {"section_id":"28","project_id":"1","package_id":"3","section_name":"Section7"}]
+       {"section_id":"28","project_id":"1","package_id":"3","section_name":"Section7"}];
      }
      }
      sectionChange($event){
@@ -122,114 +126,114 @@ export class Web1Page implements OnInit {
         this.boreHoles = this.layer1List[0].no_of_bh;
 
         if(this.layer1List[0].section_id === '1'){
-          this.section = 'Section1'
+          this.section = 'Section1';
           this.sectionId = 1;
         }else if(this.layer1List[0].section_id === '2'){
-          this.section = 'Section1'
+          this.section = 'Section1';
           this.sectionId = 2;
 
         }else if(this.layer1List[0].section_id === '3'){
-          this.section = 'Section1'
+          this.section = 'Section1';
           this.sectionId = 3;
 
         }else if(this.layer1List[0].section_id === '4'){
-          this.section = 'Section2'
+          this.section = 'Section2';
           this.sectionId = 4;
 
         }else if(this.layer1List[0].section_id === '5'){
-          this.section = 'Section3'
+          this.section = 'Section3';
           this.sectionId = 5;
 
         }else if(this.layer1List[0].section_id === '6'){
-          this.section = 'Section4'
+          this.section = 'Section4';
           this.sectionId = 6;
 
         }else if(this.layer1List[0].section_id === '7'){
-          this.section = 'Section5'
+          this.section = 'Section5';
           this.sectionId = 7;
 
         }else if(this.layer1List[0].section_id === '8'){
-          this.section = 'Section6'
+          this.section = 'Section6';
           this.sectionId = 8;
 
         }else if(this.layer1List[0].section_id === '9'){
-          this.section = 'Section7'
+          this.section = 'Section7';
           this.sectionId = 9;
 
         }else if(this.layer1List[0].section_id === '10'){
-          this.section = 'Section8'
+          this.section = 'Section8';
           this.sectionId = 10;
 
         }else if(this.layer1List[0].section_id === '11'){
-          this.section = 'Section2'
+          this.section = 'Section2';
           this.sectionId = 11;
 
         }else if(this.layer1List[0].section_id === '12'){
-          this.section = 'Section3'
+          this.section = 'Section3';
           this.sectionId = 12;
 
         }else if(this.layer1List[0].section_id === '13'){
-          this.section = 'Section4'
+          this.section = 'Section4';
           this.sectionId = 13;
 
         }else if(this.layer1List[0].section_id === '14'){
-          this.section = 'Section5'
+          this.section = 'Section5';
           this.sectionId = 14;
 
         }else if(this.layer1List[0].section_id === '15'){
-          this.section = 'Section6'
+          this.section = 'Section6';
           this.sectionId = 15;
 
         }else if(this.layer1List[0].section_id === '16'){
-          this.section = 'Section7'
+          this.section = 'Section7';
           this.sectionId = 16;
 
         }else if(this.layer1List[0].section_id === '17'){
-          this.section = 'Section8'
+          this.section = 'Section8';
           this.sectionId = 17;
 
         }else if(this.layer1List[0].section_id === '18'){
-          this.section = 'Section9'
+          this.section = 'Section9';
           this.sectionId = 18;
 
         }else if(this.layer1List[0].section_id === '19'){
-          this.section = 'Section10'
+          this.section = 'Section10';
           this.sectionId = 19;
 
         }else if(this.layer1List[0].section_id === '20'){
-          this.section = 'Section11'
+          this.section = 'Section11';
           this.sectionId = 20;
 
         }else if(this.layer1List[0].section_id === '21'){
-          this.section = 'Section12'
+          this.section = 'Section12';
           this.sectionId = 21;
 
         }else if(this.layer1List[0].section_id === '22'){
-          this.section = 'Section13'
+          this.section = 'Section13';
           this.sectionId = 22;
 
         }else if(this.layer1List[0].section_id === '23'){
-          this.section = 'Section2'
+          this.section = 'Section2';
           this.sectionId = 23;
 
         }else if(this.layer1List[0].section_id === '24'){
-          this.section = 'Section3'
+          this.section = 'Section3';
           this.sectionId = 24;
 
         }else if(this.layer1List[0].section_id === '25'){
-          this.section = 'Section4'
+          this.section = 'Section4';
           this.sectionId = 25;
 
         }else if(this.layer1List[0].section_id === '26'){
-          this.section = 'Section5'
+          this.section = 'Section5';
           this.sectionId = 26;
 
         }else if(this.layer1List[0].section_id === '27'){
-          this.section = 'Section6'
+          this.section = 'Section6';
           this.sectionId = 27;
 
         }else if(this.layer1List[0].section_id === '28'){
-          this.section = 'Section7'
+          this.section = 'Section7';
           this.sectionId = 28;
 
         }
@@ -247,7 +251,7 @@ export class Web1Page implements OnInit {
            {"section_id":"7","project_id":"1","package_id":"1","section_name":"Section5"},
            {"section_id":"8","project_id":"1","package_id":"1","section_name":"Section6"},
            {"section_id":"9","project_id":"1","package_id":"1","section_name":"Section7"},
-           {"section_id":"10","project_id":"1","package_id":"1","section_name":"Section8"}]
+           {"section_id":"10","project_id":"1","package_id":"1","section_name":"Section8"}];
 
           }else if(this.layer1List[0].package_id === '2'){
           this.package = 'DFCCIL Package-2';
@@ -265,7 +269,7 @@ export class Web1Page implements OnInit {
           {"section_id":"19","project_id":"1","package_id":"2","section_name":"Section10"},
           {"section_id":"20","project_id":"1","package_id":"2","section_name":"Section11"},
           {"section_id":"21","project_id":"1","package_id":"2","section_name":"Section12"},
-          {"section_id":"22","project_id":"1","package_id":"2","section_name":"Section13"}]
+          {"section_id":"22","project_id":"1","package_id":"2","section_name":"Section13"}];
 
 
         }else if(this.layer1List[0].package_id === '3'){
@@ -277,7 +281,7 @@ export class Web1Page implements OnInit {
           {"section_id":"25","project_id":"1","package_id":"3","section_name":"Section4"},
           {"section_id":"26","project_id":"1","package_id":"3","section_name":"Section5"},
           {"section_id":"27","project_id":"1","package_id":"3","section_name":"Section6"},
-          {"section_id":"28","project_id":"1","package_id":"3","section_name":"Section7"}]
+          {"section_id":"28","project_id":"1","package_id":"3","section_name":"Section7"}];
 
 
         }
@@ -316,11 +320,11 @@ export class Web1Page implements OnInit {
         //  Constants.webbhid= response.data.bh_id;
 
         this.httpService.getAllChainagesBySectionID(this.sectionId).subscribe((response34: any)=>{
-          console.log('response34',response34)
+          console.log('response34',response34);
           if(response34.error === false){
             Constants.chainagesBySectionIDList = response34.data;
           }
-        })
+        });
 
          this.toastService.presentSuccess(response.msg);
          console.log('structtype',this.layer1List[0].struct_type);
@@ -358,26 +362,26 @@ export class Web1Page implements OnInit {
 
       if(this.layer1List[0].struct_type === ''){
         this.httpService.getAllChainagesBySectionID(this.sectionId).subscribe((response34: any)=>{
-          console.log('response34',response34)
+          console.log('response34',response34);
           if(response34.error === false){
             Constants.chainagesBySectionIDList = response34.data;
             this.router.navigate(['boreholeinformation']);
             Constants.webbhid = Constants.laYer1Id;
 
           }
-        })
+        });
 
 
       }else{
         this.httpService.getAllChainagesBySectionID(this.sectionId).subscribe((response34: any)=>{
-          console.log('response34',response34)
+          console.log('response34',response34);
           if(response34.error === false){
             Constants.chainagesBySectionIDList = response34.data;
             this.router.navigate(['web2']);
             Constants.webbhid = Constants.laYer1Id;
 
           }
-        })
+        });
 
 
 

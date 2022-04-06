@@ -44,6 +44,12 @@ export class HomePage {
   serviceCall(userid: any, password: any){
      this.httpService.logionService(userid,password).subscribe((response: any)=>{
         if(response.error === false){
+
+          this.httpService.getAllChainages().subscribe((response34: any)=>{
+            if(response34.error === false){
+              Constants.chaingeListAndroid = response34.data;
+              console.log('response34',Constants.chaingeListAndroid );
+
              console.log('response',response.data);
               Constants.userId = response.data.user_id;
               Constants.userName = response.data.user_name;
@@ -70,7 +76,10 @@ export class HomePage {
 
              }
 
-        }else{
+
+            }
+           });
+          }else{
           this.toastSer.presentError('Invalid Credentials');
 
         }

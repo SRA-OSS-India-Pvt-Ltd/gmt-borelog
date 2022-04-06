@@ -74,15 +74,19 @@ export class HttpcallsService {
     return this.httpClient.post(`${environment.apiUrl}/submitboredata_web`, JSON.stringify(parameters));
 
   }
-  submitLayer2(bhid: any,bhlayer: any,structType: any,bhno: any,bhlocation: any,
-    bhchainage: any,bhlat: any,bhlon: any,bhsadte: any,bhrl: any,watertabe: any,typeofrig: any,
-    typeofdrill: any,circulafliuid: any,drillOrient: any,bhDia: any,casingDia: any,
-    casingDepth: any,drillbit: any,corebarrel: any,angleHorizontal: any){
-    const parameters ={bh_id:bhid,bh_layer:bhlayer,struct_type:structType,bh_no:bhno,bh_location:bhlocation,
-      bh_chainage:bhchainage,bh_lat:bhlat,bh_lon:bhlon,bh_start_date:bhsadte,bh_rl:bhrl,water_table_rl:watertabe,type_of_rig:typeofrig,
-      type_of_drilling:typeofdrill,circulation_fluid:circulafliuid,drill_orientation:drillOrient,
-      bh_dia:bhDia,casing_dia:casingDia,casing_depth:casingDepth,
-      drilling_bit:drillbit,core_barrel:corebarrel,angle_horizontal: angleHorizontal};
+  submitLayer2(bhid: any,bhlayer: any,bhno: any,bhlocation: any,
+    bhchainage: any,bhchainageId: any,bhlat: any,bhlon: any,typeOfcross: any,
+    typeOfstr: any,typeOfBridge: any,bhsadte: any,bhrl: any,watertabe: any,typeofrig: any,
+    typeOfrigother: any, drillOrient: any,bhDia: any,casingDia: any, casingDepth: any,drillbit: any,drillbitother: any,
+    corebarrel: any){
+    const parameters ={bh_id:bhid,bh_layer:bhlayer,bh_no:bhno,bh_location:bhlocation,
+      chainage:bhchainage,chainage_id:bhchainageId,easting:bhlat,northing:bhlon,
+      type_of_crossing: typeOfcross,type_of_structure: typeOfstr,type_of_bridge: typeOfBridge,
+      bh_start_date:bhsadte,bh_rl:bhrl,water_table_rl:watertabe,type_of_rig:typeofrig,
+      type_of_rig_other: typeOfrigother,
+      drill_orientation:drillOrient,bh_dia:bhDia,casing_dia:casingDia,casing_depth:casingDepth,
+      drilling_bit:drillbit,drilling_bit_other: drillbitother,
+      core_barrel:corebarrel};
     console.log('JSON',JSON.stringify(parameters));
 
     return this.httpClient.post(`${environment.apiUrl}/submitboredata_web`, JSON.stringify(parameters));
@@ -167,6 +171,12 @@ export class HttpcallsService {
 
   }
 
+
+  getAllChainages(){
+
+    return this.httpClient.get(`${environment.apiUrl}/getAllChainages`);
+
+  }
 
 
 
