@@ -17,6 +17,14 @@
       <ion-label class="label"><strong>Layer 2</strong></ion-label>
     </ion-item>
 
+
+
+
+
+
+
+
+
     <ion-item class="padding1">
       <ion-label class="label"><strong>Borehole Information</strong></ion-label>
     </ion-item>
@@ -56,8 +64,31 @@
 
 
 
+      <!-- <div class="autocomplete">
+        <ion-item>
+          <ion-label floating>Country</ion-label>
+          <ion-input  type="text"
+                      [(ngModel)]="input"
+                      (ionChange)="search(input)"
+                      (ionBlur)="removeFocus()"
+                      list="datalist1"
+                      debounce=500
+                      ></ion-input>
+        </ion-item> -->
+        <!-- <ion-list >
+          <ion-item *ngFor="let country of chaingeList" (click)="add(country)">
+            {{country.chainage}}
+          </ion-item>
+        </ion-list> -->
 
+        <!-- <datalist id="datalist1">
+          <option *ngFor="let country of chaingeList" (click)="add(country)">
+            {{country.chainage}}
 
+          </option>
+        </datalist>
+
+  </div> -->
 
 
 

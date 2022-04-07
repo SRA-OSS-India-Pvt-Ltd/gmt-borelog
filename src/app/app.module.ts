@@ -15,6 +15,7 @@ import { SQLite } from '@ionic-native/sqlite/ngx';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { Network } from '@awesome-cordova-plugins/network/ngx';
+import { Keyboard } from '@awesome-cordova-plugins/keyboard/ngx';
 
 
 
@@ -27,7 +28,7 @@ import { Network } from '@awesome-cordova-plugins/network/ngx';
   // or after 30 seconds (whichever comes first).
   registrationStrategy: 'registerWhenStable:30000'
 })],
-  providers: [Network,Geolocation,SQLite,Base64ToGallery,DatePicker,{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [Keyboard,Network,Geolocation,SQLite,Base64ToGallery,DatePicker,{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

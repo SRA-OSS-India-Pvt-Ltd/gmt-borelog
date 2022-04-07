@@ -211,32 +211,6 @@ this.httpService.getBoredetails(Constants.webbhid).subscribe((response: any)=>{
 
     });
   }
-  updateLayer3(){
-    this.httpService.submitLayer3(Constants.webbhid,3,this.drillingFrom,this.drillingTo,this.typeOfstrata,
-      this.typeOfsample,this.dsDepthFrom,this.dsDepthTo,this.sptDepthFrom,this.sptDepthTo,
-      this.first,this.firstB,
-      this.second,this.secondB,
-      this.third,this.thirdB,
-      this.total,this.totalB,this.sptstatus,
-      this.udsDepthFrom,this.udsDepthTo,this.soilSampleColor,this.typeOfSoil,this.densityConsistace,
-      this.visualClassification,this.rockSample, this.runLength,this.runTime,this.waterLoss,this.allRockPiecesLenth,
-      this.rockPicesLengthgrze,this.cr,this.rqd,this.rockSamplColor,
-      this.typeOfWeathering,this.typeOfRock,
-      this.rockDepthFrom,this.rockDepthTo).subscribe((response: any)=>{
-
-        this.toastSer.presentSuccess(response.msg);
-        if(this.layer1List[0].depth_termination === ''){
-          this.router.navigate(['layer4']);
-
-        }else{
-          this.router.navigate(['web4']);
-
-        }
-
-
-      });
-
-}
 onClick(){
   if(this.layer1List[0].depth_termination === ''){
     this.router.navigate(['layer4']);

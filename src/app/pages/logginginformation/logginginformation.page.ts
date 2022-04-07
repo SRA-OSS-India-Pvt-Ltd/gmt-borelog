@@ -39,22 +39,22 @@ export class LogginginformationPage implements OnInit {
 
   soilSampleColor: any;
 typeOfSoil: any;
-isCohessive = false;
-densityConsistace: any;
-isCohesion = false;
+
+
+
 visualClassification: any;
 
 rockSample: any;
 runLength: any;
 runTime: any;
 waterLoss: any;
-allRockPiecesLenth: any;
-rockPicesLengthgrze: any;
+
+
 cr: any;
 rqd: any;
 typeOfWeathering: any;
 rockSamplColor: any;
-typeOfRock: any;
+
 layer1List: any =[];
 isSoil = false;
 isRock = false;
@@ -70,7 +70,8 @@ bhid: any;
 rockDepthTo: any;
 rockDepthFrom: any;
 sptstatus: any;
-
+isColorShown = false;
+colorOther: any;
   constructor(public toastSer: ToastService,
     public androidDatabase: AndroidDatabaseService,
     public router: Router,
@@ -120,11 +121,11 @@ sptstatus: any;
   this.runLength = '';
   this.runTime = '';
   this.waterLoss = '';
-  this.allRockPiecesLenth = '';
-  this.rockPicesLengthgrze = '';
+
+
   this.rockSamplColor = '';
   this.typeOfWeathering = '';
-  this.typeOfRock = '';
+
   this.cr='';
   this.rqd = '';
 
@@ -138,7 +139,7 @@ sptstatus: any;
     this.typeOfsample = '';
     this.soilSampleColor = '';
     this.typeOfSoil = '';
-    this.densityConsistace = '';
+
     this.visualClassification = '';
 
     this.dsDepthFrom = '';
@@ -155,8 +156,7 @@ sptstatus: any;
     this.secondB = '';
     this.thirdB = '';
     this.totalB = '';
-    this.isCohesion = false;
-    this.isCohessive = false;
+
 
 
 
@@ -167,7 +167,7 @@ sptstatus: any;
   sampleChange($event){
     this.typeOfsample= $event.target.value;
     console.log($event.target.value);
-    if(this.typeOfsample === 'DS'){
+    if(this.typeOfsample === 'Distributed Sample'){
       this.isdsDepth = true;
       this.isSPTDepth = false;
       this.isUDSepth = false;
@@ -194,7 +194,7 @@ sptstatus: any;
 
 
 
-    }else if(this.typeOfsample === 'UDS'){
+    }else if(this.typeOfsample === 'Undistributed Sample'){
       this.isdsDepth = false;
       this.isSPTDepth = false;
       this.isUDSepth = true;
@@ -215,29 +215,20 @@ sptstatus: any;
     }
 
   }
-  typeOfSoilChange($event){
-   this.typeOfSoil = $event.target.value;
-   console.log($event.target.value);
-   if(this.typeOfSoil === 'Cohesive'){
-     this.isCohessive = true;
-     this.isCohesion = false;
-     this.densityConsistace = '';
 
-   }else{
-     this.isCohesion = true;
-     this.isCohessive = false;
-      this.densityConsistace = '';
-   }
-  }
-  densityConsiChange($event){
-   this.densityConsistace =$event.target.value;
-   console.log($event.target.value);
-  }
-  densityConsiChange1($event){
-    this.densityConsistace =$event.target.value;
+  colorChange($event){
+    this.soilSampleColor = $event.target.value;
     console.log($event.target.value);
-   }
-   visualChange($event){
+    if(this.soilSampleColor === 'Other'){
+      this.isColorShown = true;
+    }else{
+      this.isColorShown = false;
+
+    }
+
+  }
+
+  visualChange($event){
      this.visualClassification = $event.target.value;
      console.log($event.target.value);
 
@@ -248,16 +239,11 @@ sptstatus: any;
      console.log($event.target.value);
 
    }
-   crCaliculation(){
-    if(this.allRockPiecesLenth !== undefined && this.runLength !== undefined &&
-     this.allRockPiecesLenth !== 0 && this.runLength !== 0){
-    this.cr= this.allRockPiecesLenth/this.runLength;
-    }
-    if(this.rockPicesLengthgrze !== undefined && this.runLength !== undefined &&
-     this.rockPicesLengthgrze !== 0 && this.runLength !== 0){
-     this.rqd= this.rockPicesLengthgrze/this.runLength;
-     }
-
+   runLengthCalicualtion(){
+    if(this.drillingFrom !== undefined && this.drillingTo !== undefined &&
+     this.drillingFrom !== 0 && this.drillingTo !== 0){
+    this.runLength= this.drillingTo - this.drillingFrom;
+  }
   }
  weatheringChange($event){
      this.typeOfWeathering = $event.target.value;
@@ -329,7 +315,19 @@ sptstatus: any;
        else if(this.soilSampleColor === undefined){
         this.toastSer.presentError('Please Enter   Soil Sample Color');
 
+       } else if(this.soilSampleColor === 'Other' && this.colorOther === undefined){
+        this.toastSer.presentError('Please Enter   Soil Sample Color Other');
+
        }
+       else if(this.soilSampleColor === 'Other' && this.colorOther === ''){
+        this.toastSer.presentError('Please Enter   Soil Sample Color Other');
+
+       }
+       else if(this.soilSampleColor === 'Other' && this.colorOther === null){
+        this.toastSer.presentError('Please Enter   Soil Sample Color Other');
+
+       }
+
        else if( this.visualClassification === undefined){
         this.toastSer.presentError('Please Enter  Visual Classification of Sample');
        }
@@ -429,7 +427,7 @@ sptstatus: any;
         this.toastSer.presentError('Please Enter  UDS Depth ,It should not  Zero');
 
        }
-       else if(this.typeOfsample === 'DS'){
+       else if(this.typeOfsample === 'Distributed Sample'){
          this.rockDepthFrom ='';
          this.rockDepthTo = '';
           this.first = '';
@@ -452,11 +450,11 @@ sptstatus: any;
           this.runLength = '';
           this.runTime = '';
           this.waterLoss = '';
-          this.allRockPiecesLenth = '';
-          this.rockPicesLengthgrze = '';
+
+
           this.rockSamplColor = '';
           this.typeOfWeathering = '';
-          this.typeOfRock = '';
+
           this.cr='';
           this.rqd = '';
           this.adding();
@@ -475,16 +473,16 @@ sptstatus: any;
           this.runLength = '';
           this.runTime = '';
           this.waterLoss = '';
-          this.allRockPiecesLenth = '';
-          this.rockPicesLengthgrze = '';
+
+
           this.rockSamplColor = '';
           this.typeOfWeathering = '';
-          this.typeOfRock = '';
+
           this.cr='';
           this.rqd = '';
           this.adding();
 
-         }else if(this.typeOfsample === 'UDS'){
+         }else if(this.typeOfsample === 'Undistributed Sample'){
           this.rockDepthFrom ='';
           this.rockDepthTo = '';
 
@@ -509,11 +507,11 @@ sptstatus: any;
           this.runLength = '';
           this.runTime = '';
           this.waterLoss = '';
-          this.allRockPiecesLenth = '';
-          this.rockPicesLengthgrze = '';
+
+
           this.rockSamplColor = '';
           this.typeOfWeathering = '';
-          this.typeOfRock = '';
+
           this.cr='';
           this.rqd = '';
           this.adding();
@@ -532,31 +530,14 @@ sptstatus: any;
         this.toastSer.presentError('Please Enter  Rock depth to');
 
        }
-       else if( this.runLength === undefined){
-        this.toastSer.presentError('Please Enter  Run Length');
-
-       }else if( this.runTime === undefined){
-        this.toastSer.presentError('Please Enter  Run Time');
-
-       }else if( this.waterLoss === undefined){
-        this.toastSer.presentError('Please Enter  Water Loss');
-
-       }else if( this.allRockPiecesLenth === undefined){
-        this.toastSer.presentError('Please Enter  All Rock Pieces lengths');
-
-       }else if( this.rockPicesLengthgrze === undefined){
-        this.toastSer.presentError('Please Enter  Rock Pieces length >10 cm');
-
-       }else if( this.rockSamplColor === undefined){
+       else if( this.rockSamplColor === undefined){
         this.toastSer.presentError('Please Enter  Rock Sample Color');
 
        }else if( this.typeOfWeathering === undefined){
         this.toastSer.presentError('Please Select  Type of Weathering');
 
-       }else if( this.typeOfRock === undefined){
-        this.toastSer.presentError('Please Enter  Type of Rock');
-
-       }else  if( this.rockSample === ''){
+       }
+       else  if( this.rockSample === ''){
         this.toastSer.presentError('Please Enter  Type of Sample (If Rock)');
        }
        else if( this.rockDepthFrom === ''){
@@ -566,30 +547,11 @@ sptstatus: any;
         this.toastSer.presentError('Please Enter  Rock depth to');
 
        }
-       else if( this.runLength === ''){
-        this.toastSer.presentError('Please Enter  Run Length');
-
-       }else if( this.runTime === ''){
-        this.toastSer.presentError('Please Enter  Run Time');
-
-       }else if( this.waterLoss === ''){
-        this.toastSer.presentError('Please Enter  Water Loss');
-
-       }else if( this.allRockPiecesLenth === ''){
-        this.toastSer.presentError('Please Enter  All Rock Pieces lengths');
-
-       }else if( this.rockPicesLengthgrze === ''){
-        this.toastSer.presentError('Please Enter  Rock Pieces length >10 cm');
-
-       }else if( this.rockSamplColor === ''){
+        else if( this.rockSamplColor === ''){
         this.toastSer.presentError('Please Enter  Rock Sample Color');
 
        }else if( this.typeOfWeathering === ''){
         this.toastSer.presentError('Please Select  Type of Weathering');
-
-       }else if( this.typeOfRock === ''){
-        this.toastSer.presentError('Please Enter  Type of Rock');
-
        }else  if( this.rockSample === null){
         this.toastSer.presentError('Please Enter  Type of Sample (If Rock)');
        }
@@ -600,56 +562,25 @@ sptstatus: any;
         this.toastSer.presentError('Please Enter  Rock depth to');
 
        }
-       else if( this.runLength === null){
-        this.toastSer.presentError('Please Enter  Run Length');
-
-       }else if( this.runTime === null){
-        this.toastSer.presentError('Please Enter  Run Time');
-
-       }else if( this.waterLoss === null){
-        this.toastSer.presentError('Please Enter  Water Loss');
-
-       }else if( this.allRockPiecesLenth === null){
-        this.toastSer.presentError('Please Enter  All Rock Pieces lengths');
-
-       }else if( this.rockPicesLengthgrze === null){
-        this.toastSer.presentError('Please Enter  Rock Pieces length >10 cm');
-
-       }else if( this.rockSamplColor === null){
+        else if( this.rockSamplColor === null){
         this.toastSer.presentError('Please Enter  Rock Sample Color');
 
        }else if( this.typeOfWeathering === null){
         this.toastSer.presentError('Please Select  Type of Weathering');
 
-       }else if( this.typeOfRock === null){
-        this.toastSer.presentError('Please Enter  Type of Rock');
-
-       } else if( this.rockDepthFrom === 0){
+       }
+        else if( this.rockDepthFrom === 0){
         this.toastSer.presentError('Please Enter  Rock depth from, it Should Not a Zero');
 
        }else if( this.rockDepthTo === 0){
         this.toastSer.presentError('Please Enter  Rock depth to,it Should Not a Zero');
 
-       }else if( this.runLength === 0){
-        this.toastSer.presentError('Please Enter  Run Length,it Should Not a Zero');
-
-       }else if( this.runTime === 0){
-        this.toastSer.presentError('Please Enter  Run Time,it Should Not a Zero');
-
-       }else if( this.waterLoss === 0){
-        this.toastSer.presentError('Please Enter  Water Loss,it Should Not a Zero');
-
-       }else if( this.allRockPiecesLenth === 0){
-        this.toastSer.presentError('Please Enter  All Rock Pieces lengths,it Should Not a Zero');
-
-       }else if( this.rockPicesLengthgrze === 0){
-        this.toastSer.presentError('Please Enter  Rock Pieces length >10 cm,it Should Not a Zero');
-
-       }else{
+       }
+       else{
          this.typeOfsample = '';
         this.soilSampleColor = '';
 
-        this.densityConsistace = '';
+
         this.visualClassification = '';
 
         this.dsDepthFrom = '';
@@ -667,6 +598,7 @@ sptstatus: any;
         this.thirdB = '';
         this.totalB = '';
         this.sptstatus = '';
+        this.colorOther = '';
 
 
         this.adding();
@@ -685,9 +617,9 @@ sptstatus: any;
     this.typeOfsample,this.dsDepthFrom,'',this.sptDepthFrom,'',
     this.udsDepthFrom,'',this.soilSampleColor,'','',
     this.visualClassification,
-    this.rockSample, this.runLength,this.runTime,this.waterLoss,this.allRockPiecesLenth,
-    this.rockPicesLengthgrze,this.cr,this.rqd,this.rockSamplColor,
-    this.typeOfWeathering,this.typeOfRock,Constants.laYer1Id,this.first,
+    this.rockSample, this.runLength,this.runTime,this.waterLoss,'',
+    '',this.cr,this.rqd,this.rockSamplColor,
+    this.typeOfWeathering,'',Constants.laYer1Id,this.first,
     this.second,this.third,this.total,this.firstB,this.secondB,this.thirdB,this.totalB,
     this.rockDepthFrom,this.rockDepthTo,this.sptstatus);
 
@@ -726,17 +658,24 @@ sptstatus: any;
   }
 
   submitweb(){
-    this.httpService.submitLayer3(Constants.webbhid,3,this.drillingFrom,this.drillingTo,this.typeOfstrata,
-      this.typeOfsample,this.dsDepthFrom,'',this.sptDepthFrom,'',
+
+    if(this.soilSampleColor!=='Other' && this.colorOther === undefined){
+      this.colorOther= '';
+    }
+    this.httpService.submitLayer3(Constants.webbhid,3,
+      this.drillingFrom,this.drillingTo,this.typeOfstrata,
+      this.typeOfsample,this.dsDepthFrom,
+      this.sptDepthFrom,
       this.first,this.firstB,
       this.second,this.secondB,
       this.third,this.thirdB,
       this.total,this.totalB,this.sptstatus,
-      this.udsDepthFrom,'',this.soilSampleColor,'','',
-      this.visualClassification,this.rockSample, this.runLength,this.runTime,this.waterLoss,this.allRockPiecesLenth,
-      this.rockPicesLengthgrze,this.cr,this.rqd,this.rockSamplColor,
-      this.typeOfWeathering,this.typeOfRock,
-      this.rockDepthFrom,this.rockDepthTo).subscribe((response: any)=>{
+      this.udsDepthFrom,this.soilSampleColor,this.colorOther,
+      this.visualClassification,this.rockSample,
+      this.rockDepthFrom,this.rockDepthTo,
+       this.runLength,this.runTime,this.waterLoss,
+      this.cr,this.rqd,this.rockSamplColor,
+      this.typeOfWeathering,'').subscribe((response: any)=>{
 
         if(response.error === true){
           this.toastSer.presentError(response.msg);

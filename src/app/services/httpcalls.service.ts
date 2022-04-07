@@ -93,27 +93,40 @@ export class HttpcallsService {
 
   }
 
-  submitLayer3(bhid: any,bhlaye: any,drillDepthFrom: any,drillDepthTo: any,typeOfstara: any,typeOfSample: any,
-    soilDsDepthFrom: any,soilDsDepthTo: any,sptDethFrom: any,sptDepthTo: any,
+  submitLayer3(bhid: any,bhlaye: any,drillDepthFrom: any,drillDepthTo: any,typeOfstara: any,
+    typeOfSample: any,
+    soilDsDepthFrom: any,sptDethFrom: any,
     first: any,firstB: any,second: any,secondB: any,third: any,thirdB: any,total: any,totalB: any,
     sptDepthstatus: any,udsDepthFrom: any,
-    udsDepthTo: any,soilSamplColor: any,soilType: any,soilDensity: any,soilVisualClassi: any,
-    rockSampletype: any,rockrunLeng: any,rockRunTime: any,
-    rockWaterLoss: any,rockPiecesLength: any,rockPiecse10: any,rockCr: any,rockrqd: any,
-    rockSampleColor: any,rockWaethering: any,rockType: any,rockdepthfrom: any,rockdepthto: any){
+    soilSamplColor: any,colorOther: any,
+    soilVisualClassi: any,
+    rockSampletype: any,
+    rockdepthfrom: any,rockdepthto: any,
+    rockrunLeng: any,rockRunTime: any,
+    rockWaterLoss: any,rockCr: any,rockrqd: any,
+    rockSampleColor: any,rockWaethering: any,
+    iterationId: any){
     const parameters ={bh_id:bhid,bh_layer:bhlaye,drill_depth_from:drillDepthFrom,
       drill_depth_to: drillDepthTo,type_of_strata:typeOfstara,type_of_sample:typeOfSample,
-      soil_ds_depth_from:soilDsDepthFrom,soil_ds_depth_to:soilDsDepthTo,soil_spt_depth_from:sptDethFrom,
-      soil_spt_depth_to:sptDepthTo,soil_spt_penetration_1:first,soil_spt_blow_n_1:firstB,
+      soil_ds_depth:soilDsDepthFrom,
+      soil_spt_depth:sptDethFrom
+      ,soil_spt_penetration_1:first,soil_spt_blow_n_1:firstB,
       soil_spt_penetration_2:second,soil_spt_blow_n_2:secondB,soil_spt_penetration_3:third,
       soil_spt_blow_n_3:thirdB,soil_spt_penetration_total:total,soil_spt_blow_n_total: totalB,
-      soil_spt_depth_status: sptDepthstatus,soil_uds_depth_from:udsDepthFrom,
-      soil_uds_depth_to:udsDepthTo,soil_sample_color: soilSamplColor,soil_type:soilType,soil_density:soilDensity,
-      soil_visual_classif:soilVisualClassi,rock_sample_type:rockSampletype,rock_run_length: rockrunLeng,
-      rock_run_time:rockRunTime,rock_water_loss:rockWaterLoss,rock_pieces_length:rockPiecesLength,
-      rock_pieces_10:rockPiecse10,rock_cr:rockCr,rock_rqd:rockrqd,rock_sample_color:rockSampleColor,
-      rock_weathering:rockWaethering,rock_type:rockType,rock_depth_from:rockdepthfrom,
-      rock_depth_to: rockdepthto};
+      soil_spt_depth_status: sptDepthstatus,
+      soil_uds_depth:udsDepthFrom,
+      soil_sample_color: soilSamplColor,
+      soil_sample_color_other: colorOther,
+
+      soil_visual_classif:soilVisualClassi,
+      rock_sample_type:rockSampletype,
+      rock_depth_from:rockdepthfrom,
+      rock_depth_to: rockdepthto,
+      rock_run_length: rockrunLeng,
+      rock_run_time:rockRunTime,rock_water_loss:rockWaterLoss,
+      rock_cr:rockCr,rock_rqd:rockrqd,rock_sample_color:rockSampleColor,
+      rock_weathering:rockWaethering,
+      bh_iteration_id: iterationId};
     console.log('JSON',JSON.stringify(parameters));
 
     return this.httpClient.post(`${environment.apiUrl}/submitboredata_web`, JSON.stringify(parameters));

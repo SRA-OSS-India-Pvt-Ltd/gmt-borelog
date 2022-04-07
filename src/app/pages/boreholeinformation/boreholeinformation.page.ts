@@ -6,6 +6,8 @@ import { ToastService } from './../../services/toast.service';
 import { Component, OnInit } from '@angular/core';
 import { HttpcallsService } from 'src/app/services/httpcalls.service';
 import { Platform } from '@ionic/angular';
+import { Keyboard } from '@awesome-cordova-plugins/keyboard/ngx';
+
 
 @Component({
   selector: 'app-boreholeinformation',
@@ -36,6 +38,7 @@ export class BoreholeinformationPage implements OnInit {
   latitude: any;
   longitude: any;
   layer1List: any = [];
+  countries: any = [];
 
   date: any;
   angleWithHorizontal: any;
@@ -49,16 +52,25 @@ export class BoreholeinformationPage implements OnInit {
   selectedItem: any;
   drillingBitOther: any;
   isDrillBitOther = false;
+  input: any;
+  autocomplete: { input: string };
+  autocompleteItems: any[];
+
   constructor(
     public toastSer: ToastService,
     public androidDatabase: AndroidDatabaseService,
     private geolocation: Geolocation,
     public router: Router,
     public httpService: HttpcallsService,
-    public platform: Platform
+    public platform: Platform,
+    private keyboard: Keyboard
   ) {
     this.ref = 'IS 1892; IS 2131; IS 2132';
     this.date = new Date().toISOString();
+
+    this.autocomplete = { input: '' };
+    this.autocompleteItems = [];
+
     platform.ready().then(() => {
       if (this.platform.is('android')) {
         this.getLayer1LastId();
@@ -72,6 +84,43 @@ export class BoreholeinformationPage implements OnInit {
   }
 
   ngOnInit() {}
+
+
+  add(item: string) {
+    this.input = item;
+    this.countries = [];
+  }
+
+  removeFocus() {
+    this.keyboard.hide();
+   // this.keyboard.close();
+  }
+
+  search(item) {
+    if (!this.input.trim().length || !this.keyboard.show) {
+      this.countries = [];
+      return;
+    }
+
+    this.selectedItem = this.chaingeList.filter((user: any) =>
+    user.chainage.includes(item)
+  );
+
+  console.log('selected item : ', this.selectedItem);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   selected(item) {
     console.log('selected items : ', item);
@@ -359,7 +408,9 @@ export class BoreholeinformationPage implements OnInit {
         if (this.layer1List[0].drill_depth_from === '') {
           this.router.navigate(['logginginformation']);
         } else {
-          this.router.navigate(['web3']);
+          this.router.navigate(['logginginformation']);
+
+         // this.router.navigate(['web3']);
         }
       });
   }

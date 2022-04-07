@@ -327,8 +327,8 @@ export class Web1Page implements OnInit {
         });
 
          this.toastService.presentSuccess(response.msg);
-         console.log('structtype',this.layer1List[0].struct_type);
-         if(this.layer1List[0].struct_type === ''){
+         console.log('structtype',this.layer1List[0].type_of_structure);
+         if(this.layer1List[0].type_of_structure === ''){
           Constants.webbhid = Constants.laYer1Id;
 
          this.router.navigate(['boreholeinformation']);
@@ -360,7 +360,7 @@ export class Web1Page implements OnInit {
     onClick(){
 
 
-      if(this.layer1List[0].struct_type === ''){
+      if(this.layer1List[0].type_of_structure === ''){
         this.httpService.getAllChainagesBySectionID(this.sectionId).subscribe((response34: any)=>{
           console.log('response34',response34);
           if(response34.error === false){
