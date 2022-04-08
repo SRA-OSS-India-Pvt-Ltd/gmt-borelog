@@ -272,4 +272,32 @@ disconnectSubscription: any;
    }
 
 
+   moveToLayer3(id: any,bhid: any,){
+    this. platform.ready().then(() => {
+       if (this.platform.is('android')) {
+
+
+       }else{
+
+        this.moveToIterations(bhid);
+
+
+
+      }
+
+
+   });
+
+   }
+
+
+   moveToIterations(bhid: any,){
+    Constants.iteratinbhid = bhid;
+    this.router.navigate(['iterations']);
+
+  }
+
+
+
+
 }

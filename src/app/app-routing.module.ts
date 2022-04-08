@@ -95,6 +95,14 @@ const routes: Routes = [
     path: 'viewlist1',
     loadChildren: () => import('./pages/viewlist1/viewlist1.module').then( m => m.Viewlist1PageModule)
   },
+  {
+    path: 'iterations',
+    loadChildren: () => import('./pages/iterations/iterations.module').then( m => m.IterationsPageModule)
+  },
+  {
+    path: 'edititerations',
+    loadChildren: () => import('./pages/edititerations/edititerations.module').then( m => m.EdititerationsPageModule)
+  },
 ];
 
 @NgModule({

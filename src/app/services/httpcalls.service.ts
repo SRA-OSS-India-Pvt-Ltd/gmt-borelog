@@ -190,6 +190,23 @@ export class HttpcallsService {
     return this.httpClient.get(`${environment.apiUrl}/getAllChainages`);
 
   }
+  getAllBoreIterations(bhid: any){
+    const parameters ={bh_id: bhid};
+    console.log('JSON',JSON.stringify(parameters));
+
+    return this.httpClient.post(`${environment.apiUrl}/getAllBoreIterations`, JSON.stringify(parameters));
+
+  }
+
+  getSingleBoreIterationDetails(iterationId: any){
+    const parameters ={bh_iteration_id: iterationId};
+    console.log('JSON',JSON.stringify(parameters));
+
+    return this.httpClient.post(`${environment.apiUrl}/getSingleBoreIterationDetails`, JSON.stringify(parameters));
+
+  }
+
+
 
 
 

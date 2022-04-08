@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/viewlist"></ion-back-button>
+      <ion-back-button defaultHref="/iterations"></ion-back-button>
     </ion-buttons>
     <ion-title style="white-space: pre-wrap !important;" >Layer3 - View/Edit</ion-title>
 
@@ -56,10 +56,10 @@
         <ion-col size="6">
           <ion-item class="input">
             <ion-item>
-              <ion-select  placeholder="Select " (ionChange)="strataChange($event)" value="{{typeOfstrata}}">
-                <ion-select-option value="Soil">Soil</ion-select-option>
-                <ion-select-option value="Rock">Rock</ion-select-option>
-              </ion-select>
+              <ion-label  style="white-space: pre-wrap !important;">{{typeOfstrata}}</ion-label>
+
+
+
             </ion-item>
           </ion-item>
         </ion-col>
@@ -72,14 +72,8 @@
         </ion-col>
         <ion-col size="6">
           <ion-item class="input">
-            <ion-item>
-              <ion-select  placeholder="Select " (ionChange)="sampleChange($event)" value="{{typeOfsample}}">
-                <ion-select-option value="DS">DS</ion-select-option>
-                <ion-select-option value="SPT">SPT</ion-select-option>
-                <ion-select-option value="UDS">UDS</ion-select-option>
+            <ion-label>{{typeOfsample}}</ion-label>
 
-              </ion-select>
-            </ion-item>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -306,7 +300,7 @@
   <ion-row *ngIf="isRock" >
     <ion-col size="6">
       <ion-item class="padding">
-        <ion-label  style="white-space: pre-wrap !important;"><strong>Run Time (hr):</strong><span class="required-asterisk">*</span></ion-label>
+        <ion-label  style="white-space: pre-wrap !important;"><strong>Run Time (hr):</strong></ion-label>
       </ion-item>
     </ion-col>
     <ion-col size="6">
@@ -318,7 +312,7 @@
   <ion-row *ngIf="isRock" >
     <ion-col size="6">
       <ion-item class="padding">
-        <ion-label  style="white-space: pre-wrap !important;"><strong>Water Loss (%):</strong><span class="required-asterisk">*</span></ion-label>
+        <ion-label  style="white-space: pre-wrap !important;"><strong>Water Loss (%):</strong></ion-label>
       </ion-item>
     </ion-col>
     <ion-col size="6">
@@ -334,7 +328,7 @@
   <ion-row *ngIf="isRock" >
     <ion-col size="6">
       <ion-item class="padding">
-        <ion-label  style="white-space: pre-wrap !important;"><strong>CR %:</strong> <span class="required-asterisk">*</span></ion-label>
+        <ion-label  style="white-space: pre-wrap !important;"><strong>CR %:</strong> </ion-label>
       </ion-item>
     </ion-col>
     <ion-col size="6">
@@ -349,7 +343,7 @@
   <ion-row  *ngIf="isRock">
     <ion-col size="6">
       <ion-item class="padding">
-        <ion-label  style="white-space: pre-wrap !important;"><strong>RQD %:</strong> <span class="required-asterisk">*</span></ion-label>
+        <ion-label  style="white-space: pre-wrap !important;"><strong>RQD %:</strong> </ion-label>
       </ion-item>
     </ion-col>
     <ion-col size="6">
