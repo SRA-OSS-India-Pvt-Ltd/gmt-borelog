@@ -40,8 +40,9 @@ export class Web2Page implements OnInit {
   layer1List: any = [];
   chaingeList: any;
   selectedItem: any;
-
+  isCasingDiaOther = false;
   date: any;
+  casingDiaOther: any;
   isInclined = false;
   angleWithHorizontal: any;
   isDrillOther = false;
@@ -120,9 +121,27 @@ export class Web2Page implements OnInit {
       this.typeOfCrossing = this.selectedItem[0].type_of_crossing;
       this.typeOfStructure = this.selectedItem[0].type_of_structure;
       this.chainageId = this.selectedItem[0].chainage_id;
+      this.boreholeNumber = this.selectedItem[0].bhno;
+
       console.log('typeOfStructure : ', this.typeOfStructure);
     }
   }
+
+  boreholeDiaChange($event){
+    console.log($event.target.value);
+    this.boreholeDia = $event.target.value;
+
+  }
+  casingDiaChange($event){
+    console.log($event.target.value);
+    this.boreholeCasingDia = $event.target.value;
+    if(this.boreholeCasingDia === 'Other'){
+      this.isCasingDiaOther = true;
+    }else{
+      this.isCasingDiaOther = false;
+    }
+  }
+
 
   detailDrillinBitChange($event) {
     this.detailsOfDrillingBit = $event.target.value;
@@ -172,11 +191,12 @@ export class Web2Page implements OnInit {
           this.toastSer.presentError(response.msg);
         } else {
           this.toastSer.presentSuccess(response.msg);
-          if (this.layer1List[0].drill_depth_from === '') {
-            this.router.navigate(['logginginformation']);
-          } else {
-            this.router.navigate(['web3']);
-          }
+          this.getWebBoreItrations();
+          // if (this.layer1List[0].drill_depth_from === '') {
+          //   this.router.navigate(['logginginformation']);
+          // } else {
+          //   this.router.navigate(['web3']);
+          // }
         }
       });
   }
@@ -221,8 +241,6 @@ export class Web2Page implements OnInit {
       this.toastSer.presentError('Please Select Drilling Orientation');
     } else if (this.boreholeCasingDia === '') {
       this.toastSer.presentError('Please Enter Casing Dia');
-    } else if (this.casingDepth === '') {
-      this.toastSer.presentError('Please Enter Casing Depth');
     } else if (this.detailsOfDrillingBit === '') {
       this.toastSer.presentError('Please Select the Details of Drilling Bit*');
     } else if (this.detailsOdCoreBarrel === '') {
@@ -253,7 +271,14 @@ export class Web2Page implements OnInit {
       this.drillBitOther === undefined
     ) {
       this.toastSer.presentError('Please Enter Other for Method of Drilling');
-    } else {
+    }else if (this.boreholeCasingDia === 'Other' && this.casingDiaOther === null) {
+      this.toastSer.presentError('Please Enter Other for Casing Dia');
+    }else if (this.boreholeCasingDia === 'Other' && this.casingDiaOther === undefined) {
+      this.toastSer.presentError('Please Enter Other for Casing Dia');
+    }else if (this.boreholeCasingDia === 'Other' && this.casingDiaOther === '') {
+      this.toastSer.presentError('Please Enter Other for Casing Dia');
+    }
+     else {
       this.updateLayer2();
     }
   }
@@ -313,10 +338,29 @@ export class Web2Page implements OnInit {
       });
   }
   onClick() {
-    if (this.layer1List[0].drill_depth_from === '') {
-      this.router.navigate(['logginginformation']);
-    } else {
-      this.router.navigate(['web3']);
-    }
+    this.getWebBoreItrations();
+    // if (this.layer1List[0].drill_depth_from === '') {
+    //   this.router.navigate(['logginginformation']);
+    // } else {
+    //   this.router.navigate(['web3']);
+    // }
   }
+
+  getWebBoreItrations() {
+    this.httpService
+      .getAllBoreIterations(Constants.webbhid)
+      .subscribe((response: any) => {
+        console.log('response', response);
+        if (response.error === false) {
+          Constants.iteratinbhid = Constants.webbhid;
+
+          this.router.navigate(['iterations']);
+
+        }else{
+          this.router.navigate(['logginginformation']);
+
+        }
+      });
+  }
+
 }

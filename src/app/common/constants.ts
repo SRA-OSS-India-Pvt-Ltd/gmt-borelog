@@ -23,6 +23,8 @@ export abstract class Constants {
   public static usertype: any;
   public static iteratinbhid: any;
   public static iterationId: any;
+  public static sno: any;
+
 
   //ionic build --prod -- --base-href /borelogweb_testing/
 //        classpath 'com.android.tools.build:gradle:4.0.0'

@@ -55,7 +55,8 @@ export class BoreholeinformationPage implements OnInit {
   input: any;
   autocomplete: { input: string };
   autocompleteItems: any[];
-
+  isCasingDiaOther = false;
+  casingDiaOther: any;
   constructor(
     public toastSer: ToastService,
     public androidDatabase: AndroidDatabaseService,
@@ -136,6 +137,8 @@ export class BoreholeinformationPage implements OnInit {
       this.typeOfCrossing = this.selectedItem[0].type_of_crossing;
       this.typeOfStructure = this.selectedItem[0].type_of_structure;
       this.chainageId = this.selectedItem[0].chainage_id;
+      this.boreholeNumber = this.selectedItem[0].bhno;
+
       console.log('typeOfStructure : ', this.typeOfStructure);
     }
   }
@@ -177,6 +180,22 @@ export class BoreholeinformationPage implements OnInit {
     } else {
       this.isRigOther = false;
     }
+  }
+  boreholeDiaChange($event){
+    console.log($event.target.value);
+    this.boreholeDia = $event.target.value;
+
+  }
+
+  casingDiaChange($event){
+    console.log($event.target.value);
+    this.boreholeCasingDia = $event.target.value;
+    if(this.boreholeCasingDia === 'Other'){
+      this.isCasingDiaOther = true;
+    }else{
+      this.isCasingDiaOther = false;
+    }
+
   }
   drillChange($event) {
     console.log($event.target.value);
@@ -222,12 +241,13 @@ export class BoreholeinformationPage implements OnInit {
       this.toastSer.presentError('Please Select Method of Drilling');
     } else if (this.typeOfRig === 'Other' && this.rigOther === undefined) {
       this.toastSer.presentError('Please Enter Other for Method of Drilling');
-    } else if (this.orientation === undefined) {
+    }else if (this.boreholeCasingDia === 'Other' && this.casingDiaOther === undefined) {
+      this.toastSer.presentError('Please Enter Other for Casing Dia');
+    }
+     else if (this.orientation === undefined) {
       this.toastSer.presentError('Please Select Drilling Orientation');
     } else if (this.boreholeCasingDia === undefined) {
       this.toastSer.presentError('Please Enter Casing Dia');
-    } else if (this.casingDepth === undefined) {
-      this.toastSer.presentError('Please Enter Casing Depth');
     } else if (this.detailsOfDrillingBit === undefined) {
       this.toastSer.presentError('Please Select the Details of Drilling Bit');
     } else if (this.typeOfStructure === '') {
@@ -250,12 +270,13 @@ export class BoreholeinformationPage implements OnInit {
       this.toastSer.presentError('Please Select Method of Drilling');
     } else if (this.typeOfRig === 'Other' && this.rigOther === '') {
       this.toastSer.presentError('Please Enter Other for Method of Drilling');
-    } else if (this.orientation === '') {
+    }else if (this.boreholeCasingDia === 'Other' && this.casingDiaOther === '') {
+      this.toastSer.presentError('Please Enter Other for Casing Dia');
+    }
+     else if (this.orientation === '') {
       this.toastSer.presentError('Please Select Drilling Orientation');
     } else if (this.boreholeCasingDia === '') {
       this.toastSer.presentError('Please Enter Casing Dia');
-    } else if (this.casingDepth === '') {
-      this.toastSer.presentError('Please Enter Casing Depth');
     } else if (this.detailsOfDrillingBit === '') {
       this.toastSer.presentError('Please Select the Details of Drilling Bit');
     } else if (this.typeOfStructure === null) {
@@ -286,12 +307,13 @@ export class BoreholeinformationPage implements OnInit {
       this.toastSer.presentError('Please Select Method of Drilling');
     } else if (this.typeOfRig === 'Other' && this.rigOther === null) {
       this.toastSer.presentError('Please Enter Other for Method of Drilling');
-    } else if (this.orientation === null) {
+    }else if (this.boreholeCasingDia === 'Other' && this.casingDiaOther === null) {
+      this.toastSer.presentError('Please Enter Other for Casing Dia');
+    }
+     else if (this.orientation === null) {
       this.toastSer.presentError('Please Select Drilling Orientation');
     } else if (this.boreholeCasingDia === null) {
       this.toastSer.presentError('Please Enter Casing Dia');
-    } else if (this.casingDepth === null) {
-      this.toastSer.presentError('Please Enter Casing Depth');
     } else if (this.detailsOfDrillingBit === null) {
       this.toastSer.presentError('Please Select the Details of Drilling Bit');
     } else {

@@ -540,48 +540,41 @@ export class LogginginformationPage implements OnInit {
 
   moveToNext() {}
   addDatabse() {
-    this.androidDatabase.updateLayer3(
+    this.androidDatabase.additerationData(
+      Constants.laYer1Id,
       this.drillingFrom,
       this.drillingTo,
       this.typeOfstrata,
       this.typeOfsample,
       this.dsDepthFrom,
-      '',
       this.sptDepthFrom,
-      '',
+      this.first,
+      this.firstB,
+      this.second,
+      this.secondB,
+      this.third,
+      this.thirdB,
+      this.total,
+      this.totalB,
+      this.sptstatus,
       this.udsDepthFrom,
-      '',
       this.soilSampleColor,
-      '',
-      '',
+      this.colorOther,
       this.visualClassification,
       this.rockSample,
+      this.rockDepthFrom,
+      this.rockDepthTo,
       this.runLength,
       this.runTime,
       this.waterLoss,
-      '',
-      '',
       this.cr,
       this.rqd,
       this.rockSamplColor,
-      this.typeOfWeathering,
-      '',
-      Constants.laYer1Id,
-      this.first,
-      this.second,
-      this.third,
-      this.total,
-      this.firstB,
-      this.secondB,
-      this.thirdB,
-      this.totalB,
-      this.rockDepthFrom,
-      this.rockDepthTo,
-      this.sptstatus
-    );
+      this.typeOfWeathering);
 
-    // this.router.navigate(['layer4']);
-    this.getLayer1();
+      this.router.navigate(['iterations']);
+
+     // this.getLayer1();
   }
   totalCount() {
     if (

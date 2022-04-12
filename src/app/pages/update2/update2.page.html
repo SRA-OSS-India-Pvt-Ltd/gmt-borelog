@@ -66,6 +66,19 @@
 
 
 
+      <ion-row>
+        <ion-col size="6">
+          <ion-item class="padding">
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Borehole Number:</strong><span class="required-asterisk">*</span></ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item class="input">
+            <ion-label>{{boreholeNumber}}</ion-label>
+
+          </ion-item>
+        </ion-col>
+      </ion-row>
 
 
       <ion-row>
@@ -121,19 +134,7 @@
         </ion-col>
       </ion-row>
 
-      <ion-row>
-        <ion-col size="6">
-          <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Borehole Number:</strong><span class="required-asterisk">*</span></ion-label>
-          </ion-item>
-        </ion-col>
-        <ion-col size="6">
-          <ion-item class="input">
-            <ion-input type="text" cass="input" [(ngModel)]="boreholeNumber"></ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-      <ion-row>
+<ion-row>
         <ion-col size="6">
           <ion-item class="padding">
             <ion-label  style="white-space: pre-wrap !important;"><strong> Location:</strong><span class="required-asterisk">*</span></ion-label>
@@ -298,7 +299,10 @@
         </ion-col>
         <ion-col size="6">
           <ion-item class="input">
-            <ion-input type="text" cass="input" [(ngModel)]="boreholeDia"></ion-input>
+            <ion-select interface="popover" placeholder="Select " (ionChange)="boreholeDiaChange($event)" value="{{boreholeDia}}">
+              <ion-select-option value="75">75</ion-select-option>
+              <ion-select-option value="150">150</ion-select-option>
+            </ion-select>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -310,19 +314,37 @@
         </ion-col>
         <ion-col size="6">
           <ion-item class="input">
-            <ion-input type="text" cass="input" [(ngModel)]="boreholeCasingDia"></ion-input>
+            <ion-select interface="popover" placeholder="Select " (ionChange)="casingDiaChange($event)" value="{{boreholeCasingDia}}">
+              <ion-select-option value="200">200</ion-select-option>
+              <ion-select-option value="Other">Other</ion-select-option>
+            </ion-select>
+
+
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="isCasingDiaOther">
+        <ion-col size="6">
+          <ion-item class="padding">
+            <ion-label style="white-space: pre-wrap !important;"><strong>Casing Dia Other:</strong></ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item class="input">
+            <ion-input type="number" cass="input" [(ngModel)]="casingDiaOther"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col size="6">
           <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Casing Depth:</strong><span class="required-asterisk">*</span></ion-label>
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Casing Depth:</strong></ion-label>
           </ion-item>
         </ion-col>
         <ion-col size="6">
           <ion-item class="input">
-            <ion-input type="text" cass="input" [(ngModel)]="casingDepth"></ion-input>
+            <ion-input type="number" cass="input" [(ngModel)]="casingDepth"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>

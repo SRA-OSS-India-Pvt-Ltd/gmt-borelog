@@ -71,9 +71,11 @@ sptstatus: any;
 isColorShown = false;
 colorOther: any;
 increme: number;
+sno: any;
 constructor(public toastSer: ToastService,
   public httpService: HttpcallsService,
   public router: Router) {
+    this.sno = Constants.sno;
     this.getLayer1();
   }
 
@@ -596,14 +598,5 @@ validation(){
 }
 
 
-onClick(){
-  if(this.layer1List[0].depth_termination === ''){
-    this.router.navigate(['layer4']);
 
-  }else{
-    this.router.navigate(['web4']);
-
-  }
-
-}
 }

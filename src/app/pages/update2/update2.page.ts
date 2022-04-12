@@ -40,12 +40,13 @@ export class Update2Page implements OnInit {
   layer1List: any = [];
   chaingeList: any;
   selectedItem: any;
-
+  isCasingDiaOther = false;
   date: any;
   isInclined = false;
   angleWithHorizontal: any;
   isDrillOther = false;
   isRigOther = false;
+  casingDiaOther: any;
 
   constructor(public toastSer: ToastService,
     public androidDatabase: AndroidDatabaseService,
@@ -99,8 +100,6 @@ export class Update2Page implements OnInit {
       this.toastSer.presentError('Please Select Drilling Orientation');
     } else if (this.boreholeCasingDia === '') {
       this.toastSer.presentError('Please Enter Casing Dia');
-    } else if (this.casingDepth === '') {
-      this.toastSer.presentError('Please Enter Casing Depth');
     } else if (this.detailsOfDrillingBit === '') {
       this.toastSer.presentError('Please Select the Details of Drilling Bit*');
     } else if (this.detailsOdCoreBarrel === '') {
@@ -131,7 +130,14 @@ export class Update2Page implements OnInit {
       this.drillBitOther === undefined
     ) {
       this.toastSer.presentError('Please Enter Other for Method of Drilling');
-    } else {
+    } else if (this.boreholeCasingDia === 'Other' && this.casingDiaOther === null) {
+      this.toastSer.presentError('Please Enter Other for Casing Dia');
+    }else if (this.boreholeCasingDia === 'Other' && this.casingDiaOther === undefined) {
+      this.toastSer.presentError('Please Enter Other for Casing Dia');
+    }else if (this.boreholeCasingDia === 'Other' && this.casingDiaOther === '') {
+      this.toastSer.presentError('Please Enter Other for Casing Dia');
+    }
+    else {
       this.updateLayer2();
     }
   }
@@ -216,6 +222,17 @@ export class Update2Page implements OnInit {
 
   }
 
+  casingDiaChange($event){
+    console.log($event.target.value);
+    this.boreholeCasingDia = $event.target.value;
+    if(this.boreholeCasingDia === 'Other'){
+      this.isCasingDiaOther = true;
+    }else{
+      this.isCasingDiaOther = false;
+    }
+  }
+
+
   updateLayer2(){
     this.androidDatabase.updateLayer2(this.ref,this.boreholeNumber,
       this.boreholeLocation,this.latitude,this.longitude,this.chainage,this.chainageId,
@@ -262,6 +279,11 @@ getLocations(){
    });
 }
 
+boreholeDiaChange($event){
+  console.log($event.target.value);
+  this.boreholeDia = $event.target.value;
+
+}
 
   getResopnseWithDates(){}
   rigChange($event) {
@@ -324,6 +346,8 @@ getLocations(){
       this.typeOfCrossing = this.selectedItem[0].type_of_crossing;
       this.typeOfStructure = this.selectedItem[0].type_of_structure;
       this.chainageId = this.selectedItem[0].chainage_id;
+      this.boreholeNumber = this.selectedItem[0].bhno;
+
       console.log('typeOfStructure : ', this.typeOfStructure);
     }
   }

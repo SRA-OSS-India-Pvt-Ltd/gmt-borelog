@@ -1,24 +1,26 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/viewlist"></ion-back-button>
+      <ion-back-button defaultHref="/iterations"></ion-back-button>
     </ion-buttons>
-    <ion-title style="white-space: pre-wrap !important;" >Layer3 - View/Edit</ion-title>
+    <ion-title style="white-space: pre-wrap !important;" >Iteration - View/Edit</ion-title>
 
 
   </ion-toolbar>
 </ion-header>
 
 
-<ion-content>
+
+
+ <ion-content>
 
   <ion-list>
     <ion-item class="padding1">
-      <ion-label class="label"><strong>Layer3</strong><span class="required-asterisk">*</span></ion-label>
+      <ion-label class="label"><strong>Iteration no : {{sno}}</strong></ion-label>
     </ion-item>
 
     <ion-item class="padding1">
-      <ion-label class="label"><strong>Logging Information</strong><span class="required-asterisk">*</span></ion-label>
+      <ion-label class="label"><strong>Logging Information</strong></ion-label>
     </ion-item>
     <ion-grid fixed>
       <ion-row>
@@ -29,7 +31,7 @@
         </ion-col>
         <ion-col size="6">
           <ion-item class="input">
-            <ion-input type="number" [(ngModel)]="drillingFrom" ></ion-input>
+            <ion-input type="number" [(ngModel)]="drillingFrom" (ionChange)="runLengthCalicualtion()" ></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -41,7 +43,7 @@
         </ion-col>
         <ion-col size="6">
           <ion-item class="input">
-            <ion-input type="number" [(ngModel)]="drillingTo" ></ion-input>
+            <ion-input type="number" [(ngModel)]="drillingTo" (ionChange)="runLengthCalicualtion()" ></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -54,10 +56,10 @@
         <ion-col size="6">
           <ion-item class="input">
             <ion-item>
-              <ion-select  placeholder="Select " (ionChange)="strataChange($event)" value="{{typeOfstrata}}">
-                <ion-select-option value="Soil">Soil</ion-select-option>
-                <ion-select-option value="Rock">Rock</ion-select-option>
-              </ion-select>
+              <ion-label  style="white-space: pre-wrap !important;">{{typeOfstrata}}</ion-label>
+
+
+
             </ion-item>
           </ion-item>
         </ion-col>
@@ -70,22 +72,15 @@
         </ion-col>
         <ion-col size="6">
           <ion-item class="input">
-            <ion-item>
-              <ion-select  placeholder="Select " (ionChange)="sampleChange($event)" value="{{typeOfsample}}">
-                <ion-select-option value="DS">DS</ion-select-option>
-                <ion-select-option value="SPT">SPT</ion-select-option>
-                <ion-select-option value="UDS">UDS</ion-select-option>
+            <ion-label>{{typeOfsample}}</ion-label>
 
-
-              </ion-select>
-            </ion-item>
           </ion-item>
         </ion-col>
       </ion-row>
       <ion-row *ngIf="isdsDepth">
         <ion-col size="6">
           <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>DS Depth From (m):</strong><span class="required-asterisk">*</span></ion-label>
+            <ion-label  style="white-space: pre-wrap !important;"><strong>DS Depth (m):</strong><span class="required-asterisk">*</span></ion-label>
           </ion-item>
         </ion-col>
         <ion-col size="6">
@@ -94,24 +89,13 @@
           </ion-item>
         </ion-col>
       </ion-row>
-      <ion-row *ngIf="isdsDepth">
-        <ion-col size="6">
-          <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>DS Depth To (m):</strong><span class="required-asterisk">*</span></ion-label>
-          </ion-item>
-        </ion-col>
-        <ion-col size="6">
-          <ion-item class="input">
-            <ion-input type="number" [(ngModel)]="dsDepthTo" ></ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
+
 
 
       <ion-row *ngIf="isSPTDepth">
         <ion-col size="6">
           <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>SPT Depth From (m):</strong><span class="required-asterisk">*</span></ion-label>
+            <ion-label  style="white-space: pre-wrap !important;"><strong>SPT Depth  (m):</strong><span class="required-asterisk">*</span></ion-label>
           </ion-item>
         </ion-col>
         <ion-col size="6">
@@ -120,18 +104,7 @@
           </ion-item>
         </ion-col>
       </ion-row>
-      <ion-row *ngIf="isSPTDepth">
-        <ion-col size="6">
-          <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>SPT Depth To (m):</strong><span class="required-asterisk">*</span></ion-label>
-          </ion-item>
-        </ion-col>
-        <ion-col size="6">
-          <ion-item class="input">
-            <ion-input type="number" [(ngModel)]="sptDepthTo" ></ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
+
       <ion-row *ngIf="isSPTDepth">
         <ion-col size="6">
           <ion-item class="padding">
@@ -184,16 +157,17 @@
   <ion-col size="3"><ion-item class="input"><ion-label>{{totalB}}</ion-label></ion-item></ion-col>
 
   </ion-row>
-  <ion-row *ngIf="oneB">
+
+  <ion-row *ngIf="oneB" >
     <ion-col size="12" ><ion-item class="padding"><ion-label class="redtext"><strong>Refusal</strong></ion-label></ion-item></ion-col>
   </ion-row>
 
-  
+
 
   <ion-row *ngIf="isUDSepth">
     <ion-col size="6">
       <ion-item class="padding">
-        <ion-label  style="white-space: pre-wrap !important;"><strong>UDS Depth From (m):</strong><span class="required-asterisk">*</span></ion-label>
+        <ion-label  style="white-space: pre-wrap !important;"><strong>UDS Depth  (m):</strong><span class="required-asterisk">*</span></ion-label>
       </ion-item>
     </ion-col>
     <ion-col size="6">
@@ -203,92 +177,50 @@
     </ion-col>
   </ion-row>
 
-  <ion-row *ngIf="isUDSepth">
-    <ion-col size="6">
-      <ion-item class="padding">
-        <ion-label  style="white-space: pre-wrap !important;"><strong>UDS Depth To (m):</strong><span class="required-asterisk">*</span></ion-label>
-      </ion-item>
-    </ion-col>
-    <ion-col size="6">
-      <ion-item class="input">
-        <ion-input type="number" [(ngModel)]="udsDepthTo" ></ion-input>
-      </ion-item>
-    </ion-col>
-  </ion-row>
 
-  <ion-row *ngIf="isSoil" >
+
+  <ion-row *ngIf="isSoil">
     <ion-col size="6">
       <ion-item class="padding">
-        <ion-label  style="white-space: pre-wrap !important;"><strong>Soil Sample Color:</strong><span class="required-asterisk">*</span></ion-label>
-      </ion-item>
-    </ion-col>
-    <ion-col size="6">
-      <ion-item class="input">
-        <ion-input type="text" [(ngModel)]="soilSampleColor" ></ion-input>
-      </ion-item>
-    </ion-col>
-  </ion-row>
-  <ion-row  *ngIf="isSoil">
-    <ion-col size="6">
-      <ion-item class="padding">
-        <ion-label  style="white-space: pre-wrap !important;"><strong>Type of Soil:</strong><span class="required-asterisk">*</span></ion-label>
+        <ion-label style="white-space: pre-wrap !important;"><strong>Soil Sample Color:</strong><span
+            class="required-asterisk">*</span></ion-label>
       </ion-item>
     </ion-col>
     <ion-col size="6">
       <ion-item class="input">
 
-        <ion-select  placeholder="Select" (ionChange)="typeOfSoilChange($event)" value="{{typeOfSoil}}">
-           <ion-select-option value="Cohesive">Cohesive</ion-select-option>
-           <ion-select-option value="Cohesion less">Cohesion less</ion-select-option>
-         </ion-select>
 
-        </ion-item>
+        <ion-select interface="popover" placeholder="Select " (ionChange)="colorChange($event)" value="{{soilSampleColor}}">
+          <ion-select-option value="Brownish">Brownish</ion-select-option>
+          <ion-select-option value="Reddish">Reddish</ion-select-option>
+          <ion-select-option value="Greyish">Greyish</ion-select-option>
+          <ion-select-option value="Other">Other</ion-select-option>
+
+        </ion-select>
+
+      </ion-item>
     </ion-col>
   </ion-row>
 
-  <ion-row *ngIf="isCohessive" >
+
+
+  <ion-row *ngIf="isColorShown">
     <ion-col size="6">
       <ion-item class="padding">
-        <ion-label  style="white-space: pre-wrap !important;"><strong>Density / Consistency:</strong><span class="required-asterisk">*</span></ion-label>
+        <ion-label style="white-space: pre-wrap !important;"><strong>Soil Sample Color Other:</strong><span
+            class="required-asterisk">*</span></ion-label>
       </ion-item>
     </ion-col>
     <ion-col size="6">
       <ion-item class="input">
 
-        <ion-select  placeholder="Select" (ionChange)="densityConsiChange($event)" value="{{densityConsistace}}">
-           <ion-select-option value="Very soft">Very soft</ion-select-option>
-           <ion-select-option value="Soft">Soft</ion-select-option>
-           <ion-select-option value="Medium">Medium</ion-select-option>
-           <ion-select-option value="Stiff">Stiff</ion-select-option>
-           <ion-select-option value="Very Stiff">Very Stiff</ion-select-option>
-           <ion-select-option value="Hard">Hard</ion-select-option>
 
-         </ion-select>
+        <ion-input type="text" [(ngModel)]="colorOther"></ion-input>
 
-        </ion-item>
-    </ion-col>
-  </ion-row>
-  <ion-row *ngIf="isCohesion" >
-    <ion-col size="6">
-      <ion-item class="padding">
-        <ion-label  style="white-space: pre-wrap !important;"><strong>Density / Consistency:</strong><span class="required-asterisk">*</span></ion-label>
       </ion-item>
     </ion-col>
-    <ion-col size="6">
-      <ion-item class="input">
-
-        <ion-select  placeholder="Select" (ionChange)="densityConsiChange1($event)" value="{{densityConsistace}}">
-           <ion-select-option value="Very loose">Very loose</ion-select-option>
-           <ion-select-option value="Loose">Loose</ion-select-option>
-           <ion-select-option value="Medium">Medium</ion-select-option>
-           <ion-select-option value="Dense">Dense</ion-select-option>
-           <ion-select-option value="Very Dense">Very Dense</ion-select-option>
-
-         </ion-select>
-
-        </ion-item>
-    </ion-col>
   </ion-row>
+
 
   <ion-row *ngIf="isSoil" >
     <ion-col size="6">
@@ -339,59 +271,48 @@
   <ion-row *ngIf="isRock">
     <ion-col size="6">
       <ion-item class="padding">
-        <ion-label  style="white-space: pre-wrap !important;"><strong>Rock Depth From:</strong><span class="required-asterisk">*</span></ion-label>
+        <ion-label  style="white-space: pre-wrap !important;"><strong>Rock Depth From (m):</strong><span class="required-asterisk">*</span></ion-label>
       </ion-item>
     </ion-col>
     <ion-col size="6">
       <ion-item class="input">
-        <ion-input type="text" [(ngModel)]="rockDepthFrom" ></ion-input>
+        <ion-input type="number" [(ngModel)]="rockDepthFrom" ></ion-input>
       </ion-item>
     </ion-col>
   </ion-row>
   <ion-row *ngIf="isRock">
     <ion-col size="6">
       <ion-item class="padding">
-        <ion-label  style="white-space: pre-wrap !important;"><strong>Rock Depth To:</strong><span class="required-asterisk">*</span></ion-label>
+        <ion-label  style="white-space: pre-wrap !important;"><strong>Rock Depth To (m):</strong><span class="required-asterisk">*</span></ion-label>
       </ion-item>
     </ion-col>
     <ion-col size="6">
       <ion-item class="input">
-        <ion-input type="text" [(ngModel)]="rockDepthTo" ></ion-input>
+        <ion-input type="number" [(ngModel)]="rockDepthTo" ></ion-input>
       </ion-item>
     </ion-col>
   </ion-row>
 
 
-  <ion-row *ngIf="isRock" >
-    <ion-col size="6">
-      <ion-item class="padding">
-        <ion-label  style="white-space: pre-wrap !important;"><strong>Run Length (m):</strong><span class="required-asterisk">*</span></ion-label>
-      </ion-item>
-    </ion-col>
-    <ion-col size="6">
-      <ion-item class="input">
-           <ion-input type="number" [(ngModel)]="runLength" (ionChange)="crCaliculation()"></ion-input>
-        </ion-item>
-    </ion-col>
-  </ion-row>
+
 
 
   <ion-row *ngIf="isRock" >
     <ion-col size="6">
       <ion-item class="padding">
-        <ion-label  style="white-space: pre-wrap !important;"><strong>Run Time (hr):</strong><span class="required-asterisk">*</span></ion-label>
+        <ion-label  style="white-space: pre-wrap !important;"><strong>Run Time (hr):</strong></ion-label>
       </ion-item>
     </ion-col>
     <ion-col size="6">
       <ion-item class="input">
-           <ion-input type="number" [(ngModel)]="runTime"></ion-input>
-        </ion-item>
+        <ion-label style="white-space: pre-wrap !important;"><strong>{{runLength}}</strong></ion-label>
+      </ion-item>
     </ion-col>
   </ion-row>
   <ion-row *ngIf="isRock" >
     <ion-col size="6">
       <ion-item class="padding">
-        <ion-label  style="white-space: pre-wrap !important;"><strong>Water Loss (%):</strong><span class="required-asterisk">*</span></ion-label>
+        <ion-label  style="white-space: pre-wrap !important;"><strong>Water Loss (%):</strong></ion-label>
       </ion-item>
     </ion-col>
     <ion-col size="6">
@@ -401,54 +322,36 @@
     </ion-col>
   </ion-row>
 
-  <ion-row *ngIf="isRock" >
-    <ion-col size="6">
-      <ion-item class="padding">
-        <ion-label  style="white-space: pre-wrap !important;"><strong>All Rock Pieces lengths:</strong><span class="required-asterisk">*</span></ion-label>
-      </ion-item>
-    </ion-col>
-    <ion-col size="6">
-      <ion-item class="input">
-           <ion-input type="number" [(ngModel)]="allRockPiecesLenth" (ionChange)="crCaliculation()"></ion-input>
-        </ion-item>
-    </ion-col>
-  </ion-row>
-  <ion-row  *ngIf="isRock" >
-    <ion-col size="6">
-      <ion-item class="padding">
-        <ion-label  style="white-space: pre-wrap !important;"><strong>Rock Pieces length >10 cm:</strong><span class="required-asterisk">*</span></ion-label>
-      </ion-item>
-    </ion-col>
-    <ion-col size="6">
-      <ion-item class="input">
-           <ion-input type="number" [(ngModel)]="rockPicesLengthgrze" (ionChange)="crCaliculation()" ></ion-input>
-        </ion-item>
-    </ion-col>
-  </ion-row>
+
+
 
   <ion-row *ngIf="isRock" >
     <ion-col size="6">
       <ion-item class="padding">
-        <ion-label  style="white-space: pre-wrap !important;"><strong>CR %:</strong> <span class="required-asterisk">*</span></ion-label>
+        <ion-label  style="white-space: pre-wrap !important;"><strong>CR %:</strong> </ion-label>
       </ion-item>
     </ion-col>
     <ion-col size="6">
       <ion-item class="input">
-        <ion-label  style="white-space: pre-wrap !important;"><strong>{{cr}}</strong></ion-label>
-        </ion-item>
+        <ion-input type="number" [(ngModel)]="cr"></ion-input>
+
+
+      </ion-item>
     </ion-col>
   </ion-row>
 
   <ion-row  *ngIf="isRock">
     <ion-col size="6">
       <ion-item class="padding">
-        <ion-label  style="white-space: pre-wrap !important;"><strong>RQD %:</strong> <span class="required-asterisk">*</span></ion-label>
+        <ion-label  style="white-space: pre-wrap !important;"><strong>RQD %:</strong> </ion-label>
       </ion-item>
     </ion-col>
     <ion-col size="6">
       <ion-item class="input">
-        <ion-label  style="white-space: pre-wrap !important;"><strong>{{rqd}}</strong></ion-label>
-        </ion-item>
+        <ion-input type="number" [(ngModel)]="rqd"></ion-input>
+
+
+      </ion-item>
     </ion-col>
   </ion-row>
 
@@ -489,30 +392,20 @@
     </ion-col>
   </ion-row>
 
-  <ion-row *ngIf="isRock"  >
-    <ion-col size="6">
-      <ion-item class="padding">
-        <ion-label  style="white-space: pre-wrap !important;"><strong>Type Of Rock</strong><span class="required-asterisk">*</span></ion-label>
-      </ion-item>
-    </ion-col>
-    <ion-col size="6">
-      <ion-item class="input">
-        <ion-input type="text" [(ngModel)]="typeOfRock"></ion-input>
-        </ion-item>
-    </ion-col>
-  </ion-row>
+
   <ion-row>
-    <ion-col size="6">
+    <ion-col size="12">
       <ion-button  expand="block" style="text-transform: none;" (click)="validation()">
         Update and Proceed
+
       </ion-button>
     </ion-col>
-    <ion-col size="6">
+    <!-- <ion-col size="6">
       <ion-button  expand="block" style="text-transform: none;" (click)="onClick()">
         Next
       </ion-button>
 
-    </ion-col>
+    </ion-col> -->
 
   </ion-row>
 

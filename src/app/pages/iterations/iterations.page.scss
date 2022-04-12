@@ -1,0 +1,101 @@
+
+
+  .label{
+    position: fixed;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+
+
+  }
+  .padding{
+      margin: 2px;
+    --border-width: 0;
+    --inner-border-width: 0;
+  }
+  .padding1{
+    margin: 2px;
+
+    --border-width: 0;
+  --inner-border-width: 0;
+}
+  .input{
+    margin: 2px;
+    border: 2px solid;
+    border-radius: 4px;
+
+    border-color:  #3880ff;
+    --border-width: 0;
+    --inner-border-width: 0;
+
+
+  }
+  .card {
+    border: 3px solid #0093d2
+  }
+  .img2{
+    width: 50% !important;
+    height: 50% !important;
+   }
+  .button{
+      margin: 5px;
+  }
+  .required-asterisk{
+    color: red;
+    font-weight: bold;
+    margin-left: 3px;
+    font-size: 1.2em;
+}
+.autocomplete {
+  width: 100%;
+
+  ion-item {
+      ion-input {
+          padding: 1px !important;
+      }
+  }
+
+  ion-list {
+      position: absolute;
+      width: 95%;
+      overflow-y: scroll;
+      max-height: 150%;
+      border: 5px;
+      z-index: 999;
+
+      ion-item {
+          background: #f1f1f1;
+      }
+
+      ion-item:hover {
+          cursor: pointer;
+          background: #dddddd
+      }
+  }
+
+
+}
+
+.fab {
+  contain: initial;
+}
+
+ion-fab {
+  ion-fab-list button[ion-fab] {
+    overflow: visible;
+
+    div.label {
+      position: absolute;
+      right: 48px;
+      background: rgba(0,0,0,0.7);
+      height: 24px;
+      line-height: 16px;
+      padding: 5px 8px;
+      border-radius: 3px;
+      color: #fff;
+      box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.14), 0 4px 5px rgba(0, 0, 0, 0.1);
+    }
+  }
+}
+
+

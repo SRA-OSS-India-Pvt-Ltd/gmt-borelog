@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-inferrable-types */
 /* eslint-disable max-len */
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable radix */
@@ -19,10 +20,10 @@ export class Update3Page implements OnInit {
   typeOfsample: any;
   isdsDepth = false;
   dsDepthFrom: any;
-  dsDepthTo: any;
+
   isSPTDepth = false;
   sptDepthFrom: any;
-  sptDepthTo: any;
+
   first: any;
   second: any;
   third: any;
@@ -33,33 +34,44 @@ export class Update3Page implements OnInit {
   totalB: any;
   isUDSepth = false;
   udsDepthFrom: any;
-  udsDepthTo: any;
 
   soilSampleColor: any;
 typeOfSoil: any;
-isCohessive = false;
-densityConsistace: any;
-isCohesion = false;
+
+
+
 visualClassification: any;
+
 rockSample: any;
 runLength: any;
-runTime: any;
-waterLoss: any;
-allRockPiecesLenth: any;
-rockPicesLengthgrze: any;
-cr: any;
-rqd: any;
+runTime: string = '';
+waterLoss: string = '';
+
+
+cr: string = '';
+rqd: string = '';
 typeOfWeathering: any;
 rockSamplColor: any;
-typeOfRock: any;
+
 layer1List: any =[];
+isSoil = false;
 isRock = false;
+one = false;
+two = false;
+three = false;
+four = false;
+oneB = false;
+twoB = false;
+threeB = false;
+fourB = false;
+bhid: any;
 rockDepthTo: any;
 rockDepthFrom: any;
-isSoil = false;
-oneB = false;
 sptstatus: any;
+isColorShown = false;
+colorOther: any;
 increme: number;
+sno: any;
 
   constructor(public toastSer: ToastService,
     public androidDatabase: AndroidDatabaseService,
@@ -132,148 +144,35 @@ increme: number;
 
 
 
-  strataChange($event){
-    this.typeOfstrata= $event.target.value;
+  colorChange($event){
+    this.soilSampleColor = $event.target.value;
     console.log($event.target.value);
-    if(this.typeOfstrata === 'Soil'){
-    this.isSoil = true;
-    this.isRock = false;
-    this.oneB= false;
-    this.rockDepthFrom = '',
-    this.rockDepthTo = '';
-    this.rockSample = '';
-    this.runLength = '';
-    this.runTime = '';
-    this.waterLoss = '';
-    this.allRockPiecesLenth = '';
-    this.rockPicesLengthgrze = '';
-    this.rockSamplColor = '';
-    this.typeOfWeathering = '';
-    this.typeOfRock = '';
-    this.cr='';
-    this.rqd = '';
-
-
-    }else if(this.typeOfstrata === 'Rock'){
-      this.oneB= false;
-
-      this.isCohesion = false;
-      this.isCohessive = false;
-      this.isSoil = false;
-      this.isRock = true;
-      this.isSPTDepth = false;
-      this.isUDSepth = false;
-      this.isdsDepth = false;
-      this.typeOfsample = '';
-      this.soilSampleColor = '';
-      this.typeOfSoil = '';
-      this.densityConsistace = '';
-      this.visualClassification = '';
-
-      this.dsDepthFrom = '';
-      this.dsDepthTo = '';
-      this.sptDepthFrom = '';
-      this.sptDepthTo = '';
-      this.udsDepthFrom = '';
-      this.udsDepthTo = '';
-      this.first = '';
-      this.second = '';
-      this.third = '';
-      this.total = '';
-      this.firstB = '';
-      this.secondB = '';
-      this.thirdB = '';
-      this.totalB = '';
-      this.isCohesion = false;
-      this.isCohessive = false;
-
-
-
+    if(this.soilSampleColor === 'Other'){
+      this.isColorShown = true;
+    }else{
+      this.isColorShown = false;
 
     }
-    }
-    sampleChange($event){
-      this.typeOfsample= $event.target.value;
-      console.log($event.target.value);
-      if(this.typeOfsample === 'DS'){
-        this.isdsDepth = true;
-        this.oneB = false;
 
-        this.isSPTDepth = false;
-        this.isUDSepth = false;
-        this.first = '';
-        this.second = '';
-        this.third = '';
-        this.total = '';
-        this.firstB = '';
-        this.secondB = '';
-        this.thirdB = '';
-        this.totalB = '';
-        this.sptDepthFrom = '';
-        this.sptDepthTo = '';
-        this.udsDepthFrom = '';
-        this.udsDepthTo = '';
+  }
 
-      }else if(this.typeOfsample === 'SPT'){
-        this.isdsDepth = false;
-        this.isSPTDepth = true;
-        this.oneB = false;
-
-        this.isUDSepth = false;
-        this.dsDepthFrom = '';
-        this.dsDepthTo = '';
-        this.udsDepthFrom = '';
-        this.udsDepthTo = '';
-
-
-      }else if(this.typeOfsample === 'UDS'){
-        this.isdsDepth = false;
-        this.isSPTDepth = false;
-        this.isUDSepth = true;
-        this.oneB = false;
-
-        this.dsDepthFrom = '';
-        this.dsDepthTo = '';
-        this.first = '';
-        this.second = '';
-        this.third = '';
-        this.total = '';
-        this.firstB = '';
-        this.secondB = '';
-        this.thirdB = '';
-        this.totalB = '';
-        this.sptDepthFrom = '';
-        this.sptDepthTo = '';
-
+  runLengthCalicualtion() {
+    if (
+      this.drillingFrom !== undefined &&
+      this.drillingTo !== undefined &&
+      this.drillingFrom !== 0 &&
+      this.drillingTo !== 0
+    ) {
+      if(this.drillingTo > this.drillingFrom){
+      this.runLength = this.drillingTo - this.drillingFrom;
+      }else{
+        this.runLength = this.drillingFrom - this.drillingTo;
 
       }
-
     }
-    typeOfSoilChange($event){
-     this.typeOfSoil = $event.target.value;
-     console.log($event.target.value);
-     if(this.typeOfSoil === 'Cohesive'){
-       this.isCohessive = true;
-       this.isCohesion = false;
-       this.densityConsistace = '';
+  }
 
-     }else{
-       this.isCohesion = true;
-       this.isCohessive = false;
-       this.densityConsistace = '';
-
-
-     }
-    }
-    densityConsiChange($event){
-     this.densityConsistace =$event.target.value;
-     console.log($event.target.value);
-    }
-    densityConsiChange1($event){
-      this.densityConsistace =$event.target.value;
-      console.log($event.target.value);
-     }
-     visualChange($event){
+    visualChange($event){
        this.visualClassification = $event.target.value;
        console.log($event.target.value);
 
@@ -283,368 +182,297 @@ increme: number;
        console.log($event.target.value);
 
      }
-     crCaliculation(){
-       if(this.allRockPiecesLenth !== '' && this.runLength !== ''){
-       this.cr= this.allRockPiecesLenth/this.runLength;
-       }
-       if(this.rockPicesLengthgrze !== '' && this.runLength !== ''){
-        this.rqd= this.rockPicesLengthgrze/this.runLength;
-        }
 
-     }
      weatheringChange($event){
        this.typeOfWeathering = $event.target.value;
        console.log($event.target.value);
 
      }
 
-     onClick(){
-      if(this.layer1List[0].depth_termination === undefined ||
-        this.layer1List[0].depth_termination === 'undefined' ||
-        this.layer1List[0].depth_termination === null ||
-        this.layer1List[0].depth_termination === 'null' ){
-        this.router.navigate(['layer4']);
 
-      }else{
-        this.router.navigate(['update4']);
+
+  validation(){
+    if(this.drillingFrom === ''){
+      this.toastSer.presentError('Please Enter  Drilling From');
+    }else if(this.drillingTo === ''){
+     this.toastSer.presentError('Please Enter  Drilling To');
+
+    }else if(this.typeOfstrata === ''){
+     this.toastSer.presentError('Please Select  Type of Strata');
+
+    }else if(this.drillingFrom === 0){
+      this.toastSer.presentError('Please Enter  Drilling From, It should not be Zero');
+    }else if(this.drillingTo === 0){
+     this.toastSer.presentError('Please Enter  Drilling To,It should not be Zero');
+
+    }else if(this.drillingFrom === null){
+      this.toastSer.presentError('Please Enter  Drilling From');
+    }else if(this.drillingTo === null){
+     this.toastSer.presentError('Please Enter  Drilling To');
+
+    }
+    else if(this.typeOfstrata === 'Soil'){
+
+      if(this.typeOfsample === ''){
+       this.toastSer.presentError('Please Select  Type of Sample');
+
+      }else if(this.typeOfsample === 'DS' && this.dsDepthFrom === ''){
+       this.toastSer.presentError('Please Enter  Ds Depth From');
 
       }
+      else if(this.typeOfsample === 'SPT' && this.sptDepthFrom === ''){
+       this.toastSer.presentError('Please Enter  SPT Depth From');
 
-  }
+      }
+      else if(this.typeOfsample === 'SPT' && this.first === ''){
+       this.toastSer.presentError('Please Enter  Penetration From First');
+      }else if(this.typeOfsample === 'SPT' && this.second === ''){
+       this.toastSer.presentError('Please Enter  Penetration From Second');
+      }else if(this.typeOfsample === 'SPT' && this.third === ''){
+       this.toastSer.presentError('Please Enter  Penetration From Third');
 
+      }else if(this.typeOfsample === 'SPT' && this.firstB === ''){
+       this.toastSer.presentError('Please Enter  Blows - N From First');
 
-validation(){
-  if(this.drillingFrom === ''){
-    this.toastSer.presentError('Please Enter  Drilling From');
-  }else if(this.drillingTo === ''){
-   this.toastSer.presentError('Please Enter  Drilling To');
+      }else if(this.typeOfsample === 'SPT' && this.secondB === ''){
+       this.toastSer.presentError('Please Enter  Blows - N From Second');
 
-  }else if(this.typeOfstrata === ''){
-   this.toastSer.presentError('Please Select  Type of Strata');
+      }else if(this.typeOfsample === 'SPT' && this.thirdB === ''){
+       this.toastSer.presentError('Please Enter  Blows - N From Third');
 
-  }else if(this.drillingFrom === 0){
-    this.toastSer.presentError('Please Enter  Drilling From, It should not be Zero');
-  }else if(this.drillingTo === 0){
-   this.toastSer.presentError('Please Enter  Drilling To,It should not be Zero');
+      }else if(this.typeOfsample === 'UDS' && this.udsDepthFrom === ''){
+       this.toastSer.presentError('Please Enter  UDS Depth From');
 
-  }else if(this.drillingFrom === null){
-    this.toastSer.presentError('Please Enter  Drilling From');
-  }else if(this.drillingTo === null){
-   this.toastSer.presentError('Please Enter  Drilling To');
-
-  }
-  else if(this.typeOfstrata === 'Soil'){
-
-    if(this.typeOfsample === ''){
-     this.toastSer.presentError('Please Select  Type of Sample');
-
-    }else if(this.typeOfsample === 'DS' && this.dsDepthFrom === ''){
-     this.toastSer.presentError('Please Enter  Ds Depth From');
-
-    }else if(this.typeOfsample === 'DS' && this.dsDepthTo === ''){
-     this.toastSer.presentError('Please Enter  Ds Depth To');
-
-    }else if(this.typeOfsample === 'SPT' && this.sptDepthFrom === ''){
-     this.toastSer.presentError('Please Enter  SPT Depth From');
-
-    }else if(this.typeOfsample === 'SPT' && this.sptDepthTo === ''){
-     this.toastSer.presentError('Please Enter  SPT Depth To');
-
-    }else if(this.typeOfsample === 'SPT' && this.first === ''){
-     this.toastSer.presentError('Please Enter  Penetration From First');
-    }else if(this.typeOfsample === 'SPT' && this.second === ''){
-     this.toastSer.presentError('Please Enter  Penetration From Second');
-    }else if(this.typeOfsample === 'SPT' && this.third === ''){
-     this.toastSer.presentError('Please Enter  Penetration From Third');
-
-    }else if(this.typeOfsample === 'SPT' && this.firstB === ''){
-     this.toastSer.presentError('Please Enter  Blows - N From First');
-
-    }else if(this.typeOfsample === 'SPT' && this.secondB === ''){
-     this.toastSer.presentError('Please Enter  Blows - N From Second');
-
-    }else if(this.typeOfsample === 'SPT' && this.thirdB === ''){
-     this.toastSer.presentError('Please Enter  Blows - N From Third');
-
-    }else if(this.typeOfsample === 'UDS' && this.udsDepthFrom === ''){
-     this.toastSer.presentError('Please Enter  UDS Depth From');
-
-    }else if(this.typeOfsample === 'UDS' && this.udsDepthTo === ''){
-     this.toastSer.presentError('Please Enter  UDS Depth To');
       }else if(this.soilSampleColor === ''){
-     this.toastSer.presentError('Please Enter   Soil Sample Color');
+       this.toastSer.presentError('Please Enter   Soil Sample Color');
+      }else if(this.soilSampleColor === 'Other' && this.colorOther === undefined){
+        this.toastSer.presentError('Please Enter   Soil Sample Color Other');
 
-    }else if(this.typeOfSoil === ''){
-     this.toastSer.presentError('Please Select   Type Of soil');
+       }else if(this.soilSampleColor === 'Other' && this.colorOther === ''){
+        this.toastSer.presentError('Please Enter   Soil Sample Color Other');
 
-    }else if( this.densityConsistace === ''){
-     this.toastSer.presentError('Please Enter  Density / Consistency');
-    }else if( this.visualClassification === ''){
-     this.toastSer.presentError('Please Enter  Visual Classification of Sample');
-    }else if(this.typeOfsample === 'DS' && this.dsDepthFrom === 0){
-      this.toastSer.presentError('Please Enter  Ds Depth From, It should not be Zero');
+       }else if(this.soilSampleColor === 'Other' && this.colorOther === null){
+        this.toastSer.presentError('Please Enter   Soil Sample Color Other');
 
-     }else if(this.typeOfsample === 'DS' && this.dsDepthTo === 0){
-      this.toastSer.presentError('Please Enter  Ds Depth To,It should not be Zero');
+       }
+      else if(this.typeOfSoil === ''){
+       this.toastSer.presentError('Please Select   Type Of soil');
 
-     }else if(this.typeOfsample === 'SPT' && this.sptDepthFrom === 0){
-      this.toastSer.presentError('Please Enter  SPT Depth From,It should not be Zero');
+      }else if( this.visualClassification === ''){
+       this.toastSer.presentError('Please Enter  Visual Classification of Sample');
+      }else if(this.typeOfsample === 'DS' && this.dsDepthFrom === 0){
+        this.toastSer.presentError('Please Enter  Ds Depth From, It should not be Zero');
 
-     }else if(this.typeOfsample === 'SPT' && this.sptDepthTo === 0){
-      this.toastSer.presentError('Please Enter  SPT Depth To,It should not be Zero');
+       }else if(this.typeOfsample === 'SPT' && this.sptDepthFrom === 0){
+        this.toastSer.presentError('Please Enter  SPT Depth From,It should not be Zero');
 
-     }else if(this.typeOfsample === 'SPT' && this.first === 0){
-      this.toastSer.presentError('Please Enter  Penetration From First,It should not be Zero');
-     }else if(this.typeOfsample === 'SPT' && this.second === 0){
-      this.toastSer.presentError('Please Enter  Penetration From Second,It should not be Zero');
-     }else if(this.typeOfsample === 'SPT' && this.third === 0){
-      this.toastSer.presentError('Please Enter  Penetration From Third,It should not be Zero');
+       }else if(this.typeOfsample === 'SPT' && this.first === 0){
+        this.toastSer.presentError('Please Enter  Penetration From First,It should not be Zero');
+       }else if(this.typeOfsample === 'SPT' && this.second === 0){
+        this.toastSer.presentError('Please Enter  Penetration From Second,It should not be Zero');
+       }else if(this.typeOfsample === 'SPT' && this.third === 0){
+        this.toastSer.presentError('Please Enter  Penetration From Third,It should not be Zero');
 
-     }else if(this.typeOfsample === 'SPT' && this.firstB === 0){
-      this.toastSer.presentError('Please Enter  Blows - N From First,It should not be Zero');
+       }else if(this.typeOfsample === 'SPT' && this.firstB === 0){
+        this.toastSer.presentError('Please Enter  Blows - N From First,It should not be Zero');
 
-     }else if(this.typeOfsample === 'SPT' && this.secondB === 0){
-      this.toastSer.presentError('Please Enter  Blows - N From Second,It should not be Zero');
+       }else if(this.typeOfsample === 'SPT' && this.secondB === 0){
+        this.toastSer.presentError('Please Enter  Blows - N From Second,It should not be Zero');
 
-     }else if(this.typeOfsample === 'SPT' && this.thirdB === 0){
-      this.toastSer.presentError('Please Enter  Blows - N From Third,It should not be Zero');
+       }else if(this.typeOfsample === 'SPT' && this.thirdB === 0){
+        this.toastSer.presentError('Please Enter  Blows - N From Third,It should not be Zero');
 
-     }else if(this.typeOfsample === 'UDS' && this.udsDepthFrom === 0){
-      this.toastSer.presentError('Please Enter  UDS Depth From,It should not be Zero');
+       }else if(this.typeOfsample === 'UDS' && this.udsDepthFrom === 0){
+        this.toastSer.presentError('Please Enter  UDS Depth From,It should not be Zero');
 
-     }else if(this.typeOfsample === 'UDS' && this.udsDepthTo === 0){
-      this.toastSer.presentError('Please Enter  UDS Depth To,It should not be Zero');
-    }
-    else if(this.typeOfsample === 'DS' && this.dsDepthFrom === null){
-      this.toastSer.presentError('Please Enter  Ds Depth From');
+       }
 
-     }else if(this.typeOfsample === 'DS' && this.dsDepthTo === null ){
-      this.toastSer.presentError('Please Enter  Ds Depth To');
+      else if(this.typeOfsample === 'DS' && this.dsDepthFrom === null){
+        this.toastSer.presentError('Please Enter  Ds Depth From');
 
-     }else if(this.typeOfsample === 'SPT' && this.sptDepthFrom === null){
-      this.toastSer.presentError('Please Enter  SPT Depth From');
+       }else if(this.typeOfsample === 'SPT' && this.sptDepthFrom === null){
+        this.toastSer.presentError('Please Enter  SPT Depth From');
 
-     }else if(this.typeOfsample === 'SPT' && this.sptDepthTo === null){
-      this.toastSer.presentError('Please Enter  SPT Depth To');
+       }else if(this.typeOfsample === 'SPT' && this.first === null){
+        this.toastSer.presentError('Please Enter  Penetration From First');
+       }else if(this.typeOfsample === 'SPT' && this.second === null){
+        this.toastSer.presentError('Please Enter  Penetration From Second');
+       }else if(this.typeOfsample === 'SPT' && this.third === null){
+        this.toastSer.presentError('Please Enter  Penetration From Third');
 
-     }else if(this.typeOfsample === 'SPT' && this.first === null){
-      this.toastSer.presentError('Please Enter  Penetration From First');
-     }else if(this.typeOfsample === 'SPT' && this.second === null){
-      this.toastSer.presentError('Please Enter  Penetration From Second');
-     }else if(this.typeOfsample === 'SPT' && this.third === null){
-      this.toastSer.presentError('Please Enter  Penetration From Third');
+       }else if(this.typeOfsample === 'SPT' && this.firstB === null){
+        this.toastSer.presentError('Please Enter  Blows - N From First');
 
-     }else if(this.typeOfsample === 'SPT' && this.firstB === null){
-      this.toastSer.presentError('Please Enter  Blows - N From First');
+       }else if(this.typeOfsample === 'SPT' && this.secondB === null){
+        this.toastSer.presentError('Please Enter  Blows - N From Second');
 
-     }else if(this.typeOfsample === 'SPT' && this.secondB === null){
-      this.toastSer.presentError('Please Enter  Blows - N From Second');
+       }else if(this.typeOfsample === 'SPT' && this.thirdB === null){
+        this.toastSer.presentError('Please Enter  Blows - N From Third');
 
-     }else if(this.typeOfsample === 'SPT' && this.thirdB === null){
-      this.toastSer.presentError('Please Enter  Blows - N From Third');
+       }else if(this.typeOfsample === 'UDS' && this.udsDepthFrom === null){
+        this.toastSer.presentError('Please Enter  UDS Depth From');
 
-     }else if(this.typeOfsample === 'UDS' && this.udsDepthFrom === null){
-      this.toastSer.presentError('Please Enter  UDS Depth From');
+       }
 
-     }else if(this.typeOfsample === 'UDS' && this.udsDepthTo === null){
-      this.toastSer.presentError('Please Enter  UDS Depth To');
-    }
-    else if(this.typeOfsample === 'DS'){
-      this.rockDepthFrom ='';
-      this.rockDepthTo = '';
-       this.first = '';
-       this.second = '';
-       this.third = '';
-       this.total = '';
-       this.firstB = '';
-       this.secondB = '';
-       this.thirdB = '';
-       this.totalB = '';
-       this.sptDepthFrom = '';
-       this.sptDepthTo = '';
-       this.udsDepthFrom = '';
-       this.udsDepthTo = '';
-       console.log('ds');
+      else if(this.typeOfsample === 'DS'){
+        this.rockDepthFrom ='';
+        this.rockDepthTo = '';
+         this.first = '';
+         this.second = '';
+         this.third = '';
+         this.total = '';
+         this.firstB = '';
+         this.secondB = '';
+         this.thirdB = '';
+         this.totalB = '';
+         this.sptDepthFrom = '';
 
-       this.rockSample = '';
-       this.runLength = '';
-       this.runTime = '';
-       this.waterLoss = '';
-       this.allRockPiecesLenth = '';
-       this.rockPicesLengthgrze = '';
-       this.rockSamplColor = '';
-       this.typeOfWeathering = '';
-       this.typeOfRock = '';
-       this.cr='';
-       this.rqd = '';
-       this.updateLayer3();
+         this.udsDepthFrom = '';
 
-      }else if(this.typeOfsample === 'SPT'){
-       this.rockDepthFrom ='';
-       this.rockDepthTo = '';
+         console.log('ds');
 
-       this.dsDepthFrom = '';
-       this.dsDepthTo = '';
-       this.udsDepthFrom = '';
-       this.udsDepthTo = '';
-       console.log('spt');
+         this.rockSample = '';
+         this.runLength = '';
+         this.runTime = '';
+         this.waterLoss = '';
 
-       this.rockSample = '';
-       this.runLength = '';
-       this.runTime = '';
-       this.waterLoss = '';
-       this.allRockPiecesLenth = '';
-       this.rockPicesLengthgrze = '';
-       this.rockSamplColor = '';
-       this.typeOfWeathering = '';
-       this.typeOfRock = '';
-       this.cr='';
-       this.rqd = '';
-       this.updateLayer3();
+         this.rockSamplColor = '';
+         this.typeOfWeathering = '';
 
-      }else if(this.typeOfsample === 'UDS'){
-       this.rockDepthFrom ='';
-       this.rockDepthTo = '';
+         this.cr='';
+         this.rqd = '';
+         this.updateLayer3();
 
-       this.dsDepthFrom = '';
-       this.dsDepthTo = '';
-       this.sptDepthFrom = '';
-       this.sptDepthTo = '';
-       this.first = '';
-       this.second = '';
-       this.third = '';
-       this.total = '';
-       this.firstB = '';
-       this.secondB = '';
-       this.thirdB = '';
-       this.totalB = '';
-       console.log('uds');
+        }else if(this.typeOfsample === 'SPT'){
+         this.rockDepthFrom ='';
+         this.rockDepthTo = '';
+
+         this.dsDepthFrom = '';
+
+         this.udsDepthFrom = '';
+
+         console.log('spt');
+
+         this.rockSample = '';
+         this.runLength = '';
+         this.runTime = '';
+         this.waterLoss = '';
+
+         this.rockSamplColor = '';
+         this.typeOfWeathering = '';
+
+         this.cr='';
+         this.rqd = '';
+         this.updateLayer3();
+
+        }else if(this.typeOfsample === 'UDS'){
+         this.rockDepthFrom ='';
+         this.rockDepthTo = '';
+
+         this.dsDepthFrom = '';
+
+         this.sptDepthFrom = '';
+
+         this.first = '';
+         this.second = '';
+         this.third = '';
+         this.total = '';
+         this.firstB = '';
+         this.secondB = '';
+         this.thirdB = '';
+         this.totalB = '';
+         console.log('uds');
 
 
-       this.rockSample = '';
-       this.runLength = '';
-       this.runTime = '';
-       this.waterLoss = '';
-       this.allRockPiecesLenth = '';
-       this.rockPicesLengthgrze = '';
-       this.rockSamplColor = '';
-       this.typeOfWeathering = '';
-       this.typeOfRock = '';
-       this.cr='';
-       this.rqd = '';
-       this.updateLayer3();
+         this.rockSample = '';
+         this.runLength = '';
+         this.runTime = '';
+         this.waterLoss = '';
 
+         this.rockSamplColor = '';
+         this.typeOfWeathering = '';
+
+         this.cr='';
+         this.rqd = '';
+         this.updateLayer3();
+
+
+        }
+
+    }else if(this.typeOfstrata === 'Rock'){
+      if( this.rockSample === ''){
+       this.toastSer.presentError('Please Enter  Type of Sample (If Rock)');
+      }
+      else if( this.rockDepthFrom === ''){
+       this.toastSer.presentError('Please Enter  Rock depth from');
+
+      }else if( this.rockDepthTo === ''){
+       this.toastSer.presentError('Please Enter  Rock depth to');
 
       }
+      else if( this.runLength === ''){
+       this.toastSer.presentError('Please Enter  Run Length');
 
-  }else if(this.typeOfstrata === 'Rock'){
-    if( this.rockSample === ''){
-     this.toastSer.presentError('Please Enter  Type of Sample (If Rock)');
-    }
-    else if( this.rockDepthFrom === ''){
-     this.toastSer.presentError('Please Enter  Rock depth from');
+      }
+      else if( this.rockSamplColor === ''){
+       this.toastSer.presentError('Please Enter  Rock Sample Color');
 
-    }else if( this.rockDepthTo === ''){
-     this.toastSer.presentError('Please Enter  Rock depth to');
+      }else if( this.typeOfWeathering === ''){
+       this.toastSer.presentError('Please Select  Type of Weathering');
 
-    }
-    else if( this.runLength === ''){
-     this.toastSer.presentError('Please Enter  Run Length');
+      }
+       else if( this.rockDepthFrom === 0){
+        this.toastSer.presentError('Please Enter  Rock depth from, it Should Not a Zero');
 
-    }else if( this.runTime === ''){
-     this.toastSer.presentError('Please Enter  Run Time');
+       }else if( this.rockDepthTo === 0){
+        this.toastSer.presentError('Please Enter  Rock depth to,it Should Not a Zero');
 
-    }else if( this.waterLoss === ''){
-     this.toastSer.presentError('Please Enter  Water Loss');
+       }else if( this.runLength === 0){
+        this.toastSer.presentError('Please Enter  Run Length,it Should Not a Zero');
 
-    }else if( this.allRockPiecesLenth === ''){
-     this.toastSer.presentError('Please Enter  All Rock Pieces lengths');
+       }
+       else if( this.rockDepthFrom === null){
+        this.toastSer.presentError('Please Enter  Rock depth from');
 
-    }else if( this.rockPicesLengthgrze === ''){
-     this.toastSer.presentError('Please Enter  Rock Pieces length >10 cm');
+       }else if( this.rockDepthTo === null ){
+        this.toastSer.presentError('Please Enter  Rock depth to');
 
-    }else if( this.rockSamplColor === ''){
-     this.toastSer.presentError('Please Enter  Rock Sample Color');
+       }else if( this.runLength === null){
+        this.toastSer.presentError('Please Enter  Run Length');
 
-    }else if( this.typeOfWeathering === ''){
-     this.toastSer.presentError('Please Select  Type of Weathering');
+       }
+      else{
+        this.typeOfsample = '';
+       this.soilSampleColor = '';
+       this.colorOther = '';
+       this.typeOfSoil = '';
 
-    }else if( this.typeOfRock === ''){
-     this.toastSer.presentError('Please Enter  Type of Rock');
+       this.visualClassification = '';
 
-    } else if( this.rockDepthFrom === 0){
-      this.toastSer.presentError('Please Enter  Rock depth from, it Should Not a Zero');
+       this.dsDepthFrom = '';
 
-     }else if( this.rockDepthTo === 0){
-      this.toastSer.presentError('Please Enter  Rock depth to,it Should Not a Zero');
+       this.sptDepthFrom = '';
 
-     }else if( this.runLength === 0){
-      this.toastSer.presentError('Please Enter  Run Length,it Should Not a Zero');
+       this.udsDepthFrom = '';
 
-     }else if( this.runTime === 0){
-      this.toastSer.presentError('Please Enter  Run Time,it Should Not a Zero');
+       this.first = '';
+       this.second = '';
+       this.third = '';
+       this.total = '';
+       this.firstB = '';
+       this.secondB = '';
+       this.thirdB = '';
+       this.totalB = '';
 
-     }else if( this.waterLoss === 0){
-      this.toastSer.presentError('Please Enter  Water Loss,it Should Not a Zero');
-
-     }else if( this.allRockPiecesLenth === 0){
-      this.toastSer.presentError('Please Enter  All Rock Pieces lengths,it Should Not a Zero');
-
-     }else if( this.rockPicesLengthgrze === 0){
-      this.toastSer.presentError('Please Enter  Rock Pieces length >10 cm,it Should Not a Zero');
-
+       this.updateLayer3();
      }
-     else if( this.rockDepthFrom === null){
-      this.toastSer.presentError('Please Enter  Rock depth from');
+    }
 
-     }else if( this.rockDepthTo === null ){
-      this.toastSer.presentError('Please Enter  Rock depth to');
 
-     }else if( this.runLength === null){
-      this.toastSer.presentError('Please Enter  Run Length');
 
-     }else if( this.runTime === null){
-      this.toastSer.presentError('Please Enter  Run Time');
-
-     }else if( this.waterLoss === null){
-      this.toastSer.presentError('Please Enter  Water Loss');
-
-     }else if( this.allRockPiecesLenth === null){
-      this.toastSer.presentError('Please Enter  All Rock Pieces lengths');
-
-     }else if( this.rockPicesLengthgrze === null){
-      this.toastSer.presentError('Please Enter  Rock Pieces length >10 cm');
-
-     }
-    else{
-      this.typeOfsample = '';
-     this.soilSampleColor = '';
-     this.typeOfSoil = '';
-     this.densityConsistace = '';
-     this.visualClassification = '';
-
-     this.dsDepthFrom = '';
-     this.dsDepthTo = '';
-     this.sptDepthFrom = '';
-     this.sptDepthTo = '';
-     this.udsDepthFrom = '';
-     this.udsDepthTo = '';
-     this.first = '';
-     this.second = '';
-     this.third = '';
-     this.total = '';
-     this.firstB = '';
-     this.secondB = '';
-     this.thirdB = '';
-     this.totalB = '';
-
-     this.updateLayer3();
-   }
   }
 
 
-
-}
      getLayer1() {
       this.androidDatabase.getLayer1ById(Constants.laYer1Id).then((data) => {
         this.layer1List = [];
@@ -671,82 +499,71 @@ validation(){
           }
 
            this.typeOfsample = this.layer1List[0].type_of_sample;
-           if(this.typeOfsample === 'DS'){
-            this.isdsDepth = true;
-          }else if(this.typeOfsample === 'SPT'){
-            this.isSPTDepth = true;
-          }else if(this.typeOfsample === 'UDS'){
-            this.isUDSepth = true;
-          }
+           if(this.typeOfsample === 'Distributed Sample'){
+             this.isdsDepth = true;
+           }else if(this.typeOfsample === 'SPT'){
+             this.isSPTDepth = true;
+           }else if(this.typeOfsample === 'Undistributed Sample'){
+             this.isUDSepth = true;
+           }
+           this.dsDepthFrom = this.layer1List[0].soil_ds_depth;
 
-           this.dsDepthFrom = this.layer1List[0].soil_ds_depth_from;
-           this.dsDepthTo = this.layer1List[0].soil_ds_depth_to;
-           this.sptDepthFrom = this.layer1List[0].soil_spt_depth_from;
-           this.sptDepthTo = this.layer1List[0].soil_spt_depth_to;
-           this.udsDepthFrom = this.layer1List[0].soil_uds_depth_from;
-           this.udsDepthTo = this.layer1List[0].soil_uds_depth_to;
+           this.sptDepthFrom = this.layer1List[0].soil_spt_depth;
+
+           this.udsDepthFrom = this.layer1List[0].soil_uds_depth;
+
            this.soilSampleColor = this.layer1List[0].soil_sample_color;
-           this.typeOfSoil = this.layer1List[0].soil_type;
-           this.densityConsistace = this.layer1List[0].soil_density;
+           this.colorOther = this.layer1List[0].soil_sample_color;
            this.visualClassification = this.layer1List[0].soil_visual_classif;
            this.rockSample = this.layer1List[0].rock_sample_type;
            this.runLength = this.layer1List[0].rock_run_length;
            this.runTime = this.layer1List[0].rock_run_time;
            this.waterLoss = this.layer1List[0].rock_water_loss;
-           this.allRockPiecesLenth = this.layer1List[0].rock_pieces_length;
-           this.rockPicesLengthgrze = this.layer1List[0].rock_pieces_10;
+
+
            this.cr = this.layer1List[0].rock_cr;
            this.rqd = this.layer1List[0].rock_rqd;
            this.rockSamplColor = this.layer1List[0].rock_sample_color;
            this.typeOfWeathering = this.layer1List[0].rock_weathering;
-           this.typeOfRock = this.layer1List[0].rock_type;
-           this.first = this.layer1List[0].first;
-           this.second = this.layer1List[0].second;
-           this.third = this.layer1List[0].third;
-           this.total = this.layer1List[0].total;
-           this.firstB = this.layer1List[0].firstB;
-           this.secondB = this.layer1List[0].secondB;
-           this.thirdB = this.layer1List[0].thirdB;
-           this.totalB = this.layer1List[0].totalB;
+
+           this.first = this.layer1List[0].soil_spt_penetration_1;
+           this.second = this.layer1List[0].soil_spt_penetration_2;
+           this.third = this.layer1List[0].soil_spt_penetration_3;
+           this.total = this.layer1List[0].soil_spt_penetration_total;
+           this.firstB = this.layer1List[0].soil_spt_blow_n_1;
+           this.secondB = this.layer1List[0].soil_spt_blow_n_2;
+           this.thirdB = this.layer1List[0].soil_spt_blow_n_3;
+           this.totalB = this.layer1List[0].soil_spt_blow_n_total;
+           console.log('spt',this.first,this.second,this.third,this.total,this.firstB);
            this.rockDepthFrom = this.layer1List[0].rock_depth_from;
            this.rockDepthTo = this.layer1List[0].rock_depth_to;
            this.sptstatus = this.layer1List[0].soil_spt_depth_status;
 
-           if(this.layer1List[0].soil_type === 'Cohesive'){
-            this.isCohessive = true;
-          }else{
-            this.isCohesion = true;
-          }
-
-
            if(this.layer1List[0].soil_spt_penetration_1 === '0'){
-            this. first = '';
+             this. first = '';
+           }
+           if(this.layer1List[0].soil_spt_penetration_2 === '0'){
+            this. second = '';
           }
-          if(this.layer1List[0].soil_spt_penetration_2 === '0'){
-           this. second = '';
-         }
-         if(this.layer1List[0].soil_spt_penetration_3 === '0'){
-           this. third = '';
-         }
-         if(this.layer1List[0].soil_spt_penetration_total === '0'){
-           this. total = '';
-         }
-         if(this.layer1List[0].soil_spt_blow_n_1 === '0'){
-           this. firstB = '';
-         }
-         if(this.layer1List[0].soil_spt_blow_n_2 === '0'){
-           this. secondB = '';
-         }
-         if(this.layer1List[0].soil_spt_blow_n_3 === '0'){
-           this. thirdB = '';
-         }
-         if(this.layer1List[0].soil_spt_blow_n_total === '0'){
-           this. totalB = '';
-         }
-         if(this.layer1List[0].soil_spt_depth_status === 'Refusal'){
-
-          this.oneB = true;
-         }
+          if(this.layer1List[0].soil_spt_penetration_3 === '0'){
+            this. third = '';
+          }
+          if(this.layer1List[0].soil_spt_penetration_total === '0'){
+            this. total = '';
+          }
+          if(this.layer1List[0].soil_spt_blow_n_1 === '0'){
+            this. firstB = '';
+          }
+          if(this.layer1List[0].soil_spt_blow_n_2 === '0'){
+            this. secondB = '';
+          }
+          if(this.layer1List[0].soil_spt_blow_n_3 === '0'){
+            this. thirdB = '';
+          }
+          if(this.layer1List[0].soil_spt_blow_n_total === '0'){
+            this. totalB = '';
+          }
+          console.log(this.sptstatus);
 
 
 
@@ -756,28 +573,40 @@ validation(){
       });
     }
     updateLayer3(){
-      this.androidDatabase.updateLayer3(this.drillingFrom,this.drillingTo,this.typeOfstrata,
-        this.typeOfsample,this.dsDepthFrom,this.dsDepthTo,this.sptDepthFrom,this.sptDepthTo,
-        this.udsDepthFrom,this.udsDepthTo,this.soilSampleColor,this.typeOfSoil,this.densityConsistace,
+      this.androidDatabase.updateLayer3(Constants.iterationId,
+        Constants.iteratinbhid,
+        this.drillingFrom,
+        this.drillingTo,
+        this.typeOfstrata,
+        this.typeOfsample,
+        this.dsDepthFrom,
+        this.sptDepthFrom,
+        this.first,
+        this.firstB,
+        this.second,
+        this.secondB,
+        this.third,
+        this.thirdB,
+        this.total,
+        this.totalB,
+        this.sptstatus,
+        this.udsDepthFrom,
+        this.soilSampleColor,
+        this.colorOther,
         this.visualClassification,
-        this.rockSample, this.runLength,this.runTime,this.waterLoss,this.allRockPiecesLenth,
-        this.rockPicesLengthgrze,this.cr,this.rqd,this.rockSamplColor,
-        this.typeOfWeathering,this.typeOfRock,Constants.laYer1Id,this.first,
-        this.second,this.third,this.total,this.firstB,this.secondB,this.thirdB,this.totalB,this.rockDepthFrom,
-        this.rockDepthTo,this.sptstatus);
+        this.rockSample,
+        this.rockDepthFrom,
+        this.rockDepthTo,
+        this.runLength,
+        this.runTime,
+        this.waterLoss,
+        this.cr,
+        this.rqd,
+        this.rockSamplColor,
+        this.typeOfWeathering);
 
 
-        if(this.layer1List[0].depth_termination === undefined ||
-          this.layer1List[0].depth_termination === 'undefined' ||
-          this.layer1List[0].depth_termination === null ||
-          this.layer1List[0].depth_termination === 'null' ){
-          this.router.navigate(['layer4']);
-
-        }else{
-          this.router.navigate(['update4']);
-
-        }
-
+        this.router.navigate(['iteration']);
 
         }
 

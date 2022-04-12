@@ -272,14 +272,14 @@ disconnectSubscription: any;
    }
 
 
-   moveToLayer3(id: any,bhid: any,){
+   moveToLayer3(id: any,bhid: any){
     this. platform.ready().then(() => {
        if (this.platform.is('android')) {
 
-
+        this.moveToAndroidIterations(id);
        }else{
 
-        this.moveToIterations(bhid);
+        this.moveToWebIterations(bhid);
 
 
 
@@ -291,11 +291,21 @@ disconnectSubscription: any;
    }
 
 
-   moveToIterations(bhid: any,){
+   moveToWebIterations(bhid: any){
     Constants.iteratinbhid = bhid;
+
+
     this.router.navigate(['iterations']);
 
   }
+  moveToAndroidIterations(bhid: any){
+    Constants.iteratinbhid = bhid;
+
+
+    this.router.navigate(['iterations']);
+
+  }
+
 
 
 

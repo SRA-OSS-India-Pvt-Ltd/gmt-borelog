@@ -323,21 +323,22 @@ export class Web1Page implements OnInit {
           console.log('response34',response34);
           if(response34.error === false){
             Constants.chainagesBySectionIDList = response34.data;
+            this.toastService.presentSuccess(response.msg);
+            console.log('structtype',this.layer1List[0].type_of_structure);
+            if(this.layer1List[0].type_of_structure === ''){
+             Constants.webbhid = Constants.laYer1Id;
+
+            this.router.navigate(['boreholeinformation']);
+
+            }else{
+             this.router.navigate(['web2']);
+             Constants.webbhid = Constants.laYer1Id;
+
+            }
           }
         });
 
-         this.toastService.presentSuccess(response.msg);
-         console.log('structtype',this.layer1List[0].type_of_structure);
-         if(this.layer1List[0].type_of_structure === ''){
-          Constants.webbhid = Constants.laYer1Id;
 
-         this.router.navigate(['boreholeinformation']);
-
-         }else{
-          this.router.navigate(['web2']);
-          Constants.webbhid = Constants.laYer1Id;
-
-         }
         }
 
         });
