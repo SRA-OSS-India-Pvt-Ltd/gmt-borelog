@@ -80,7 +80,7 @@
       <ion-row *ngIf="isdsDepth">
         <ion-col size="6">
           <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>DS Depth From:</strong></ion-label>
+            <ion-label  style="white-space: pre-wrap !important;"><strong>DS Depth :</strong></ion-label>
           </ion-item>
         </ion-col>
         <ion-col size="6">
@@ -90,24 +90,13 @@
         </ion-col>
       </ion-row>
 
-      <ion-row *ngIf="isdsDepth">
-        <ion-col size="6">
-          <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>DS Depth To:</strong></ion-label>
-          </ion-item>
-        </ion-col>
-        <ion-col size="6">
-          <ion-item class="input">
-            <ion-label type="text" >{{dsDepthTo}}</ion-label>
-          </ion-item>
-        </ion-col>
-      </ion-row>
+
 
 
       <ion-row *ngIf="isSPTDepth">
         <ion-col size="6">
           <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>SPT Depth From:</strong></ion-label>
+            <ion-label  style="white-space: pre-wrap !important;"><strong>SPT Depth :</strong></ion-label>
           </ion-item>
         </ion-col>
         <ion-col size="6">
@@ -117,18 +106,7 @@
         </ion-col>
       </ion-row>
 
-      <ion-row *ngIf="isSPTDepth">
-        <ion-col size="6">
-          <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>SPT Depth To:</strong></ion-label>
-          </ion-item>
-        </ion-col>
-        <ion-col size="6">
-          <ion-item class="input">
-            <ion-label type="text"  >{{sptDepthTo}}</ion-label>
-          </ion-item>
-        </ion-col>
-      </ion-row>
+
 
       <ion-row *ngIf="isSPTDepth">
         <ion-col size="6">
@@ -192,7 +170,7 @@
   <ion-row *ngIf="isUDSepth">
     <ion-col size="6">
       <ion-item class="padding">
-        <ion-label  style="white-space: pre-wrap !important;"><strong>UDS Depth From:</strong></ion-label>
+        <ion-label  style="white-space: pre-wrap !important;"><strong>UDS Depth :</strong></ion-label>
       </ion-item>
     </ion-col>
     <ion-col size="6">
@@ -202,18 +180,7 @@
     </ion-col>
   </ion-row>
 
-  <ion-row *ngIf="isUDSepth">
-    <ion-col size="6">
-      <ion-item class="padding">
-        <ion-label  style="white-space: pre-wrap !important;"><strong>UDS Depth To:</strong></ion-label>
-      </ion-item>
-    </ion-col>
-    <ion-col size="6">
-      <ion-item class="input">
-        <ion-label type="text"  >{{udsDepthTo}}</ion-label>
-      </ion-item>
-    </ion-col>
-  </ion-row>
+
 
   <ion-row *ngIf="isSoil" >
     <ion-col size="6">
@@ -224,6 +191,24 @@
     <ion-col size="6">
       <ion-item class="input">
         <ion-label type="text"  >{{soilSampleColor}}</ion-label>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row *ngIf="isColorShown">
+    <ion-col size="6">
+      <ion-item class="padding">
+        <ion-label style="white-space: pre-wrap !important;"><strong>Soil Sample Color Other:</strong><span
+            class="required-asterisk">*</span></ion-label>
+      </ion-item>
+    </ion-col>
+    <ion-col size="6">
+      <ion-item class="input">
+
+        <ion-label>colorOther</ion-label>
+
+
+
       </ion-item>
     </ion-col>
   </ion-row>
@@ -325,7 +310,7 @@
     </ion-col>
     <ion-col size="6">
       <ion-item class="input">
-           <ion-label type="number" (ionChange)="crCaliculation()">{{runLength}}</ion-label>
+           <ion-label type="number" >{{runLength}}</ion-label>
         </ion-item>
     </ion-col>
   </ion-row>
@@ -356,30 +341,7 @@
     </ion-col>
   </ion-row>
 
-  <ion-row *ngIf="isRock" >
-    <ion-col size="6">
-      <ion-item class="padding">
-        <ion-label  style="white-space: pre-wrap !important;"><strong>All Rock Pieces lengths:</strong></ion-label>
-      </ion-item>
-    </ion-col>
-    <ion-col size="6">
-      <ion-item class="input">
-           <ion-label type="number"  (ionChange)="crCaliculation()">{{allRockPiecesLenth}}</ion-label>
-        </ion-item>
-    </ion-col>
-  </ion-row>
-  <ion-row  *ngIf="isRock" >
-    <ion-col size="6">
-      <ion-item class="padding">
-        <ion-label  style="white-space: pre-wrap !important;"><strong>Rock Pieces length >10 cm:</strong></ion-label>
-      </ion-item>
-    </ion-col>
-    <ion-col size="6">
-      <ion-item class="input">
-           <ion-label type="number"  (ionChange)="crCaliculation()" >{{rockPicesLengthgrze}}</ion-label>
-        </ion-item>
-    </ion-col>
-  </ion-row>
+
 
   <ion-row *ngIf="isRock" >
     <ion-col size="6">
@@ -433,18 +395,7 @@
     </ion-col>
   </ion-row>
 
-  <ion-row *ngIf="isRock"  >
-    <ion-col size="6">
-      <ion-item class="padding">
-        <ion-label  style="white-space: pre-wrap !important;"><strong>Type Of Rock</strong></ion-label>
-      </ion-item>
-    </ion-col>
-    <ion-col size="6">
-      <ion-item class="input">
-        <ion-label type="text" >{{typeOfRock}}</ion-label>
-        </ion-item>
-    </ion-col>
-  </ion-row>
+
   <ion-row>
        <ion-col size="12">
       <ion-button  expand="block" style="text-transform: none;" (click)="onClick()">

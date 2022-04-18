@@ -1,7 +1,7 @@
 import { HttpcallsService } from 'src/app/services/httpcalls.service';
 
 import { Constants } from 'src/app/common/constants';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { ToastService } from 'src/app/services/toast.service';
@@ -13,30 +13,42 @@ import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
   styleUrls: ['./nonedit2.page.scss'],
 })
 export class Nonedit2Page implements OnInit {
+  @ViewChild('previewimage') waterMarkImage: ElementRef;
+  easting: any;
+  northing: any;
   boreholeNumber: any;
   boreholeLocation: any;
-  boreholeChainage: any;
+
   detailsOfDrillingBit: any;
   detailsOdCoreBarrel: any;
   rl: any;
-  isInclined = false;
   waterTable: any;
   today: any;
   typeOfRig: any;
-  typeOfDrill: any;
-  circulationFluid: any;
+  chainage: any;
+  chainageId: any;
+  drillBitOther: any;
+
   orientation: any;
   boreholeDia: any;
   boreholeCasingDia: any;
   casingDepth: any;
-
+  rigOther: any;
   typeOfStructure: any;
   ref: any;
-  latitude: any;
-  longitude: any;
+
+  typeOfCrossing: any;
+  typeOfBridge: any;
   layer1List: any = [];
-  angleWithHorizontal: any;
+  chaingeList: any;
+  selectedItem: any;
+  isCasingDiaOther = false;
   date: any;
+  casingDiaOther: any;
+  isInclined = false;
+  angleWithHorizontal: any;
+  isDrillOther = false;
+  isRigOther = false;
 
   constructor(public toastSer: ToastService,
     private geolocation: Geolocation,
@@ -52,51 +64,48 @@ export class Nonedit2Page implements OnInit {
 
   getLayer1() {
     this.layer1List = [];
-this.httpService.getBoredetails(Constants.webbhid).subscribe((response: any)=>{
- this.layer1List = response.data;
+    this.httpService
+      .getBoredetails(Constants.webbhid)
+      .subscribe((response: any) => {
+        this.layer1List = response.data;
 
+        console.log('layer1List', this.layer1List);
+        if (this.layer1List.length > 0) {
+          this.boreholeNumber = this.layer1List[0].bh_no;
+          this.boreholeLocation = this.layer1List[0].bh_location;
+          this.chainage = this.layer1List[0].chainage;
+          this.chainageId = this.layer1List[0].chainage_id;
+          this.easting = this.layer1List[0].easting;
+          this.northing = this.layer1List[0].northing;
 
-        console.log('layer1List',this.layer1List);
-        if(this.layer1List.length>0){
+          this.typeOfStructure = this.layer1List[0].type_of_structure;
+          this.typeOfCrossing = this.layer1List[0].type_of_crossing;
+          this.typeOfBridge = this.layer1List[0].type_of_bridge;
 
-         this.typeOfStructure = this.layer1List[0].struct_type;
-         this.boreholeNumber = this.layer1List[0].bh_no;
-         this.boreholeLocation = this.layer1List[0].bh_location;
-         this.latitude = this.layer1List[0].bh_lat;
-         this.longitude = this.layer1List[0].bh_lon;
-         this.boreholeChainage = this.layer1List[0].bh_chainage;
-         this.date = this.layer1List[0].bh_start_date;
-         this.rl = this.layer1List[0].bh_rl;
-         this.waterTable = this.layer1List[0].water_table_rl;
-         this.typeOfRig = this.layer1List[0].type_of_rig;
-         this.typeOfDrill = this.layer1List[0].type_of_drilling;
-         this.circulationFluid = this.layer1List[0].circulation_fluid;
-         this.orientation = this.layer1List[0].drill_orientation;
-         this.boreholeDia = this.layer1List[0].bh_dia;
-         this.boreholeCasingDia = this.layer1List[0].casing_dia;
-         this.casingDepth = this.layer1List[0].casing_depth;
-         this.detailsOfDrillingBit = this.layer1List[0].drilling_bit;
-         this.detailsOdCoreBarrel = this.layer1List[0].core_barrel;
-         this.angleWithHorizontal = this.layer1List[0].angle_horizontal;
+          this.date = this.layer1List[0].bh_start_date;
 
-         if(this.layer1List[0].bh_dia === 'undefined'){
-          this.boreholeDia = '';
+          this.rl = this.layer1List[0].bh_rl;
+          this.waterTable = this.layer1List[0].water_table_rl;
+          this.typeOfRig = this.layer1List[0].type_of_rig;
+
+          this.rigOther = this.layer1List[0].type_of_rig_other;
+
+          this.orientation = this.layer1List[0].drill_orientation;
+          this.boreholeDia = this.layer1List[0].bh_dia;
+          this.boreholeCasingDia = this.layer1List[0].casing_dia;
+          this.casingDepth = this.layer1List[0].casing_depth;
+          this.detailsOfDrillingBit = this.layer1List[0].drilling_bit;
+          this.drillBitOther = this.layer1List[0].drilling_bit_other;
+          this.detailsOdCoreBarrel = this.layer1List[0].core_barrel;
+
+           if(this.layer1List[0].drill_orientation === 'Inclined'){
+            this.isInclined = true;
+          }else{
+            this.isInclined = false;
+          }
+          this.waterMarkImage.nativeElement.src= this.layer1List[0].borehole_pic;
         }
-        if(this.layer1List[0].bh_dia === undefined){
-         this.boreholeDia = '';
-       }
-
-         if(this.layer1List[0].drill_orientation === 'Inclined'){
-           this.isInclined = true;
-         }else{
-           this.isInclined = false;
-         }
-
-
-
-        }
-
-    });
+      });
   }
 
   detailDrillinBitChange($event){
@@ -112,14 +121,8 @@ this.httpService.getBoredetails(Constants.webbhid).subscribe((response: any)=>{
 
 
 
-getLocations(){
-  this.geolocation.getCurrentPosition().then((resp) => {
-    this.latitude= resp.coords.latitude;
-    this.longitude= resp.coords.longitude;
-   }).catch((error) => {
-     console.log('Error getting location', error);
-   });
-}
+
+
 
 
   getResopnseWithDates(){}
@@ -128,16 +131,8 @@ getLocations(){
 
     this.typeOfRig =$event.target.value;
   }
-  drillChange($event){
-    console.log($event.target.value);
 
-    this.typeOfDrill =$event.target.value;
-  }
-  circulationChange($event){
-    console.log($event.target.value);
 
-    this.circulationFluid =$event.target.value;
-  }
   oriantionChange($event){
     console.log($event.target.value);
 

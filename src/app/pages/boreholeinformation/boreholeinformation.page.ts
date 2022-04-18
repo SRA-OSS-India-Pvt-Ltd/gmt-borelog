@@ -423,6 +423,7 @@ export class BoreholeinformationPage implements OnInit {
       this.detailsOfDrillingBit,
       this.drillingBitOther,
       this.detailsOdCoreBarrel,
+      this.angleWithHorizontal,
       this.waterMarkImage.nativeElement.src);
     //this.router.navigate(['logginginformation']);
     this.getLayer1();
@@ -542,6 +543,7 @@ export class BoreholeinformationPage implements OnInit {
   }
 
   getLatLong() {
+    console.log('Easting,northing');
     this.loadingLocation = true;
 
     this.geolocation
@@ -552,6 +554,7 @@ export class BoreholeinformationPage implements OnInit {
         this.loadingLocation = false;
         this.latitude = this.locationCordinates.latitude;
         this.longitude = this.locationCordinates.longitude;
+        console.log('lati',this.latitude);
 
 this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longitude);
 
@@ -638,6 +641,7 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
 
 
   async imageSelection() {
+    this.getLatLong();
     const alert = await this.alertCtrl.create({
       header: 'Choose Type',
       buttons: [

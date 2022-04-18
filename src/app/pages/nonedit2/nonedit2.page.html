@@ -19,6 +19,7 @@
     <ion-item class="padding1">
       <ion-label class="label"><strong>Borehole Information</strong></ion-label>
     </ion-item>
+
     <ion-grid fixed>
       <ion-row>
         <ion-col size="6">
@@ -28,184 +29,276 @@
         </ion-col>
         <ion-col size="6">
           <ion-item class="input">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>IS 1892; IS 2131; IS 2132</strong></ion-label>
+            <ion-label  style="white-space: pre-wrap !important;"><strong>IS 4464; IS 6926; IS 5313</strong> </ion-label>
           </ion-item>
         </ion-col>
       </ion-row>
 
-      <ion-row>
-        <ion-col size="6">
-          <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Type of Structure:</strong></ion-label>
-          </ion-item>
-        </ion-col>
-        <ion-col size="6">
-          <ion-item class="input">
-            <ion-label type="text" cass="input" >{{typeOfStructure}}</ion-label>
-          </ion-item>
-        </ion-col>
-      </ion-row>
+
+
+
+
+
+
+
 
       <ion-row>
         <ion-col size="6">
           <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Borehole Number:</strong></ion-label>
+            <ion-label  style="white-space: pre-wrap !important;"><strong> Chainage:</strong><span class="required-asterisk">*</span></ion-label>
           </ion-item>
         </ion-col>
         <ion-col size="6">
           <ion-item class="input">
-            <ion-label type="text" cass="input" >{{boreholeNumber}}</ion-label>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col size="6">
-          <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Borehole Location:</strong></ion-label>
-          </ion-item>
-        </ion-col>
-        <ion-col size="6">
-          <ion-item class="input">
-            <ion-label type="text" cass="input" >{{boreholeLocation}}</ion-label>
+            <ion-label>{{chainage}}</ion-label>
+
+
+
           </ion-item>
         </ion-col>
       </ion-row>
 
-       <ion-row>
-        <ion-col size="6">
-          <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Borehole Latitude:</strong></ion-label>
-          </ion-item>
-        </ion-col>
-        <ion-col size="6">
-          <ion-item class="input" (click)="getLocations()">
-            <ion-label type="text" cass="input" >{{latitude}}</ion-label>
-          </ion-item>
-        </ion-col>
-      </ion-row>      <ion-row>
-        <ion-col size="6">
-          <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Borehole longitude:</strong></ion-label>
-          </ion-item>
-        </ion-col>
-        <ion-col size="6">
-          <ion-item class="input">
-            <ion-label type="text" cass="input" >{{longitude}}</ion-label>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col size="6">
-          <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Borehole Chainage:</strong></ion-label>
-          </ion-item>
-        </ion-col>
-        <ion-col size="6">
-          <ion-item class="input">
-            <ion-label type="text" cass="input" >{{boreholeChainage}}</ion-label>
-          </ion-item>
-        </ion-col>
-      </ion-row>
+      <datalist id="chainList">
+        <option *ngFor="let series of chaingeList" [value]="series.chainage">
+          {{ series.chainage }}
 
-      <ion-row>
+        </option>
+      </datalist>
 
-        <ion-col size="12">
-          <ion-item class="input">
-            <ion-label>Borehole StartDate</ion-label>
-            <ion-label>{{date}}</ion-label>
-          </ion-item>
-              </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col size="6">
-          <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Borehole RL (m):</strong></ion-label>
-          </ion-item>
-        </ion-col>
-        <ion-col size="6">
-          <ion-item class="input">
-            <ion-label type="number" cass="input"  >{{rl}}</ion-label>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col size="6">
-          <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Water Table RL (m):</strong></ion-label>
-          </ion-item>
-        </ion-col>
-        <ion-col size="6">
-          <ion-item class="input">
-            <ion-label type="number" cass="input" >{{waterTable}}</ion-label>
-          </ion-item>
-        </ion-col>
-      </ion-row>
+
 
       <ion-row>
         <ion-col size="6">
           <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Type of Rig:</strong></ion-label>
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Borehole Number:</strong><span class="required-asterisk">*</span></ion-label>
           </ion-item>
         </ion-col>
         <ion-col size="6">
           <ion-item class="input">
-              <ion-label>{{typeOfRig}}</ion-label>
+            <ion-label>{{boreholeNumber}}</ion-label>
+
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+
+
+      <ion-row>
+        <ion-col size="6">
+          <ion-item class="padding">
+            <ion-label style="white-space: pre-wrap !important;"><strong>Type of Structure:</strong><span
+                class="required-asterisk">*</span></ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item class="input">
+            <ion-item>
+              <ion-label>{{typeOfStructure}}</ion-label>
 
             </ion-item>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col size="6">
-          <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Type of Drilling:</strong></ion-label>
-          </ion-item>
-        </ion-col>
-        <ion-col size="6">
-          <ion-item class="input">
-            <ion-label>{{typeOfDrill}}</ion-label>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col size="6">
-          <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Circulation Fluid:</strong></ion-label>
-          </ion-item>
-        </ion-col>
-        <ion-col size="6">
-          <ion-item class="input">
-            <ion-label>{{circulationFluid}}</ion-label>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col size="6">
-          <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Drilling Orientation:</strong></ion-label>
-          </ion-item>
-        </ion-col>
-        <ion-col size="6">
-          <ion-item class="input">
-            <ion-label>{{orientation}}</ion-label>
           </ion-item>
         </ion-col>
       </ion-row>
 
+
+
+      <ion-row>
+        <ion-col size="6">
+          <ion-item class="padding">
+            <ion-label style="white-space: pre-wrap !important;"><strong>Type of Bridge:</strong><span
+                class="required-asterisk">*</span></ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item class="input">
+            <ion-item>
+              <ion-label>{{typeOfBridge}}</ion-label>
+
+            </ion-item>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="6">
+          <ion-item class="padding">
+            <ion-label style="white-space: pre-wrap !important;"><strong>Type of Crossing:</strong><span
+                class="required-asterisk">*</span></ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item class="input">
+            <ion-item>
+              <ion-label>{{typeOfCrossing}}</ion-label>
+
+            </ion-item>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="6">
+          <ion-item class="padding">
+            <ion-label  style="white-space: pre-wrap !important;"><strong>  Borehole picture:</strong><span class="required-asterisk">*</span></ion-label>
+          </ion-item>
+
+        </ion-col>
+
+        <ion-col size="6">
+          <img #previewimage>
+
+
+        </ion-col>
+
+
+      </ion-row>
+
+
+      <ion-row>
+        <ion-col size="6">
+          <ion-item class="padding">
+            <ion-label  style="white-space: pre-wrap !important;"><strong> Location:</strong><span class="required-asterisk">*</span></ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item class="input">
+            <ion-label>boreholeLocation</ion-label>
+
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+
+      <ion-row>
+        <ion-col size="6">
+          <ion-item class="padding">
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Easting:</strong><span class="required-asterisk">*</span></ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item class="input" >
+            <ion-label>{{easting}}</ion-label>
+
+          </ion-item>
+        </ion-col>
+      </ion-row>
+         <ion-row>
+        <ion-col size="6">
+          <ion-item class="padding">
+            <ion-label  style="white-space: pre-wrap !important;"><strong> Northing:</strong><span class="required-asterisk">*</span></ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item class="input">
+            <ion-label>{{northing}}</ion-label>
+
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="6">
+          <ion-item class="padding">
+            <ion-label  style="white-space: pre-wrap !important;"><strong> Borehole date:</strong><span class="required-asterisk">*</span></ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item class="input">
+            <ion-label>{{date}}</ion-label>
+
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+
+      <ion-row>
+        <ion-col size="6">
+          <ion-item class="padding">
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Borehole RL (m):</strong><span class="required-asterisk">*</span></ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item class="input">
+            <ion-label>{{rl}}</ion-label>
+
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="6">
+          <ion-item class="padding">
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Depth of Water Table RL (m):</strong><span class="required-asterisk">*</span></ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item class="input">
+            <ion-label>{{waterTable}}</ion-label>
+
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="6">
+          <ion-item class="padding">
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Method of Drilling:</strong><span class="required-asterisk">*</span></ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item class="input">
+            <ion-item>
+<ion-label>{{typeOfRig}}</ion-label>
+            </ion-item>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="isRigOther">
+        <ion-col size="6">
+          <ion-item class="padding">
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Other:</strong><span class="required-asterisk">*</span></ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item class="input">
+            <ion-label>{{rigOther}}</ion-label>
+
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+
+
+
+
+
+      <ion-row>
+        <ion-col size="6">
+          <ion-item class="padding">
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Drilling Orientation:</strong><span class="required-asterisk">*</span></ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item class="input">
+            <ion-item>
+<ion-label>{{orientation}}</ion-label>
+            </ion-item>
+          </ion-item>
+        </ion-col>
+      </ion-row>
       <ion-row *ngIf="isInclined">
         <ion-col size="6">
           <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Angle With Horizontal:</strong></ion-label>
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Angle With Horizontal:</strong><span class="required-asterisk">*</span></ion-label>
           </ion-item>
         </ion-col>
         <ion-col size="6">
           <ion-item class="input">
             <ion-label>{{angleWithHorizontal}}</ion-label>
 
-
           </ion-item>
         </ion-col>
       </ion-row>
-
 
 
       <ion-row>
@@ -216,22 +309,43 @@
         </ion-col>
         <ion-col size="6">
           <ion-item class="input">
-            <ion-label type="text" cass="input" >{{boreholeDia}}</ion-label>
+            <ion-label>{{boreholeDia}}</ion-label>
+
+
+
           </ion-item>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col size="6">
           <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Casing dia:</strong></ion-label>
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Casing dia:</strong><span class="required-asterisk">*</span></ion-label>
           </ion-item>
         </ion-col>
         <ion-col size="6">
           <ion-item class="input">
-            <ion-label type="text" cass="input" >{{boreholeCasingDia}}</ion-label>
+            <ion-label>{{boreholeCasingDia}}</ion-label>
+
+
+
           </ion-item>
         </ion-col>
       </ion-row>
+
+      <ion-row *ngIf="isCasingDiaOther">
+        <ion-col size="6">
+          <ion-item class="padding">
+            <ion-label style="white-space: pre-wrap !important;"><strong>Casing Dia Other:</strong></ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item class="input">
+            <ion-label>{{casingDiaOther}}</ion-label>
+
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
       <ion-row>
         <ion-col size="6">
           <ion-item class="padding">
@@ -240,7 +354,8 @@
         </ion-col>
         <ion-col size="6">
           <ion-item class="input">
-            <ion-label type="text" cass="input" >{{casingDepth}}</ion-label>
+            <ion-label>{{casingDepth}}</ion-label>
+
           </ion-item>
         </ion-col>
       </ion-row>
@@ -248,30 +363,44 @@
       <ion-row  >
         <ion-col size="6">
           <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Details of Drilling Bit:</strong></ion-label>
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Details of Drilling Bit:</strong><span class="required-asterisk">*</span></ion-label>
           </ion-item>
         </ion-col>
         <ion-col size="6">
           <ion-item class="input">
 
-  <ion-label>{{detailsOfDrillingBit}}</ion-label>
+            <ion-label>{{detailsOfDrillingBit}}</ion-label>
 
-
-            </ion-item>
+          </ion-item>
         </ion-col>
       </ion-row>
+
+      <ion-row *ngIf="isDrillOther">
+        <ion-col size="6">
+          <ion-item class="padding">
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Other:</strong><span class="required-asterisk">*</span></ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item class="input">
+            <ion-label>{{rigOther}}</ion-label>
+
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
 
 
       <ion-row  >
         <ion-col size="6">
           <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Details of Core Barrel:</strong></ion-label>
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Details of Core Barrel:</strong><span class="required-asterisk">*</span></ion-label>
           </ion-item>
         </ion-col>
         <ion-col size="6">
           <ion-item class="input">
-            <ion-label>{{detailsOdCoreBarrel}}</ion-label>
 
+           <ion-label>{{detailsOdCoreBarrel}}</ion-label>
             </ion-item>
         </ion-col>
       </ion-row>

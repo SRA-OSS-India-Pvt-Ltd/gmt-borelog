@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-inferrable-types */
 import { HttpcallsService } from 'src/app/services/httpcalls.service';
 import { Constants } from 'src/app/common/constants';
 import { Component, OnInit } from '@angular/core';
@@ -11,51 +12,110 @@ import { ToastService } from 'src/app/services/toast.service';
   styleUrls: ['./nonedit3.page.scss'],
 })
 export class Nonedit3Page implements OnInit {
-  drillingFrom: any;
-  drillingTo: any;
-  typeOfstrata: any;
-  typeOfsample: any;
-  isdsDepth = false;
-  dsDepthFrom: any;
-  dsDepthTo: any;
-  isSPTDepth = false;
-  sptDepthFrom: any;
-  sptDepthTo: any;
-  first: any;
-  second: any;
-  third: any;
-  total: any;
-  firstB: any;
-  secondB: any;
-  thirdB: any;
-  totalB: any;
-  oneB= false;
-  isUDSepth = false;
-  udsDepthFrom: any;
-  udsDepthTo: any;
-  soilSampleColor: any;
+//   drillingFrom: any;
+//   drillingTo: any;
+//   typeOfstrata: any;
+//   typeOfsample: any;
+//   isdsDepth = false;
+//   dsDepthFrom: any;
+//   dsDepthTo: any;
+//   isSPTDepth = false;
+//   sptDepthFrom: any;
+//   sptDepthTo: any;
+//   first: any;
+//   second: any;
+//   third: any;
+//   total: any;
+//   firstB: any;
+//   secondB: any;
+//   thirdB: any;
+//   totalB: any;
+//   oneB= false;
+//   isUDSepth = false;
+//   udsDepthFrom: any;
+//   udsDepthTo: any;
+//   soilSampleColor: any;
+// typeOfSoil: any;
+// isCohessive = false;
+// densityConsistace: any;
+// isCohesion = false;
+// visualClassification: any;
+// rockSample: any;
+// runLength: any;
+// runTime: any;
+// waterLoss: any;
+// allRockPiecesLenth: any;
+// rockPicesLengthgrze: any;
+// cr: any;
+// rqd: any;
+// typeOfWeathering: any;
+// rockSamplColor: any;
+// typeOfRock: any;
+// layer1List: any =[];
+// isRock = false;
+// rockDepthTo: any;
+// rockDepthFrom: any;
+// isSoil = false;
+// sptstatus: any;
+
+drillingFrom: any;
+drillingTo: any;
+typeOfstrata: any;
+typeOfsample: any;
+isdsDepth = false;
+dsDepthFrom: any;
+
+isSPTDepth = false;
+sptDepthFrom: any;
+
+first: any;
+second: any;
+third: any;
+total: any;
+firstB: any;
+secondB: any;
+thirdB: any;
+totalB: any;
+isUDSepth = false;
+udsDepthFrom: any;
+
+soilSampleColor: any;
 typeOfSoil: any;
-isCohessive = false;
-densityConsistace: any;
-isCohesion = false;
+
+
+
 visualClassification: any;
+
 rockSample: any;
 runLength: any;
-runTime: any;
-waterLoss: any;
-allRockPiecesLenth: any;
-rockPicesLengthgrze: any;
-cr: any;
-rqd: any;
+runTime: string = '';
+waterLoss: string = '';
+
+
+cr: string = '';
+rqd: string = '';
 typeOfWeathering: any;
 rockSamplColor: any;
-typeOfRock: any;
+
 layer1List: any =[];
+isSoil = false;
 isRock = false;
+one = false;
+two = false;
+three = false;
+four = false;
+oneB = false;
+twoB = false;
+threeB = false;
+fourB = false;
+bhid: any;
 rockDepthTo: any;
 rockDepthFrom: any;
-isSoil = false;
 sptstatus: any;
+isColorShown = false;
+colorOther: any;
+increme: number;
+sno: any;
 constructor(public toastSer: ToastService,
   public httpService: HttpcallsService,
   public router: Router) {
@@ -99,19 +159,7 @@ strataChange($event){
     }
 
   }
-  typeOfSoilChange($event){
-   this.typeOfSoil = $event.target.value;
-   console.log($event.target.value);
-   if(this.typeOfSoil === 'Cohesive'){
-     this.isCohessive = true;
-     this.isCohesion = false;
 
-   }else{
-     this.isCohesion = true;
-     this.isCohessive = false;
-
-   }
-  }
   densityConsiChange($event){
    this.densityConsiChange =$event.target.value;
    console.log($event.target.value);
@@ -130,15 +178,7 @@ strataChange($event){
      console.log($event.target.value);
 
    }
-   crCaliculation(){
-     if(this.allRockPiecesLenth !== undefined && this.runLength !== undefined){
-     this.cr= this.allRockPiecesLenth/this.runLength;
-     }
-     if(this.rockPicesLengthgrze !== undefined && this.runLength !== undefined){
-      this.rqd= this.rockPicesLengthgrze/this.runLength;
-      }
 
-   }
    weatheringChange($event){
      this.typeOfWeathering = $event.target.value;
      console.log($event.target.value);
@@ -170,12 +210,15 @@ this.httpService.getBoredetails(Constants.webbhid).subscribe((response: any)=>{
         }
 
          this.dsDepthFrom = this.layer1List[0].soil_ds_depth_from;
-         this.dsDepthTo = this.layer1List[0].soil_ds_depth_to;
+
          this.sptDepthFrom = this.layer1List[0].soil_spt_depth_from;
-         this.sptDepthTo = this.layer1List[0].soil_spt_depth_to;
+
          this.udsDepthFrom = this.layer1List[0].soil_uds_depth_from;
-         this.udsDepthTo = this.layer1List[0].soil_uds_depth_to;
+
          this.soilSampleColor = this.layer1List[0].soil_sample_color;
+         if(this.soilSampleColor === 'Other'){
+           this.isColorShown = true;
+         }
          this.typeOfSoil = this.layer1List[0].soil_type;
          this.densityConsiChange = this.layer1List[0].soil_density;
          this.visualClassification = this.layer1List[0].soil_visual_classif;
@@ -183,13 +226,13 @@ this.httpService.getBoredetails(Constants.webbhid).subscribe((response: any)=>{
          this.runLength = this.layer1List[0].rock_run_length;
          this.runTime = this.layer1List[0].rock_run_time;
          this.waterLoss = this.layer1List[0].rock_water_loss;
-         this.allRockPiecesLenth = this.layer1List[0].rock_pieces_length;
-         this.rockPicesLengthgrze = this.layer1List[0].rock_pieces_10;
+         this.colorOther = this.layer1List[0].soil_sample_color;
+
          this.cr = this.layer1List[0].rock_cr;
          this.rqd = this.layer1List[0].rock_rqd;
          this.rockSamplColor = this.layer1List[0].rock_sample_color;
          this.typeOfWeathering = this.layer1List[0].rock_weathering;
-         this.typeOfRock = this.layer1List[0].rock_type;
+
          this.first = this.layer1List[0].soil_spt_penetration_1;
          this.second = this.layer1List[0].soil_spt_penetration_2;
          this.third = this.layer1List[0].soil_spt_penetration_3;

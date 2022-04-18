@@ -180,6 +180,7 @@ export class AndroidDatabaseService {
     casingDepth: any,id: any,drillbit: any,
     driiother: any,
     core: any,
+    angleWithHorizontal: any,
     boreholepic: any){
       return this.databaseObj.executeSql(`UPDATE borelog_data
        SET ref_std = '${refstd}',
@@ -211,6 +212,7 @@ export class AndroidDatabaseService {
        drilling_bit = '${drillbit}',
        drilling_bit_other = '${driiother}',
        core_barrel = '${core}',
+       angle_horizontal = '${angleWithHorizontal}',
        borehole_pic = '${boreholepic}'
 
 

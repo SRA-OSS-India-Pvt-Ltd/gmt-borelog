@@ -114,6 +114,7 @@ export class Update2Page implements OnInit {
     cmeridian: any;
     // eslint-disable-next-line @typescript-eslint/naming-convention
     utm_data: any = [];
+    iterationList: any = [];
     easting: any;
     northing: any;
     base64Image: any;
@@ -224,16 +225,30 @@ export class Update2Page implements OnInit {
   }
 
   onClick(){
-    if(this.layer1List[0].drill_depth_from === null ||
-      this.layer1List[0].drill_depth_from === 'null' ||
-      this.layer1List[0].drill_depth_from === undefined ||
-      this.layer1List[0].drill_depth_from === 'undefined'  ){
-     this.router.navigate(['logginginformation']);
-     }else{
-      this.router.navigate(['update3']);
+   this. getWebBoreItrations();
 
-     }
+}
 
+getWebBoreItrations() {
+  this.androidDatabase.getIteraions(Constants.laYer1Id).then((data) => {
+    this.iterationList = [];
+    console.log('size',data.rows.length);
+    if (data.rows.length > 0) {
+      for (let i = 0; i < data.rows.length; i++) {
+        this.iterationList.push(data.rows.item(i));
+      }
+      console.log('iterationList',this.iterationList);
+      if(this.iterationList.length>0){
+
+
+        this.router.navigate(['iterations']);
+
+      }else{
+        this.router.navigate(['logginginformation']);
+
+      }
+    }
+  });
 }
   getLayer1() {
     this.androidDatabase.getLayer1ById(Constants.laYer1Id).then((data) => {
@@ -276,8 +291,10 @@ export class Update2Page implements OnInit {
 
           if(this.layer1List[0].drill_orientation === 'Inclined'){
             this.isInclined = true;
+            this.angleWithHorizontal = this.layer1List[0].angle_horizontal;
           }else{
             this.isInclined = false;
+            this.angleWithHorizontal = '';
           }
 
           this.waterMarkImage.nativeElement.src= this.layer1List[0].borehole_pic;
@@ -328,6 +345,7 @@ export class Update2Page implements OnInit {
       this.detailsOfDrillingBit,
       this.drillBitOther,
       this.detailsOdCoreBarrel,
+      this.angleWithHorizontal,
       this.waterMarkImage.nativeElement.src
       );
 
@@ -526,6 +544,7 @@ this.showPosition(this.locationCordinates.easting,this.locationCordinates.northi
 
 
   async imageSelection() {
+    this.getLatLong();
     const alert = await this.alertCtrl.create({
       header: 'Choose Type',
       buttons: [

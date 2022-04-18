@@ -487,6 +487,7 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
   }
 
   async imageSelection() {
+    this.getLatLong();
     const alert = await this.alertCtrl.create({
       header: 'Choose Type',
       buttons: [
@@ -508,6 +509,7 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
   }
 
   async imageSelection2() {
+    this.getLatLong();
     const alert = await this.alertCtrl.create({
       header: 'Choose Type',
       buttons: [
