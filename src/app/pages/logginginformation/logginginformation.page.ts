@@ -689,6 +689,9 @@ export class LogginginformationPage implements OnInit {
       .subscribe((response: any) => {
         this.layer1List = response.data;
         console.log('list', this.layer1List);
+        Constants.chainge = this.layer1List[0].chainage;
+        Constants.bhno = this.layer1List[0].bh_no;
+
         if (this.layer1List[0].depth_termination === '') {
           this.router.navigate(['layer4']);
         } else {

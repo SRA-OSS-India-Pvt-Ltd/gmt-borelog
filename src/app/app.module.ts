@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -16,6 +17,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { Network } from '@awesome-cordova-plugins/network/ngx';
 import { Keyboard } from '@awesome-cordova-plugins/keyboard/ngx';
+import { Camera } from '@awesome-cordova-plugins/camera/ngx';
+
 
 
 
@@ -28,7 +31,7 @@ import { Keyboard } from '@awesome-cordova-plugins/keyboard/ngx';
   // or after 30 seconds (whichever comes first).
   registrationStrategy: 'registerWhenStable:30000'
 })],
-  providers: [Keyboard,Network,Geolocation,SQLite,Base64ToGallery,DatePicker,{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [Camera,Keyboard,Network,Geolocation,SQLite,Base64ToGallery,DatePicker,{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

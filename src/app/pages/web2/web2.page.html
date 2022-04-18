@@ -136,6 +136,29 @@
         </ion-col>
       </ion-row>
 
+      <ion-row>
+        <ion-col size="6">
+          <ion-item class="padding">
+            <ion-label  style="white-space: pre-wrap !important;"><strong>  Borehole picture:</strong><span class="required-asterisk">*</span></ion-label>
+          </ion-item>
+
+        </ion-col>
+
+        <ion-col size="4">
+          <img #previewimage>
+
+          <!-- <ion-img [src]="originalImage"></ion-img> -->
+        </ion-col>
+
+        <ion-col size="1">
+
+          <ion-button title="camera" (click)="imageSelection()">
+            <ion-icon  name="camera" ></ion-icon>
+            </ion-button>
+        </ion-col>
+
+
+      </ion-row>
 
 
       <ion-row>
@@ -159,8 +182,8 @@
           </ion-item>
         </ion-col>
         <ion-col size="6">
-          <ion-item class="input" (click)="getLocations()">
-            <ion-input type="text" cass="input" [(ngModel)]="latitude" ></ion-input>
+          <ion-item class="input" >
+            <ion-input type="text" cass="input" [(ngModel)]="easting" ></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>      <ion-row>
@@ -171,7 +194,7 @@
         </ion-col>
         <ion-col size="6">
           <ion-item class="input">
-            <ion-input type="text" cass="input" [(ngModel)]="longitude"></ion-input>
+            <ion-input type="text" cass="input" [(ngModel)]="northing"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>

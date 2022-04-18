@@ -134,6 +134,9 @@ export class IterationsPage implements OnInit {
       .subscribe((response: any) => {
         this.layer1List = response.data;
         if(response.error === false){
+          Constants.chainge = this.layer1List[0].chainage;
+          Constants.bhno = this.layer1List[0].bh_no;
+
 
         if(this.layer1List[0].depth_termination === ''){
           this.router.navigate(['layer4']);
@@ -164,10 +167,15 @@ export class IterationsPage implements OnInit {
         }
         console.log('layer1List',this.layer1List);
         if(this.layer1List.length>0){
-          if(this.layer1List[0].depth_termination === ''){
+          if(this.layer1List[0].depth_termination === 'null'
+          ||this.layer1List[0].depth_termination === 'undefined'
+          || this.layer1List[0].depth_termination === null
+          || this.layer1List[0].depth_termination === undefined){
             this.router.navigate(['layer4']);
 
           }else{
+
+
             this.router.navigate(['update4']);
 
           }
@@ -190,12 +198,17 @@ getIterationCount() {
       }
       console.log('countList',this.countList);
       this.count = this.countList[0].Id;
+      console.log('count',this.count);
 
       if(this.count <= 50){
         Constants.laYer1Id = Constants.iteratinbhid;
 
         this.router.navigate(['logginginformation']);
           }else{
+            Constants.laYer1Id = Constants.iteratinbhid;
+
+            this.router.navigate(['logginginformation']);
+
         this.toastService.presentError('You already added 50 Iterations');
       }
 

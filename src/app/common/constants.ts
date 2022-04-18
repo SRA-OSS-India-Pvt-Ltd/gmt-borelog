@@ -24,6 +24,8 @@ export abstract class Constants {
   public static iteratinbhid: any;
   public static iterationId: any;
   public static sno: any;
+  public static chainge: any;
+  public static bhno: any;
 
 
   //ionic build --prod -- --base-href /borelogweb_testing/
