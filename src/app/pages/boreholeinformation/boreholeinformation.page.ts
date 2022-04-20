@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-inferrable-types */
 /* eslint-disable @typescript-eslint/dot-notation */
 import { AlertController } from '@ionic/angular';
 /* eslint-disable @typescript-eslint/naming-convention */
@@ -24,11 +25,11 @@ export class BoreholeinformationPage implements OnInit {
   @ViewChild('previewimage') waterMarkImage: ElementRef;
 
   boreholeNumber: any;
-  boreholeLocation: any;
+  boreholeLocation: string = '';
   boreholeChainage: any;
   chainageId: any;
 
-  rl: any;
+  rl: string = '';
   waterTable: any;
   today: any;
   typeOfRig: any;
@@ -36,8 +37,8 @@ export class BoreholeinformationPage implements OnInit {
   circulationFluid: any;
   orientation: any;
   boreholeDia: any;
-  boreholeCasingDia: any;
-  casingDepth: any;
+  boreholeCasingDia: string = '';
+  casingDepth: string = '';
 
   typeOfStructure: any;
   typeOfCrossing: any;
@@ -55,17 +56,17 @@ export class BoreholeinformationPage implements OnInit {
   isRigOther = false;
   bhid: any;
   detailsOfDrillingBit: any;
-  detailsOdCoreBarrel: any;
-  rigOther: any;
+  detailsOdCoreBarrel: string = '';
+  rigOther: string = '';
   chaingeList: any;
   selectedItem: any;
-  drillingBitOther: any;
+  drillingBitOther: string = '';
   isDrillBitOther = false;
   input: any;
   autocomplete: { input: string };
   autocompleteItems: any[];
   isCasingDiaOther = false;
-  casingDiaOther: any;
+  casingDiaOther: string = '';
   options1: CameraOptions = {
     quality: 100,
     destinationType: this.camera.DestinationType.FILE_URI,
@@ -121,6 +122,7 @@ export class BoreholeinformationPage implements OnInit {
     beta: any;
     gamma: any;
     delta: any;
+    imgPlacementSrc: any;
 
     epsilon: any;
     result: any;
@@ -139,6 +141,7 @@ export class BoreholeinformationPage implements OnInit {
     private keyboard: Keyboard,
     public camera: Camera,
     public alertCtrl: AlertController
+
 
   ) {
     this.ref = 'IS 1892; IS 2131; IS 2132';
@@ -221,6 +224,7 @@ export class BoreholeinformationPage implements OnInit {
     }
   }
 
+
   getLayer1LastId() {
     this.androidDatabase.getLastId().then((data) => {
       this.layer1List = [];
@@ -288,8 +292,6 @@ export class BoreholeinformationPage implements OnInit {
   validation() {
     if (this.boreholeNumber === undefined) {
       this.toastSer.presentError('Please Enter Borehole Number');
-    } else if (this.boreholeLocation === undefined) {
-      this.toastSer.presentError('Please Enter Borehole Location');
     } else if (this.easting === undefined) {
       this.toastSer.presentError('Please Enter Latitude');
     } else if (this.northing === undefined) {
@@ -320,8 +322,6 @@ export class BoreholeinformationPage implements OnInit {
       this.toastSer.presentError('Please Enter Type of Structure');
     } else if (this.boreholeNumber === '') {
       this.toastSer.presentError('Please Enter Borehole Number');
-    } else if (this.boreholeLocation === '') {
-      this.toastSer.presentError('Please Enter Borehole Location');
     } else if (this.easting === '') {
       this.toastSer.presentError('Please Enter Latitude');
     } else if (this.northing === '') {
@@ -349,8 +349,6 @@ export class BoreholeinformationPage implements OnInit {
       this.toastSer.presentError('Please Enter Type of Structure');
     } else if (this.boreholeNumber === null) {
       this.toastSer.presentError('Please Enter Borehole Number');
-    } else if (this.boreholeLocation === null) {
-      this.toastSer.presentError('Please Enter Borehole Location');
     } else if (this.easting === null) {
       this.toastSer.presentError('Please Enter Latitude');
     } else if (this.northing === null) {
@@ -361,7 +359,7 @@ export class BoreholeinformationPage implements OnInit {
       this.toastSer.presentError('Please Enter Borehole Start Date');
     } else if (this.waterTable === null) {
       this.toastSer.presentError('Please Enter Depth of Water Table RL (m)');
-    } else if (this.rl === 0) {
+    } else if (this.rl === '0') {
       this.toastSer.presentError(
         'Please EnterProper Borehole RL (m), it should not be zero'
       );
@@ -425,8 +423,9 @@ export class BoreholeinformationPage implements OnInit {
       this.detailsOdCoreBarrel,
       this.angleWithHorizontal,
       this.waterMarkImage.nativeElement.src);
-    //this.router.navigate(['logginginformation']);
-    this.getLayer1();
+
+      this.getIterationlist();
+     // this.getLayer1();
   }
   submitWeb() {
     this.httpService
@@ -464,7 +463,7 @@ export class BoreholeinformationPage implements OnInit {
         } else {
           this.toastSer.presentSuccess(response.msg);
           //  this.router.navigate(['logginginformation']);
-          this.getWebData();
+          this.getWebBoreItrations();
         }
       });
   }
@@ -496,6 +495,22 @@ export class BoreholeinformationPage implements OnInit {
     });
   }
 
+  getWebBoreItrations() {
+    this.httpService
+      .getAllBoreIterations(Constants.webbhid)
+      .subscribe((response: any) => {
+        console.log('response', response);
+        if (response.error === false) {
+          this.router.navigate(['iterations']);
+
+        }else{
+          this.router.navigate(['logginginformation']);
+
+        }
+      });
+  }
+
+
   getWebData() {
     this.layer1List = [];
 
@@ -513,6 +528,36 @@ export class BoreholeinformationPage implements OnInit {
         }
       });
   }
+
+  getLocations(){
+    this.geolocation.getCurrentPosition().then((resp) => {
+      this.latitude= resp.coords.latitude;
+      this.longitude= resp.coords.longitude;
+      console.log('lattt', this.latitude);
+
+     }).catch((error) => {
+       console.log('Error getting location', error);
+     });
+  }
+
+
+getIterationlist(){
+  this.androidDatabase.getIteraions(Constants.laYer1Id).then((data) => {
+    console.log('bhid',Constants.laYer1Id);
+
+    console.log('size',data.rows.length);
+    if (data.rows.length > 0) {
+      this.router.navigate(['iterations']);
+
+    }else{
+      this.router.navigate(['logginginformation']);
+
+
+    }
+  });
+
+}
+
 
   getLayer1() {
     this.androidDatabase.getLayer1ById(Constants.laYer1Id).then((data) => {
@@ -602,6 +647,12 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
   }
 
 
+  snap(){
+    this.camera.getPicture(this.options1).then((imageData)=> {
+       this.imgPlacementSrc = document.getElementById('imgPlacement');
+      this.imgPlacementSrc.src = 'data:image/jpeg;base64,' + imageData;
+ });
+  }
 
   takeSnap() {
     this.camera.getPicture(this.options1).then(

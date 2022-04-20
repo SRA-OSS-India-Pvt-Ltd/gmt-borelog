@@ -352,6 +352,9 @@ export class Web1Page implements OnInit {
       }else if(this.subAgency === ''){
         this.toastService.presentError('Please Select SubAgencyName');
 
+      }else if(this.sectionId === ''){
+        this.toastService.presentError('Please Select Section');
+
       }
       else{
         this.updateLayer1();

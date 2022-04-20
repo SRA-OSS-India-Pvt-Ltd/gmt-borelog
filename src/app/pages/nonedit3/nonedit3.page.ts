@@ -186,7 +186,7 @@ strataChange($event){
    }
   getLayer1() {
     this.layer1List = [];
-this.httpService.getBoredetails(Constants.webbhid).subscribe((response: any)=>{
+this.httpService.getSingleBoreIterationDetails(Constants.iterationId).subscribe((response: any)=>{
   this.layer1List = response.data;
 
         console.log('layer1List',this.layer1List);
@@ -209,11 +209,11 @@ this.httpService.getBoredetails(Constants.webbhid).subscribe((response: any)=>{
           this.isUDSepth = true;
         }
 
-         this.dsDepthFrom = this.layer1List[0].soil_ds_depth_from;
+         this.dsDepthFrom = this.layer1List[0].soil_ds_depth;
 
-         this.sptDepthFrom = this.layer1List[0].soil_spt_depth_from;
+         this.sptDepthFrom = this.layer1List[0].soil_spt_depth;
 
-         this.udsDepthFrom = this.layer1List[0].soil_uds_depth_from;
+         this.udsDepthFrom = this.layer1List[0].soil_uds_depth;
 
          this.soilSampleColor = this.layer1List[0].soil_sample_color;
          if(this.soilSampleColor === 'Other'){
@@ -255,13 +255,10 @@ this.httpService.getBoredetails(Constants.webbhid).subscribe((response: any)=>{
     });
   }
 onClick(){
-  if(this.layer1List[0].depth_termination === ''){
-    this.router.navigate(['layer4']);
 
-  }else{
-    this.router.navigate(['nonedit4']);
 
-  }
+    this.router.navigate(['nonediiterations']);
+
 
 }
 }

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-inferrable-types */
 /* eslint-disable @typescript-eslint/dot-notation */
 import { HttpcallsService } from 'src/app/services/httpcalls.service';
 import { Platform, AlertController } from '@ionic/angular';
@@ -19,7 +20,7 @@ export class Update2Page implements OnInit {
   @ViewChild('previewimage') waterMarkImage: ElementRef;
 
   boreholeNumber: any;
-  boreholeLocation: any;
+  boreholeLocation: string = '';
 
   detailsOfDrillingBit: any;
   detailsOdCoreBarrel: any;
@@ -146,8 +147,6 @@ export class Update2Page implements OnInit {
       this.toastSer.presentError('Please Enter Type of Structure');
     } else if (this.boreholeNumber === '') {
       this.toastSer.presentError('Please Enter Borehole Number');
-    } else if (this.boreholeLocation === '') {
-      this.toastSer.presentError('Please Enter Borehole Location');
     } else if (this.easting === '') {
       this.toastSer.presentError('Please Enter Latitude');
     } else if (this.northing === '') {
@@ -263,7 +262,7 @@ getWebBoreItrations() {
 
 
           this.boreholeNumber = this.layer1List[0].bh_no;
-          this.boreholeLocation = this.layer1List[0].bh_location;
+
           this.chainage = this.layer1List[0].chainage;
           this.chainageId = this.layer1List[0].chainage_id;
           this.easting = this.layer1List[0].easting;
@@ -350,15 +349,7 @@ getWebBoreItrations() {
       );
 
 
-        if(this.layer1List[0].drill_depth_from === null ||
-        this.layer1List[0].drill_depth_from === 'null' ||
-        this.layer1List[0].drill_depth_from === undefined ||
-        this.layer1List[0].drill_depth_from === 'undefined'  ){
-       this.router.navigate(['logginginformation']);
-       }else{
-        this.router.navigate(['update3']);
-
-       }
+         this.getWebBoreItrations();
 
 
 
@@ -372,7 +363,21 @@ getWebBoreItrations() {
     this.typeOfStructure = $event.target.value;
     console.log('typeOfStructure: ',this.typeOfStructure);
   }
+  getIterationlist(){
+    this.androidDatabase.getIteraions(Constants.laYer1Id).then((data) => {
 
+      console.log('size',data.rows.length);
+      if (data.rows.length > 0) {
+        this.router.navigate(['iterations']);
+
+      }else{
+        this.router.navigate(['logginginformation']);
+
+
+      }
+    });
+
+  }
 
 boreholeDiaChange($event){
   console.log($event.target.value);

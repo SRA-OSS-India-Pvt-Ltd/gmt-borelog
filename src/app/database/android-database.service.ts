@@ -280,7 +280,7 @@ additerationData(bhid: any,drillDepthFrom: any,drillDepthTo: any,typeOfstara: an
     '${rockWaethering}')`,[])
     .then((res: any)=>{
       console.log('adding Borelog');
-      this.toastSer.presentError('Iteration Added');
+      this.toastSer.presentSuccess('Iteration Added');
 
     }).catch((error: any)=>{
       console.log('error on adding Borelog ', JSON.stringify(error));
@@ -350,6 +350,22 @@ additerationData(bhid: any,drillDepthFrom: any,drillDepthTo: any,typeOfstara: an
        });
 
       }
+
+
+updatebhid(bhid: any,id: any){
+              return this.databaseObj.executeSql(`UPDATE iterations
+               SET bh_id = '${bhid}' WHERE bh_id = ${id} `,[])
+              .then((res) => {
+               console.log('Updating bhid');
+               this.toastSer.presentSuccess(' bhid Details Updated');
+               return res;
+             })
+             .catch((e) => {
+               console.log('error on Updating bhid ', JSON.stringify(e));
+               return 'error on Updating bhid ' + JSON.stringify(e);
+             });
+
+            }
 
 
 updateLayer4(depthTer: any,edate: any,rvrepname: any,
@@ -462,6 +478,19 @@ updateLayer4(depthTer: any,edate: any,rvrepname: any,
         return 'error on getting iterations ' + JSON.stringify(e);
       });
   }
+  getIterationsByid(iterationid: any) {
+    return this.databaseObj
+      .executeSql(`select * from iterations where bh_iteration_id = '${iterationid}'`, [])
+      .then((res) => {
+        console.log('getting iterations');
+        return res;
+      })
+      .catch((e) => {
+        console.log('error on getting iterations ', JSON.stringify(e));
+        return 'error on getting iterations ' + JSON.stringify(e);
+      });
+  }
+
 
 
   getLastId() {
@@ -503,5 +532,19 @@ updateLayer4(depthTer: any,edate: any,rvrepname: any,
         return 'error on getting Id ' + JSON.stringify(e);
       });
   }
+
+  deleteRowbyIdIter(id: any) {
+    return this.databaseObj
+      .executeSql(`DELETE FROM iterations WHERE bh_id = '${id}'`, [])
+      .then((res) => {
+        console.log('getting Id');
+        return res;
+      })
+      .catch((e) => {
+        console.log('error on getting Id ', JSON.stringify(e));
+        return 'error on getting Id ' + JSON.stringify(e);
+      });
+  }
+
 
 }

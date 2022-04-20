@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-inferrable-types */
 /* eslint-disable @typescript-eslint/dot-notation */
 import { AlertController } from '@ionic/angular';
 /* eslint-disable @typescript-eslint/naming-convention */
@@ -21,7 +22,7 @@ export class Web2Page implements OnInit {
   @ViewChild('previewimage') waterMarkImage: ElementRef;
 
   boreholeNumber: any;
-  boreholeLocation: any;
+  boreholeLocation: string = '';
 
   detailsOfDrillingBit: any;
   detailsOdCoreBarrel: any;
@@ -290,8 +291,6 @@ export class Web2Page implements OnInit {
       this.toastSer.presentError('Please Enter Type of Structure');
     } else if (this.boreholeNumber === '') {
       this.toastSer.presentError('Please Enter Borehole Number');
-    } else if (this.boreholeLocation === '') {
-      this.toastSer.presentError('Please Enter Borehole Location');
     } else if (this.easting === '') {
       this.toastSer.presentError('Please Enter Latitude');
     } else if (this.northing === '') {
@@ -427,8 +426,6 @@ export class Web2Page implements OnInit {
       .subscribe((response: any) => {
         console.log('response', response);
         if (response.error === false) {
-          Constants.iteratinbhid = Constants.webbhid;
-
           this.router.navigate(['iterations']);
 
         }else{

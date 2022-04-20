@@ -21,11 +21,13 @@ export abstract class Constants {
   public static orgId: any;
   public static webbhid: any;
   public static usertype: any;
-  public static iteratinbhid: any;
+
   public static iterationId: any;
   public static sno: any;
   public static chainge: any;
   public static bhno: any;
+  public static mainBHID: any;
+  public static flow: any;
 
 
   //ionic build --prod -- --base-href /borelogweb_testing/

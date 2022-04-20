@@ -688,7 +688,10 @@ this.cmeridian = this.degree2radian(-183.0 + (zone * 6.0));
 return parseFloat(this.cmeridian);
 }
 
+skipnow(){
+this.router.navigate(['viewlist']);
 
+}
 
 
 

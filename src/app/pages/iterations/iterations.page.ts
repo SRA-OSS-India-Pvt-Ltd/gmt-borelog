@@ -16,6 +16,7 @@ export class IterationsPage implements OnInit {
   layer1List: any = [];
   countList: any = [];
   count: any;
+  orderForm: any;
   constructor(public httpService: HttpcallsService,
     public platform: Platform,
     public router: Router,
@@ -23,8 +24,11 @@ export class IterationsPage implements OnInit {
     public toastService: ToastService) {
     this.platform.ready().then(() => {
       if (this.platform.is('android')) {
+
+
         this.getANdroidIterations();
       } else {
+
         this.getWebBoreItrations();
       }
     });
@@ -33,10 +37,15 @@ export class IterationsPage implements OnInit {
   ngOnInit() {}
 
   ionViewDidEnter(){
+
+
     this.platform.ready().then(() => {
       if (this.platform.is('android')) {
+
         this.getANdroidIterations();
       } else {
+
+
         this.getWebBoreItrations();
       }
     });
@@ -45,7 +54,7 @@ export class IterationsPage implements OnInit {
 
   getWebBoreItrations() {
     this.httpService
-      .getAllBoreIterations(Constants.iteratinbhid)
+      .getAllBoreIterations(Constants.webbhid)
       .subscribe((response: any) => {
         console.log('response', response);
         if (response.error === false) {
@@ -56,7 +65,7 @@ export class IterationsPage implements OnInit {
 
 
   getANdroidIterations() {
-    this.androidDatabase.getIteraions(Constants.iteratinbhid).then((data) => {
+    this.androidDatabase.getIteraions(Constants.laYer1Id).then((data) => {
       this.iterationList = [];
       console.log('size',data.rows.length);
       if (data.rows.length > 0) {
@@ -102,8 +111,6 @@ export class IterationsPage implements OnInit {
       if (this.platform.is('android')) {
         this.getIterationCount();
       } else {
-        Constants.webbhid = Constants.iteratinbhid;
-        Constants.laYer1Id = Constants.iteratinbhid;
 
         this.router.navigate(['logginginformation']);
           }
@@ -125,10 +132,7 @@ export class IterationsPage implements OnInit {
 
   }
   webLayer4(){
-
-    Constants.webbhid = Constants.iteratinbhid;
-
-    this.layer1List = [];
+this.layer1List = [];
     this.httpService
       .getBoredetails(Constants.webbhid)
       .subscribe((response: any) => {
@@ -156,7 +160,7 @@ export class IterationsPage implements OnInit {
   }
 
   androidLayer4() {
-    Constants.laYer1Id = Constants.iteratinbhid;
+
 
     this.androidDatabase.getLayer1ById(Constants.laYer1Id).then((data) => {
       this.layer1List = [];
@@ -188,31 +192,33 @@ export class IterationsPage implements OnInit {
 }
 
 getIterationCount() {
+  this.router.navigate(['logginginformation']);
 
-  this.androidDatabase.getIterationCount(Constants.iteratinbhid).then((data) => {
-    this.countList = [];
-    console.log('size',data.rows.length);
-    if (data.rows.length > 0) {
-      for (let i = 0; i < data.rows.length; i++) {
-        this.countList.push(data.rows.item(i));
-      }
-      console.log('countList',this.countList);
-      this.count = this.countList[0].Id;
-      console.log('count',this.count);
 
-      if(this.count <= 50){
-        Constants.laYer1Id = Constants.iteratinbhid;
+  // this.androidDatabase.getIterationCount(Constants.laYer1Id).then((data) => {
+  //   this.countList = [];
+  //   console.log('size',data.rows.length);
+  //   if (data.rows.length > 0) {
+  //     for (let i = 0; i < data.rows.length; i++) {
+  //       this.countList.push(data.rows.item(i));
+  //     }
+  //     console.log('countList',this.countList);
+  //     this.count = this.countList[0].Id;
+  //     console.log('count',this.count);
 
-        this.router.navigate(['logginginformation']);
-          }else{
-            Constants.laYer1Id = Constants.iteratinbhid;
+  //     if(this.count <= 50){
+  //       Constants.laYer1Id = Constants.laYer1Id;
 
-            this.router.navigate(['logginginformation']);
+  //       this.router.navigate(['logginginformation']);
+  //         }else{
+  //           Constants.laYer1Id = Constants.laYer1Id;
 
-        this.toastService.presentError('You already added 50 Iterations');
-      }
+  //           this.router.navigate(['logginginformation']);
 
-    }
-  });
+  //      // this.toastService.presentError('You already added 50 Iterations');
+  //     }
+
+  //   }
+  // });
 }
 }

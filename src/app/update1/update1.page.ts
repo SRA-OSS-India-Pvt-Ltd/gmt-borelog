@@ -201,6 +201,9 @@ getLayer1() {
     }else if(this.subAgency === ''){
       this.toastService.presentError('Please Select SubAgencyName');
 
+    }else if(this.sectionId === ''){
+      this.toastService.presentError('Please Select Section');
+
     }
     else{
       this.updateLayer1();

@@ -4,7 +4,8 @@ import { Constants } from 'src/app/common/constants';
 import { AndroidDatabaseService } from './../../database/android-database.service';
 import { Component, OnInit } from '@angular/core';
 import { HttpcallsService } from 'src/app/services/httpcalls.service';
-import { Platform } from '@ionic/angular';
+import { Platform, AlertController } from '@ionic/angular';
+import { LoadingController } from '@ionic/angular';
 
 
 
@@ -26,7 +27,11 @@ disconnectSubscription: any;
     public router: Router,
     public httpService: HttpcallsService,
     public platform: Platform,
-    public toastser: ToastService) {
+    public toastser: ToastService,
+    public loadingController: LoadingController,
+    public alertCtrl: AlertController
+
+    ) {
     this.adding();
     this.project = 'DFCCIL';
 
@@ -34,6 +39,29 @@ disconnectSubscription: any;
 
   ngOnInit() {
   }
+
+  async alert(id: any,bhid: any) {
+
+    const alert = await this.alertCtrl.create({
+      header: 'Do you want to submit this borehole information to server ?',
+      buttons: [
+        {
+          text: 'Yes',
+          handler: (redc) => {
+            this.datasubmit(id,bhid);
+          },
+        },
+        {
+          text: 'No',
+          handler: (redc) => {
+
+          },
+        },
+      ],
+    });
+    alert.present();
+  }
+
   ionViewDidEnter(){
     this.adding();
     this.project = 'DFCCIL';
@@ -75,6 +103,7 @@ disconnectSubscription: any;
     this.router.navigate(['update4']);
   }
   submitboredata(id: any){
+    Constants.mainBHID = id;
     this.androidDatabase.getLayer1ById(id).then((data) => {
       this.totalList = [];
       console.log('size',data.rows.length);
@@ -134,14 +163,14 @@ disconnectSubscription: any;
            if(response.error === true){
             this.toastser.presentError(response.msg);
 
-            this.submitIterations(id,response.data.bh_id);
 
            }else{
            console.log('Idddddddd',id);
-           this.toastser.presentSuccess(response.msg);
-           this.androidDatabase.deleteRowbyId(id);
+           this.androidDatabase.updatebhid(response.data.bh_id,id).then((res: any)=>{
+            this.submitIterations(response.data.bh_id,id);
 
-           this.router.navigate(['sidemenu']);
+           });
+
            }
 
 
@@ -151,8 +180,23 @@ disconnectSubscription: any;
 
   }
 
-  submitIterations(id: any,bhid: any){
-    this.androidDatabase.getIteraions(id).then((data) => {
+
+  autoLoader() {
+    this.loadingController.create({
+      spinner:'lines',
+      message: 'Loading, Please Wait ...',
+      duration: 20000
+    }).then((response) => {
+      response.present();
+      response.onDidDismiss().then((response1) => {
+        console.log('Loader dismissed', response);
+      });
+    });
+  }
+
+  submitIterations(bhid: any,id: any){
+    this.autoLoader();
+    this.androidDatabase.getIteraions(bhid).then((data) => {
       this.iterationlist = [];
       console.log('size',data.rows.length);
       if (data.rows.length > 0) {
@@ -166,9 +210,10 @@ disconnectSubscription: any;
             this.toastser.presentError(res.msg);
 
            }else{
-           console.log('Idddddddd',id);
+           console.log('Idddddddd',bhid);
            this.toastser.presentSuccess(res.msg);
            this.androidDatabase.deleteRowbyId(id);
+           this.androidDatabase.deleteRowbyIdIter(bhid);
 
            this.router.navigate(['sidemenu']);
            }
@@ -295,14 +340,16 @@ disconnectSubscription: any;
 
 
    moveToWebIterations(bhid: any){
-    Constants.iteratinbhid = bhid;
+
+    Constants.webbhid = bhid;
 
 
     this.router.navigate(['iterations']);
 
   }
   moveToAndroidIterations(bhid: any){
-    Constants.iteratinbhid = bhid;
+
+    Constants.laYer1Id = bhid;
 
 
     this.router.navigate(['iterations']);

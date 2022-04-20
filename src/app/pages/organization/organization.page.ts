@@ -133,6 +133,12 @@ isimg = false;
     }else if(this.subAgency === ''){
       this.toastService.presentError('Please Select SubAgencyName');
 
+    }else if(this.sectionId === ''){
+      this.toastService.presentError('Please Select Section');
+
+    }else if(this.sectionId === undefined){
+     this.toastService.presentError('Please Select Section');
+
     }
     else{
       this.adding();
@@ -155,7 +161,7 @@ isimg = false;
 
       this.androiDatabase.updateLayer1(this.package,this.sections,this.subAgencyId,
         this.subAgencyAddress,this.subAgencyLogo,Constants.laYer1Id,this.sectionId);
-        this.router.navigate(['boreholeinformation']);
+
         this.getLayer1();
 
     }
@@ -284,10 +290,10 @@ isimg = false;
           this.layer1List.push(data.rows.item(i));
         }
         console.log('layer1List',this.layer1List[0].struct_type);
-        if(this.layer1List[0].struct_type === 'null' ||
-        this.layer1List[0].struct_type === null ||
-        this.layer1List[0].struct_type === 'undefined' ||
-        this.layer1List[0].struct_type === undefined ){
+        if(this.layer1List[0].type_of_structure === 'null' ||
+        this.layer1List[0].type_of_structure === null ||
+        this.layer1List[0].type_of_structure === 'undefined' ||
+        this.layer1List[0].type_of_structure === undefined ){
           this.router.navigate(['boreholeinformation']);
 
           Constants.webbhid = Constants.laYer1Id;

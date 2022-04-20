@@ -193,27 +193,40 @@ export class Nonedit1Page implements OnInit {
         }
 
 
+        if(this.layer1List[0].org_id === '1'){
+          this.orgName = 'Aarvee Associates';
+          this.orgAddrs = 'Hyderabad';
+          this.orgLogo = 'http:\/\/sraossinc.net:7071\/borelogapi\/images\/aarvee-icon.png';
+          this.projName ='DFCCIL';
+          this.clientName = 'DFCCIL';
+          this.projLocation = 'Hyderabad';
+        }
+         if(this.layer1List[0].package_id === '1'){
+           console.log('pack');
+           this.package = 'DFCCIL Package-1';
+         }else if(this.layer1List[0].package_id === '2'){
+          this.package = 'DFCCIL Package-2';
+        }else if(this.layer1List[0].package_id === '3'){
+          this.package = 'DFCCIL Package-3';
+        }
 
-   if(this.layer1List[0].sa_id === '1'){
+         if(this.layer1List[0].sa_id === '1'){
 
   this.subAgencyId = '1';
 
   this.subAgency = 'SubAgency-1';
   this.subAgencyAddress = 'Hyderabad';
   this.subAgencyLogo = 'http://sraossinc.net:7071/borelogapi/images/subagency.png';
-  }else if(this.layer1List[0].sa_id === '2'){
+}else if(this.layer1List[0].sa_id === '2'){
 
   this.subAgencyId = '2';
 
   this.subAgency = 'SubAgency-2';
   this.subAgencyAddress = 'Hyderabad';
   this.subAgencyLogo = 'http://sraossinc.net:7071/borelogapi/images/subagency2.png';
-   }
+}
 
-
-
-
-       });
+    });
      }
 
     onClick(){

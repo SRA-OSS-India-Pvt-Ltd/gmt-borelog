@@ -69,7 +69,7 @@ export class LogginginformationPage implements OnInit {
   rockDepthFrom: any;
   sptstatus: any;
   isColorShown = false;
-  colorOther: any;
+  colorOther: string = '';
   constructor(
     public toastSer: ToastService,
     public androidDatabase: AndroidDatabaseService,
@@ -77,12 +77,25 @@ export class LogginginformationPage implements OnInit {
     public httpService: HttpcallsService,
     public platform: Platform
   ) {
+    this.clearFields();
+
     platform.ready().then(() => {
       if (this.platform.is('android')) {
+        this.clearFields();
         this.getLayer1LastId();
       } else {
       }
     });
+  }
+  ionViewDidEnter(){
+    this.clearFields();
+    this.platform.ready().then(() => {
+      if (this.platform.is('android')) {
+        this.clearFields();
+      } else {
+      }
+    });
+
   }
 
   ngOnInit() {}
@@ -148,7 +161,7 @@ export class LogginginformationPage implements OnInit {
   sampleChange($event) {
     this.typeOfsample = $event.target.value;
     console.log($event.target.value);
-    if (this.typeOfsample === 'Distributed Sample') {
+    if (this.typeOfsample === 'DS') {
       this.isdsDepth = true;
       this.isSPTDepth = false;
       this.isUDSepth = false;
@@ -170,7 +183,7 @@ export class LogginginformationPage implements OnInit {
       this.dsDepthFrom = '';
 
       this.udsDepthFrom = '';
-    } else if (this.typeOfsample === 'Undistributed Sample') {
+    } else if (this.typeOfsample === 'UDS') {
       this.isdsDepth = false;
       this.isSPTDepth = false;
       this.isUDSepth = true;
@@ -383,7 +396,7 @@ export class LogginginformationPage implements OnInit {
         this.toastSer.presentError(
           'Please Enter  UDS Depth ,It should not  Zero'
         );
-      } else if (this.typeOfsample === 'Distributed Sample') {
+      } else if (this.typeOfsample === 'DS') {
         this.rockDepthFrom = '';
         this.rockDepthTo = '';
         this.first = '';
@@ -434,7 +447,7 @@ export class LogginginformationPage implements OnInit {
         this.cr = '';
         this.rqd = '';
         this.adding();
-      } else if (this.typeOfsample === 'Undistributed Sample') {
+      } else if (this.typeOfsample === 'UDS') {
         this.rockDepthFrom = '';
         this.rockDepthTo = '';
 
@@ -538,6 +551,71 @@ export class LogginginformationPage implements OnInit {
     }
   }
 
+  clearFields(){
+
+    this.rockDepthFrom = '';
+    this.rockDepthTo = '';
+    this.first = '';
+    this.second = '';
+    this.third = '';
+    this.total = '';
+    this.firstB = '';
+    this.secondB = '';
+    this.thirdB = '';
+    this.totalB = '';
+    this.sptDepthFrom = '';
+
+    this.udsDepthFrom = '';
+
+    this.sptstatus = '';
+
+
+    this.rockSample = '';
+    this.runLength = '';
+    this.runTime = '';
+    this.waterLoss = '';
+
+    this.rockSamplColor = '';
+    this.typeOfWeathering = '';
+
+    this.cr = '';
+    this.rqd = '';
+    this.typeOfsample = '';
+    this.soilSampleColor = '';
+
+    this.visualClassification = '';
+
+    this.dsDepthFrom = '';
+
+    this.sptDepthFrom = '';
+
+    this.udsDepthFrom = '';
+
+    this.first = '';
+    this.second = '';
+    this.third = '';
+    this.total = '';
+    this.firstB = '';
+    this.secondB = '';
+    this.thirdB = '';
+    this.totalB = '';
+    this.sptstatus = '';
+    this.colorOther = '';
+    this.typeOfstrata= undefined;
+    this.typeOfsample = undefined;
+    this.soilSampleColor = undefined;
+    this.visualClassification= undefined;
+    this.drillingFrom = '';
+    this.drillingTo = '';
+    this.isRock = false;
+    this.isSoil = false;
+    this.isSPTDepth = false;
+    this.isUDSepth = false;
+    this.isdsDepth = false;
+    this.isColorShown = false;
+    this.typeOfstrata = null
+
+  }
   moveToNext() {}
   addDatabse() {
     this.androidDatabase.additerationData(
@@ -572,6 +650,7 @@ export class LogginginformationPage implements OnInit {
       this.rockSamplColor,
       this.typeOfWeathering);
 
+      this.clearFields();
       this.router.navigate(['iterations']);
 
      // this.getLayer1();
@@ -671,11 +750,10 @@ export class LogginginformationPage implements OnInit {
 
   adding() {
     this.platform.ready().then(() => {
+
       if (this.platform.is('android')) {
         this.addDatabse();
       } else {
-        //this.addDatabse();
-
         this.submitweb();
       }
     });

@@ -97,7 +97,7 @@ export class Nonedit2Page implements OnInit {
           this.detailsOfDrillingBit = this.layer1List[0].drilling_bit;
           this.drillBitOther = this.layer1List[0].drilling_bit_other;
           this.detailsOdCoreBarrel = this.layer1List[0].core_barrel;
-
+          this.angleWithHorizontal = this.layer1List[0].angle_horizontal;
            if(this.layer1List[0].drill_orientation === 'Inclined'){
             this.isInclined = true;
           }else{
@@ -149,7 +149,7 @@ export class Nonedit2Page implements OnInit {
 
   onClick(){
 
-       this.router.navigate(['nonedit3']);
+       this.router.navigate(['nonediiterations']);
 
    }
 

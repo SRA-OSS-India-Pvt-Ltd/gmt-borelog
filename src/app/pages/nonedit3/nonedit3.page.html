@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/viewlist"></ion-back-button>
+      <ion-back-button defaultHref="/nonediiterations"></ion-back-button>
     </ion-buttons>
     <ion-title style="white-space: pre-wrap !important;" >Logging Information </ion-title>
 
@@ -212,38 +212,10 @@
       </ion-item>
     </ion-col>
   </ion-row>
-  <ion-row  *ngIf="isSoil">
-    <ion-col size="6">
-      <ion-item class="padding">
-        <ion-label  style="white-space: pre-wrap !important;"><strong>Type of Soil:</strong></ion-label>
-      </ion-item>
-    </ion-col>
-    <ion-col size="6">
-      <ion-item class="input">
-
-        <ion-label>{{typeOfSoil}}</ion-label>
 
 
-        </ion-item>
-    </ion-col>
-  </ion-row>
 
-  <ion-row *ngIf="isSoil" >
-    <ion-col size="6">
-      <ion-item class="padding">
-        <ion-label  style="white-space: pre-wrap !important;"><strong>Density / Consistency:</strong></ion-label>
-      </ion-item>
-    </ion-col>
-    <ion-col size="6">
-      <ion-item class="input">
-
-        <ion-label>{{densityConsiChange}}</ion-label>
-
-
-        </ion-item>
-    </ion-col>
-  </ion-row>
-
+  
 
   <ion-row *ngIf="isSoil" >
     <ion-col size="6">

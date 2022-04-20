@@ -103,6 +103,10 @@ const routes: Routes = [
     path: 'edititerations',
     loadChildren: () => import('./pages/edititerations/edititerations.module').then( m => m.EdititerationsPageModule)
   },
+  {
+    path: 'nonediiterations',
+    loadChildren: () => import('./pages/nonediiterations/nonediiterations.module').then( m => m.NonediiterationsPageModule)
+  },
 ];
 
 @NgModule({

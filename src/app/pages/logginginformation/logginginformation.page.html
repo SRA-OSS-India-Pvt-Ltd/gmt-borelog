@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/sidemenu"></ion-back-button>
+      <ion-back-button defaultHref="/iterations"></ion-back-button>
     </ion-buttons>
     <ion-title style="white-space: pre-wrap !important;">Logging Information</ion-title>
 
@@ -11,6 +11,7 @@
 </ion-header>
 
 <ion-content>
+
   <ion-list>
     <ion-item class="padding1">
       <ion-label class="label"><strong>Add Iteration</strong></ion-label>
@@ -75,9 +76,9 @@
           <ion-item class="input">
             <ion-item>
               <ion-select interface="popover" placeholder="Select " (ionChange)="sampleChange($event)">
-                <ion-select-option value="Distributed Sample">Distributed Sample </ion-select-option>
+                <ion-select-option value="DS">Distributed Sample </ion-select-option>
                 <ion-select-option value="SPT">SPT</ion-select-option>
-                <ion-select-option value="Undistributed Sample">Undistributed Sample</ion-select-option>
+                <ion-select-option value="UDS">Undistributed Sample</ion-select-option>
               </ion-select>
             </ion-item>
           </ion-item>

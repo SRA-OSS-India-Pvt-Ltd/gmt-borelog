@@ -474,7 +474,7 @@ sno: any;
 
 
      getLayer1() {
-      this.androidDatabase.getLayer1ById(Constants.laYer1Id).then((data) => {
+      this.androidDatabase.getIterationsByid(Constants.iterationId).then((data) => {
         this.layer1List = [];
         console.log('size',data.rows.length);
         if (data.rows.length > 0) {
@@ -499,11 +499,11 @@ sno: any;
           }
 
            this.typeOfsample = this.layer1List[0].type_of_sample;
-           if(this.typeOfsample === 'Distributed Sample'){
+           if(this.typeOfsample === 'DS'){
              this.isdsDepth = true;
            }else if(this.typeOfsample === 'SPT'){
              this.isSPTDepth = true;
-           }else if(this.typeOfsample === 'Undistributed Sample'){
+           }else if(this.typeOfsample === 'UDS'){
              this.isUDSepth = true;
            }
            this.dsDepthFrom = this.layer1List[0].soil_ds_depth;
@@ -574,7 +574,7 @@ sno: any;
     }
     updateLayer3(){
       this.androidDatabase.updateLayer3(Constants.iterationId,
-        Constants.iteratinbhid,
+        Constants.webbhid,
         this.drillingFrom,
         this.drillingTo,
         this.typeOfstrata,

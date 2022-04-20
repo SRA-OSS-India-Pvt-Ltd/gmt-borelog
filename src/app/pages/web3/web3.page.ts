@@ -209,11 +209,11 @@ this.httpService.getSingleBoreIterationDetails(Constants.iterationId).subscribe(
         }
 
          this.typeOfsample = this.layer1List[0].type_of_sample;
-         if(this.typeOfsample === 'Distributed Sample'){
+         if(this.typeOfsample === 'DS '){
            this.isdsDepth = true;
          }else if(this.typeOfsample === 'SPT'){
            this.isSPTDepth = true;
-         }else if(this.typeOfsample === 'Undistributed Sample'){
+         }else if(this.typeOfsample === 'UDS'){
            this.isUDSepth = true;
          }
          this.dsDepthFrom = this.layer1List[0].soil_ds_depth;
@@ -287,7 +287,7 @@ this.httpService.getSingleBoreIterationDetails(Constants.iterationId).subscribe(
       this.colorOther = '';
     }
 
-    this.httpService.submitLayer3(Constants.iteratinbhid,3,
+    this.httpService.submitLayer3(Constants.webbhid,3,
       this.drillingFrom,this.drillingTo,this.typeOfstrata,
       this.typeOfsample,this.dsDepthFrom,
       this.sptDepthFrom,
