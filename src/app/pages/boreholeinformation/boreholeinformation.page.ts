@@ -1,3 +1,4 @@
+/* eslint-disable no-var */
 import { CompleteTestServiceService } from './../../services/complete-test-service.service';
 /* eslint-disable @typescript-eslint/ban-types */
 import { AutoCompleteComponent, AutoCompleteService, AutoCompleteStyles } from 'ionic4-auto-complete';
@@ -19,6 +20,7 @@ import { Keyboard } from '@awesome-cordova-plugins/keyboard/ngx';
 import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 import * as watermark from 'watermarkjs';
+import { File } from '@awesome-cordova-plugins/file/ngx';
 
 
 
@@ -87,7 +89,11 @@ export class BoreholeinformationPage implements OnInit {
     destinationType: this.camera.DestinationType.FILE_URI,
     encodingType: this.camera.EncodingType.JPEG,
     mediaType: this.camera.MediaType.PICTURE,
-    saveToPhotoAlbum: true
+    saveToPhotoAlbum: true,
+    allowEdit: true,
+    sourceType:  this.camera.PictureSourceType.CAMERA ,
+
+
   };
   gelleryOptions: CameraOptions = {
     quality: 100,
@@ -139,7 +145,7 @@ export class BoreholeinformationPage implements OnInit {
     gamma: any;
     delta: any;
     imgPlacementSrc: any;
-
+     item56: any;
     epsilon: any;
     result: any;
     cmeridian: any;
@@ -159,7 +165,8 @@ export class BoreholeinformationPage implements OnInit {
     private keyboard: Keyboard,
     public camera: Camera,
     public alertCtrl: AlertController,
-    public completeTestService: CompleteTestServiceService
+    public completeTestService: CompleteTestServiceService,
+    public file: File
 
 
   ) {
@@ -723,10 +730,31 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
 
 
   snap(){
-    this.camera.getPicture(this.options1).then((imageData)=> {
-       this.imgPlacementSrc = document.getElementById('imgPlacement');
-      this.imgPlacementSrc.src = 'data:image/jpeg;base64,' + imageData;
- });
+    const options: CameraOptions = {
+      quality: 100,
+      targetHeight: 320,
+      targetWidth: 320,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      sourceType: this.camera.PictureSourceType.CAMERA,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    };
+
+    this.camera.getPicture(options).then((imgFileUri) => {
+     // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+     this.item56 = (<any>window).Ionic.WebView.convertFileSrc(imgFileUri);
+
+     fetch(this.item56)
+     .then((res) => res.blob())
+     .then((blob) => {
+       this.blobImage = blob;
+       this.watermarkImage();
+     });
+
+    }, (err) => {
+     console.log(err);
+    });
+
   }
 
   takeSnap() {
@@ -774,7 +802,7 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
         {
           text: 'Camera',
           handler: (redc) => {
-            this.takeSnap();
+            this.snap();
           },
         },
         {
