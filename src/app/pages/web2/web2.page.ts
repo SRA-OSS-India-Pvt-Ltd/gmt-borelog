@@ -43,7 +43,7 @@ export class Web2Page implements OnInit {
   rigOther: any;
   typeOfStructure: any;
   ref: any;
-
+  isch= true;
   typeOfCrossing: any;
   typeOfBridge: any;
   layer1List: any = [];
@@ -136,7 +136,7 @@ export class Web2Page implements OnInit {
     this.ref = 'IS 1892; IS 2131; IS 2132';
     this.date = new Date().toISOString();
     this.getLayer1();
-    this.getLatLong();
+   // this.getLatLong();
     this.chaingeList = Constants.chainagesBySectionIDList;
     console.log('chaingeList', this.chaingeList);
   }
@@ -287,8 +287,10 @@ export class Web2Page implements OnInit {
   }
 
   getValue($event){
-
+    this.isch = false;
     console.log($event.target.value);
+    this.chainage = $event.target.value;
+    console.log('chhhhh',this.chainage);
 
     this.selectedItem = this.chaingeList.filter((user: any) =>
     user.chainage.includes($event.target.value)
@@ -601,12 +603,14 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
  showPosition(lat, lon) {
   this.utm_data = [];
 	this.utm_data = this.ll2utm(lat, lon);
-  this.easting = this.utm_data.x;
-  this.northing = this.utm_data.y;
+  this.easting = Math.round(this.utm_data.x * 100) / 100;
+  this.northing = Math.round(this.utm_data.y * 100) /100;
   console.log('utm data',this.utm_data.x);
+  console.log('chainage',this.chainage);
+
   this.string3 = `UTM:`+this.easting + `,`+ this.northing + `
   Date:`+this.date+ `
-  Chainage:`+this.chainage `
+  Chainage:`+this.chainage +`
   Bhno:`+this.boreholeNumber;
 
   console.log('string3',this.string3);

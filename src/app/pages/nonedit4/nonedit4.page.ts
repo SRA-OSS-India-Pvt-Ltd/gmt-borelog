@@ -36,7 +36,7 @@ subAgencyRepresentivaeName: any;
 clientRepresNaame: any;
 layer1List: any = [];
 pdf: any;
-
+waterTable: any;
 constructor(public toastSer: ToastService,
     public httpService: HttpcallsService,
     public router: Router) {
@@ -86,6 +86,7 @@ constructor(public toastSer: ToastService,
 
         console.log('layer1List',this.layer1List);
         if(this.layer1List.length>0){
+          this.waterTable = this.layer1List[0].water_table_rl;
 
          this.depthOfTermination = this.layer1List[0].depth_termination;
          this.date = this.layer1List[0].bh_enddate;

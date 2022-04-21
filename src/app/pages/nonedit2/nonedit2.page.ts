@@ -17,12 +17,10 @@ export class Nonedit2Page implements OnInit {
   easting: any;
   northing: any;
   boreholeNumber: any;
-  boreholeLocation: any;
 
   detailsOfDrillingBit: any;
   detailsOdCoreBarrel: any;
   rl: any;
-  waterTable: any;
   today: any;
   typeOfRig: any;
   chainage: any;
@@ -72,7 +70,6 @@ export class Nonedit2Page implements OnInit {
         console.log('layer1List', this.layer1List);
         if (this.layer1List.length > 0) {
           this.boreholeNumber = this.layer1List[0].bh_no;
-          this.boreholeLocation = this.layer1List[0].bh_location;
           this.chainage = this.layer1List[0].chainage;
           this.chainageId = this.layer1List[0].chainage_id;
           this.easting = this.layer1List[0].easting;
@@ -85,7 +82,6 @@ export class Nonedit2Page implements OnInit {
           this.date = this.layer1List[0].bh_start_date;
 
           this.rl = this.layer1List[0].bh_rl;
-          this.waterTable = this.layer1List[0].water_table_rl;
           this.typeOfRig = this.layer1List[0].type_of_rig;
 
           this.rigOther = this.layer1List[0].type_of_rig_other;

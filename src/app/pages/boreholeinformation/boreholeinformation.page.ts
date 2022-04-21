@@ -87,6 +87,7 @@ export class BoreholeinformationPage implements OnInit {
     destinationType: this.camera.DestinationType.FILE_URI,
     encodingType: this.camera.EncodingType.JPEG,
     mediaType: this.camera.MediaType.PICTURE,
+    saveToPhotoAlbum: true
   };
   gelleryOptions: CameraOptions = {
     quality: 100,
@@ -211,6 +212,7 @@ getValue($event){
 
   console.log($event.target.value);
 
+  this.boreholeChainage = $event.target.value;
   this.selectedItem = this.chaingeList.filter((user: any) =>
   user.chainage.includes($event.target.value)
 );
@@ -815,8 +817,8 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
  showPosition(lat, lon) {
   this.utm_data = [];
 	this.utm_data = this.ll2utm(lat, lon);
-  this.easting = this.utm_data.x;
-  this.northing = this.utm_data.y;
+  this.easting = Math.round(this.utm_data.x * 100) / 100;
+  this.northing = Math.round(this.utm_data.y * 100) /100;
   console.log('utm data',this.utm_data.x);
   this.string3 = `UTM:`+this.easting + `,`+ this.northing + `
   Date:`+this.date+ `

@@ -574,7 +574,7 @@ sno: any;
     }
     updateLayer3(){
       this.androidDatabase.updateLayer3(Constants.iterationId,
-        Constants.webbhid,
+        Constants.laYer1Id,
         this.drillingFrom,
         this.drillingTo,
         this.typeOfstrata,

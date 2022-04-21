@@ -296,6 +296,7 @@ export class HttpcallsService {
   submitLayer4(
     bhid: any,
     bhlaye: any,
+    watertablerl: any,
     depthTermination: any,
     bhedate: any,
     rvRepName: any,
@@ -311,6 +312,7 @@ export class HttpcallsService {
     const parameters = {
       bh_id: bhid,
       bh_layer: bhlaye,
+      water_table_rl: watertablerl,
       depth_termination: depthTermination,
       bh_enddate: bhedate,
       rv_rep_name: rvRepName,

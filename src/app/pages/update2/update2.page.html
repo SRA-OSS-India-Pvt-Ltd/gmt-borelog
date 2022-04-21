@@ -64,12 +64,18 @@
 
 
       <ion-row>
-        <ion-col size="12">
+        <ion-col size="6">
           <ion-item class="padding">
             <ion-label style="white-space: pre-wrap !important;"><strong> Chainage:</strong><span
                 class="required-asterisk">*</span></ion-label>
           </ion-item>
         </ion-col>
+        <ion-col size="6" *ngIf="isch">
+          <ion-item class="padding">
+            <ion-label style="white-space: pre-wrap !important;">{{chainage}}</ion-label>
+          </ion-item>
+        </ion-col>
+
         </ion-row>
 
         <ion-row>
@@ -168,7 +174,7 @@
         </ion-col>
         <ion-col size="6">
           <ion-item class="input" >
-            <ion-input type="text" cass="input" [(ngModel)]="easting" ></ion-input>
+            <ion-input type="number"  [(ngModel)]="easting" ></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>      <ion-row>
@@ -179,7 +185,7 @@
         </ion-col>
         <ion-col size="6">
           <ion-item class="input">
-            <ion-input type="text" cass="input" [(ngModel)]="northing"></ion-input>
+            <ion-input type="number" cass="input" [(ngModel)]="northing"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>

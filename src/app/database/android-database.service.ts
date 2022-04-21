@@ -365,11 +365,13 @@ updatebhid(bhid: any,id: any){
             }
 
 
-updateLayer4(depthTer: any,edate: any,rvrepname: any,
+updateLayer4(watertable: any,depthTer: any,edate: any,rvrepname: any,
         rvrepsign: any,sarepname: any,sarepsign: any,clientname: any,clisign: any,id: any,
         depthpic: any,samplepic: any){
           return this.databaseObj.executeSql(`UPDATE borelog_data
-           SET depth_termination = '${depthTer}',
+           SET
+           water_table_rl = '${watertable}',
+           depth_termination = '${depthTer}',
            bh_enddate = '${edate}',
            rv_rep_name = '${rvrepname}',
            rv_rep_sign = '${rvrepsign}',
@@ -392,11 +394,14 @@ updateLayer4(depthTer: any,edate: any,rvrepname: any,
 
         }
 
-        updateLayer4home(depthTer: any,edate: any,rvrepname: any,
+        updateLayer4home(watertable: any,depthTer: any,edate: any,rvrepname: any,
           rvrepsign: any,sarepname: any,sarepsign: any,clientname: any,clisign: any,id: any,
           depthpic: any,samplepic: any){
             return this.databaseObj.executeSql(`UPDATE borelog_data
-             SET depth_termination = '${depthTer}',
+             SET
+             water_table_rl = '${watertable}',
+
+             depth_termination = '${depthTer}',
              bh_enddate = '${edate}',
              rv_rep_name = '${rvrepname}',
              rv_rep_sign = '${rvrepsign}',

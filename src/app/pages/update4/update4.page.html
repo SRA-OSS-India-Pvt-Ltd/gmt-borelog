@@ -11,6 +11,21 @@
 <ion-content class="ion-padding">
   <ion-list>
     <ion-grid fixed>
+
+      <ion-row>
+        <ion-col size="6">
+          <ion-item class="padding">
+            <ion-label style="white-space: pre-wrap !important;"><strong>Depth of Water Table RL (m):</strong><span
+                class="required-asterisk">*</span></ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item class="input">
+            <ion-input type="number" cass="input" [(ngModel)]="waterTable"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
       <ion-row >
         <ion-col size="6">
           <ion-item class="padding">
@@ -90,7 +105,7 @@
       <ion-row >
         <ion-col size="6">
           <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Sub Agency Representative Name:</strong><span class="required-asterisk">*</span></ion-label>
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Sub Agency Representative Name:</strong></ion-label>
           </ion-item>
         </ion-col>
         <ion-col size="6">
@@ -104,7 +119,7 @@
       <ion-row >
         <ion-col size="10">
           <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Sub Agency Representative Signature:</strong><span class="required-asterisk">*</span></ion-label>
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Sub Agency Representative Signature:</strong></ion-label>
           </ion-item>
         </ion-col>
         <ion-col size="2">
@@ -129,7 +144,7 @@
       <ion-row >
         <ion-col size="6">
           <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Client Representative Name:</strong><span class="required-asterisk">*</span></ion-label>
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Client Representative Name:</strong></ion-label>
           </ion-item>
         </ion-col>
         <ion-col size="6">
@@ -143,7 +158,7 @@
       <ion-row >
         <ion-col size="10">
           <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Client Representative Signature:</strong><span class="required-asterisk">*</span></ion-label>
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Client Representative Signature:</strong></ion-label>
           </ion-item>
         </ion-col>
         <ion-col size="2">

@@ -171,50 +171,31 @@ export class Layer4Page implements AfterViewInit {
       this.toastSer.presentError(
         'please Enter the AARVEE Representative Signature'
       );
-    } else if (this.subAgencyRepresentivaeName === undefined) {
-      this.toastSer.presentError(
-        'please Enter the Sub Agency Representative Name'
-      );
-    } else if (
-      this.signaturePad1.toDataURL() ===
-      'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAACWCAYAAABkW7XSAAAAAXNSR0IArs4c6QAABGJJREFUeF7t1AEJAAAMAsHZv/RyPNwSyDncOQIECEQEFskpJgECBM5geQICBDICBitTlaAECBgsP0CAQEbAYGWqEpQAAYPlBwgQyAgYrExVghIgYLD8AAECGQGDlalKUAIEDJYfIEAgI2CwMlUJSoCAwfIDBAhkBAxWpipBCRAwWH6AAIGMgMHKVCUoAQIGyw8QIJARMFiZqgQlQMBg+QECBDICBitTlaAECBgsP0CAQEbAYGWqEpQAAYPlBwgQyAgYrExVghIgYLD8AAECGQGDlalKUAIEDJYfIEAgI2CwMlUJSoCAwfIDBAhkBAxWpipBCRAwWH6AAIGMgMHKVCUoAQIGyw8QIJARMFiZqgQlQMBg+QECBDICBitTlaAECBgsP0CAQEbAYGWqEpQAAYPlBwgQyAgYrExVghIgYLD8AAECGQGDlalKUAIEDJYfIEAgI2CwMlUJSoCAwfIDBAhkBAxWpipBCRAwWH6AAIGMgMHKVCUoAQIGyw8QIJARMFiZqgQlQMBg+QECBDICBitTlaAECBgsP0CAQEbAYGWqEpQAAYPlBwgQyAgYrExVghIgYLD8AAECGQGDlalKUAIEDJYfIEAgI2CwMlUJSoCAwfIDBAhkBAxWpipBCRAwWH6AAIGMgMHKVCUoAQIGyw8QIJARMFiZqgQlQMBg+QECBDICBitTlaAECBgsP0CAQEbAYGWqEpQAAYPlBwgQyAgYrExVghIgYLD8AAECGQGDlalKUAIEDJYfIEAgI2CwMlUJSoCAwfIDBAhkBAxWpipBCRAwWH6AAIGMgMHKVCUoAQIGyw8QIJARMFiZqgQlQMBg+QECBDICBitTlaAECBgsP0CAQEbAYGWqEpQAAYPlBwgQyAgYrExVghIgYLD8AAECGQGDlalKUAIEDJYfIEAgI2CwMlUJSoCAwfIDBAhkBAxWpipBCRAwWH6AAIGMgMHKVCUoAQIGyw8QIJARMFiZqgQlQMBg+QECBDICBitTlaAECBgsP0CAQEbAYGWqEpQAAYPlBwgQyAgYrExVghIgYLD8AAECGQGDlalKUAIEDJYfIEAgI2CwMlUJSoCAwfIDBAhkBAxWpipBCRAwWH6AAIGMgMHKVCUoAQIGyw8QIJARMFiZqgQlQMBg+QECBDICBitTlaAECBgsP0CAQEbAYGWqEpQAAYPlBwgQyAgYrExVghIgYLD8AAECGQGDlalKUAIEDJYfIEAgI2CwMlUJSoCAwfIDBAhkBAxWpipBCRAwWH6AAIGMgMHKVCUoAQIGyw8QIJARMFiZqgQlQMBg+QECBDICBitTlaAECBgsP0CAQEbAYGWqEpQAAYPlBwgQyAgYrExVghIgYLD8AAECGQGDlalKUAIEDJYfIEAgI2CwMlUJSoCAwfIDBAhkBAxWpipBCRAwWH6AAIGMgMHKVCUoAQIGyw8QIJARMFiZqgQlQMBg+QECBDICBitTlaAECBgsP0CAQEbAYGWqEpQAgQdWMQCX4yW9owAAAABJRU5ErkJggg=='
-    ) {
-      this.toastSer.presentError(
-        'please Enter the Sub Agency Representative Signature'
-      );
-    } else if (this.clientRepresNaame === undefined) {
-      this.toastSer.presentError('please Enter the Client Representative Name');
-    } else if (
-      this.signaturePad2.toDataURL() ===
-      'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAACWCAYAAABkW7XSAAAAAXNSR0IArs4c6QAABGJJREFUeF7t1AEJAAAMAsHZv/RyPNwSyDncOQIECEQEFskpJgECBM5geQICBDICBitTlaAECBgsP0CAQEbAYGWqEpQAAYPlBwgQyAgYrExVghIgYLD8AAECGQGDlalKUAIEDJYfIEAgI2CwMlUJSoCAwfIDBAhkBAxWpipBCRAwWH6AAIGMgMHKVCUoAQIGyw8QIJARMFiZqgQlQMBg+QECBDICBitTlaAECBgsP0CAQEbAYGWqEpQAAYPlBwgQyAgYrExVghIgYLD8AAECGQGDlalKUAIEDJYfIEAgI2CwMlUJSoCAwfIDBAhkBAxWpipBCRAwWH6AAIGMgMHKVCUoAQIGyw8QIJARMFiZqgQlQMBg+QECBDICBitTlaAECBgsP0CAQEbAYGWqEpQAAYPlBwgQyAgYrExVghIgYLD8AAECGQGDlalKUAIEDJYfIEAgI2CwMlUJSoCAwfIDBAhkBAxWpipBCRAwWH6AAIGMgMHKVCUoAQIGyw8QIJARMFiZqgQlQMBg+QECBDICBitTlaAECBgsP0CAQEbAYGWqEpQAAYPlBwgQyAgYrExVghIgYLD8AAECGQGDlalKUAIEDJYfIEAgI2CwMlUJSoCAwfIDBAhkBAxWpipBCRAwWH6AAIGMgMHKVCUoAQIGyw8QIJARMFiZqgQlQMBg+QECBDICBitTlaAECBgsP0CAQEbAYGWqEpQAAYPlBwgQyAgYrExVghIgYLD8AAECGQGDlalKUAIEDJYfIEAgI2CwMlUJSoCAwfIDBAhkBAxWpipBCRAwWH6AAIGMgMHKVCUoAQIGyw8QIJARMFiZqgQlQMBg+QECBDICBitTlaAECBgsP0CAQEbAYGWqEpQAAYPlBwgQyAgYrExVghIgYLD8AAECGQGDlalKUAIEDJYfIEAgI2CwMlUJSoCAwfIDBAhkBAxWpipBCRAwWH6AAIGMgMHKVCUoAQIGyw8QIJARMFiZqgQlQMBg+QECBDICBitTlaAECBgsP0CAQEbAYGWqEpQAAYPlBwgQyAgYrExVghIgYLD8AAECGQGDlalKUAIEDJYfIEAgI2CwMlUJSoCAwfIDBAhkBAxWpipBCRAwWH6AAIGMgMHKVCUoAQIGyw8QIJARMFiZqgQlQMBg+QECBDICBitTlaAECBgsP0CAQEbAYGWqEpQAAYPlBwgQyAgYrExVghIgYLD8AAECGQGDlalKUAIEDJYfIEAgI2CwMlUJSoCAwfIDBAhkBAxWpipBCRAwWH6AAIGMgMHKVCUoAQIGyw8QIJARMFiZqgQlQMBg+QECBDICBitTlaAECBgsP0CAQEbAYGWqEpQAAYPlBwgQyAgYrExVghIgYLD8AAECGQGDlalKUAIEDJYfIEAgI2CwMlUJSoCAwfIDBAhkBAxWpipBCRAwWH6AAIGMgMHKVCUoAQIGyw8QIJARMFiZqgQlQMBg+QECBDICBitTlaAECBgsP0CAQEbAYGWqEpQAgQdWMQCX4yW9owAAAABJRU5ErkJggg=='
-    ) {
-      this.toastSer.presentError(
-        'please Enter the Client Representative Signature'
-      );
-    } else if (this.depthOfTermination === '') {
+    }  else if (this.depthOfTermination === '') {
       this.toastSer.presentError('please Enter the Depth of Termination');
-    } else if (this.date === '') {
+    }else if(this.waterTable === undefined){
+      this.toastSer.presentError('please Enter the Depth of Water Table RL ');
+
+    }else if(this.waterTable === null){
+      this.toastSer.presentError('please Enter the Depth of Water Table RL ');
+
+    }else if(this.waterTable === ''){
+      this.toastSer.presentError('please Enter the Depth of Water Table RL ');
+
+    }else if(this.waterTable === 0){
+      this.toastSer.presentError('please Enter the Depth of Water Table RL ');
+
+    }
+    else if (this.date === '') {
       this.toastSer.presentError('please Enter the Borehole End date');
     } else if (this.aarveRepresName === '') {
       this.toastSer.presentError('please Enter the AARVEE Representative Name');
-    } else if (this.subAgencyRepresentivaeName === '') {
-      this.toastSer.presentError(
-        'please Enter the Sub Agency Representative Name'
-      );
-    } else if (this.clientRepresNaame === '') {
-      this.toastSer.presentError('please Enter the Client Representative Name');
     } else if (this.depthOfTermination === null) {
       this.toastSer.presentError('please Enter the Depth of Termination');
     } else if (this.date === null) {
       this.toastSer.presentError('please Enter the Borehole End date');
     } else if (this.aarveRepresName === null) {
       this.toastSer.presentError('please Enter the AARVEE Representative Name');
-    } else if (this.subAgencyRepresentivaeName === null) {
-      this.toastSer.presentError(
-        'please Enter the Sub Agency Representative Name'
-      );
-    } else if (this.clientRepresNaame === null) {
-      this.toastSer.presentError('please Enter the Client Representative Name');
     } else if (this.depthOfTermination === 0) {
       this.toastSer.presentError(
         'please Enter the Depth of Termination, It should not be zero'
@@ -260,6 +241,7 @@ export class Layer4Page implements AfterViewInit {
   addDatabase() {
     console.log(this.base641, this.base642, this.base643);
     this.androidDatabase.updateLayer4(
+      this.waterTable,
       this.depthOfTermination,
       this.date,
       this.aarveRepresName,
@@ -277,6 +259,7 @@ export class Layer4Page implements AfterViewInit {
   addDatabase1() {
     console.log(this.base641, this.base642, this.base643);
     this.androidDatabase.updateLayer4(
+      this.waterTable,
       this.depthOfTermination,
       this.date,
       this.aarveRepresName,
@@ -297,6 +280,7 @@ export class Layer4Page implements AfterViewInit {
       .submitLayer4(
         Constants.webbhid,
         4,
+        this.waterTable,
         this.depthOfTermination,
         this.date,
         this.aarveRepresName,
@@ -324,6 +308,7 @@ export class Layer4Page implements AfterViewInit {
       .submitLayer4(
         Constants.webbhid,
         4,
+        this.waterTable,
         this.depthOfTermination,
         this.date,
         this.aarveRepresName,

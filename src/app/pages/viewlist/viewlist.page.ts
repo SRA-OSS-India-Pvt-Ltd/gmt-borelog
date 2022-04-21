@@ -104,6 +104,8 @@ disconnectSubscription: any;
   }
   submitboredata(id: any){
     Constants.mainBHID = id;
+    this.autoLoader();
+
     this.androidDatabase.getLayer1ById(id).then((data) => {
       this.totalList = [];
       console.log('size',data.rows.length);
@@ -184,8 +186,8 @@ disconnectSubscription: any;
   autoLoader() {
     this.loadingController.create({
       spinner:'lines',
-      message: 'Loading, Please Wait ...',
-      duration: 20000
+      message: 'Uploading, Please Wait ...',
+      duration: 70000
     }).then((response) => {
       response.present();
       response.onDidDismiss().then((response1) => {
@@ -195,7 +197,6 @@ disconnectSubscription: any;
   }
 
   submitIterations(bhid: any,id: any){
-    this.autoLoader();
     this.androidDatabase.getIteraions(bhid).then((data) => {
       this.iterationlist = [];
       console.log('size',data.rows.length);

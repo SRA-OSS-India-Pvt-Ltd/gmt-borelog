@@ -41,7 +41,7 @@ export class Update2Page implements OnInit {
   rigOther: any;
   typeOfStructure: any;
   ref: any;
-
+  isch = true;
   typeOfCrossing: any;
   typeOfBridge: any;
   layer1List: any = [];
@@ -140,7 +140,7 @@ export class Update2Page implements OnInit {
       console.log('chaingeList', this.chaingeList);
 
       this.getLayer1();
-      this.getLatLong();
+     // this.getLatLong();
     }
 
   ngOnInit() {
@@ -226,8 +226,9 @@ export class Update2Page implements OnInit {
 
 
 getValue($event){
-
+this.isch = false;
   console.log($event.target.value);
+  this.chainage = $event.target.value;
 
   this.selectedItem = this.chaingeList.filter((user: any) =>
   user.chainage.includes($event.target.value)
@@ -289,9 +290,11 @@ getWebBoreItrations() {
 
           this.chainage = this.layer1List[0].chainage;
           this.chainageId = this.layer1List[0].chainage_id;
+
           this.easting = this.layer1List[0].easting;
           this.northing = this.layer1List[0].northing;
 
+          console.log('eastinggg',this.layer1List[0].easting);
           this.typeOfStructure = this.layer1List[0].type_of_structure;
           this.typeOfCrossing = this.layer1List[0].type_of_crossing;
           this.typeOfBridge = this.layer1List[0].type_of_bridge;
@@ -487,7 +490,7 @@ boreholeDiaChange($event){
         this.latitude = this.locationCordinates.latitude;
         this.longitude = this.locationCordinates.longitude;
 
-this.showPosition(this.locationCordinates.easting,this.locationCordinates.northing);
+this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longitude);
 
       })
       .catch((error) => {
@@ -622,12 +625,12 @@ this.showPosition(this.locationCordinates.easting,this.locationCordinates.northi
  showPosition(lat, lon) {
   this.utm_data = [];
 	this.utm_data = this.ll2utm(lat, lon);
-  this.easting = this.utm_data.x;
-  this.northing = this.utm_data.y;
+  this.easting = Math.round(this.utm_data.x * 100) / 100;
+  this.northing = Math.round(this.utm_data.y * 100) /100;
   console.log('utm data',this.utm_data.x);
   this.string3 = `UTM:`+this.easting + `,`+ this.northing + `
   Date:`+this.date+ `
-  Chainage:`+this.chainage `
+  Chainage:`+this.chainage +`
   Bhno:`+this.boreholeNumber;
 
   console.log('string3',this.string3);
