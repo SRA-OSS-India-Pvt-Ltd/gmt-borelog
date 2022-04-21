@@ -114,6 +114,7 @@ export class Layer4Page implements AfterViewInit {
     northing: any;
     chainge: any;
     bhno: any;
+    waterTable: any;
   constructor(
     public toastSer: ToastService,
     public androidDatabase: AndroidDatabaseService,

@@ -159,7 +159,6 @@ export class HttpcallsService {
     bhid: any,
     bhlayer: any,
     bhno: any,
-    bhlocation: any,
     bhchainage: any,
     bhchainageId: any,
     bhlat: any,
@@ -171,7 +170,6 @@ export class HttpcallsService {
     typeOfBridge: any,
     bhsadte: any,
     bhrl: any,
-    watertabe: any,
     typeofrig: any,
     typeOfrigother: any,
     drillOrient: any,
@@ -181,13 +179,13 @@ export class HttpcallsService {
     drillbit: any,
     drillbitother: any,
     corebarrel: any,
+    angleWithHori: any,
     boreholepic: any
   ) {
     const parameters = {
       bh_id: bhid,
       bh_layer: bhlayer,
       bh_no: bhno,
-      bh_location: bhlocation,
       chainage: bhchainage,
       chainage_id: bhchainageId,
       easting: bhlat,
@@ -199,7 +197,6 @@ export class HttpcallsService {
       type_of_bridge: typeOfBridge,
       bh_start_date: bhsadte,
       bh_rl: bhrl,
-      water_table_rl: watertabe,
       type_of_rig: typeofrig,
       type_of_rig_other: typeOfrigother,
       drill_orientation: drillOrient,
@@ -209,6 +206,7 @@ export class HttpcallsService {
       drilling_bit: drillbit,
       drilling_bit_other: drillbitother,
       core_barrel: corebarrel,
+      angle_horizontal: angleWithHori,
       borehole_pic: boreholepic,
     };
     console.log('JSON', JSON.stringify(parameters));

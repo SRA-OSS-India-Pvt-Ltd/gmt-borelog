@@ -3,13 +3,15 @@
 import { HttpcallsService } from 'src/app/services/httpcalls.service';
 import { Platform, AlertController } from '@ionic/angular';
 import { Constants } from 'src/app/common/constants';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AndroidDatabaseService } from 'src/app/database/android-database.service';
 import { ToastService } from 'src/app/services/toast.service';
 import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 import * as watermark from 'watermarkjs';
+import { AutoCompleteComponent,  AutoCompleteStyles } from 'ionic4-auto-complete';
+import { CompleteTestServiceService } from './../../services/complete-test-service.service';
 
 @Component({
   selector: 'app-update2',
@@ -18,14 +20,14 @@ import * as watermark from 'watermarkjs';
 })
 export class Update2Page implements OnInit {
   @ViewChild('previewimage') waterMarkImage: ElementRef;
+  @ViewChild('searchbar')searchbar: AutoCompleteComponent;
+  @Input() public styles = new AutoCompleteStyles();
 
   boreholeNumber: any;
-  boreholeLocation: string = '';
 
   detailsOfDrillingBit: any;
   detailsOdCoreBarrel: any;
   rl: any;
-  waterTable: any;
   today: any;
   typeOfRig: any;
   chainage: any;
@@ -128,7 +130,9 @@ export class Update2Page implements OnInit {
     public platform: Platform,
     public httpService: HttpcallsService,
     public camera: Camera,
-    public alertCtrl: AlertController
+    public alertCtrl: AlertController,
+    public completeTestService: CompleteTestServiceService
+
 ) {
       this.ref = 'IS 1892; IS 2131; IS 2132';
       this.date = new Date().toISOString();
@@ -155,18 +159,10 @@ export class Update2Page implements OnInit {
       this.toastSer.presentError('Please Enter Borehole Chainage');
     } else if (this.date === '') {
       this.toastSer.presentError('Please Enter Borehole Start Date');
-    } else if (this.waterTable === '') {
-      this.toastSer.presentError('Please Enter Water Table RL (m)');
     } else if (this.rl === 0) {
       this.toastSer.presentError(
         'Please Enter Proper Borehole RL (m), it should not be zero'
       );
-    } else if (this.waterTable === 0) {
-      this.toastSer.presentError(
-        'Please Enter Proper Water Table RL it should not be zero (m)'
-      );
-    } else if (this.waterTable === null) {
-      this.toastSer.presentError('Please Enter  Water Table RL ');
     } else if (this.typeOfRig === '') {
       this.toastSer.presentError('Please Select Method of Drilling');
     } else if (this.typeOfRig === 'Other' && this.rigOther === '') {
@@ -228,6 +224,34 @@ export class Update2Page implements OnInit {
 
 }
 
+
+getValue($event){
+
+  console.log($event.target.value);
+
+  this.selectedItem = this.chaingeList.filter((user: any) =>
+  user.chainage.includes($event.target.value)
+);
+
+
+console.log('selected item : ', this.selectedItem);
+
+if (this.selectedItem.length > 0) {
+  // this.easting = this.selectedItem[0].easting;
+  // this.northing = this.selectedItem[0].northing;
+  this.typeOfBridge = this.selectedItem[0].type_of_bridge;
+  this.typeOfCrossing = this.selectedItem[0].type_of_crossing;
+  this.typeOfStructure = this.selectedItem[0].type_of_structure;
+  this.chainageId = this.selectedItem[0].chainage_id;
+  this.boreholeNumber = this.selectedItem[0].bhno;
+
+  console.log('typeOfStructure : ', this.typeOfStructure);
+  this.getLatLong();
+
+
+}
+
+}
 getWebBoreItrations() {
   this.androidDatabase.getIteraions(Constants.laYer1Id).then((data) => {
     this.iterationList = [];
@@ -275,7 +299,6 @@ getWebBoreItrations() {
           this.date = this.layer1List[0].bh_start_date;
 
           this.rl = this.layer1List[0].bh_rl;
-          this.waterTable = this.layer1List[0].water_table_rl;
           this.typeOfRig = this.layer1List[0].type_of_rig;
 
           this.rigOther = this.layer1List[0].type_of_rig_other;
@@ -333,11 +356,11 @@ getWebBoreItrations() {
 
   updateLayer2(){
     this.androidDatabase.updateLayer2(this.ref,this.boreholeNumber,
-      this.boreholeLocation,this.easting,this.northing,this.latitude,this.longitude,
+      this.easting,this.northing,this.latitude,this.longitude,
       this.chainage,this.chainageId,
       this.typeOfCrossing,this.typeOfStructure,this.typeOfBridge,
       this.date,
-      this.rl,this.waterTable,this.typeOfRig,
+      this.rl,this.typeOfRig,
       this.rigOther,
       this.orientation,
       this.boreholeDia,this.boreholeCasingDia,this.casingDepth,Constants.laYer1Id,

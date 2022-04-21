@@ -1,3 +1,8 @@
+import { CompleteTestServiceService } from './../../services/complete-test-service.service';
+/* eslint-disable @typescript-eslint/ban-types */
+import { AutoCompleteComponent, AutoCompleteService, AutoCompleteStyles } from 'ionic4-auto-complete';
+/* eslint-disable @typescript-eslint/member-ordering */
+/* eslint-disable @typescript-eslint/type-annotation-spacing */
 /* eslint-disable @typescript-eslint/no-inferrable-types */
 /* eslint-disable @typescript-eslint/dot-notation */
 import { AlertController } from '@ionic/angular';
@@ -7,13 +12,17 @@ import { Constants } from 'src/app/common/constants';
 
 import { AndroidDatabaseService } from './../../database/android-database.service';
 import { ToastService } from './../../services/toast.service';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { HttpcallsService } from 'src/app/services/httpcalls.service';
 import { Platform } from '@ionic/angular';
 import { Keyboard } from '@awesome-cordova-plugins/keyboard/ngx';
 import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 import * as watermark from 'watermarkjs';
+
+
+
+
 
 
 @Component({
@@ -23,14 +32,20 @@ import * as watermark from 'watermarkjs';
 })
 export class BoreholeinformationPage implements OnInit {
   @ViewChild('previewimage') waterMarkImage: ElementRef;
+  @ViewChild('searchbar')searchbar: AutoCompleteComponent;
+  @Input() public styles = new AutoCompleteStyles();
+
+
+  isItemAvailable = false;
+  items = [];
+
+
 
   boreholeNumber: any;
-  boreholeLocation: string = '';
   boreholeChainage: any;
   chainageId: any;
 
   rl: string = '';
-  waterTable: any;
   today: any;
   typeOfRig: any;
   typeOfDrill: any;
@@ -131,6 +146,8 @@ export class BoreholeinformationPage implements OnInit {
     easting: any;
     northing: any;
     base64Image: any;
+
+
   constructor(
     public toastSer: ToastService,
     public androidDatabase: AndroidDatabaseService,
@@ -140,7 +157,8 @@ export class BoreholeinformationPage implements OnInit {
     public platform: Platform,
     private keyboard: Keyboard,
     public camera: Camera,
-    public alertCtrl: AlertController
+    public alertCtrl: AlertController,
+    public completeTestService: CompleteTestServiceService
 
 
   ) {
@@ -189,6 +207,65 @@ export class BoreholeinformationPage implements OnInit {
 }
 
 
+getValue($event){
+
+  console.log($event.target.value);
+
+  this.selectedItem = this.chaingeList.filter((user: any) =>
+  user.chainage.includes($event.target.value)
+);
+
+
+console.log('selected item : ', this.selectedItem);
+
+if (this.selectedItem.length > 0) {
+  // this.easting = this.selectedItem[0].easting;
+  // this.northing = this.selectedItem[0].northing;
+  this.typeOfBridge = this.selectedItem[0].type_of_bridge;
+  this.typeOfCrossing = this.selectedItem[0].type_of_crossing;
+  this.typeOfStructure = this.selectedItem[0].type_of_structure;
+  this.chainageId = this.selectedItem[0].chainage_id;
+  this.boreholeNumber = this.selectedItem[0].bhno;
+
+  console.log('typeOfStructure : ', this.typeOfStructure);
+  this.getLatLong();
+
+
+}
+
+}
+initializeItems(){
+  this.items = ['Ram','gopi', 'dravid'];
+}
+
+getItems(ev: any) {
+  // Reset items back to all of the items
+  this.initializeItems();
+
+  // set val to the value of the searchbar
+  const val = ev.target.value;
+
+  // if the value is an empty string don't filter the items
+  if (val && val.trim() !== '') {
+      this.isItemAvailable = true;
+      // this.items = this.items.filter((item : any) => {
+      //   console.log('getItems');
+      //     return (item.indexOf(val) > -1);
+      // });
+      this.items = this.chaingeList.filter(item =>{
+        item.chainage.startsWith(ev);
+      });
+
+  } else {
+      this.isItemAvailable = false;
+  }
+}
+
+getResults(keyword:string) {
+  this.chaingeList.filter(item =>{
+    item.chainage.startsWith(keyword);
+  });
+}
 
 
 
@@ -199,6 +276,13 @@ export class BoreholeinformationPage implements OnInit {
 
 
 
+sel(keyword: string){
+  this.selectedItem=  this.chaingeList.filter(item =>{
+    item.chainage.startsWith(keyword);
+  });
+  console.log('sssss item : ', this.selectedItem);
+
+}
 
 
   selected(item) {
@@ -206,6 +290,8 @@ export class BoreholeinformationPage implements OnInit {
     this.selectedItem = this.chaingeList.filter((user: any) =>
       user.chainage.includes(item)
     );
+
+
     console.log('selected item : ', this.selectedItem);
 
     if (this.selectedItem.length > 0) {
@@ -303,9 +389,7 @@ export class BoreholeinformationPage implements OnInit {
       this.toastSer.presentError('Please Enter Borehole Chainage');
     } else if (this.date === undefined) {
       this.toastSer.presentError('Please Enter Borehole Start Date');
-    } else if (this.waterTable === undefined) {
-      this.toastSer.presentError('Please Enter Water Table RL (m)');
-    } else if (this.typeOfRig === undefined) {
+    }  else if (this.typeOfRig === undefined) {
       this.toastSer.presentError('Please Select Method of Drilling');
     } else if (this.typeOfRig === 'Other' && this.rigOther === undefined) {
       this.toastSer.presentError('Please Enter Other for Method of Drilling');
@@ -330,8 +414,6 @@ export class BoreholeinformationPage implements OnInit {
       this.toastSer.presentError('Please Enter Borehole Chainage');
     } else if (this.date === '') {
       this.toastSer.presentError('Please Enter Borehole Start Date');
-    } else if (this.waterTable === '') {
-      this.toastSer.presentError('Please Enter Water Table RL (m)');
     } else if (this.typeOfRig === '') {
       this.toastSer.presentError('Please Select Method of Drilling');
     } else if (this.typeOfRig === 'Other' && this.rigOther === '') {
@@ -357,15 +439,9 @@ export class BoreholeinformationPage implements OnInit {
       this.toastSer.presentError('Please Enter Borehole Chainage');
     } else if (this.date === null) {
       this.toastSer.presentError('Please Enter Borehole Start Date');
-    } else if (this.waterTable === null) {
-      this.toastSer.presentError('Please Enter Depth of Water Table RL (m)');
     } else if (this.rl === '0') {
       this.toastSer.presentError(
         'Please EnterProper Borehole RL (m), it should not be zero'
-      );
-    } else if (this.waterTable === 0) {
-      this.toastSer.presentError(
-        'Please Enter Proper Water Table RL it should not be zero (m)'
       );
     } else if (this.typeOfRig === null) {
       this.toastSer.presentError('Please Select Method of Drilling');
@@ -398,7 +474,6 @@ export class BoreholeinformationPage implements OnInit {
     this.androidDatabase.updateLayer2(
       this.ref,
       this.boreholeNumber,
-      this.boreholeLocation,
       this.easting,
       this.northing,
       this.latitude,
@@ -410,7 +485,6 @@ export class BoreholeinformationPage implements OnInit {
       this.typeOfBridge,
       this.date,
       this.rl,
-      this.waterTable,
       this.typeOfRig,
       this.rigOther,
       this.orientation,
@@ -433,7 +507,6 @@ export class BoreholeinformationPage implements OnInit {
         Constants.webbhid,
         2,
         this.boreholeNumber,
-        this.boreholeLocation,
         this.boreholeChainage,
         this.chainageId,
         this.easting,
@@ -445,7 +518,6 @@ export class BoreholeinformationPage implements OnInit {
         this.typeOfBridge,
         this.date,
         this.rl,
-        this.waterTable,
         this.typeOfRig,
         this.rigOther,
         this.orientation,
@@ -455,6 +527,7 @@ export class BoreholeinformationPage implements OnInit {
         this.detailsOfDrillingBit,
         this.drillingBitOther,
         this.detailsOdCoreBarrel,
+        this.angleWithHorizontal,
         this.waterMarkImage.nativeElement.src       )
       .subscribe((response: any) => {
         console.log('response', response);
@@ -832,5 +905,8 @@ this.xy[0] = this.xy[0] * this.uTMScaleFactor + 500000.0;
 this.cmeridian = this.degree2radian(-183.0 + (zone * 6.0));
 return parseFloat(this.cmeridian);
 }
+
+
+
 
 }

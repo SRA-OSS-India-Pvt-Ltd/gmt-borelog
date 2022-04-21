@@ -37,11 +37,9 @@
 
 
 
-      <!-- <input type="number"  list="chainList" [(ngModel)]='boreholeChainage'
-      (change)="selected(boreholeChainage)" /> -->
 
 
-      <ion-row>
+      <!-- <ion-row>
         <ion-col size="6">
           <ion-item class="padding">
             <ion-label  style="white-space: pre-wrap !important;"><strong> Chainage:</strong><span class="required-asterisk">*</span></ion-label>
@@ -62,7 +60,28 @@
           {{ series.chainage }}
 
         </option>
-      </datalist>
+      </datalist> -->
+
+
+      <ion-row>
+        <ion-col size="12">
+          <ion-item class="padding">
+            <ion-label style="white-space: pre-wrap !important;"><strong> Chainage:</strong><span
+                class="required-asterisk">*</span></ion-label>
+          </ion-item>
+        </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="12">
+            <ion-item class="input">
+
+              <ion-auto-complete  [dataProvider]="completeTestService"
+              (ionChange) = "getValue($event)" [ngStyle]="styles.list"
+              #searchbar></ion-auto-complete>
+                    </ion-item>
+          </ion-col>
+          </ion-row>
 
 
 
@@ -134,35 +153,12 @@
         </ion-col>
       </ion-row>
 
-      <ion-row>
-        <ion-col size="6">
-          <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>  Borehole picture:</strong><span class="required-asterisk">*</span></ion-label>
-          </ion-item>
-
-        </ion-col>
-
-        <ion-col size="4">
-          <img #previewimage>
-
-          <!-- <ion-img [src]="originalImage"></ion-img> -->
-        </ion-col>
-
-        <ion-col size="1">
-
-          <ion-button title="camera" (click)="imageSelection()">
-            <ion-icon  name="camera" ></ion-icon>
-            </ion-button>
-        </ion-col>
-
-
-      </ion-row>
 
 
 
 
 
-      
+
 
       <ion-row>
         <ion-col size="6">
@@ -189,6 +185,30 @@
       </ion-row>
 
 
+
+      <ion-row>
+        <ion-col size="6">
+          <ion-item class="padding">
+            <ion-label  style="white-space: pre-wrap !important;"><strong>  Borehole picture:</strong><span class="required-asterisk">*</span></ion-label>
+          </ion-item>
+
+        </ion-col>
+
+        <ion-col size="4">
+          <img #previewimage>
+
+          <!-- <ion-img [src]="originalImage"></ion-img> -->
+        </ion-col>
+
+        <ion-col size="1">
+
+          <ion-button title="camera" (click)="imageSelection()">
+            <ion-icon  name="camera" ></ion-icon>
+            </ion-button>
+        </ion-col>
+
+
+      </ion-row>
 
 
       <ion-row>
@@ -225,18 +245,8 @@
           </ion-item>
         </ion-col>
       </ion-row>
-      <ion-row>
-        <ion-col size="6">
-          <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Depth of Water Table RL (m):</strong><span class="required-asterisk">*</span></ion-label>
-          </ion-item>
-        </ion-col>
-        <ion-col size="6">
-          <ion-item class="input">
-            <ion-input type="number" cass="input" [(ngModel)]="waterTable"></ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
+
+
 
       <ion-row>
         <ion-col size="6">
@@ -318,6 +328,8 @@
             <ion-select interface="popover" placeholder="Select " (ionChange)="boreholeDiaChange($event)" value="{{boreholeDia}}">
               <ion-select-option value="75">75</ion-select-option>
               <ion-select-option value="150">150</ion-select-option>
+              <ion-select-option value="Other">Other</ion-select-option>
+
             </ion-select>
           </ion-item>
         </ion-col>
@@ -331,6 +343,8 @@
         <ion-col size="6">
           <ion-item class="input">
             <ion-select interface="popover" placeholder="Select " (ionChange)="casingDiaChange($event)" value="{{boreholeCasingDia}}">
+
+              <ion-select-option value="80">80</ion-select-option>
               <ion-select-option value="200">200</ion-select-option>
               <ion-select-option value="Other">Other</ion-select-option>
             </ion-select>

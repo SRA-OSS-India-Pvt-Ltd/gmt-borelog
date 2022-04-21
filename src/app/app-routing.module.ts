@@ -107,6 +107,10 @@ const routes: Routes = [
     path: 'nonediiterations',
     loadChildren: () => import('./pages/nonediiterations/nonediiterations.module').then( m => m.NonediiterationsPageModule)
   },
+  {
+    path: 'search',
+    loadChildren: () => import('./pages/search/search.module').then( m => m.SearchPageModule)
+  },
 ];
 
 @NgModule({

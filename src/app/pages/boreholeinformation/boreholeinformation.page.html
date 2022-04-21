@@ -42,51 +42,32 @@
         </ion-col>
       </ion-row>
 
+        <!-- <ion-row>
+    <ion-col size="6">
+      <ion-item class="padding">
+        <ion-label style="white-space: pre-wrap !important;"><strong> Chainage:</strong><span
+            class="required-asterisk">*</span></ion-label>
+      </ion-item>
+    </ion-col>
+    <ion-col size="6">
+      <ion-item class="input">
+
+
+        <ion-auto-complete [dataProvider]="completeTestService"
+        (ionChange) = "getValue()"></ion-auto-complete>
+
+
+
+
+      </ion-item>
+    </ion-col>
+  </ion-row> -->
 
 
 
 
 
-
-
-
-      <!-- <div class="autocomplete">
-        <ion-item>
-          <ion-label floating>Country</ion-label>
-          <ion-input  type="text"
-                      [(ngModel)]="input"
-                      (ionChange)="search(input)"
-                      (ionBlur)="removeFocus()"
-                      list="datalist1"
-                      debounce=500
-                      ></ion-input>
-        </ion-item> -->
-        <!-- <ion-list >
-          <ion-item *ngFor="let country of chaingeList" (click)="add(country)">
-            {{country.chainage}}
-          </ion-item>
-        </ion-list> -->
-
-        <!-- <datalist id="datalist1">
-          <option *ngFor="let country of chaingeList" (click)="add(country)">
-            {{country.chainage}}
-
-          </option>
-        </datalist>
-
-  </div> -->
-
-
-
-
-
-
-
-
-
-
-
-      <ion-row>
+      <!-- <ion-row>
         <ion-col size="6">
           <ion-item class="padding">
             <ion-label style="white-space: pre-wrap !important;"><strong> Chainage:</strong><span
@@ -103,17 +84,42 @@
           </ion-item>
         </ion-col>
       </ion-row>
+ -->
 
 
-
-      <datalist id="datalist1">
+      <!-- <datalist id="datalist1">
         <option *ngFor="let user of chaingeList" [value]="user.chainage">
           {{ user.chainage }}
 
         </option>
-      </datalist>
+      </datalist> -->
+
+
 
       <ion-row>
+        <ion-col size="12">
+          <ion-item class="padding">
+            <ion-label style="white-space: pre-wrap !important;"><strong> Chainage:</strong><span
+                class="required-asterisk">*</span></ion-label>
+          </ion-item>
+        </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="12">
+            <ion-item class="input">
+
+              <ion-auto-complete  [dataProvider]="completeTestService"
+              (ionChange) = "getValue($event)" [ngStyle]="styles.list"
+              #searchbar></ion-auto-complete>
+                    </ion-item>
+          </ion-col>
+          </ion-row>
+
+
+
+
+    <ion-row>
         <ion-col size="6">
           <ion-item class="padding">
             <ion-label style="white-space: pre-wrap !important;"><strong>Borehole Number:</strong><span
@@ -186,33 +192,10 @@
       </ion-row>
 
 
-      <ion-row>
-        <ion-col size="6">
-          <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>  Borehole picture:</strong><span class="required-asterisk">*</span></ion-label>
-          </ion-item>
-
-        </ion-col>
-
-        <ion-col size="4">
-          <img #previewimage>
-
-          <!-- <ion-img [src]="originalImage"></ion-img> -->
-        </ion-col>
-
-        <ion-col size="1">
-
-          <ion-button title="camera" (click)="imageSelection()">
-            <ion-icon  name="camera" ></ion-icon>
-            </ion-button>
-        </ion-col>
-
-
-      </ion-row>
 
 
 
-      
+
 
 
       <ion-row>
@@ -244,6 +227,31 @@
 
 
       <ion-row>
+        <ion-col size="6">
+          <ion-item class="padding">
+            <ion-label  style="white-space: pre-wrap !important;"><strong>  Borehole picture:</strong><span class="required-asterisk">*</span></ion-label>
+          </ion-item>
+
+        </ion-col>
+
+        <ion-col size="4">
+          <img #previewimage>
+
+          <!-- <ion-img [src]="originalImage"></ion-img> -->
+        </ion-col>
+
+        <ion-col size="1">
+
+          <ion-button title="camera" (click)="imageSelection()">
+            <ion-icon  name="camera" ></ion-icon>
+            </ion-button>
+        </ion-col>
+
+
+      </ion-row>
+
+
+      <ion-row>
 
         <ion-col size="12">
           <ion-item class="input">
@@ -271,19 +279,6 @@
         <ion-col size="6">
           <ion-item class="input">
             <ion-input type="number" cass="input" [(ngModel)]="rl"></ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col size="6">
-          <ion-item class="padding">
-            <ion-label style="white-space: pre-wrap !important;"><strong>Depth of Water Table RL (m):</strong><span
-                class="required-asterisk">*</span></ion-label>
-          </ion-item>
-        </ion-col>
-        <ion-col size="6">
-          <ion-item class="input">
-            <ion-input type="number" cass="input" [(ngModel)]="waterTable"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -370,6 +365,8 @@
             <ion-select interface="popover" placeholder="Select " (ionChange)="boreholeDiaChange($event)">
               <ion-select-option value="75">75</ion-select-option>
               <ion-select-option value="150">150</ion-select-option>
+              <ion-select-option value="Other">Other</ion-select-option>
+
             </ion-select>
 
 
@@ -387,7 +384,9 @@
         <ion-col size="6">
           <ion-item class="input">
             <ion-select interface="popover" placeholder="Select " (ionChange)="casingDiaChange($event)">
+              <ion-select-option value="200">80</ion-select-option>
               <ion-select-option value="200">200</ion-select-option>
+
               <ion-select-option value="Other">Other</ion-select-option>
             </ion-select>
 

@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Ionic Search</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<!-- <ion-content class="ion-padding">
+
+
+  <ion-searchbar placeholder="Filter Schedules" [(ngModel)]="term" animated="true"></ion-searchbar>
+
+
+  <ion-list>
+    <ion-item *ngFor="let item of filterData | filter:term">
+      <ion-label>{{item.firstName}} {{item.lastName}}</ion-label>
+    </ion-item>
+  </ion-list>
+
+</ion-content> -->
+<ion-content>
+    <ion-searchbar [(ngModel)]="searchCountryString" (input)="searchCountry($event)" placeholder="Search"></ion-searchbar>
+    <ion-list>
+        <button ion-item *ngFor="let country of countries">
+            {{country}}
+        </button>
+    </ion-list>
+</ion-content>
+

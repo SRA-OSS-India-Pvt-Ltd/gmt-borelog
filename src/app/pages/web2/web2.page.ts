@@ -5,13 +5,15 @@ import { AlertController } from '@ionic/angular';
 import { HttpcallsService } from 'src/app/services/httpcalls.service';
 import { Platform } from '@ionic/angular';
 import { Constants } from 'src/app/common/constants';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { ToastService } from 'src/app/services/toast.service';
 import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 import * as watermark from 'watermarkjs';
+import { CompleteTestServiceService } from './../../services/complete-test-service.service';
+import { AutoCompleteComponent, AutoCompleteStyles } from 'ionic4-auto-complete';
 
 @Component({
   selector: 'app-web2',
@@ -20,14 +22,14 @@ import * as watermark from 'watermarkjs';
 })
 export class Web2Page implements OnInit {
   @ViewChild('previewimage') waterMarkImage: ElementRef;
+  @ViewChild('searchbar')searchbar: AutoCompleteComponent;
+  @Input() public styles = new AutoCompleteStyles();
 
   boreholeNumber: any;
-  boreholeLocation: string = '';
 
   detailsOfDrillingBit: any;
   detailsOdCoreBarrel: any;
   rl: any;
-  waterTable: any;
   today: any;
   typeOfRig: any;
   chainage: any;
@@ -126,7 +128,9 @@ export class Web2Page implements OnInit {
     public platform: Platform,
     public httpService: HttpcallsService,
     public camera: Camera,
-    public alertCtrl: AlertController
+    public alertCtrl: AlertController,
+    public completeTestService: CompleteTestServiceService
+
 
   ) {
     this.ref = 'IS 1892; IS 2131; IS 2132';
@@ -149,7 +153,6 @@ export class Web2Page implements OnInit {
         console.log('layer1List', this.layer1List);
         if (this.layer1List.length > 0) {
           this.boreholeNumber = this.layer1List[0].bh_no;
-          this.boreholeLocation = this.layer1List[0].bh_location;
           this.chainage = this.layer1List[0].chainage;
           this.chainageId = this.layer1List[0].chainage_id;
           this.easting = this.layer1List[0].easting;
@@ -162,7 +165,6 @@ export class Web2Page implements OnInit {
           this.date = this.layer1List[0].bh_start_date;
 
           this.rl = this.layer1List[0].bh_rl;
-          this.waterTable = this.layer1List[0].water_table_rl;
           this.typeOfRig = this.layer1List[0].type_of_rig;
 
           this.rigOther = this.layer1List[0].type_of_rig_other;
@@ -241,7 +243,6 @@ export class Web2Page implements OnInit {
         Constants.webbhid,
         2,
         this.boreholeNumber,
-        this.boreholeLocation,
         this.chainage,
         this.chainageId,
         this.easting,
@@ -253,7 +254,6 @@ export class Web2Page implements OnInit {
         this.typeOfBridge,
         this.date,
         this.rl,
-        this.waterTable,
         this.typeOfRig,
         this.rigOther,
         this.orientation,
@@ -263,6 +263,7 @@ export class Web2Page implements OnInit {
         this.detailsOfDrillingBit,
         this.drillBitOther,
         this.detailsOdCoreBarrel,
+        this.angleWithHorizontal,
         this.waterMarkImage.nativeElement.src
       )
       .subscribe((response: any) => {
@@ -285,6 +286,33 @@ export class Web2Page implements OnInit {
     console.log('typeOfStructure: ', this.typeOfStructure);
   }
 
+  getValue($event){
+
+    console.log($event.target.value);
+
+    this.selectedItem = this.chaingeList.filter((user: any) =>
+    user.chainage.includes($event.target.value)
+  );
+
+
+  console.log('selected item : ', this.selectedItem);
+
+  if (this.selectedItem.length > 0) {
+    // this.easting = this.selectedItem[0].easting;
+    // this.northing = this.selectedItem[0].northing;
+    this.typeOfBridge = this.selectedItem[0].type_of_bridge;
+    this.typeOfCrossing = this.selectedItem[0].type_of_crossing;
+    this.typeOfStructure = this.selectedItem[0].type_of_structure;
+    this.chainageId = this.selectedItem[0].chainage_id;
+    this.boreholeNumber = this.selectedItem[0].bhno;
+
+    console.log('typeOfStructure : ', this.typeOfStructure);
+    this.getLatLong();
+
+
+  }
+
+  }
   validation() {
     console.log('typeOfStuct', this.typeOfStructure);
     if (this.typeOfStructure === '') {
@@ -299,18 +327,10 @@ export class Web2Page implements OnInit {
       this.toastSer.presentError('Please Enter Borehole Chainage');
     } else if (this.date === '') {
       this.toastSer.presentError('Please Enter Borehole Start Date');
-    } else if (this.waterTable === '') {
-      this.toastSer.presentError('Please Enter Water Table RL (m)');
     } else if (this.rl === 0) {
       this.toastSer.presentError(
         'Please Enter Proper Borehole RL (m), it should not be zero'
       );
-    } else if (this.waterTable === 0) {
-      this.toastSer.presentError(
-        'Please Enter Proper Water Table RL it should not be zero (m)'
-      );
-    } else if (this.waterTable === null) {
-      this.toastSer.presentError('Please Enter  Water Table RL ');
     } else if (this.typeOfRig === '') {
       this.toastSer.presentError('Please Select Method of Drilling');
     } else if (this.typeOfRig === 'Other' && this.rigOther === '') {

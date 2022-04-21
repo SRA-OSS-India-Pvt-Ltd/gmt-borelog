@@ -7,9 +7,11 @@ import { IonicModule } from '@ionic/angular';
 import { Web2PageRoutingModule } from './web2-routing.module';
 
 import { Web2Page } from './web2.page';
+import { AutoCompleteModule } from 'ionic4-auto-complete';
 
 @NgModule({
   imports: [
+    AutoCompleteModule,
     CommonModule,
     FormsModule,
     IonicModule,

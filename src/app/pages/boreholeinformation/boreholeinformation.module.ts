@@ -7,9 +7,11 @@ import { IonicModule } from '@ionic/angular';
 import { BoreholeinformationPageRoutingModule } from './boreholeinformation-routing.module';
 
 import { BoreholeinformationPage } from './boreholeinformation.page';
+import { AutoCompleteModule } from 'ionic4-auto-complete';
 
 @NgModule({
   imports: [
+    AutoCompleteModule,
     CommonModule,
     FormsModule,
     IonicModule,

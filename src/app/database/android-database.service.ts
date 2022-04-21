@@ -170,11 +170,11 @@ export class AndroidDatabaseService {
 
   }
   updateLayer2(refstd: any,bhno: any,
-    bhloca: any,bhlat: any,bhlon: any,
+    bhlat: any,bhlon: any,
     latude: any,longitu: any,
     chainage: any, chainageid: any,
     typeOfcross: any,typeofStruc: any,typeOfBride: any,
-    bhsdate: any,bhrl: any,watertaRl: any,
+    bhsdate: any,bhrl: any,
     typeOfrig: any,typeRigOther: any,
     drillOrient: any,bhDia: any,casingDia: any,
     casingDepth: any,id: any,drillbit: any,
@@ -186,8 +186,6 @@ export class AndroidDatabaseService {
        SET ref_std = '${refstd}',
 
        bh_no = '${bhno}',
-       bh_location = '${bhloca}',
-
        easting = '${bhlat}',
        northing = '${bhlon}',
        latitude = '${latude}',
@@ -200,7 +198,6 @@ export class AndroidDatabaseService {
 
        bh_start_date = '${bhsdate}',
        bh_rl = '${bhrl}',
-       water_table_rl = '${watertaRl}',
        type_of_rig = '${typeOfrig}',
        type_of_rig_other = '${typeRigOther}',
 
