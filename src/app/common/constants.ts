@@ -15,6 +15,8 @@ export abstract class Constants {
   public static subAgencyList: any =[];
   public static chaingeListAndroid: any =[];
   public static chaingeListAndroid11: any =[];
+  public static yetbhidList: any =[];
+  public static submitbhList: any =[];
 
   public static laYer1Id: any;
   public static projectId: any;

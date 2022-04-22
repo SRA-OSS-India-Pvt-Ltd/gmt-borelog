@@ -411,4 +411,23 @@ export class HttpcallsService {
       JSON.stringify(parameters)
     );
   }
+  getSampleStatus(pid: any,packagid: any,secId: any,sta: any) {
+    const parameters = { project_id: pid,package_id:packagid,section_id: secId,status: sta};
+    console.log('JSON', JSON.stringify(parameters));
+
+    return this.httpClient.post(
+      `${environment.apiUrl}/getSampleStatus`,
+      JSON.stringify(parameters)
+    );
+  }
+  submitSampleStatus(uid: any,bhid: any) {
+    const parameters = { user_id: uid, bh_ids: bhid};
+    console.log('JSON', JSON.stringify(parameters));
+
+    return this.httpClient.post(
+      `${environment.apiUrl}/submitSampleStatus`,
+      JSON.stringify(parameters)
+    );
+  }
+
 }

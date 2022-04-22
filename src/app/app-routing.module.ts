@@ -111,6 +111,18 @@ const routes: Routes = [
     path: 'search',
     loadChildren: () => import('./pages/search/search.module').then( m => m.SearchPageModule)
   },
+  {
+    path: 'samplescreen',
+    loadChildren: () => import('./pages/samplescreen/samplescreen.module').then( m => m.SamplescreenPageModule)
+  },
+  {
+    path: 'yettosubmit',
+    loadChildren: () => import('./pages/yettosubmit/yettosubmit.module').then( m => m.YettosubmitPageModule)
+  },
+  {
+    path: 'submitted',
+    loadChildren: () => import('./pages/submitted/submitted.module').then( m => m.SubmittedPageModule)
+  },
 ];
 
 @NgModule({
