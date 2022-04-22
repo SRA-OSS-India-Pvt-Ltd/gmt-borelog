@@ -98,7 +98,8 @@ export class Update4Page implements AfterViewInit {
     beta: any;
     gamma: any;
     delta: any;
-
+    item561: any;
+    item56: any;
     epsilon: any;
     result: any;
     cmeridian: any;
@@ -400,41 +401,96 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
       });
   }
 
-  takeSnap() {
-    this.camera.getPicture(this.options1).then(
-      (imageData) => {
-        this.originalImage = 'data:image/jpeg;base64,' + imageData;
 
-        fetch(this.originalImage)
-          .then((res) => res.blob())
-          .then((blob) => {
-            this.blobImage = blob;
-            this.watermarkImage();
-          });
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+  snap1(){
+    const options: CameraOptions = {
+      quality: 100,
+      targetHeight: 320,
+      targetWidth: 320,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      sourceType: this.camera.PictureSourceType.CAMERA,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    };
+
+    this.camera.getPicture(options).then((imgFileUri) => {
+     // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+     this.item561 = (<any>window).Ionic.WebView.convertFileSrc(imgFileUri);
+
+     fetch(this.item561)
+     .then((res) => res.blob())
+     .then((blob) => {
+       this.blobImage2 = blob;
+       this.watermarkImage2();
+     });
+
+    }, (err) => {
+     console.log(err);
+    });
+
   }
+  snap(){
+    const options: CameraOptions = {
+      quality: 100,
+      targetHeight: 320,
+      targetWidth: 320,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      sourceType: this.camera.PictureSourceType.CAMERA,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    };
 
-  takeSnap1() {
-    this.camera.getPicture(this.options1).then(
-      (imageData) => {
-        this.originalImage2 = 'data:image/jpeg;base64,' + imageData;
+    this.camera.getPicture(options).then((imgFileUri) => {
+     // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+     this.item56 = (<any>window).Ionic.WebView.convertFileSrc(imgFileUri);
 
-        fetch(this.originalImage2)
-          .then((res) => res.blob())
-          .then((blob) => {
-            this.blobImage2 = blob;
-            this.watermarkImage2();
-          });
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+     fetch(this.item56)
+     .then((res) => res.blob())
+     .then((blob) => {
+       this.blobImage = blob;
+       this.watermarkImage();
+     });
+
+    }, (err) => {
+     console.log(err);
+    });
+
   }
+  // takeSnap() {
+  //   this.camera.getPicture(this.options1).then(
+  //     (imageData) => {
+  //       this.originalImage = 'data:image/jpeg;base64,' + imageData;
+
+  //       fetch(this.originalImage)
+  //         .then((res) => res.blob())
+  //         .then((blob) => {
+  //           this.blobImage = blob;
+  //           this.watermarkImage();
+  //         });
+  //     },
+  //     (error) => {
+  //       console.log(error);
+  //     }
+  //   );
+  // }
+
+  // takeSnap1() {
+  //   this.camera.getPicture(this.options1).then(
+  //     (imageData) => {
+  //       this.originalImage2 = 'data:image/jpeg;base64,' + imageData;
+
+  //       fetch(this.originalImage2)
+  //         .then((res) => res.blob())
+  //         .then((blob) => {
+  //           this.blobImage2 = blob;
+  //           this.watermarkImage2();
+  //         });
+  //     },
+  //     (error) => {
+  //       console.log(error);
+  //     }
+  //   );
+  // }
 
   openGallery() {
     this.camera.getPicture(this.gelleryOptions).then(
@@ -480,7 +536,7 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
         {
           text: 'Camera',
           handler: (redc) => {
-            this.takeSnap();
+            this.snap();
           },
         },
         {
@@ -502,7 +558,7 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
         {
           text: 'Camera',
           handler: (redc) => {
-            this.takeSnap1();
+            this.snap1();
           },
         },
         {

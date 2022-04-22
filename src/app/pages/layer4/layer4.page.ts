@@ -105,7 +105,8 @@ export class Layer4Page implements AfterViewInit {
     beta: any;
     gamma: any;
     delta: any;
-
+     item56: any;
+     item561: any;
     epsilon: any;
     result: any;
     cmeridian: any;
@@ -440,6 +441,35 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
       });
   }
 
+
+
+  snap(){
+    const options: CameraOptions = {
+      quality: 100,
+      targetHeight: 320,
+      targetWidth: 320,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      sourceType: this.camera.PictureSourceType.CAMERA,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    };
+
+    this.camera.getPicture(options).then((imgFileUri) => {
+     // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+     this.item56 = (<any>window).Ionic.WebView.convertFileSrc(imgFileUri);
+
+     fetch(this.item56)
+     .then((res) => res.blob())
+     .then((blob) => {
+       this.blobImage = blob;
+       this.watermarkImage();
+     });
+
+    }, (err) => {
+     console.log(err);
+    });
+
+  }
   takeSnap() {
     this.camera.getPicture(this.options1).then(
       (imageData) => {
@@ -474,6 +504,34 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
         console.log(error);
       }
     );
+  }
+
+  snap1(){
+    const options: CameraOptions = {
+      quality: 100,
+      targetHeight: 320,
+      targetWidth: 320,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      sourceType: this.camera.PictureSourceType.CAMERA,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    };
+
+    this.camera.getPicture(options).then((imgFileUri) => {
+     // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+     this.item561 = (<any>window).Ionic.WebView.convertFileSrc(imgFileUri);
+
+     fetch(this.item561)
+     .then((res) => res.blob())
+     .then((blob) => {
+       this.blobImage2 = blob;
+       this.watermarkImage2();
+     });
+
+    }, (err) => {
+     console.log(err);
+    });
+
   }
 
   openGallery() {
@@ -520,7 +578,16 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
         {
           text: 'Camera',
           handler: (redc) => {
-            this.takeSnap();
+
+            this.platform.ready().then(() => {
+              if (this.platform.is('android')) {
+                this.snap();
+              } else {
+
+                this.takeSnap();
+              }
+
+          });
           },
         },
         {
@@ -542,7 +609,18 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
         {
           text: 'Camera',
           handler: (redc) => {
-            this.takeSnap1();
+
+            this.platform.ready().then(() => {
+              if (this.platform.is('android')) {
+                this.snap1();
+              } else {
+                //  this.addDatabase();
+
+                this.takeSnap1();
+              }
+
+          });
+
           },
         },
         {

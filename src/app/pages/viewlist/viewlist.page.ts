@@ -123,7 +123,6 @@ disconnectSubscription: any;
           this.totalList[0].SubAgencyName,
           this.totalList[0].section_id,
           this.totalList[0].bh_no,
-          this.totalList[0].bh_location,
           this.totalList[0].chainage,
           this.totalList[0].chainage_id,
           this.totalList[0].easting,
@@ -140,8 +139,11 @@ disconnectSubscription: any;
           this.totalList[0].type_of_rig_other,
           this.totalList[0].drill_orientation,
           this.totalList[0].bh_dia,
+          this.totalList[0].bh_dia_other,
 
           this.totalList[0].casing_dia,
+          this.totalList[0].casing_dia_other,
+
           this.totalList[0].casing_depth,
           this.totalList[0].drilling_bit,
           this.totalList[0].drilling_bit_other,
@@ -187,7 +189,7 @@ disconnectSubscription: any;
     this.loadingController.create({
       spinner:'lines',
       message: 'Uploading, Please Wait ...',
-      duration: 70000
+      duration: 60000
     }).then((response) => {
       response.present();
       response.onDidDismiss().then((response1) => {
@@ -273,7 +275,7 @@ disconnectSubscription: any;
 
 
       }else{
-
+             this.autoLoader();
         this.httpService.submitall('all',bhid).subscribe((response: any)=>{
           console.log('respons',response);
           if(response.error === true){

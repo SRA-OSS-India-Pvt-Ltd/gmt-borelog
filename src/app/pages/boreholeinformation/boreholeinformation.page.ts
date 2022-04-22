@@ -84,6 +84,9 @@ export class BoreholeinformationPage implements OnInit {
   autocompleteItems: any[];
   isCasingDiaOther = false;
   casingDiaOther: string = '';
+  isbhOther = false;
+  bhdiaOther: string = '';
+
   options1: CameraOptions = {
     quality: 100,
     destinationType: this.camera.DestinationType.FILE_URI,
@@ -349,6 +352,12 @@ sel(keyword: string){
   boreholeDiaChange($event){
     console.log($event.target.value);
     this.boreholeDia = $event.target.value;
+    if(this.boreholeDia === 'Other'){
+      this.isbhOther = true;
+    }else{
+      this.isbhOther = false;
+    }
+
 
   }
 
@@ -405,6 +414,9 @@ sel(keyword: string){
     }else if (this.boreholeCasingDia === 'Other' && this.casingDiaOther === undefined) {
       this.toastSer.presentError('Please Enter Other for Casing Dia');
     }
+    else if (this.boreholeDia === 'Other' && this.bhdiaOther === undefined) {
+      this.toastSer.presentError('Please Enter Other for Borehole Dia');
+    }
      else if (this.orientation === undefined) {
       this.toastSer.presentError('Please Select Drilling Orientation');
     } else if (this.boreholeCasingDia === undefined) {
@@ -429,7 +441,10 @@ sel(keyword: string){
       this.toastSer.presentError('Please Enter Other for Method of Drilling');
     }else if (this.boreholeCasingDia === 'Other' && this.casingDiaOther === '') {
       this.toastSer.presentError('Please Enter Other for Casing Dia');
+    }    else if (this.boreholeDia === 'Other' && this.bhdiaOther === '') {
+      this.toastSer.presentError('Please Enter Other for Borehole Dia');
     }
+
      else if (this.orientation === '') {
       this.toastSer.presentError('Please Select Drilling Orientation');
     } else if (this.boreholeCasingDia === '') {
@@ -458,7 +473,10 @@ sel(keyword: string){
       this.toastSer.presentError('Please Enter Other for Method of Drilling');
     }else if (this.boreholeCasingDia === 'Other' && this.casingDiaOther === null) {
       this.toastSer.presentError('Please Enter Other for Casing Dia');
+    }    else if (this.boreholeDia === 'Other' && this.bhdiaOther === null) {
+      this.toastSer.presentError('Please Enter Other for Borehole Dia');
     }
+
      else if (this.orientation === null) {
       this.toastSer.presentError('Please Select Drilling Orientation');
     } else if (this.boreholeCasingDia === null) {
@@ -498,7 +516,9 @@ sel(keyword: string){
       this.rigOther,
       this.orientation,
       this.boreholeDia,
+      this.bhdiaOther,
       this.boreholeCasingDia,
+      this.casingDiaOther,
       this.casingDepth,
       Constants.laYer1Id,
       this.detailsOfDrillingBit,
@@ -531,7 +551,9 @@ sel(keyword: string){
         this.rigOther,
         this.orientation,
         this.boreholeDia,
+        this.bhdiaOther,
         this.boreholeCasingDia,
+        this.casingDiaOther,
         this.casingDepth,
         this.detailsOfDrillingBit,
         this.drillingBitOther,
@@ -802,8 +824,18 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
         {
           text: 'Camera',
           handler: (redc) => {
-            this.snap();
-          },
+
+            this.platform.ready().then(() => {
+              if (this.platform.is('android')) {
+                this.snap();
+              } else {
+                //  this.addDatabase();
+
+                this.takeSnap();
+              }
+
+          });
+        },
         },
         {
           text: 'Gallery',

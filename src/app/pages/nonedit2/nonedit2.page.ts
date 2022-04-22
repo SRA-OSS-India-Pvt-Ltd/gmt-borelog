@@ -41,8 +41,11 @@ export class Nonedit2Page implements OnInit {
   chaingeList: any;
   selectedItem: any;
   isCasingDiaOther = false;
+  isbhOther = false;
+
   date: any;
   casingDiaOther: any;
+  bhdiaOther: any;
   isInclined = false;
   angleWithHorizontal: any;
   isDrillOther = false;
@@ -99,6 +102,22 @@ export class Nonedit2Page implements OnInit {
           }else{
             this.isInclined = false;
           }
+          this.bhdiaOther = this.layer1List[0].bh_dia_other;
+          this.casingDiaOther = this.layer1List[0].casing_dia_other;
+
+          if(this.layer1List[0].bh_dia === 'Other'){
+            this.isbhOther = true;
+          }else{
+            this.isbhOther = false;
+
+          }
+          if(this.layer1List[0].casing_dia === 'Other'){
+            this.isCasingDiaOther = true;
+          }else{
+            this.isCasingDiaOther = false;
+
+          }
+
           this.waterMarkImage.nativeElement.src= this.layer1List[0].borehole_pic;
         }
       });

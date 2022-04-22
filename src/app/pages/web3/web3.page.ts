@@ -209,7 +209,7 @@ this.httpService.getSingleBoreIterationDetails(Constants.iterationId).subscribe(
         }
 
          this.typeOfsample = this.layer1List[0].type_of_sample;
-         if(this.typeOfsample === 'DS '){
+         if(this.layer1List[0].type_of_sample === 'DS'){
            this.isdsDepth = true;
          }else if(this.typeOfsample === 'SPT'){
            this.isSPTDepth = true;
@@ -546,10 +546,7 @@ validation(){
      this.toastSer.presentError('Please Select  Type of Weathering');
 
     }
-     else if( this.rockDepthFrom === 0){
-      this.toastSer.presentError('Please Enter  Rock depth from, it Should Not a Zero');
-
-     }else if( this.rockDepthTo === 0){
+    else if( this.rockDepthTo === 0){
       this.toastSer.presentError('Please Enter  Rock depth to,it Should Not a Zero');
 
      }else if( this.runLength === 0){

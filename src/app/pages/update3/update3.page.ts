@@ -421,10 +421,7 @@ sno: any;
        this.toastSer.presentError('Please Select  Type of Weathering');
 
       }
-       else if( this.rockDepthFrom === 0){
-        this.toastSer.presentError('Please Enter  Rock depth from, it Should Not a Zero');
-
-       }else if( this.rockDepthTo === 0){
+       else if( this.rockDepthTo === 0){
         this.toastSer.presentError('Please Enter  Rock depth to,it Should Not a Zero');
 
        }else if( this.runLength === 0){
@@ -606,7 +603,7 @@ sno: any;
         this.typeOfWeathering);
 
 
-        this.router.navigate(['iteration']);
+        this.router.navigate(['iterations']);
 
         }
 

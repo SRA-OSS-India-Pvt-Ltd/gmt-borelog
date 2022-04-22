@@ -50,8 +50,10 @@ export class Web2Page implements OnInit {
   chaingeList: any;
   selectedItem: any;
   isCasingDiaOther = false;
+  isbhOther = false;
   date: any;
   casingDiaOther: any;
+  bhdiaOther: any;
   isInclined = false;
   angleWithHorizontal: any;
   isDrillOther = false;
@@ -182,6 +184,22 @@ export class Web2Page implements OnInit {
           }else{
             this.isInclined = false;
           }
+          this.bhdiaOther = this.layer1List[0].bh_dia_other;
+          this.casingDiaOther = this.layer1List[0].casing_dia_other;
+
+          if(this.layer1List[0].bh_dia === 'Other'){
+            this.isbhOther = true;
+          }else{
+            this.isbhOther = false;
+
+          }
+          if(this.layer1List[0].casing_dia === 'Other'){
+            this.isCasingDiaOther = true;
+          }else{
+            this.isCasingDiaOther = false;
+
+          }
+
           this.waterMarkImage.nativeElement.src= this.layer1List[0].borehole_pic;
         }
       });
@@ -209,6 +227,13 @@ export class Web2Page implements OnInit {
   boreholeDiaChange($event){
     console.log($event.target.value);
     this.boreholeDia = $event.target.value;
+
+    if(this.boreholeDia === 'Other'){
+      this.isbhOther = true;
+    }else{
+      this.isbhOther = false;
+    }
+
 
   }
   casingDiaChange($event){
@@ -258,7 +283,9 @@ export class Web2Page implements OnInit {
         this.rigOther,
         this.orientation,
         this.boreholeDia,
+        this.bhdiaOther,
         this.boreholeCasingDia,
+        this.casingDiaOther,
         this.casingDepth,
         this.detailsOfDrillingBit,
         this.drillBitOther,
@@ -377,7 +404,15 @@ export class Web2Page implements OnInit {
       this.toastSer.presentError('Please Enter Other for Casing Dia');
     }else if (this.boreholeCasingDia === 'Other' && this.casingDiaOther === '') {
       this.toastSer.presentError('Please Enter Other for Casing Dia');
-    }else if (
+    }else if (this.boreholeDia === 'Other' && this.bhdiaOther === null) {
+      this.toastSer.presentError('Please Enter Other for Borehole Dia');
+    }else if (this.boreholeDia === 'Other' && this.bhdiaOther === undefined) {
+      this.toastSer.presentError('Please Enter Other for Borehole Dia');
+    }else if (this.boreholeDia === 'Other' && this.bhdiaOther === '') {
+      this.toastSer.presentError('Please Enter Other for Borehole Dia');
+    }
+
+    else if (
       this.waterMarkImage.nativeElement.src === null ||
       this.waterMarkImage.nativeElement.src === ''
     ) {

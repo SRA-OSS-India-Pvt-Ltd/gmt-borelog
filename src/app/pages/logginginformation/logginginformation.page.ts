@@ -119,7 +119,8 @@ export class LogginginformationPage implements OnInit {
     if (this.typeOfstrata === 'Soil') {
       this.isSoil = true;
       this.isRock = false;
-      (this.rockDepthFrom = ''), (this.rockDepthTo = '');
+      this.rockDepthFrom = '',
+      this.rockDepthTo = '';
       this.rockSample = '';
       this.runLength = '';
       this.runTime = '';
@@ -510,10 +511,6 @@ export class LogginginformationPage implements OnInit {
         this.toastSer.presentError('Please Enter  Rock Sample Color');
       } else if (this.typeOfWeathering === null) {
         this.toastSer.presentError('Please Select  Type of Weathering');
-      } else if (this.rockDepthFrom === 0) {
-        this.toastSer.presentError(
-          'Please Enter  Rock depth from, it Should Not a Zero'
-        );
       } else if (this.rockDepthTo === 0) {
         this.toastSer.presentError(
           'Please Enter  Rock depth to,it Should Not a Zero'
@@ -613,7 +610,7 @@ export class LogginginformationPage implements OnInit {
     this.isUDSepth = false;
     this.isdsDepth = false;
     this.isColorShown = false;
-    this.typeOfstrata = null
+    this.typeOfstrata = null;
 
   }
   moveToNext() {}

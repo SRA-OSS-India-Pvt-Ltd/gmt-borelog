@@ -48,13 +48,15 @@ export class Update2Page implements OnInit {
   chaingeList: any;
   selectedItem: any;
   isCasingDiaOther = false;
+  isbhOther = false;
+
   date: any;
   isInclined = false;
   angleWithHorizontal: any;
   isDrillOther = false;
   isRigOther = false;
   casingDiaOther: any;
-
+  bhdiaOther: any;
   options1: CameraOptions = {
     quality: 100,
     destinationType: this.camera.DestinationType.FILE_URI,
@@ -76,7 +78,7 @@ export class Update2Page implements OnInit {
   blobImage = null;
   blobImage1 = null;
   blobImage2 = null;
-
+  item56: any;
   locationCordinates: any;
   loadingLocation: boolean;
   utmz: any;
@@ -208,6 +210,13 @@ export class Update2Page implements OnInit {
     }else if (this.boreholeCasingDia === 'Other' && this.casingDiaOther === '') {
       this.toastSer.presentError('Please Enter Other for Casing Dia');
     }
+    else if (this.boreholeDia === 'Other' && this.bhdiaOther === null) {
+      this.toastSer.presentError('Please Enter Other for Casing Dia');
+    }else if (this.boreholeDia === 'Other' && this.bhdiaOther === undefined) {
+      this.toastSer.presentError('Please Enter Other for Casing Dia');
+    }else if (this.boreholeDia === 'Other' && this.bhdiaOther === '') {
+      this.toastSer.presentError('Please Enter Other for Casing Dia');
+    }
     else if (
       this.waterMarkImage.nativeElement.src === null ||
       this.waterMarkImage.nativeElement.src === ''
@@ -314,12 +323,31 @@ getWebBoreItrations() {
           this.drillBitOther = this.layer1List[0].drilling_bit_other;
           this.detailsOdCoreBarrel = this.layer1List[0].core_barrel;
 
+          this.bhdiaOther = this.layer1List[0].bh_dia_other;
+          this.casingDiaOther = this.layer1List[0].casing_dia_other;
+
+
           if(this.layer1List[0].drill_orientation === 'Inclined'){
             this.isInclined = true;
             this.angleWithHorizontal = this.layer1List[0].angle_horizontal;
           }else{
             this.isInclined = false;
             this.angleWithHorizontal = '';
+          }
+          this.bhdiaOther = this.layer1List[0].bh_dia_other;
+          this.casingDiaOther = this.layer1List[0].casing_dia_other;
+
+          if(this.layer1List[0].bh_dia === 'Other'){
+            this.isbhOther = true;
+          }else{
+            this.isbhOther = false;
+
+          }
+          if(this.layer1List[0].casing_dia === 'Other'){
+            this.isCasingDiaOther = true;
+          }else{
+            this.isCasingDiaOther = false;
+
           }
 
           this.waterMarkImage.nativeElement.src= this.layer1List[0].borehole_pic;
@@ -344,6 +372,7 @@ getWebBoreItrations() {
     this.detailsOdCoreBarrel= $event.target.value;
     console.log($event.target.value);
 
+
   }
 
   casingDiaChange($event){
@@ -366,7 +395,11 @@ getWebBoreItrations() {
       this.rl,this.typeOfRig,
       this.rigOther,
       this.orientation,
-      this.boreholeDia,this.boreholeCasingDia,this.casingDepth,Constants.laYer1Id,
+      this.boreholeDia,
+      this.bhdiaOther,
+      this.boreholeCasingDia,
+      this.casingDiaOther,
+      this.casingDepth,Constants.laYer1Id,
       this.detailsOfDrillingBit,
       this.drillBitOther,
       this.detailsOdCoreBarrel,
@@ -408,6 +441,12 @@ getWebBoreItrations() {
 boreholeDiaChange($event){
   console.log($event.target.value);
   this.boreholeDia = $event.target.value;
+  if(this.boreholeDia === 'Other'){
+    this.isbhOther = true;
+  }else{
+    this.isbhOther = false;
+  }
+
 
 }
 
@@ -536,24 +575,35 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
   }
 
 
+  snap(){
+    const options: CameraOptions = {
+      quality: 100,
+      targetHeight: 320,
+      targetWidth: 320,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      sourceType: this.camera.PictureSourceType.CAMERA,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    };
 
-  takeSnap() {
-    this.camera.getPicture(this.options1).then(
-      (imageData) => {
-        this.originalImage = 'data:image/jpeg;base64,' + imageData;
+    this.camera.getPicture(options).then((imgFileUri) => {
+     // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+     this.item56 = (<any>window).Ionic.WebView.convertFileSrc(imgFileUri);
 
-        fetch(this.originalImage)
-          .then((res) => res.blob())
-          .then((blob) => {
-            this.blobImage = blob;
-            this.watermarkImage();
-          });
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+     fetch(this.item56)
+     .then((res) => res.blob())
+     .then((blob) => {
+       this.blobImage = blob;
+       this.watermarkImage();
+     });
+
+    }, (err) => {
+     console.log(err);
+    });
+
   }
+
+
   openGallery() {
     this.camera.getPicture(this.gelleryOptions).then(
       (imgData) => {
@@ -582,7 +632,7 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
         {
           text: 'Camera',
           handler: (redc) => {
-            this.takeSnap();
+            this.snap();
           },
         },
         {
