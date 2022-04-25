@@ -259,10 +259,6 @@ export class LogginginformationPage implements OnInit {
       this.toastSer.presentError('Please Enter  Drilling To');
     } else if (this.typeOfstrata === null) {
       this.toastSer.presentError('Please Select  Type of Strata');
-    } else if (this.drillingFrom === 0) {
-      this.toastSer.presentError(
-        'Please Enter  Drilling From, It should not  Zero'
-      );
     } else if (this.drillingTo === 0) {
       this.toastSer.presentError(
         'Please Enter  Drilling To,It should not  Zero'

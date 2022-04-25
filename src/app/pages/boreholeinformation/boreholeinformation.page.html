@@ -111,6 +111,7 @@
 
               <ion-auto-complete  [dataProvider]="completeTestService"
               (ionChange) = "getValue($event)" [ngStyle]="styles.list"
+              [options]="{ type : 'number' }"
               #searchbar></ion-auto-complete>
                     </ion-item>
           </ion-col>

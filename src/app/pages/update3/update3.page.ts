@@ -200,8 +200,6 @@ sno: any;
     }else if(this.typeOfstrata === ''){
      this.toastSer.presentError('Please Select  Type of Strata');
 
-    }else if(this.drillingFrom === 0){
-      this.toastSer.presentError('Please Enter  Drilling From, It should not be Zero');
     }else if(this.drillingTo === 0){
      this.toastSer.presentError('Please Enter  Drilling To,It should not be Zero');
 
