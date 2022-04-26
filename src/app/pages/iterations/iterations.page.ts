@@ -192,33 +192,34 @@ this.layer1List = [];
 }
 
 getIterationCount() {
-  this.router.navigate(['logginginformation']);
+ // this.router.navigate(['logginginformation']);
 
 
-  // this.androidDatabase.getIterationCount(Constants.laYer1Id).then((data) => {
-  //   this.countList = [];
-  //   console.log('size',data.rows.length);
-  //   if (data.rows.length > 0) {
-  //     for (let i = 0; i < data.rows.length; i++) {
-  //       this.countList.push(data.rows.item(i));
-  //     }
-  //     console.log('countList',this.countList);
-  //     this.count = this.countList[0].Id;
-  //     console.log('count',this.count);
+  this.androidDatabase.getIterationCount(Constants.laYer1Id).then((data) => {
+    this.countList = [];
+    console.log('size',data.rows.length);
+    if (data.rows.length > 0) {
+      for (let i = 0; i < data.rows.length; i++) {
+        this.countList.push(data.rows.item(i));
+      }
+      console.log('countList',this.countList);
+      this.count = this.countList[0].drill_depth_from;
+      console.log('count',this.count);
+      console.log('count',this.count);
 
-  //     if(this.count <= 50){
-  //       Constants.laYer1Id = Constants.laYer1Id;
+      if(this.count < Constants.iterationCpunt){
 
-  //       this.router.navigate(['logginginformation']);
-  //         }else{
-  //           Constants.laYer1Id = Constants.laYer1Id;
 
-  //           this.router.navigate(['logginginformation']);
+        this.router.navigate(['logginginformation']);
+          }else{
 
-  //      // this.toastService.presentError('You already added 50 Iterations');
-  //     }
 
-  //   }
-  // });
+           // this.router.navigate(['logginginformation']);
+
+        this.toastService.presentError('You already added '+Constants.iterationCpunt+'Iterations');
+      }
+
+    }
+  });
 }
 }

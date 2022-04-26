@@ -63,7 +63,15 @@ isimg = false;
    this.package = $event.target.value;
    console.log($event.target.value);
 
-
+  //  [{"section_id":'1',"project_id":"1","package_id":"1","section_name":"Section1"},
+  //  {"section_id":"4","project_id":"1","package_id":"1","section_name":"Section2"},
+  //  {"section_id":"5","project_id":"1","package_id":"1","section_name":"Section3"},
+  //  {"section_id":"6","project_id":"1","package_id":"1","section_name":"Section4"},
+  //  {"section_id":"7","project_id":"1","package_id":"1","section_name":"Section5-A&B"},
+  //  {"section_id":"29","project_id":"1","package_id":"1","section_name":"Section5-C"},
+  //  {"section_id":"8","project_id":"1","package_id":"1","section_name":"Section6"},
+  //  {"section_id":"9","project_id":"1","package_id":"1","section_name":"Section7"},
+  //  {"section_id":"10","project_id":"1","package_id":"1","section_name":"Section8"}];
    if(this.package === '1' ){
     this.sectionList =[{"section_id":'1',"project_id":"1","package_id":"1","section_name":"Section1"},
     {"section_id":"4","project_id":"1","package_id":"1","section_name":"Section2"},
@@ -269,7 +277,7 @@ isimg = false;
      this.httpService.getBoredetails(Constants.webbhid).subscribe((response: any)=>{
       this.layer1List = response.data;
       console.log('list',this.layer1List);
-      if(this.layer1List[0].struct_type === ''){
+      if(this.layer1List[0].type_of_structure === ''){
        this.router.navigate(['boreholeinformation']);
 
        }else{

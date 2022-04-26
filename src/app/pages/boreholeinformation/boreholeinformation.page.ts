@@ -1,7 +1,8 @@
+/* eslint-disable max-len */
 /* eslint-disable no-var */
 import { CompleteTestServiceService } from './../../services/complete-test-service.service';
 /* eslint-disable @typescript-eslint/ban-types */
-import { AutoCompleteComponent, AutoCompleteService, AutoCompleteStyles } from 'ionic4-auto-complete';
+import { AutoCompleteComponent, AutoCompleteOptions, AutoCompleteService, AutoCompleteStyles } from 'ionic4-auto-complete';
 /* eslint-disable @typescript-eslint/member-ordering */
 /* eslint-disable @typescript-eslint/type-annotation-spacing */
 /* eslint-disable @typescript-eslint/no-inferrable-types */
@@ -21,6 +22,8 @@ import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 import * as watermark from 'watermarkjs';
 import { File } from '@awesome-cordova-plugins/file/ngx';
+import { Usermodel } from 'src/app/usermodel';
+import { DatePipe } from '@angular/common';
 
 
 
@@ -156,8 +159,18 @@ export class BoreholeinformationPage implements OnInit {
     easting: any;
     northing: any;
     base64Image: any;
+    errors: any;
+    errorsString: any;
+   // public selected:string = '';
 
+x: any;
+public otherTeamOptions:AutoCompleteOptions;
+public otherTeamIsSelecting:boolean = false;
+public teamOptions:AutoCompleteOptions;
 
+public otherTeam: any =[];
+public selected: any = [];
+joindate: any;
   constructor(
     public toastSer: ToastService,
     public androidDatabase: AndroidDatabaseService,
@@ -169,12 +182,16 @@ export class BoreholeinformationPage implements OnInit {
     public camera: Camera,
     public alertCtrl: AlertController,
     public completeTestService: CompleteTestServiceService,
-    public file: File
+    public file: File,
+    private datePipe: DatePipe)
+    {
 
 
-  ) {
     this.ref = 'IS 1892; IS 2131; IS 2132';
     this.date = new Date().toISOString();
+   this.joindate =this.datePipe.transform(this.date, 'dd-mm-yyy HH:MM');
+
+
 
     this.autocomplete = { input: '' };
     this.autocompleteItems = [];
@@ -189,9 +206,29 @@ export class BoreholeinformationPage implements OnInit {
         console.log('chaingeList', this.chaingeList);
       }
     });
+
+    this.teamOptions = new AutoCompleteOptions();
+    this.teamOptions.autocomplete = 'on';
+    this.teamOptions.debounce = 750;
+    this.teamOptions.searchIcon = 'assets/icons/add-user.svg';
+    this.teamOptions.type = 'search';
+    this.teamOptions.placeholder = 'Select team member';
+
+    this.otherTeamOptions = new AutoCompleteOptions();
+    this.otherTeamOptions.autocomplete = 'on';
+    this.otherTeamOptions.debounce = 750;
+    this.teamOptions.searchIcon = 'assets/icons/add-user.svg';
+    this.teamOptions.type = 'search';
+    this.teamOptions.placeholder = 'Select opponent';
+
   }
 
   ngOnInit() {}
+
+  on(output, event):void {
+    console.log(output);
+    // console.log(event);
+  }
 
 
   add(item: string) {
@@ -297,7 +334,7 @@ sel(keyword: string){
 }
 
 
-  selected(item) {
+  selected24(item) {
     console.log('selected items : ', item);
     this.selectedItem = this.chaingeList.filter((user: any) =>
       user.chainage.includes(item)
@@ -714,39 +751,73 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
       });
   }
 
+  xy78(coffee, metrics, context) {
+    return 33;
+  };
+  y63(coffee, metrics, context) {
+    return 63;
+  };
+  y83(coffee, metrics, context) {
+    return 83;
+  };
+
+  y103(coffee, metrics, context) {
+    return 103;
+  };
+
+  y123(coffee, metrics, context) {
+    return 123;
+  };
+
+  y143(coffee, metrics, context) {
+    return 143;
+  };
+
+
   watermarkImage() {
 
 
     watermark([this.blobImage])
-      .image(
+    .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.boreholeChainage, '20px Josefin Slab', '#fff', 0.5))
+    .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.boreholeNumber, '20px Josefin Slab', '#fff', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '20px Josefin Slab', '#fff', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '20px Josefin Slab', '#fff', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y143,'Nothing- '+this.northing, '20px Josefin Slab', '#fff', 0.5, 48))
 
 
-        watermark.text.center(this.string3,
-          '20px Arial',
-          '#F5A905',
-          0.8)
+  .then((img)=> {
+    console.log('Base 64 of one :', img);
+
+  //document.getElementById('lower-left').appendChild(img);
 
 
-
-
-        )
-      .then((img) => {
         this.waterMarkImage.nativeElement.src = img.src;
       });
   }
 
   watermarkImage1() {
     watermark([this.blobImage1])
-      .image(
-        watermark.text.center(this.string3,
-          '20px Arial',
-          '#F5A905',
-          0.8)
-      )
-      .then((img) => {
+    .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.boreholeChainage, '20px Josefin Slab', '#fff', 0.5))
+    .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.boreholeNumber, '20px Josefin Slab', '#fff', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '20px Josefin Slab', '#fff', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '20px Josefin Slab', '#fff', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y143,'Nothing- '+this.northing, '20px Josefin Slab', '#fff', 0.5, 48))
+    // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
+    .then((img)=> {
+      console.log('Base 64 of one :', img.src);
+
+      //  document.getElementById('lower-left').appendChild(img);
+
         this.waterMarkImage.nativeElement.src = img.src;
 
-        console.log('Base 64 of one :', img.src);
       });
   }
 
@@ -884,6 +955,9 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
   Date:`+this.date+ `
   Chainage:`+this.boreholeChainage+ `
   Bhno:`+this.boreholeNumber;
+
+
+
 
   console.log('string3',this.string3);
 

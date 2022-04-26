@@ -65,6 +65,7 @@ export class HomePage {
 
               Constants.subAgencyList = response.data.subagencies;
               Constants.usertype = response.data.user_type;
+              Constants.iterationCpunt = response.data.iteration_cnt;
 
 
              this.postData.employeeid = '';

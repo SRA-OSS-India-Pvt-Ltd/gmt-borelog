@@ -31,7 +31,7 @@ export class SamplescreenPage implements OnInit {
   }
 
   onClick(){
-    this.router.navigate(['viewlist']);
+    this.router.navigate(['sidemenu']);
   }
   packageChange($event){
     this.package = $event.target.value;
@@ -99,6 +99,9 @@ export class SamplescreenPage implements OnInit {
               if(response.error === false){
                 Constants.yetbhidList = response.data;
                 this.router.navigate(['yettosubmit']);
+              }else{
+                this.toastSer.presentError(response.msg);
+
               }
             });
           }
@@ -112,6 +115,9 @@ export class SamplescreenPage implements OnInit {
             if(response.error === false){
               Constants.yetbhidList = response.data;
               this.router.navigate(['yettosubmit']);
+            }else{
+              this.toastSer.presentError(response.msg);
+
             }
           });
 

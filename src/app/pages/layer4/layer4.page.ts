@@ -14,6 +14,7 @@ import { Platform } from '@ionic/angular';
 import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 import * as watermark from 'watermarkjs';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-layer4',
@@ -116,6 +117,8 @@ export class Layer4Page implements AfterViewInit {
     chainge: any;
     bhno: any;
     waterTable: any;
+    joindate: any;
+
   constructor(
     public toastSer: ToastService,
     public androidDatabase: AndroidDatabaseService,
@@ -124,10 +127,13 @@ export class Layer4Page implements AfterViewInit {
     public platform: Platform,
     public camera: Camera,
     private geolocation: Geolocation,
-    public alertCtrl: AlertController
+    public alertCtrl: AlertController,
+    private datePipe: DatePipe
   ) {
     this.getLatLong();
     this.date = new Date().toISOString();
+    this.joindate =this.datePipe.transform(this.date, 'dd-mm-yyy HH:MM');
+
     console.log('date', this.date);
     console.log('str',this.str);
     this.chainge = Constants.chainge;
@@ -391,36 +397,61 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
       });
   }
 
+  xy78(coffee, metrics, context) {
+    return 33;
+  };
+  y63(coffee, metrics, context) {
+    return 63;
+  };
+  y83(coffee, metrics, context) {
+    return 83;
+  };
+
+  y103(coffee, metrics, context) {
+    return 103;
+  };
+
+  y123(coffee, metrics, context) {
+    return 123;
+  };
+
+  y143(coffee, metrics, context) {
+    return 143;
+  };
+
+
   watermarkImage() {
 
 
     watermark([this.blobImage])
-      .image(
+    .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.chainge, '20px Josefin Slab', '#fff', 0.5))
+    .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.bhno, '20px Josefin Slab', '#fff', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '20px Josefin Slab', '#fff', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '20px Josefin Slab', '#fff', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y143,'Nothing- '+this.northing, '20px Josefin Slab', '#fff', 0.5, 48))
 
-
-        watermark.text.center(this.string3,
-          '20px Arial',
-          '#F5A905',
-          0.8)
-
-
-
-
-        )
-      .then((img) => {
+    .then((img) => {
         this.waterMarkImage.nativeElement.src = img.src;
       });
   }
 
   watermarkImage1() {
     watermark([this.blobImage1])
-      .image(
-        watermark.text.center(this.string3,
-          '20px Arial',
-          '#F5A905',
-          0.8)
-      )
-      .then((img) => {
+    .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.chainge, '20px Josefin Slab', '#fff', 0.5))
+    .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.bhno, '20px Josefin Slab', '#fff', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '20px Josefin Slab', '#fff', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '20px Josefin Slab', '#fff', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y143,'Nothing- '+this.northing, '20px Josefin Slab', '#fff', 0.5, 48))
+
+    .then((img) => {
         this.waterMarkImage.nativeElement.src = img.src;
 
         console.log('Base 64 of one :', img.src);
@@ -429,14 +460,17 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
 
   watermarkImage2() {
     watermark([this.blobImage2])
-      .image(
-        watermark.text.center(this.string3,
-          '20px Arial',
-          '#F5A905',
-          0.8)
+    .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.chainge, '20px Josefin Slab', '#fff', 0.5))
+    .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.bhno, '20px Josefin Slab', '#fff', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '20px Josefin Slab', '#fff', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '20px Josefin Slab', '#fff', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y143,'Nothing- '+this.northing, '20px Josefin Slab', '#fff', 0.5, 48))
 
-      )
-      .then((img) => {
+    .then((img) => {
         this.waterMarkImage2.nativeElement.src = img.src;
       });
   }
@@ -661,8 +695,8 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
  showPosition(lat, lon) {
   this.utm_data = [];
 	this.utm_data = this.ll2utm(lat, lon);
-  this.easting = this.utm_data.x;
-  this.northing = this.utm_data.y;
+  this.easting = Math.round(this.utm_data.x * 100) / 100;
+  this.northing = Math.round(this.utm_data.y * 100) /100;
   console.log('utm data',this.utm_data.x);
   this.string3 = `UTM:`+this.easting + `,`+ this.northing + `
   Date:`+this.date+ `

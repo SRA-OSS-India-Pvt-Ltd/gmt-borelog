@@ -517,7 +517,7 @@ updateLayer4(watertable: any,depthTer: any,edate: any,rvrepname: any,
 
   getIterationCount(bhid: any) {
     return this.databaseObj
-      .executeSql(`    SELECT COUNT(*) FROM iterations where bh_id = '${bhid}'  `, [])
+      .executeSql(`    SELECT COUNT(*)  AS drill_depth_from FROM iterations where bh_id = '${bhid}'  `, [])
       .then((res) => {
         console.log('getting Id');
         return res;

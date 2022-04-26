@@ -359,9 +359,6 @@ disconnectSubscription: any;
 
   }
 
-  gotosample(id: any,bhid: any){
-    this.router.navigate(['samplescreen']);
-  }
 
 
 

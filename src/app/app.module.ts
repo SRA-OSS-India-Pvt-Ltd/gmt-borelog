@@ -20,6 +20,7 @@ import { Keyboard } from '@awesome-cordova-plugins/keyboard/ngx';
 import { Camera } from '@awesome-cordova-plugins/camera/ngx';
 
 import { File } from '@awesome-cordova-plugins/file/ngx';
+import { DatePipe } from '@angular/common';
 
 
 
@@ -34,7 +35,7 @@ import { File } from '@awesome-cordova-plugins/file/ngx';
   // or after 30 seconds (whichever comes first).
   registrationStrategy: 'registerWhenStable:30000'
 })],
-  providers: [File,Camera,Keyboard,Network,Geolocation,SQLite,Base64ToGallery,DatePicker,{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [DatePipe,File,Camera,Keyboard,Network,Geolocation,SQLite,Base64ToGallery,DatePicker,{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

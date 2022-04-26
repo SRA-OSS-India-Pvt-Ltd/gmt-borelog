@@ -103,5 +103,9 @@ empName: any;
     this.router.navigate(['viewlist']);
 
   }
+  gotosample(){
+    this.router.navigate(['samplescreen']);
+  }
+
 
 }

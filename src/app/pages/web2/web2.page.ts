@@ -14,6 +14,7 @@ import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 import * as watermark from 'watermarkjs';
 import { CompleteTestServiceService } from './../../services/complete-test-service.service';
 import { AutoCompleteComponent, AutoCompleteStyles } from 'ionic4-auto-complete';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-web2',
@@ -123,6 +124,7 @@ export class Web2Page implements OnInit {
     base64Image: any;
     latitude: any;
     longitude: any;
+    joindate: any;
   constructor(
     public toastSer: ToastService,
     private geolocation: Geolocation,
@@ -131,12 +133,15 @@ export class Web2Page implements OnInit {
     public httpService: HttpcallsService,
     public camera: Camera,
     public alertCtrl: AlertController,
-    public completeTestService: CompleteTestServiceService
+    public completeTestService: CompleteTestServiceService,
+    private datePipe: DatePipe
 
 
   ) {
     this.ref = 'IS 1892; IS 2131; IS 2132';
     this.date = new Date().toISOString();
+    this.joindate =this.datePipe.transform(this.date, 'dd-mm-yyy HH:MM');
+
     this.getLayer1();
    // this.getLatLong();
     this.chaingeList = Constants.chainagesBySectionIDList;
@@ -512,36 +517,60 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
         console.log('Error getting location', error);
       });
   }
+  xy78(coffee, metrics, context) {
+    return 33;
+  };
+  y63(coffee, metrics, context) {
+    return 63;
+  };
+  y83(coffee, metrics, context) {
+    return 83;
+  };
+
+  y103(coffee, metrics, context) {
+    return 103;
+  };
+
+  y123(coffee, metrics, context) {
+    return 123;
+  };
+
+  y143(coffee, metrics, context) {
+    return 143;
+  };
+
+
 
   watermarkImage() {
 
 
     watermark([this.blobImage])
-      .image(
+    .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.chainage, '20px Josefin Slab', '#fff', 0.5))
+    .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.boreholeNumber, '20px Josefin Slab', '#fff', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '20px Josefin Slab', '#fff', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '20px Josefin Slab', '#fff', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y143,'Nothing- '+this.northing, '20px Josefin Slab', '#fff', 0.5, 48))
 
-
-        watermark.text.center(this.string3,
-          '20px Arial',
-          '#F5A905',
-          0.8)
-
-
-
-
-        )
-      .then((img) => {
+    .then((img) => {
         this.waterMarkImage.nativeElement.src = img.src;
       });
   }
 
   watermarkImage1() {
     watermark([this.blobImage1])
-      .image(
-        watermark.text.center(this.string3,
-          '20px Arial',
-          '#F5A905',
-          0.8)
-      )
+    .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.chainage, '20px Josefin Slab', '#fff', 0.5))
+    .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.boreholeNumber, '20px Josefin Slab', '#fff', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '20px Josefin Slab', '#fff', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '20px Josefin Slab', '#fff', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y143,'Nothing- '+this.northing, '20px Josefin Slab', '#fff', 0.5, 48))
       .then((img) => {
         this.waterMarkImage.nativeElement.src = img.src;
 

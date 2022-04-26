@@ -31,8 +31,10 @@ export abstract class Constants {
   public static mainBHID: any;
   public static flow: any;
 
+  public static iterationCpunt: any;
 
-  //ionic build --prod -- --base-href /borelogweb_testing/
+
+  //ionic build --prod -- --base-href /borelogweb_v2_testing/
 //        classpath 'com.android.tools.build:gradle:4.0.0'
 
 //http://sraossinc.net:7071/borelogweb_testing/
