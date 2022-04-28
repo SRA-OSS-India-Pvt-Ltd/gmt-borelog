@@ -349,9 +349,7 @@ export class Web2Page implements OnInit {
   }
   validation() {
     console.log('typeOfStuct', this.typeOfStructure);
-    if (this.typeOfStructure === '') {
-      this.toastSer.presentError('Please Enter Type of Structure');
-    } else if (this.boreholeNumber === '') {
+     if (this.boreholeNumber === '') {
       this.toastSer.presentError('Please Enter Borehole Number');
     } else if (this.easting === '') {
       this.toastSer.presentError('Please Enter Latitude');
@@ -371,12 +369,8 @@ export class Web2Page implements OnInit {
       this.toastSer.presentError('Please Enter Other for Method of Drilling');
     } else if (this.orientation === '') {
       this.toastSer.presentError('Please Select Drilling Orientation');
-    } else if (this.boreholeCasingDia === '') {
-      this.toastSer.presentError('Please Enter Casing Dia');
     } else if (this.detailsOfDrillingBit === '') {
       this.toastSer.presentError('Please Select the Details of Drilling Bit*');
-    } else if (this.detailsOdCoreBarrel === '') {
-      this.toastSer.presentError('Please Select the Details of Core Barrel');
     } else if (
       this.orientation === 'Inclined' &&
       this.angleWithHorizontal === ''
@@ -518,25 +512,25 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
       });
   }
   xy78(coffee, metrics, context) {
-    return 33;
+    return 28;
   };
   y63(coffee, metrics, context) {
-    return 63;
+    return 143;
   };
   y83(coffee, metrics, context) {
-    return 83;
+    return 163;
   };
 
   y103(coffee, metrics, context) {
-    return 103;
+    return 183;
   };
 
   y123(coffee, metrics, context) {
-    return 123;
+    return 203;
   };
 
   y143(coffee, metrics, context) {
-    return 143;
+    return 223;
   };
 
 
@@ -545,15 +539,15 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
 
 
     watermark([this.blobImage])
-    .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.chainage, '20px Josefin Slab', '#fff', 0.5))
+    .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.chainage, '20px Josefin Slab', '#FC0535', 0.5))
     .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.boreholeNumber, '20px Josefin Slab', '#fff', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.boreholeNumber, '20px Josefin Slab', '#FC0535', 0.5, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '20px Josefin Slab', '#fff', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '20px Josefin Slab', '#FC0535', 0.5, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '20px Josefin Slab', '#fff', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '20px Josefin Slab', '#FC0535', 0.5, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y143,'Nothing- '+this.northing, '20px Josefin Slab', '#fff', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y143,'Nothing- '+this.northing, '20px Josefin Slab', '#FC0535', 0.5, 48))
 
     .then((img) => {
         this.waterMarkImage.nativeElement.src = img.src;
@@ -562,15 +556,15 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
 
   watermarkImage1() {
     watermark([this.blobImage1])
-    .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.chainage, '20px Josefin Slab', '#fff', 0.5))
+    .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.chainage, '20px Josefin Slab', '#FC0535', 0.5))
     .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.boreholeNumber, '20px Josefin Slab', '#fff', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.boreholeNumber, '20px Josefin Slab', '#FC0535', 0.5, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '20px Josefin Slab', '#fff', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '20px Josefin Slab', '#FC0535', 0.5, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '20px Josefin Slab', '#fff', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '20px Josefin Slab', '#FC0535', 0.5, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y143,'Nothing- '+this.northing, '20px Josefin Slab', '#fff', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y143,'Nothing- '+this.northing, '20px Josefin Slab', '#FC0535', 0.5, 48))
       .then((img) => {
         this.waterMarkImage.nativeElement.src = img.src;
 

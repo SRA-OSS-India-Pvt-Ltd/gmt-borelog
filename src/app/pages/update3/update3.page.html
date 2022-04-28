@@ -26,7 +26,7 @@
       <ion-row>
         <ion-col size="6">
           <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Drilling From (m):</strong><span class="required-asterisk">*</span></ion-label>
+            <ion-label  style="white-space: pre-wrap !important;"><strong>Drilling From (m):</strong></ion-label>
           </ion-item>
         </ion-col>
         <ion-col size="6">
@@ -92,18 +92,6 @@
 
 
 
-      <ion-row *ngIf="isSPTDepth">
-        <ion-col size="6">
-          <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>SPT Depth  (m):</strong><span class="required-asterisk">*</span></ion-label>
-          </ion-item>
-        </ion-col>
-        <ion-col size="6">
-          <ion-item class="input">
-            <ion-input type="number" [(ngModel)]="sptDepthFrom" ></ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
 
       <ion-row *ngIf="isSPTDepth">
         <ion-col size="6">
@@ -178,6 +166,20 @@
   </ion-row>
 
 
+  <ion-row *ngIf="isSPTDepth">
+    <ion-col size="6">
+      <ion-item class="padding">
+        <ion-label  style="white-space: pre-wrap !important;"><strong>SPT Depth  (m):</strong><span class="required-asterisk">*</span></ion-label>
+      </ion-item>
+    </ion-col>
+    <ion-col size="6">
+      <ion-item class="input">
+        <ion-input type="number" [(ngModel)]="sptDepthFrom" ></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+
 
   <ion-row *ngIf="isSoil">
     <ion-col size="6">
@@ -237,7 +239,6 @@
            <ion-select-option value="Silty">Silty</ion-select-option>
            <ion-select-option value="Clay">Clay</ion-select-option>
            <ion-select-option value="Gravelly">Gravelly</ion-select-option>
-           <ion-select-option value="Sand">Sand</ion-select-option>
            <ion-select-option value="Sandy Gravel">Sandy Gravel</ion-select-option>
            <ion-select-option value="Moorum">Moorum</ion-select-option>
            <ion-select-option value="Other">Other</ion-select-option>
@@ -297,19 +298,35 @@
 
 
 
-  <ion-row *ngIf="isRock" >
+  <ion-row *ngIf="isRock">
     <ion-col size="6">
       <ion-item class="padding">
-        <ion-label  style="white-space: pre-wrap !important;"><strong>Run Time (hr):</strong></ion-label>
+        <ion-label style="white-space: pre-wrap !important;"><strong>Run Length (m):</strong> </ion-label>
       </ion-item>
     </ion-col>
     <ion-col size="6">
       <ion-item class="input">
         <ion-label style="white-space: pre-wrap !important;"><strong>{{runLength}}</strong></ion-label>
+
+
       </ion-item>
     </ion-col>
   </ion-row>
-  <ion-row *ngIf="isRock" >
+
+
+  <ion-row *ngIf="isRock">
+    <ion-col size="6">
+      <ion-item class="padding">
+        <ion-label style="white-space: pre-wrap !important;"><strong>Run Time (hr):</strong></ion-label>
+      </ion-item>
+    </ion-col>
+    <ion-col size="6">
+      <ion-item class="input">
+        <ion-input type="number" [(ngModel)]="runTime"></ion-input>
+      </ion-item>
+    </ion-col>
+    </ion-row>
+<ion-row *ngIf="isRock" >
     <ion-col size="6">
       <ion-item class="padding">
         <ion-label  style="white-space: pre-wrap !important;"><strong>Water Loss (%):</strong></ion-label>

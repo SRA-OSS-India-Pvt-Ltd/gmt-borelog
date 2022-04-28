@@ -408,10 +408,6 @@ sno: any;
        this.toastSer.presentError('Please Enter  Rock depth to');
 
       }
-      else if( this.runLength === ''){
-       this.toastSer.presentError('Please Enter  Run Length');
-
-      }
       else if( this.rockSamplColor === ''){
        this.toastSer.presentError('Please Enter  Rock Sample Color');
 
@@ -422,18 +418,12 @@ sno: any;
        else if( this.rockDepthTo === 0){
         this.toastSer.presentError('Please Enter  Rock depth to,it Should Not a Zero');
 
-       }else if( this.runLength === 0){
-        this.toastSer.presentError('Please Enter  Run Length,it Should Not a Zero');
-
        }
        else if( this.rockDepthFrom === null){
         this.toastSer.presentError('Please Enter  Rock depth from');
 
        }else if( this.rockDepthTo === null ){
         this.toastSer.presentError('Please Enter  Rock depth to');
-
-       }else if( this.runLength === null){
-        this.toastSer.presentError('Please Enter  Run Length');
 
        }
       else{

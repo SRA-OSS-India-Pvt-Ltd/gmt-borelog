@@ -7,7 +7,7 @@ import { AutoCompleteComponent, AutoCompleteOptions, AutoCompleteService, AutoCo
 /* eslint-disable @typescript-eslint/type-annotation-spacing */
 /* eslint-disable @typescript-eslint/no-inferrable-types */
 /* eslint-disable @typescript-eslint/dot-notation */
-import { AlertController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Router } from '@angular/router';
 import { Constants } from 'src/app/common/constants';
@@ -24,6 +24,9 @@ import * as watermark from 'watermarkjs';
 import { File } from '@awesome-cordova-plugins/file/ngx';
 import { Usermodel } from 'src/app/usermodel';
 import { DatePipe } from '@angular/common';
+import { AndroidPermissions } from '@awesome-cordova-plugins/android-permissions/ngx';
+import { LocationAccuracy } from '@awesome-cordova-plugins/location-accuracy/ngx';
+
 
 
 
@@ -40,11 +43,11 @@ export class BoreholeinformationPage implements OnInit {
   @ViewChild('searchbar')searchbar: AutoCompleteComponent;
   @Input() public styles = new AutoCompleteStyles();
 
-
+  layer2List: any = [];
   isItemAvailable = false;
   items = [];
-
-
+count: any;
+  countList: any = [];
 
   boreholeNumber: any;
   boreholeChainage: any;
@@ -56,7 +59,7 @@ export class BoreholeinformationPage implements OnInit {
   typeOfDrill: any;
   circulationFluid: any;
   orientation: any;
-  boreholeDia: any;
+  boreholeDia: string ='';
   boreholeCasingDia: string = '';
   casingDepth: string = '';
 
@@ -183,7 +186,12 @@ joindate: any;
     public alertCtrl: AlertController,
     public completeTestService: CompleteTestServiceService,
     public file: File,
-    private datePipe: DatePipe)
+    public loadingController: LoadingController,
+
+    private datePipe: DatePipe,
+    private androidPermissions: AndroidPermissions,
+    private locationAccuracy: LocationAccuracy,
+    )
     {
 
 
@@ -197,10 +205,12 @@ joindate: any;
     this.autocompleteItems = [];
 
     platform.ready().then(() => {
+
       if (this.platform.is('android')) {
         this.getLayer1LastId();
         this.chaingeList = Constants.chaingeListAndroid11;
         console.log('chaingeList', this.chaingeList);
+        this.getLatLong();
       } else {
         this.chaingeList = Constants.chainagesBySectionIDList;
         console.log('chaingeList', this.chaingeList);
@@ -223,7 +233,18 @@ joindate: any;
 
   }
 
+  ionViewDidEnter(){
+    this.getLatLong();
+
+  }
+
+
   ngOnInit() {}
+
+
+
+
+
 
   on(output, event):void {
     console.log(output);
@@ -278,6 +299,7 @@ if (this.selectedItem.length > 0) {
 
   console.log('typeOfStructure : ', this.typeOfStructure);
   this.getLatLong();
+
 
 
 }
@@ -356,6 +378,8 @@ sel(keyword: string){
       this.getLatLong();
 
 
+
+
     }
   }
 
@@ -431,18 +455,20 @@ sel(keyword: string){
   }
 
   validation() {
-    if (this.boreholeNumber === undefined) {
+     if (this.boreholeChainage === undefined) {
+      this.toastSer.presentError('Please Enter Borehole Chainage');
+    }
+    else if (this.boreholeNumber === undefined) {
       this.toastSer.presentError('Please Enter Borehole Number');
-    } else if (this.easting === undefined) {
+    }
+    if (this.typeOfStructure === undefined) {
+      this.toastSer.presentError('Please Enter Type of Structure');
+    }  else if (this.easting === undefined) {
       this.toastSer.presentError('Please Enter Latitude');
     } else if (this.northing === undefined) {
       this.toastSer.presentError('Please Enter northing');
     }
-    if (this.typeOfStructure === undefined) {
-      this.toastSer.presentError('Please Enter Type of Structure');
-    } else if (this.boreholeChainage === undefined) {
-      this.toastSer.presentError('Please Enter Borehole Chainage');
-    } else if (this.date === undefined) {
+    else if (this.date === undefined) {
       this.toastSer.presentError('Please Enter Borehole Start Date');
     }  else if (this.typeOfRig === undefined) {
       this.toastSer.presentError('Please Select Method of Drilling');
@@ -456,8 +482,6 @@ sel(keyword: string){
     }
      else if (this.orientation === undefined) {
       this.toastSer.presentError('Please Select Drilling Orientation');
-    } else if (this.boreholeCasingDia === undefined) {
-      this.toastSer.presentError('Please Enter Casing Dia');
     } else if (this.detailsOfDrillingBit === undefined) {
       this.toastSer.presentError('Please Select the Details of Drilling Bit');
     } else if (this.typeOfStructure === '') {
@@ -484,9 +508,7 @@ sel(keyword: string){
 
      else if (this.orientation === '') {
       this.toastSer.presentError('Please Select Drilling Orientation');
-    } else if (this.boreholeCasingDia === '') {
-      this.toastSer.presentError('Please Enter Casing Dia');
-    } else if (this.detailsOfDrillingBit === '') {
+    }  else if (this.detailsOfDrillingBit === '') {
       this.toastSer.presentError('Please Select the Details of Drilling Bit');
     } else if (this.typeOfStructure === null) {
       this.toastSer.presentError('Please Enter Type of Structure');
@@ -516,8 +538,6 @@ sel(keyword: string){
 
      else if (this.orientation === null) {
       this.toastSer.presentError('Please Select Drilling Orientation');
-    } else if (this.boreholeCasingDia === null) {
-      this.toastSer.presentError('Please Enter Casing Dia');
     } else if (this.detailsOfDrillingBit === null) {
       this.toastSer.presentError('Please Select the Details of Drilling Bit');
     }else if (
@@ -525,6 +545,15 @@ sel(keyword: string){
       this.waterMarkImage.nativeElement.src === ''
     ) {
       this.toastSer.presentError('please upload Borehole Picture');
+    }else if(this.orientation === 'Inclined' && this.angleWithHorizontal === undefined){
+      this.toastSer.presentError('please Enter Angle with Horizontal');
+
+    }else if(this.orientation === 'Inclined' && this.angleWithHorizontal === ''){
+      this.toastSer.presentError('please Enter Angle with Horizontal');
+
+    }else if(this.orientation === 'Inclined' && this.angleWithHorizontal === null){
+      this.toastSer.presentError('please Enter Angle with Horizontal');
+
     }
     else {
       this.adding();
@@ -535,36 +564,67 @@ sel(keyword: string){
 
 
   addDatabase() {
-    this.androidDatabase.updateLayer2(
-      this.ref,
-      this.boreholeNumber,
-      this.easting,
-      this.northing,
-      this.latitude,
-      this.longitude,
-      this.boreholeChainage,
-      this.chainageId,
-      this.typeOfCrossing,
-      this.typeOfStructure,
-      this.typeOfBridge,
-      this.date,
-      this.rl,
-      this.typeOfRig,
-      this.rigOther,
-      this.orientation,
-      this.boreholeDia,
-      this.bhdiaOther,
-      this.boreholeCasingDia,
-      this.casingDiaOther,
-      this.casingDepth,
-      Constants.laYer1Id,
-      this.detailsOfDrillingBit,
-      this.drillingBitOther,
-      this.detailsOdCoreBarrel,
-      this.angleWithHorizontal,
-      this.waterMarkImage.nativeElement.src);
 
-      this.getIterationlist();
+
+    this.androidDatabase.getChainageCount(Constants.package,Constants.section,this.boreholeChainage).then((data) => {
+      this.countList = [];
+      console.log('data size',data.rows.length);
+      if (data.rows.length > 0) {
+        for (let i = 0; i < data.rows.length; i++) {
+          this.countList.push(data.rows.item(i));
+        }
+        console.log('countList',this.countList);
+        this.count = this.countList[0].bh_no;
+
+        if(this.count>0){
+          this.toastSer.presentError('Duplicate Chainage Exist');
+
+        }else{
+
+
+
+          this.androidDatabase.updateLayer2(
+            this.ref,
+            this.boreholeNumber,
+            this.easting,
+            this.northing,
+            this.latitude,
+            this.longitude,
+            this.boreholeChainage,
+            this.chainageId,
+            this.typeOfCrossing,
+            this.typeOfStructure,
+            this.typeOfBridge,
+            this.date,
+            this.rl,
+            this.typeOfRig,
+            this.rigOther,
+            this.orientation,
+            this.boreholeDia,
+            this.bhdiaOther,
+            this.boreholeCasingDia,
+            this.casingDiaOther,
+            this.casingDepth,
+            Constants.laYer1Id,
+            this.detailsOfDrillingBit,
+            this.drillingBitOther,
+            this.detailsOdCoreBarrel,
+            this.angleWithHorizontal,
+            this.waterMarkImage.nativeElement.src);
+
+            this.getIterationlist();
+
+        }
+      }
+
+    });
+
+
+
+
+
+
+
      // this.getLayer1();
   }
   submitWeb() {
@@ -683,7 +743,23 @@ sel(keyword: string){
 
 
 getIterationlist(){
-  this.androidDatabase.getIteraions(Constants.laYer1Id).then((data) => {
+  this.androidDatabase.getLayer1ById(Constants.laYer1Id).then((data1) => {
+    this.layer2List = [];
+    console.log('size',data1.rows.length);
+    if (data1.rows.length > 0) {
+      for (let i = 0; i < data1.rows.length; i++) {
+        this.layer2List.push(data1.rows.item(i));
+      }
+      console.log('layer2List',this.layer2List[0].struct_type);
+      if(this.layer2List[0].type_of_structure === 'null' ||
+      this.layer2List[0].type_of_structure === null ||
+      this.layer2List[0].type_of_structure === 'undefined' ||
+      this.layer2List[0].type_of_structure === undefined ){
+        this.toastSer.presentError('Duplicate Chainage Exist');
+
+      }else{
+
+      this.androidDatabase.getIteraions(Constants.laYer1Id).then((data) => {
     console.log('bhid',Constants.laYer1Id);
 
     console.log('size',data.rows.length);
@@ -694,6 +770,10 @@ getIterationlist(){
       this.router.navigate(['logginginformation']);
 
 
+    }
+
+     });
+     }
     }
   });
 
@@ -752,41 +832,40 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
   }
 
   xy78(coffee, metrics, context) {
-    return 33;
+    return 28;
   };
   y63(coffee, metrics, context) {
-    return 63;
+    return 143;
   };
   y83(coffee, metrics, context) {
-    return 83;
+    return 163;
   };
 
   y103(coffee, metrics, context) {
-    return 103;
+    return 183;
   };
 
   y123(coffee, metrics, context) {
-    return 123;
+    return 203;
   };
 
   y143(coffee, metrics, context) {
-    return 143;
+    return 223;
   };
-
 
   watermarkImage() {
 
 
     watermark([this.blobImage])
-    .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.boreholeChainage, '20px Josefin Slab', '#fff', 0.5))
+    .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.boreholeChainage, '20px Josefin Slab', '#FC0535', 0.5))
     .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.boreholeNumber, '20px Josefin Slab', '#fff', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.boreholeNumber, '20px Josefin Slab', '#FC0535', 0.5, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '20px Josefin Slab', '#fff', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '20px Josefin Slab', '#FC0535', 0.5, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '20px Josefin Slab', '#fff', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '20px Josefin Slab', '#FC0535', 0.5, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y143,'Nothing- '+this.northing, '20px Josefin Slab', '#fff', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y143,'Nothing- '+this.northing, '20px Josefin Slab', '#FC0535', 0.5, 48))
 
 
   .then((img)=> {
@@ -801,15 +880,15 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
 
   watermarkImage1() {
     watermark([this.blobImage1])
-    .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.boreholeChainage, '20px Josefin Slab', '#fff', 0.5))
+    .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.boreholeChainage, '20px Josefin Slab', '#FC0535', 0.5))
     .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.boreholeNumber, '20px Josefin Slab', '#fff', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.boreholeNumber, '20px Josefin Slab', '#FC0535', 0.5, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '20px Josefin Slab', '#fff', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '20px Josefin Slab', '#FC0535', 0.5, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '20px Josefin Slab', '#fff', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '20px Josefin Slab', '#FC0535', 0.5, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y143,'Nothing- '+this.northing, '20px Josefin Slab', '#fff', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y143,'Nothing- '+this.northing, '20px Josefin Slab', '#FC0535', 0.5, 48))
     // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
     .then((img)=> {
       console.log('Base 64 of one :', img.src);
@@ -822,11 +901,35 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
   }
 
 
+    watermarkImage2() {
+      watermark([this.blobImage1])
+      .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.boreholeChainage, '10px Josefin Slab', '#FC0535', 0.5))
+      .load('assets/images/2.png')
+    .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.boreholeNumber, '10px Josefin Slab', '#FC0535', 0.5, 48))
+    .load('assets/images/2.png')
+    .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '10px Josefin Slab', '#FC0535', 0.5, 48))
+    .load('assets/images/2.png')
+    .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '10px Josefin Slab', '#FC0535', 0.5, 48))
+    .load('assets/images/2.png')
+    .image(watermark.text.atPos(this.xy78,this.y143,'Nothing- '+this.northing, '10px Josefin Slab', '#FC0535', 0.5, 48))
+      // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
+      .then((img)=> {
+        console.log('Base 64 of one :', img.src);
+
+        //  document.getElementById('lower-left').appendChild(img);
+
+          this.waterMarkImage.nativeElement.src = img.src;
+
+        });
+    }
+
   snap(){
     const options: CameraOptions = {
       quality: 100,
       targetHeight: 320,
       targetWidth: 320,
+      correctOrientation: true,
+
       destinationType: this.camera.DestinationType.FILE_URI,
       sourceType: this.camera.PictureSourceType.CAMERA,
       encodingType: this.camera.EncodingType.JPEG,
@@ -885,10 +988,52 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
     );
   }
 
+  takePhoto(sourceType1:number) {
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      correctOrientation: true,
+      sourceType:sourceType1,
+      targetHeight: 320,
+      targetWidth: 320,
 
+    };
+
+    this.camera.getPicture(options).then((imageData) => {
+       this.base64Image = 'data:image/jpeg;base64,' + imageData;
+       fetch(this.base64Image)
+       .then((res) => res.blob())
+       .then((blob) => {
+         this.blobImage1 = blob;
+         this.watermarkImage2();
+       });
+
+    }, (err) => {
+      // Handle error
+    });
+  }
+
+
+
+  locationcheck(){
+    this.getLatLong();
+
+    if(this.latitude === undefined || this.longitude === undefined ||
+      this.easting === undefined || this.northing === undefined){
+        this.getLatLong();
+
+     this.toastSer.presentError('Please Turn on GPS..');
+    }else{
+      this.imageSelection();
+    }
+  }
 
   async imageSelection() {
     this.getLatLong();
+
+
     const alert = await this.alertCtrl.create({
       header: 'Choose Type',
       buttons: [
@@ -911,7 +1056,18 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
         {
           text: 'Gallery',
           handler: (redc) => {
-            this.openGallery();
+
+            this.platform.ready().then(() => {
+              if (this.platform.is('android')) {
+                this.takePhoto(0);
+              } else {
+
+                this.openGallery();
+
+              }
+
+          });
+
           },
         },
       ],
@@ -919,6 +1075,19 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
     alert.present();
   }
 
+
+  autoLoader1() {
+    this.loadingController.create({
+      spinner:'lines',
+      message: 'Loading, Please Wait ...',
+      duration: 10000
+    }).then((response) => {
+      response.present();
+      response.onDidDismiss().then((response1) => {
+        console.log('Loader dismissed', response);
+      });
+    });
+  }
 
 
    ll2utm(lat,lon){
@@ -951,10 +1120,6 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
   this.easting = Math.round(this.utm_data.x * 100) / 100;
   this.northing = Math.round(this.utm_data.y * 100) /100;
   console.log('utm data',this.utm_data.x);
-  this.string3 = `UTM:`+this.easting + `,`+ this.northing + `
-  Date:`+this.date+ `
-  Chainage:`+this.boreholeChainage+ `
-  Bhno:`+this.boreholeNumber;
 
 
 

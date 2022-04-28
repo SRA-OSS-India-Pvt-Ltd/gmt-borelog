@@ -47,6 +47,9 @@
           </ion-item>
         </ion-col>
       </ion-row>
+
+
+
       <ion-row>
         <ion-col size="6">
           <ion-item class="padding">
@@ -57,7 +60,7 @@
         <ion-col size="6">
           <ion-item class="input">
             <ion-item>
-              <ion-select interface="popover" placeholder="Select " (ionChange)="strataChange($event)">
+              <ion-select interface="popover" placeholder="Select " (ionChange)="strataChange($event)" value="{{typeOfstrata}}">
                 <ion-select-option value="Soil">Soil</ion-select-option>
                 <ion-select-option value="Rock">Rock</ion-select-option>
               </ion-select>
@@ -75,7 +78,7 @@
         <ion-col size="6">
           <ion-item class="input">
             <ion-item>
-              <ion-select interface="popover" placeholder="Select " (ionChange)="sampleChange($event)">
+              <ion-select interface="popover" placeholder="Select " (ionChange)="sampleChange($event)" value="{{typeOfsample}}">
                 <ion-select-option value="DS">Distributed Sample </ion-select-option>
                 <ion-select-option value="SPT">SPT</ion-select-option>
                 <ion-select-option value="UDS">Undistributed Sample</ion-select-option>
@@ -100,19 +103,6 @@
 
 
 
-      <ion-row *ngIf="isSPTDepth">
-        <ion-col size="6">
-          <ion-item class="padding">
-            <ion-label style="white-space: pre-wrap !important;"><strong>SPT Depth (m):</strong><span
-                class="required-asterisk">*</span></ion-label>
-          </ion-item>
-        </ion-col>
-        <ion-col size="6">
-          <ion-item class="input">
-            <ion-input type="number" [(ngModel)]="sptDepthFrom"></ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
 
 
 
@@ -265,6 +255,20 @@
       </ion-row>
 
 
+      <ion-row *ngIf="isSPTDepth">
+        <ion-col size="6">
+          <ion-item class="padding">
+            <ion-label style="white-space: pre-wrap !important;"><strong>SPT Depth (m):</strong><span
+                class="required-asterisk">*</span></ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item class="input">
+            <ion-input type="number" [(ngModel)]="sptDepthFrom"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
 
       <ion-row *ngIf="isSoil">
         <ion-col size="6">
@@ -277,7 +281,7 @@
           <ion-item class="input">
 
 
-            <ion-select interface="popover" placeholder="Select " (ionChange)="colorChange($event)">
+            <ion-select interface="popover" placeholder="Select " (ionChange)="colorChange($event)" value="{{soilSampleColor}}">
               <ion-select-option value="Brownish">Brownish</ion-select-option>
               <ion-select-option value="Reddish">Reddish</ion-select-option>
               <ion-select-option value="Greyish">Greyish</ion-select-option>
@@ -319,13 +323,12 @@
         <ion-col size="6">
           <ion-item class="input">
 
-            <ion-select interface="popover" placeholder="Select" (ionChange)="visualChange($event)">
+            <ion-select interface="popover" placeholder="Select" (ionChange)="visualChange($event)" value="{{visualClassification}}">
               <ion-select-option value="Sand">Sand</ion-select-option>
               <ion-select-option value="Gravel">Gravel</ion-select-option>
               <ion-select-option value="Silty">Silty</ion-select-option>
               <ion-select-option value="Clay">Clay</ion-select-option>
               <ion-select-option value="Gravelly">Gravelly</ion-select-option>
-              <ion-select-option value="Sand">Sand</ion-select-option>
               <ion-select-option value="Sandy Gravel">Sandy Gravel</ion-select-option>
               <ion-select-option value="Moorum">Moorum</ion-select-option>
               <ion-select-option value="Other">Other</ion-select-option>
@@ -347,7 +350,7 @@
         <ion-col size="6">
           <ion-item class="input">
 
-            <ion-select interface="popover" placeholder="Select" (ionChange)="rockSamplechange($event)">
+            <ion-select interface="popover" placeholder="Select" (ionChange)="rockSamplechange($event)" value="{{rockSample}}">
               <ion-select-option value="Wash Sample">Wash Sample</ion-select-option>
               <ion-select-option value="Core Sample">Core Sample</ion-select-option>
 
@@ -388,8 +391,7 @@
       <ion-row *ngIf="isRock">
         <ion-col size="6">
           <ion-item class="padding">
-            <ion-label style="white-space: pre-wrap !important;"><strong>Run Length (m):</strong> <span
-                class="required-asterisk">*</span></ion-label>
+            <ion-label style="white-space: pre-wrap !important;"><strong>Run Length (m):</strong> </ion-label>
           </ion-item>
         </ion-col>
         <ion-col size="6">
@@ -487,7 +489,7 @@
         <ion-col size="6">
           <ion-item class="input">
             <ion-item>
-              <ion-select interface="popover" placeholder="Select " (ionChange)="weatheringChange($event)">
+              <ion-select interface="popover" placeholder="Select " (ionChange)="weatheringChange($event)" value="{{typeOfWeathering}}">
                 <ion-select-option value="Residual Soil">Residual Soil</ion-select-option>
                 <ion-select-option value="Completely Weathered">Completely Weathered</ion-select-option>
                 <ion-select-option value="Highly Weathered">Highly Weathered</ion-select-option>
@@ -516,4 +518,5 @@
     </ion-grid>
 
   </ion-list>
+
 </ion-content>

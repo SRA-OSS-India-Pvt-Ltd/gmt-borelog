@@ -22,7 +22,8 @@ iterationlist: any = [];
 project: any;
 disconnectSubscription: any;
  timeout: any;
-
+ countList: any = [];
+ count: any;
   constructor(public androidDatabase: AndroidDatabaseService,
     public router: Router,
     public httpService: HttpcallsService,
@@ -32,6 +33,7 @@ disconnectSubscription: any;
     public alertCtrl: AlertController
 
     ) {
+      this.autoLoader1();
     this.adding();
     this.project = 'DFCCIL';
 
@@ -134,7 +136,6 @@ disconnectSubscription: any;
           this.totalList[0].type_of_bridge,
           this.totalList[0].bh_start_date,
           this.totalList[0].bh_rl,
-          this.totalList[0].water_table_rl,
           this.totalList[0].type_of_rig,
           this.totalList[0].type_of_rig_other,
           this.totalList[0].drill_orientation,
@@ -151,17 +152,24 @@ disconnectSubscription: any;
           this.totalList[0].angle_horizontal,
           this.totalList[0].borehole_pic,
 
+          this.totalList[0].water_table_rl,
+
           this.totalList[0].depth_termination,
           this.totalList[0].bh_enddate,
           this.totalList[0].rv_rep_name,
           this.totalList[0].rv_rep_sign,
+
           this.totalList[0].sa_rep_name,
           this.totalList[0].sa_rep_sign,
+
           this.totalList[0].client_rep_name,
           this.totalList[0].client_rep_sign,
+
           this.totalList[0].modified_date,
+
           this.totalList[0].depth_termination_pic,
-          this.totalList[0].sample_pic )
+          this.totalList[0].sample_pic,
+          )
            .subscribe((response: any)=>{
            console.log('response',response);
            if(response.error === true){
@@ -184,12 +192,11 @@ disconnectSubscription: any;
 
   }
 
-
-  autoLoader() {
+  autoLoader1() {
     this.loadingController.create({
       spinner:'lines',
-      message: 'Uploading, Please Wait ...',
-      duration: 60000
+      message: 'Loading, Please Wait ...',
+      duration: 5000
     }).then((response) => {
       response.present();
       response.onDidDismiss().then((response1) => {
@@ -197,6 +204,21 @@ disconnectSubscription: any;
       });
     });
   }
+
+
+  autoLoader() {
+    this.loadingController.create({
+      spinner:'lines',
+      message: 'Uploading, Please Wait ...',
+      duration: 35000
+    }).then((response) => {
+      response.present();
+      response.onDidDismiss().then((response1) => {
+        console.log('Loader dismissed', response);
+      });
+    });
+  }
+
 
   submitIterations(bhid: any,id: any){
     this.androidDatabase.getIteraions(bhid).then((data) => {
@@ -269,7 +291,7 @@ disconnectSubscription: any;
           this.toastser.presentError('Please check your internet connection');
 
          }else{
-          this.submitboredata(id);
+           this.getIterationCount(id);
 
          }
 
@@ -361,5 +383,34 @@ disconnectSubscription: any;
 
 
 
+  getIterationCount(id: any) {
 
+
+    this.androidDatabase.getIterationCount(id).then((data) => {
+      this.countList = [];
+      console.log('size',data.rows.length);
+      if (data.rows.length > 0) {
+        for (let i = 0; i < data.rows.length; i++) {
+          this.countList.push(data.rows.item(i));
+        }
+        console.log('countList',this.countList);
+        this.count = this.countList[0].drill_depth_from;
+        console.log('count',this.count);
+        console.log('count',this.count);
+
+        if(this.count >0){
+
+
+          this.submitboredata(id);
+            }else{
+
+
+
+
+          this.toastser.presentError('No iterations added for this borehole. Unable to submit');
+        }
+
+      }
+    });
+  }
 }

@@ -38,40 +38,11 @@ export class SamplescreenPage implements OnInit {
     console.log($event.target.value);
 
 
-    if(this.package === '1' ){
-     this.sectionList =[{"section_id":'1',"project_id":"1","package_id":"1","section_name":"Section1"},
-     {"section_id":"4","project_id":"1","package_id":"1","section_name":"Section2"},
-     {"section_id":"5","project_id":"1","package_id":"1","section_name":"Section3"},
-     {"section_id":"6","project_id":"1","package_id":"1","section_name":"Section4"},
-     {"section_id":"7","project_id":"1","package_id":"1","section_name":"Section5"},
-     {"section_id":"8","project_id":"1","package_id":"1","section_name":"Section6"},
-     {"section_id":"9","project_id":"1","package_id":"1","section_name":"Section7"},
-     {"section_id":"10","project_id":"1","package_id":"1","section_name":"Section8"}];
-   }else if(this.package === '2'){
-     this.sectionList =[{"section_id":"2","project_id":"1","package_id":"2","section_name":"Section1"},
-     {"section_id":"11","project_id":"1","package_id":"2","section_name":"Section2"},
-     {"section_id":"12","project_id":"1","package_id":"2","section_name":"Section3"},
-     {"section_id":"13","project_id":"1","package_id":"2","section_name":"Section4"},
-     {"section_id":"14","project_id":"1","package_id":"2","section_name":"Section5"},
-     {"section_id":"15","project_id":"1","package_id":"2","section_name":"Section6"},
-     {"section_id":"16","project_id":"1","package_id":"2","section_name":"Section7"},
-     {"section_id":"17","project_id":"1","package_id":"2","section_name":"Section8"},
-     {"section_id":"18","project_id":"1","package_id":"2","section_name":"Section9"},
-     {"section_id":"19","project_id":"1","package_id":"2","section_name":"Section10"},
-     {"section_id":"20","project_id":"1","package_id":"2","section_name":"Section11"},
-     {"section_id":"21","project_id":"1","package_id":"2","section_name":"Section12"},
-     {"section_id":"22","project_id":"1","package_id":"2","section_name":"Section13"}];
-   }else if(this.package === '3'){
+    this.sectionList = Constants.sectionListService.filter((user: any) =>
+    user.package_id.includes(this.package));
+    console.log('sectionList',this.sectionList);
 
-     this.sectionList = [{"section_id":"3","project_id":"1","package_id":"3","section_name":"Section1"},
-     {"section_id":"23","project_id":"1","package_id":"3","section_name":"Section2"},
-     {"section_id":"24","project_id":"1","package_id":"3","section_name":"Section3"},
-     {"section_id":"25","project_id":"1","package_id":"3","section_name":"Section4"},
-     {"section_id":"26","project_id":"1","package_id":"3","section_name":"Section5"},
-     {"section_id":"27","project_id":"1","package_id":"3","section_name":"Section6"},
-     {"section_id":"28","project_id":"1","package_id":"3","section_name":"Section7"}];
-   }
-   }
+  }
    sectionChange($event){
     this.sectionId= $event.target.value;
    console.log($event.target.value);
@@ -125,6 +96,9 @@ export class SamplescreenPage implements OnInit {
 
       });
 
+      this.package = null;
+      this.sectionId = null;
+
 
 
 
@@ -173,6 +147,10 @@ export class SamplescreenPage implements OnInit {
         }
 
       });
+
+      this.package = null;
+      this.sectionId = null;
+
 
 
 

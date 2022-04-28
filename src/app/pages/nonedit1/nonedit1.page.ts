@@ -56,20 +56,6 @@ export class Nonedit1Page implements OnInit {
 
     ngOnInit() {
     }
-    subAgencyChange($event){
-      this.subAencyListValues = [$event.target.value];
-      console.log('array', this.subAencyListValues);
-      if(this.subAencyListValues.length>0){
-        this.subAgencyId = this.subAencyListValues[0].sa_id;
-
-        this.subAgency = this.subAencyListValues[0].sa_name;
-        this.subAgencyAddress = this.subAencyListValues[0].sa_address;
-        this.subAgencyLogo = this.subAencyListValues[0].sa_logo;
-
-
-
-      }
-    }
 
     getWebData(){
       this.layer1List = [];
@@ -103,7 +89,7 @@ export class Nonedit1Page implements OnInit {
           this.sectionId = 6;
 
         }else if(this.layer1List[0].section_id === '7'){
-          this.section = 'Section5';
+          this.section = 'Section5-A&B';
           this.sectionId = 7;
 
         }else if(this.layer1List[0].section_id === '8'){
@@ -190,6 +176,10 @@ export class Nonedit1Page implements OnInit {
           this.section = 'Section7';
           this.sectionId = 28;
 
+        }else if(this.layer1List[0].section_id === '29'){
+          this.section = 'Section5-C';
+          this.sectionId = 29;
+
         }
 
 
@@ -210,22 +200,19 @@ export class Nonedit1Page implements OnInit {
           this.package = 'DFCCIL Package-3';
         }
 
-         if(this.layer1List[0].sa_id === '1'){
+        if(this.layer1List[0].sa_id === '1'){
 
-  this.subAgencyId = '1';
+          this.subAgencyId = '1';
+          this.subAgency = 'SubAgency-1';
+          this.subAgencyAddress = 'Hyderabad';
+          this.subAgencyLogo = Constants.imageUrl+'/images/subagency.png';
+        }else if(this.layer1List[0].sa_id === '2'){
 
-  this.subAgency = 'SubAgency-1';
-  this.subAgencyAddress = 'Hyderabad';
-  this.subAgencyLogo = 'http://sraossinc.net:7071/borelogapi/images/subagency.png';
-}else if(this.layer1List[0].sa_id === '2'){
-
-  this.subAgencyId = '2';
-
-  this.subAgency = 'SubAgency-2';
-  this.subAgencyAddress = 'Hyderabad';
-  this.subAgencyLogo = 'http://sraossinc.net:7071/borelogapi/images/subagency2.png';
-}
-
+          this.subAgencyId = '2';
+          this.subAgency = 'SubAgency-2';
+          this.subAgencyAddress = 'Hyderabad';
+          this.subAgencyLogo = Constants.imageUrl+'/images/subagency2.png';
+        }
     });
      }
 

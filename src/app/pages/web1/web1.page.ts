@@ -36,6 +36,7 @@ export class Web1Page implements OnInit {
   section: any;
   sectionId: any;
   sectionList: any = [];
+  selectedList: any = [];
   constructor(
     public router: Router,
     public platform: Platform,
@@ -59,41 +60,9 @@ export class Web1Page implements OnInit {
       this.package = $event.target.value;
       console.log($event.target.value);
 
+      this.sectionList = Constants.sectionListService.filter((user: any) =>
+      user.package_id.includes(this.package));
 
-      if(this.pid === '1' ){
-
-        this.sectionList =[{"section_id":"1","project_id":"1","package_id":"1","section_name":"Section1"},
-       {"section_id":"4","project_id":"1","package_id":"1","section_name":"Section2"},
-       {"section_id":"5","project_id":"1","package_id":"1","section_name":"Section3"},
-       {"section_id":"6","project_id":"1","package_id":"1","section_name":"Section4"},
-       {"section_id":"7","project_id":"1","package_id":"1","section_name":"Section5"},
-       {"section_id":"8","project_id":"1","package_id":"1","section_name":"Section6"},
-       {"section_id":"9","project_id":"1","package_id":"1","section_name":"Section7"},
-       {"section_id":"10","project_id":"1","package_id":"1","section_name":"Section8"}];
-     }else if(this.pid === '2'){
-       this.sectionList =[{"section_id":"2","project_id":"1","package_id":"2","section_name":"Section1"},
-       {"section_id":"11","project_id":"1","package_id":"2","section_name":"Section2"},
-       {"section_id":"12","project_id":"1","package_id":"2","section_name":"Section3"},
-       {"section_id":"13","project_id":"1","package_id":"2","section_name":"Section4"},
-       {"section_id":"14","project_id":"1","package_id":"2","section_name":"Section5"},
-       {"section_id":"15","project_id":"1","package_id":"2","section_name":"Section6"},
-       {"section_id":"16","project_id":"1","package_id":"2","section_name":"Section7"},
-       {"section_id":"17","project_id":"1","package_id":"2","section_name":"Section8"},
-       {"section_id":"18","project_id":"1","package_id":"2","section_name":"Section9"},
-       {"section_id":"19","project_id":"1","package_id":"2","section_name":"Section10"},
-       {"section_id":"20","project_id":"1","package_id":"2","section_name":"Section11"},
-       {"section_id":"21","project_id":"1","package_id":"2","section_name":"Section12"},
-       {"section_id":"22","project_id":"1","package_id":"2","section_name":"Section13"}];
-     }else if(this.pid === '3'){
-
-       this.sectionList = [{"section_id":"3","project_id":"1","package_id":"3","section_name":"Section1"},
-       {"section_id":"23","project_id":"1","package_id":"3","section_name":"Section2"},
-       {"section_id":"24","project_id":"1","package_id":"3","section_name":"Section3"},
-       {"section_id":"25","project_id":"1","package_id":"3","section_name":"Section4"},
-       {"section_id":"26","project_id":"1","package_id":"3","section_name":"Section5"},
-       {"section_id":"27","project_id":"1","package_id":"3","section_name":"Section6"},
-       {"section_id":"28","project_id":"1","package_id":"3","section_name":"Section7"}];
-     }
      }
      sectionChange($event){
        this.sectionId= $event.target.value;
@@ -125,6 +94,7 @@ export class Web1Page implements OnInit {
         console.log('list',this.layer1List);
         this.boreHoles = this.layer1List[0].no_of_bh;
 
+
         if(this.layer1List[0].section_id === '1'){
           this.section = 'Section1';
           this.sectionId = 1;
@@ -149,7 +119,7 @@ export class Web1Page implements OnInit {
           this.sectionId = 6;
 
         }else if(this.layer1List[0].section_id === '7'){
-          this.section = 'Section5';
+          this.section = 'Section5-A&B';
           this.sectionId = 7;
 
         }else if(this.layer1List[0].section_id === '8'){
@@ -237,70 +207,69 @@ export class Web1Page implements OnInit {
           this.sectionId = 28;
 
         }
+        else if(this.layer1List[0].section_id === '29'){
+          this.section = 'Section5-C';
+          this.sectionId = 29;
+
+        }
 
 
          if(this.layer1List[0].package_id === '1'){
            console.log('pack');
            this.package = 'DFCCIL Package-1';
            this.pid = 1;
-
-           this.sectionList =[{"section_id":"1","project_id":"1","package_id":"1","section_name":"Section1"},
-           {"section_id":"4","project_id":"1","package_id":"1","section_name":"Section2"},
-           {"section_id":"5","project_id":"1","package_id":"1","section_name":"Section3"},
-           {"section_id":"6","project_id":"1","package_id":"1","section_name":"Section4"},
-           {"section_id":"7","project_id":"1","package_id":"1","section_name":"Section5"},
-           {"section_id":"8","project_id":"1","package_id":"1","section_name":"Section6"},
-           {"section_id":"9","project_id":"1","package_id":"1","section_name":"Section7"},
-           {"section_id":"10","project_id":"1","package_id":"1","section_name":"Section8"}];
+           this.sectionList = Constants.sectionListService.filter((user: any) =>
+           user.package_id.includes(this.pid));
 
           }else if(this.layer1List[0].package_id === '2'){
           this.package = 'DFCCIL Package-2';
           this.pid = 2;
-
-          this.sectionList =[{"section_id":"2","project_id":"1","package_id":"2","section_name":"Section1"},
-          {"section_id":"11","project_id":"1","package_id":"2","section_name":"Section2"},
-          {"section_id":"12","project_id":"1","package_id":"2","section_name":"Section3"},
-          {"section_id":"13","project_id":"1","package_id":"2","section_name":"Section4"},
-          {"section_id":"14","project_id":"1","package_id":"2","section_name":"Section5"},
-          {"section_id":"15","project_id":"1","package_id":"2","section_name":"Section6"},
-          {"section_id":"16","project_id":"1","package_id":"2","section_name":"Section7"},
-          {"section_id":"17","project_id":"1","package_id":"2","section_name":"Section8"},
-          {"section_id":"18","project_id":"1","package_id":"2","section_name":"Section9"},
-          {"section_id":"19","project_id":"1","package_id":"2","section_name":"Section10"},
-          {"section_id":"20","project_id":"1","package_id":"2","section_name":"Section11"},
-          {"section_id":"21","project_id":"1","package_id":"2","section_name":"Section12"},
-          {"section_id":"22","project_id":"1","package_id":"2","section_name":"Section13"}];
+          this.sectionList = Constants.sectionListService.filter((user: any) =>
+          user.package_id.includes(this.pid));
 
 
         }else if(this.layer1List[0].package_id === '3'){
           this.package = 'DFCCIL Package-3';
           this.pid = 3;
-          this.sectionList = [{"section_id":"3","project_id":"1","package_id":"3","section_name":"Section1"},
-          {"section_id":"23","project_id":"1","package_id":"3","section_name":"Section2"},
-          {"section_id":"24","project_id":"1","package_id":"3","section_name":"Section3"},
-          {"section_id":"25","project_id":"1","package_id":"3","section_name":"Section4"},
-          {"section_id":"26","project_id":"1","package_id":"3","section_name":"Section5"},
-          {"section_id":"27","project_id":"1","package_id":"3","section_name":"Section6"},
-          {"section_id":"28","project_id":"1","package_id":"3","section_name":"Section7"}];
+          this.sectionList = Constants.sectionListService.filter((user: any) =>
+          user.package_id.includes(this.pid));
+
 
 
         }
 
-   if(this.layer1List[0].sa_id === '1'){
+        this.subAencyListValues = this.subAencyList.filter((user: any) =>
+        user.sa_id.includes(this.layer1List[0].sa_id));
 
-  this.subAgencyId = '1';
 
-  this.subAgency = 'SubAgency-1';
-  this.subAgencyAddress = 'Hyderabad';
-  this.subAgencyLogo = 'http://sraossinc.net:7071/borelogapi/images/subagency.png';
-  }else if(this.layer1List[0].sa_id === '2'){
 
-  this.subAgencyId = '2';
+       console.log('array', this.subAencyListValues);
+        if(this.subAencyListValues.length>0){
+          this.subAgencyId = this.subAencyListValues[0].sa_id;
 
-  this.subAgency = 'SubAgency-2';
-  this.subAgencyAddress = 'Hyderabad';
-  this.subAgencyLogo = 'http://sraossinc.net:7071/borelogapi/images/subagency2.png';
-   }
+          this.subAgency = this.subAencyListValues[0].sa_name;
+          this.subAgencyAddress = this.subAencyListValues[0].sa_address;
+          this.subAgencyLogo = this.subAencyListValues[0].sa_logo;
+
+
+
+        }
+
+  //  if(this.layer1List[0].sa_id === '1'){
+
+  // this.subAgencyId = '1';
+
+  // this.subAgency = 'SubAgency-1';
+  // this.subAgencyAddress = 'Hyderabad';
+  // this.subAgencyLogo = Constants.imageUrl+'/images/subagency.png';
+  // }else if(this.layer1List[0].sa_id === '2'){
+
+  // this.subAgencyId = '2';
+
+  // this.subAgency = 'SubAgency-2';
+  // this.subAgencyAddress = 'Hyderabad';
+  // this.subAgencyLogo = Constants.imageUrl+'/images/subagency2.png';
+  //  }
 
 
 
@@ -335,6 +304,9 @@ export class Web1Page implements OnInit {
              Constants.webbhid = Constants.laYer1Id;
 
             }
+          }else{
+            this.toastService.presentError(response34.msg);
+
           }
         });
 
@@ -349,11 +321,11 @@ export class Web1Page implements OnInit {
     validation(){
       if(this.package === ''){
         this.toastService.presentError('Please Select Package');
-      }else if(this.subAgency === ''){
-        this.toastService.presentError('Please Select SubAgencyName');
-
       }else if(this.sectionId === ''){
         this.toastService.presentError('Please Select Section');
+
+      }else if(this.subAgency === ''){
+        this.toastService.presentError('Please Select SubAgencyName');
 
       }
       else{
@@ -372,6 +344,9 @@ export class Web1Page implements OnInit {
             this.router.navigate(['boreholeinformation']);
             Constants.webbhid = Constants.laYer1Id;
 
+          }else{
+            this.toastService.presentError(response34.msg);
+
           }
         });
 
@@ -383,6 +358,9 @@ export class Web1Page implements OnInit {
             Constants.chainagesBySectionIDList = response34.data;
             this.router.navigate(['web2']);
             Constants.webbhid = Constants.laYer1Id;
+
+          }else{
+            this.toastService.presentError(response34.msg);
 
           }
         });

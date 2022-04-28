@@ -10,6 +10,7 @@ import { HttpcallsService } from 'src/app/services/httpcalls.service';
 import { Platform } from '@ionic/angular';
 
 
+
 @Component({
   selector: 'app-organization',
   templateUrl: './organization.page.html',
@@ -55,6 +56,7 @@ isimg = false;
     this.packageList = Constants.packageList;
     this.subAencyList = Constants.subAgencyList;
 
+
   }
 
   ngOnInit() {
@@ -63,48 +65,12 @@ isimg = false;
    this.package = $event.target.value;
    console.log($event.target.value);
 
-  //  [{"section_id":'1',"project_id":"1","package_id":"1","section_name":"Section1"},
-  //  {"section_id":"4","project_id":"1","package_id":"1","section_name":"Section2"},
-  //  {"section_id":"5","project_id":"1","package_id":"1","section_name":"Section3"},
-  //  {"section_id":"6","project_id":"1","package_id":"1","section_name":"Section4"},
-  //  {"section_id":"7","project_id":"1","package_id":"1","section_name":"Section5-A&B"},
-  //  {"section_id":"29","project_id":"1","package_id":"1","section_name":"Section5-C"},
-  //  {"section_id":"8","project_id":"1","package_id":"1","section_name":"Section6"},
-  //  {"section_id":"9","project_id":"1","package_id":"1","section_name":"Section7"},
-  //  {"section_id":"10","project_id":"1","package_id":"1","section_name":"Section8"}];
-   if(this.package === '1' ){
-    this.sectionList =[{"section_id":'1',"project_id":"1","package_id":"1","section_name":"Section1"},
-    {"section_id":"4","project_id":"1","package_id":"1","section_name":"Section2"},
-    {"section_id":"5","project_id":"1","package_id":"1","section_name":"Section3"},
-    {"section_id":"6","project_id":"1","package_id":"1","section_name":"Section4"},
-    {"section_id":"7","project_id":"1","package_id":"1","section_name":"Section5"},
-    {"section_id":"8","project_id":"1","package_id":"1","section_name":"Section6"},
-    {"section_id":"9","project_id":"1","package_id":"1","section_name":"Section7"},
-    {"section_id":"10","project_id":"1","package_id":"1","section_name":"Section8"}];
-  }else if(this.package === '2'){
-    this.sectionList =[{"section_id":"2","project_id":"1","package_id":"2","section_name":"Section1"},
-    {"section_id":"11","project_id":"1","package_id":"2","section_name":"Section2"},
-    {"section_id":"12","project_id":"1","package_id":"2","section_name":"Section3"},
-    {"section_id":"13","project_id":"1","package_id":"2","section_name":"Section4"},
-    {"section_id":"14","project_id":"1","package_id":"2","section_name":"Section5"},
-    {"section_id":"15","project_id":"1","package_id":"2","section_name":"Section6"},
-    {"section_id":"16","project_id":"1","package_id":"2","section_name":"Section7"},
-    {"section_id":"17","project_id":"1","package_id":"2","section_name":"Section8"},
-    {"section_id":"18","project_id":"1","package_id":"2","section_name":"Section9"},
-    {"section_id":"19","project_id":"1","package_id":"2","section_name":"Section10"},
-    {"section_id":"20","project_id":"1","package_id":"2","section_name":"Section11"},
-    {"section_id":"21","project_id":"1","package_id":"2","section_name":"Section12"},
-    {"section_id":"22","project_id":"1","package_id":"2","section_name":"Section13"}];
-  }else if(this.package === '3'){
+console.log('totallist',Constants.sectionListService);
+   this.sectionList = Constants.sectionListService.filter((user: any) =>
+   user.package_id.includes(this.package));
+   console.log('sectionList',this.sectionList);
 
-    this.sectionList = [{"section_id":"3","project_id":"1","package_id":"3","section_name":"Section1"},
-    {"section_id":"23","project_id":"1","package_id":"3","section_name":"Section2"},
-    {"section_id":"24","project_id":"1","package_id":"3","section_name":"Section3"},
-    {"section_id":"25","project_id":"1","package_id":"3","section_name":"Section4"},
-    {"section_id":"26","project_id":"1","package_id":"3","section_name":"Section5"},
-    {"section_id":"27","project_id":"1","package_id":"3","section_name":"Section6"},
-    {"section_id":"28","project_id":"1","package_id":"3","section_name":"Section7"}];
-  }
+
   }
   sectionChange($event){
     this.sectionId= $event.target.value;
@@ -133,19 +99,21 @@ isimg = false;
   validation(){
     if(this.package === undefined){
       this.toastService.presentError('Please Select Package');
-    }else if(this.subAgency === undefined){
-      this.toastService.presentError('Please Select SubAgencyName');
-
     }else if(this.package === ''){
       this.toastService.presentError('Please Select Package');
-    }else if(this.subAgency === ''){
-      this.toastService.presentError('Please Select SubAgencyName');
+    }
 
-    }else if(this.sectionId === ''){
+    else if(this.sectionId === ''){
       this.toastService.presentError('Please Select Section');
 
     }else if(this.sectionId === undefined){
      this.toastService.presentError('Please Select Section');
+
+    }    else if(this.subAgency === undefined){
+      this.toastService.presentError('Please Select SubAgencyName');
+
+    }else if(this.subAgency === ''){
+      this.toastService.presentError('Please Select SubAgencyName');
 
     }
     else{
@@ -155,22 +123,45 @@ isimg = false;
 
   addDatabase(){
     if(Constants.laYer1Id === ''){
-      this.selected(this.sectionId);
+
 
       this.androiDatabase.addLayer1Details(this.package,this.sectionId,this.subAgencyId,this.subAgencyAddress,this.subAgencyLogo,
         Constants.userId,Constants.orgId,Constants.projectId,this.subAgencyId,this.sectionId);
         this.getLayer1LastId();
 
-      this.router.navigate(['boreholeinformation']);
+        Constants.chaingeListAndroid11 = Constants.chaingeListAndroid.filter((user: any)=>user.section_id.includes(this.sectionId));
+        console.log('chainageListExample1 : ',Constants.chaingeListAndroid11);
+        console.log('Chaingelistsize : ',Constants.chaingeListAndroid11.length);
+        console.log('sectionId : ',this.sectionId);
+
+        Constants.package = this.package;
+        Constants.section = this.sectionId;
+        if(Constants.chaingeListAndroid11.length>0){
+          this.router.navigate(['boreholeinformation']);
+
+        }else{
+          this.toastService.presentError('No Chainage exist.');
+
+        }
 
 
     }else{
-      this.selected(this.sectionId);
+
+      Constants.chaingeListAndroid11 = Constants.chaingeListAndroid.filter((user: any)=>user.section_id.includes(this.sectionId));
+
+      if(Constants.chaingeListAndroid11.length>0){
 
       this.androiDatabase.updateLayer1(this.package,this.sections,this.subAgencyId,
         this.subAgencyAddress,this.subAgencyLogo,Constants.laYer1Id,this.sectionId);
 
+        Constants.package = this.package;
+        Constants.section = this.sectionId;
+
         this.getLayer1();
+      }else{
+        this.toastService.presentError('No Chainage exist.');
+
+      }
 
     }
 
@@ -205,16 +196,19 @@ isimg = false;
        if(response.error === true){
          this.toastService.presentError(response.msg);
        }else{
+        Constants.webbhid= response.data.bh_id;
 
         this.httpService.getAllChainagesBySectionID(this.sectionId).subscribe((response34: any)=>{
           console.log('response34',response34);
           if(response34.error === false){
             Constants.chainagesBySectionIDList = response34.data;
 
-            Constants.webbhid= response.data.bh_id;
             console.log('webbhid',Constants.webbhid);
             this.toastService.presentSuccess(response.msg);
             this.router.navigate(['boreholeinformation']);
+
+          }else{
+            this.toastService.presentError(response34.msg);
 
           }
         });
@@ -233,8 +227,18 @@ isimg = false;
           this.toastService.presentError(response.msg);
         }else{
 
-         this.toastService.presentSuccess(response.msg);
+          this.httpService.getAllChainagesBySectionID(this.sectionId).subscribe((response34: any)=>{
+            console.log('response34',response34);
+            if(response34.error === false){
+
+
+            this.toastService.presentSuccess(response.msg);
            this.getWebData();
+            }else{
+              this.toastService.presentError(response34.msg);
+
+            }
+          });
         }
         });
 
@@ -244,14 +248,6 @@ isimg = false;
 
   }
 
-
-  selected(item){
-    console.log('selected items : ',item);
-
-     Constants.chaingeListAndroid11 = Constants.chaingeListAndroid.filter((user: any)=>user.chainage.includes(item));
-     console.log('chainageListExample1 : ',Constants.chaingeListAndroid11);
-
-  }
 
 
 
@@ -314,4 +310,6 @@ isimg = false;
       }
     });
   }
+
+
 }

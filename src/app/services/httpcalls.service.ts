@@ -37,7 +37,6 @@ export class HttpcallsService {
     typeofbridge: any,
     bhsadte: any,
     bhrl: any,
-    watertabe: any,
     typeofrig: any,
     rigother: any,
     drillOrient: any,
@@ -51,17 +50,21 @@ export class HttpcallsService {
     soilCoreBarrel: any,
     anglewithHorizontal: any,
     boreholepic: any,
-    depthTermination: any,
+
+    watertabe: any,
+   depthTermination: any,
     bhedate: any,
     rvRepName: any,
     rvRepSign: any,
+
     sarepName: any,
     saRepSign: any,
     clientRepName: any,
     clientRepSign: any,
     mdate: any,
     depthpic: any,
-    samplepic: any
+    samplepic: any,
+
   ) {
     const parameters = {
       user_id: uid,
@@ -97,20 +100,23 @@ export class HttpcallsService {
       core_barrel: soilCoreBarrel,
 
       angle_horizontal: anglewithHorizontal,
-      borehole_pic: boreholepic,
 
       water_table_rl: watertabe,
       depth_termination: depthTermination,
       bh_enddate: bhedate,
-      rv_rep_name: rvRepName,
-      rv_rep_sign: rvRepSign,
       sa_rep_name: sarepName,
       sa_rep_sign: saRepSign,
+      rv_rep_name: rvRepName,
+      rv_rep_sign: rvRepSign,
+
       client_rep_name: clientRepName,
       client_rep_sign: clientRepSign,
+
       modified_date: mdate,
       depth_termination_pic: depthpic,
       sample_pic: samplepic,
+      borehole_pic: boreholepic,
+
     };
     console.log('JSON', JSON.stringify(parameters));
 
@@ -120,7 +126,7 @@ export class HttpcallsService {
     );
   }
 
-  submitboreiterations(bhid: any, itr: any) {
+  submitboreiterations(bhid: any, itr: any=[]) {
     const parameters = { bh_id: bhid, iterations: itr };
     console.log('JSON', JSON.stringify(parameters));
 

@@ -18,7 +18,7 @@
      <ion-col size="6">
        <ion-item class="input">
 
-         <ion-select interface="popover" placeholder="Select Package" (ionChange)="packageChange($event)">
+         <ion-select interface="popover" placeholder="Select Package" (ionChange)="packageChange($event)" value="{{package}}">
            <ion-select-option  *ngFor="let package of packageList" [value]="package.pkg_id">
              {{package.pkg_name}}</ion-select-option>
          </ion-select>        </ion-item>
@@ -35,7 +35,7 @@
        <ion-item class="input">
 
 
-         <ion-select  interface="popover" placeholder="Select Section" (ionChange)="sectionChange($event)">
+         <ion-select  interface="popover" placeholder="Select Section" (ionChange)="sectionChange($event)" value="{{sectionId}}">
 
 
            <ion-select-option  *ngFor="let section of sectionList" [value]="section.section_id">

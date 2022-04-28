@@ -3,6 +3,7 @@ import { ToastService } from './../services/toast.service';
 import { Injectable } from '@angular/core';
 //import { SQLite, SQLiteObject } from '@awesome-cordova-plugins/sqlite/ngx';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
+import { Constants } from '../common/constants';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,7 @@ export class AndroidDatabaseService {
        this.databaseObj = db;
 
        // eslint-disable-next-line max-len
-         db.executeSql('CREATE TABLE IF NOT EXISTS borelog_data (Id Integer Primary key AUTOINCREMENT,Package Text,NoofBoreHoles Text,SubAgencyName Text,SubAgencyAddress Text,SubAgencyLogo Text,section_id Text, user_id int(11) ,org_id int(11) , project_id int(11) ,sa_id int(11) ,ref_std varchar(255)  ,bh_no varchar(255) , bh_location varchar(255) , chainage varchar(255) ,  chainage_id Text, easting varchar(255) ,northing varchar(255) ,  type_of_crossing Text,type_of_structure Text, type_of_bridge Text, bh_start_date date ,bh_rl varchar(255) , water_table_rl varchar(255) ,type_of_rig varchar(255) , type_of_rig_other Text ,drill_orientation varchar(255) ,bh_dia varchar(255) ,casing_dia varchar(255) ,casing_depth varchar(255) ,drilling_bit Text , drilling_bit_other Text,core_barrel text, drill_depth_from varchar(255) ,drill_depth_to varchar(255) ,type_of_strata varchar(255) ,type_of_sample text ,soil_ds_depth_from varchar(255) ,soil_ds_depth_to varchar(255) ,soil_spt_depth_from varchar(255) ,soil_spt_depth_to varchar(255) ,soil_uds_depth_from varchar(255) ,soil_uds_depth_to varchar(255) ,soil_sample_color varchar(255),soil_type varchar(100) ,soil_density varchar(100) ,soil_visual_classif varchar(100)  ,rock_sample_type varchar(100) ,rock_depth_from text,rock_depth_to text,rock_run_length varchar(100) ,rock_run_time varchar(100) ,rock_water_loss varchar(100) ,rock_pieces_length varchar(100) , rock_pieces_10 varchar(100) , rock_cr varchar(100) ,rock_rqd varchar(100) ,rock_sample_color varchar(100) ,rock_weathering varchar(100) ,rock_type varchar(100) ,depth_termination varchar(255) ,bh_enddate date , rv_rep_name varchar(255) ,rv_rep_sign varchar(255) ,sa_rep_name varchar(255) ,sa_rep_sign varchar(255) ,client_rep_name varchar(255) ,client_rep_sign varchar(255) ,created_date datetime ,modified_date datetime ,bh_layer text,bh_status text,first text,second text,third text,total text,firstB text,secondB text,thirdB text, totalB text,soil_spt_depth_status text,angle_horizontal Text,depth_termination_pic Text,sample_pic Text,borehole_pic Text,latitude Text,longitude Text,bh_dia_other Text, casing_dia_other Text )',[])
+         db.executeSql('CREATE TABLE IF NOT EXISTS borelog_data (Id Integer Primary key AUTOINCREMENT,Package Text,NoofBoreHoles Text,SubAgencyName Text,SubAgencyAddress Text,SubAgencyLogo Text,section_id Text, user_id int(11) ,org_id int(11) , project_id int(11) ,sa_id int(11) ,ref_std varchar(255)  ,bh_no varchar(255) , bh_location varchar(255) , chainage Text  ,  chainage_id Text , easting varchar(255) ,northing varchar(255) ,  type_of_crossing Text,type_of_structure Text, type_of_bridge Text, bh_start_date date ,bh_rl varchar(255) , water_table_rl varchar(255) ,type_of_rig varchar(255) , type_of_rig_other Text ,drill_orientation varchar(255) ,bh_dia varchar(255) ,casing_dia varchar(255) ,casing_depth varchar(255) ,drilling_bit Text , drilling_bit_other Text,core_barrel text, drill_depth_from varchar(255) ,drill_depth_to varchar(255) ,type_of_strata varchar(255) ,type_of_sample text ,soil_ds_depth_from varchar(255) ,soil_ds_depth_to varchar(255) ,soil_spt_depth_from varchar(255) ,soil_spt_depth_to varchar(255) ,soil_uds_depth_from varchar(255) ,soil_uds_depth_to varchar(255) ,soil_sample_color varchar(255),soil_type varchar(100) ,soil_density varchar(100) ,soil_visual_classif varchar(100)  ,rock_sample_type varchar(100) ,rock_depth_from text,rock_depth_to text,rock_run_length varchar(100) ,rock_run_time varchar(100) ,rock_water_loss varchar(100) ,rock_pieces_length varchar(100) , rock_pieces_10 varchar(100) , rock_cr varchar(100) ,rock_rqd varchar(100) ,rock_sample_color varchar(100) ,rock_weathering varchar(100) ,rock_type varchar(100) ,depth_termination varchar(255) ,bh_enddate date , rv_rep_name varchar(255) ,rv_rep_sign varchar(255) ,sa_rep_name varchar(255) ,sa_rep_sign varchar(255) ,client_rep_name varchar(255) ,client_rep_sign varchar(255) ,created_date datetime ,modified_date datetime ,bh_layer text,bh_status text,first text,second text,third text,total text,firstB text,secondB text,thirdB text, totalB text,soil_spt_depth_status text,angle_horizontal Text,depth_termination_pic Text,sample_pic Text,borehole_pic Text,latitude Text,longitude Text,bh_dia_other Text, casing_dia_other Text )',[])
          .then(() => console.log('Executed SQL'))
          .catch(e => console.log(e));
 
@@ -221,10 +222,13 @@ export class AndroidDatabaseService {
        WHERE Id = ${id} `,[])
       .then((res) => {
        console.log('Updating Layer2');
+       Constants.duplicate = '';
        this.toastSer.presentSuccess('Layer 2 Details Updated');
        return res;
      })
      .catch((e) => {
+      this.toastSer.presentError('Duplicate Chainge');
+      Constants.duplicate = 'Dupli';
        console.log('error on Updating Layer2 ', JSON.stringify(e));
        return 'error on Updating Layer2 ' + JSON.stringify(e);
      });
@@ -518,6 +522,19 @@ updateLayer4(watertable: any,depthTer: any,edate: any,rvrepname: any,
   getIterationCount(bhid: any) {
     return this.databaseObj
       .executeSql(`    SELECT COUNT(*)  AS drill_depth_from FROM iterations where bh_id = '${bhid}'  `, [])
+      .then((res) => {
+        console.log('getting Id');
+        return res;
+      })
+      .catch((e) => {
+        console.log('error on getting Id ', JSON.stringify(e));
+        return 'error on getting Id ' + JSON.stringify(e);
+      });
+  }
+
+  getChainageCount(packa: any,sec: any,chai: any) {
+    return this.databaseObj
+      .executeSql(`SELECT COUNT(*)  AS bh_no FROM borelog_data where Package='${packa}' and section_id= '${sec}' and  chainage='${chai}'  `, [])
       .then((res) => {
         console.log('getting Id');
         return res;

@@ -13,6 +13,8 @@ import * as watermark from 'watermarkjs';
 import { AutoCompleteComponent,  AutoCompleteStyles } from 'ionic4-auto-complete';
 import { CompleteTestServiceService } from './../../services/complete-test-service.service';
 import { DatePipe } from '@angular/common';
+import { AndroidPermissions } from '@awesome-cordova-plugins/android-permissions/ngx';
+import { LocationAccuracy } from '@awesome-cordova-plugins/location-accuracy/ngx';
 
 @Component({
   selector: 'app-update2',
@@ -75,7 +77,8 @@ export class Update2Page implements OnInit {
   originalImage1 = null;
   originalImage2 = null;
   base64Image1 = null;
-
+  countList: any =[];
+  count: any;
   blobImage = null;
   blobImage1 = null;
   blobImage2 = null;
@@ -121,11 +124,12 @@ export class Update2Page implements OnInit {
     // eslint-disable-next-line @typescript-eslint/naming-convention
     utm_data: any = [];
     iterationList: any = [];
+    countList1: any = [];
     easting: any;
     northing: any;
     base64Image: any;
     joindate: any;
-
+count1: any;
   constructor(public toastSer: ToastService,
     public androidDatabase: AndroidDatabaseService,
     private geolocation: Geolocation,
@@ -135,7 +139,10 @@ export class Update2Page implements OnInit {
     public camera: Camera,
     public alertCtrl: AlertController,
     public completeTestService: CompleteTestServiceService,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private androidPermissions: AndroidPermissions,
+    private locationAccuracy: LocationAccuracy,
+
 
 
 ) {
@@ -145,18 +152,25 @@ export class Update2Page implements OnInit {
 
       this.chaingeList = Constants.chaingeListAndroid11;
       console.log('chaingeList', this.chaingeList);
-
+this.getLatLong();
       this.getLayer1();
-     // this.getLatLong();
+
     }
+
+
 
   ngOnInit() {
   }
+
+  ionViewDidEnter(){
+    this.getLatLong();
+    this.getLayer1();
+
+  }
+
   validation() {
     console.log('typeOfStuct', this.typeOfStructure);
-    if (this.typeOfStructure === '') {
-      this.toastSer.presentError('Please Enter Type of Structure');
-    } else if (this.boreholeNumber === '') {
+     if (this.boreholeNumber === '') {
       this.toastSer.presentError('Please Enter Borehole Number');
     } else if (this.easting === '') {
       this.toastSer.presentError('Please Enter Latitude');
@@ -176,12 +190,8 @@ export class Update2Page implements OnInit {
       this.toastSer.presentError('Please Enter Other for Method of Drilling');
     } else if (this.orientation === '') {
       this.toastSer.presentError('Please Select Drilling Orientation');
-    } else if (this.boreholeCasingDia === '') {
-      this.toastSer.presentError('Please Enter Casing Dia');
     } else if (this.detailsOfDrillingBit === '') {
       this.toastSer.presentError('Please Select the Details of Drilling Bit*');
-    } else if (this.detailsOdCoreBarrel === '') {
-      this.toastSer.presentError('Please Select the Details of Core Barrel');
     } else if (
       this.orientation === 'Inclined' &&
       this.angleWithHorizontal === ''
@@ -268,25 +278,40 @@ if (this.selectedItem.length > 0) {
 
 }
 getWebBoreItrations() {
-  this.androidDatabase.getIteraions(Constants.laYer1Id).then((data) => {
-    this.iterationList = [];
+
+  this.router.navigate(['iterations']);
+
+
+  this.androidDatabase.getIterationCount(Constants.laYer1Id).then((data) => {
+    this.countList1 = [];
     console.log('size',data.rows.length);
-    if (data.rows.length > 0) {
+    if (data.rows.length > 1) {
       for (let i = 0; i < data.rows.length; i++) {
-        this.iterationList.push(data.rows.item(i));
+        this.countList1.push(data.rows.item(i));
       }
-      console.log('iterationList',this.iterationList);
-      if(this.iterationList.length>0){
+      console.log('countList',this.countList1);
+      this.count1 = this.countList1[0].drill_depth_from;
+      console.log('count',this.count1);
+
+     if(this.count1>0){
+      this.router.navigate(['iterations']);
+
+     }else{
+      this.router.navigate(['logginginformation']);
+
+     }
 
 
-        this.router.navigate(['iterations']);
 
-      }else{
-        this.router.navigate(['logginginformation']);
 
-      }
-    }
-  });
+
+
+
+
+
+       }
+        });
+
 }
   getLayer1() {
     this.androidDatabase.getLayer1ById(Constants.laYer1Id).then((data) => {
@@ -392,6 +417,25 @@ getWebBoreItrations() {
 
 
   updateLayer2(){
+
+
+    this.androidDatabase.getChainageCount(Constants.package,Constants.section,this.chainage).then((data) => {
+      this.countList = [];
+      console.log('data size',data.rows.length);
+      if (data.rows.length > 0) {
+        for (let i = 0; i < data.rows.length; i++) {
+          this.countList.push(data.rows.item(i));
+        }
+        console.log('countList',this.countList);
+        this.count = this.countList[0].bh_no;
+
+        if(this.count>1){
+          this.toastSer.presentError('Duplicate Chainage Exist');
+
+        }else{
+
+
+
     this.androidDatabase.updateLayer2(this.ref,this.boreholeNumber,
       this.easting,this.northing,this.latitude,this.longitude,
       this.chainage,this.chainageId,
@@ -411,9 +455,16 @@ getWebBoreItrations() {
       this.angleWithHorizontal,
       this.waterMarkImage.nativeElement.src
       );
+      this.getWebBoreItrations();
 
 
-         this.getWebBoreItrations();
+
+        }
+      }
+    });
+
+
+
 
 
 
@@ -545,62 +596,67 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
 
 
   xy78(coffee, metrics, context) {
-    return 33;
+    return 28;
   };
   y63(coffee, metrics, context) {
-    return 63;
+    return 143;
   };
   y83(coffee, metrics, context) {
-    return 83;
+    return 163;
   };
 
   y103(coffee, metrics, context) {
-    return 103;
+    return 183;
   };
 
   y123(coffee, metrics, context) {
-    return 123;
+    return 203;
   };
 
   y143(coffee, metrics, context) {
-    return 143;
+    return 223;
   };
 
   watermarkImage() {
 
 
     watermark([this.blobImage])
-    .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.chainage, '20px Josefin Slab', '#fff', 0.5))
+    .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.chainage, '20px Josefin Slab', '#FC0535', 0.5))
     .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.boreholeNumber, '20px Josefin Slab', '#fff', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.boreholeNumber, '20px Josefin Slab', '#FC0535', 0.5, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '20px Josefin Slab', '#fff', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '20px Josefin Slab', '#FC0535', 0.5, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '20px Josefin Slab', '#fff', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '20px Josefin Slab', '#FC0535', 0.5, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y143,'Nothing- '+this.northing, '20px Josefin Slab', '#fff', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y143,'Nothing- '+this.northing, '20px Josefin Slab', '#FC0535', 0.5, 48))
 
       .then((img) => {
         this.waterMarkImage.nativeElement.src = img.src;
       });
   }
 
+
+
   watermarkImage1() {
     watermark([this.blobImage1])
-    .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.chainage, '20px Josefin Slab', '#fff', 0.5))
+    .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.chainage, '10px Josefin Slab', '#FC0535', 0.5))
     .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.boreholeNumber, '20px Josefin Slab', '#fff', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.boreholeNumber, '10px Josefin Slab', '#FC0535', 0.5, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '20px Josefin Slab', '#fff', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '10px Josefin Slab', '#FC0535', 0.5, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '20px Josefin Slab', '#fff', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '10px Josefin Slab', '#FC0535', 0.5, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y143,'Nothing- '+this.northing, '20px Josefin Slab', '#fff', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y143,'Nothing- '+this.northing, '10px Josefin Slab', '#FC0535', 0.5, 48))
+    // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
+    .then((img)=> {
+      console.log('Base 64 of one :', img.src);
 
-      .then((img) => {
+      //  document.getElementById('lower-left').appendChild(img);
+
         this.waterMarkImage.nativeElement.src = img.src;
 
-        console.log('Base 64 of one :', img.src);
       });
   }
 
@@ -613,7 +669,9 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
       destinationType: this.camera.DestinationType.FILE_URI,
       sourceType: this.camera.PictureSourceType.CAMERA,
       encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE
+      mediaType: this.camera.MediaType.PICTURE,
+      correctOrientation: true
+
     };
 
     this.camera.getPicture(options).then((imgFileUri) => {
@@ -634,24 +692,48 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
   }
 
 
-  openGallery() {
-    this.camera.getPicture(this.gelleryOptions).then(
-      (imgData) => {
-        console.log('image data =>  ', imgData);
-        this.base64Image = 'data:image/jpeg;base64,' + imgData;
-        fetch(this.base64Image)
-          .then((res) => res.blob())
-          .then((blob) => {
-            this.blobImage1 = blob;
-            this.watermarkImage1();
-          });
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+
+
+  takePhoto(sourceType1: number) {
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      correctOrientation: true,
+      sourceType:sourceType1,
+      targetHeight: 320,
+      targetWidth: 320,
+
+    };
+
+    this.camera.getPicture(options).then((imageData) => {
+       this.base64Image = 'data:image/jpeg;base64,' + imageData;
+       fetch(this.base64Image)
+       .then((res) => res.blob())
+       .then((blob) => {
+         this.blobImage1 = blob;
+         this.watermarkImage1();
+       });
+
+    }, (err) => {
+      // Handle error
+    });
   }
 
+
+  locationcheck(){
+    this.getLatLong();
+
+    if(this.latitude === undefined || this.longitude === undefined ||
+      this.easting === undefined || this.northing === undefined){
+        this.getLatLong();
+
+     this.toastSer.presentError('Please Turn on GPS..');
+    }else{
+      this.imageSelection();
+    }
+  }
 
 
   async imageSelection() {
@@ -668,7 +750,7 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
         {
           text: 'Gallery',
           handler: (redc) => {
-            this.openGallery();
+            this.takePhoto(0);
           },
         },
       ],

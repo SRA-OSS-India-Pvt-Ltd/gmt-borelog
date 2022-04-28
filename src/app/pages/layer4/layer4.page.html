@@ -20,7 +20,7 @@
         </ion-col>
         <ion-col size="6">
           <ion-item class="input">
-            <ion-input type="number" cass="input" [(ngModel)]="waterTable"></ion-input>
+            <ion-input type="number" cass="input" [(ngModel)]="waterTable" (onclick)="getLatLong()"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -197,7 +197,7 @@
 
           <ion-col size="1">
 
-            <ion-button title="camera" (click)="imageSelection()">
+            <ion-button title="camera" (click)="locationcheck()">
               <ion-icon  name="camera" ></ion-icon>
               </ion-button>
           </ion-col>
@@ -220,7 +220,7 @@
 
           <ion-col size="1">
 
-            <ion-button title="camera" (click)="imageSelection2()">
+            <ion-button title="camera" (click)="locationcheck2()">
               <ion-icon  name="camera" ></ion-icon>
               </ion-button>
           </ion-col>

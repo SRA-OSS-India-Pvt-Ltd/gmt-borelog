@@ -9,6 +9,7 @@ import { ToastService } from './../../services/toast.service';
 import { Component, OnInit } from '@angular/core';
 import { HttpcallsService } from 'src/app/services/httpcalls.service';
 import { Platform } from '@ionic/angular';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-logginginformation',
@@ -70,28 +71,31 @@ export class LogginginformationPage implements OnInit {
   sptstatus: any;
   isColorShown = false;
   colorOther: string = '';
+statra: any = [];
   constructor(
     public toastSer: ToastService,
     public androidDatabase: AndroidDatabaseService,
     public router: Router,
     public httpService: HttpcallsService,
-    public platform: Platform
-  ) {
-    this.clearFields();
+    public platform: Platform,
+
+    ) {
+
+      this.statra = ['Soil','Rock'];
 
     platform.ready().then(() => {
       if (this.platform.is('android')) {
-        this.clearFields();
+
         this.getLayer1LastId();
       } else {
       }
     });
   }
   ionViewDidEnter(){
-    this.clearFields();
+
     this.platform.ready().then(() => {
       if (this.platform.is('android')) {
-        this.clearFields();
+
       } else {
       }
     });
@@ -607,10 +611,19 @@ export class LogginginformationPage implements OnInit {
     this.isdsDepth = false;
     this.isColorShown = false;
     this.typeOfstrata = null;
+    this.typeOfWeathering = null;
+    this.rockSample = null;
+    this.visualClassification = null;
+    this.soilSampleColor = null;
+    this.typeOfsample = null;
 
   }
   moveToNext() {}
   addDatabse() {
+
+
+
+
     this.androidDatabase.additerationData(
       Constants.laYer1Id,
       this.drillingFrom,
@@ -642,8 +655,8 @@ export class LogginginformationPage implements OnInit {
       this.rqd,
       this.rockSamplColor,
       this.typeOfWeathering);
-
       this.clearFields();
+
       this.router.navigate(['iterations']);
 
      // this.getLayer1();
@@ -734,11 +747,13 @@ export class LogginginformationPage implements OnInit {
           this.toastSer.presentError(response.msg);
         } else {
           this.toastSer.presentSuccess(response.msg);
-
+      this.clearFields();
             this.router.navigate(['iterations']);
           // this.getWebData();
         }
       });
+
+
   }
 
   adding() {

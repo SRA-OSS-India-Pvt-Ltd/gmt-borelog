@@ -17,6 +17,8 @@ export class IterationsPage implements OnInit {
   countList: any = [];
   count: any;
   orderForm: any;
+  isweb= false;
+  isandroid = false;
   constructor(public httpService: HttpcallsService,
     public platform: Platform,
     public router: Router,
@@ -24,10 +26,14 @@ export class IterationsPage implements OnInit {
     public toastService: ToastService) {
     this.platform.ready().then(() => {
       if (this.platform.is('android')) {
-
+        this.isandroid = true;
+        this.isweb = false;
 
         this.getANdroidIterations();
       } else {
+        this.isandroid = false;
+        this.isweb = true;
+
 
         this.getWebBoreItrations();
       }
@@ -41,9 +47,15 @@ export class IterationsPage implements OnInit {
 
     this.platform.ready().then(() => {
       if (this.platform.is('android')) {
+        this.isandroid = true;
+        this.isweb = false;
+
 
         this.getANdroidIterations();
       } else {
+        this.isandroid = false;
+        this.isweb = true;
+
 
 
         this.getWebBoreItrations();
@@ -171,6 +183,9 @@ this.layer1List = [];
         }
         console.log('layer1List',this.layer1List);
         if(this.layer1List.length>0){
+          Constants.chainge = this.layer1List[0].chainage;
+          Constants.bhno = this.layer1List[0].bh_no;
+
           if(this.layer1List[0].depth_termination === 'null'
           ||this.layer1List[0].depth_termination === 'undefined'
           || this.layer1List[0].depth_termination === null
@@ -191,8 +206,9 @@ this.layer1List = [];
   });
 }
 
+
+
 getIterationCount() {
- // this.router.navigate(['logginginformation']);
 
 
   this.androidDatabase.getIterationCount(Constants.laYer1Id).then((data) => {
