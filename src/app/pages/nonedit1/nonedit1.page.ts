@@ -186,7 +186,7 @@ export class Nonedit1Page implements OnInit {
         if(this.layer1List[0].org_id === '1'){
           this.orgName = 'Aarvee Associates';
           this.orgAddrs = 'Hyderabad';
-          this.orgLogo = 'http:\/\/sraossinc.net:7071\/borelogapi\/images\/aarvee-icon.png';
+          this.orgLogo = Constants.imageUrl+'/images\/aarvee-icon.png';
           this.projName ='DFCCIL';
           this.clientName = 'DFCCIL';
           this.projLocation = 'Hyderabad';

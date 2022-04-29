@@ -34,11 +34,33 @@ export class AndroidDatabaseService {
          .then(() => console.log('Executed SQL'))
          .catch(e => console.log(e));
 
+        //  db.executeSql('CREATE TABLE IF NOT EXISTS chlist (bhno text,bridgeno text,chainage text,chainage_id text ,easting text,northing text,package_id text, section_id text,type_of_bridge text,type_of_crossing text,type_of_structure)',[])
+        //  .then(() => console.log('Executed SQL'))
+        //  .catch(e => console.log(e));
+
+
 
       })
       .catch(e => console.log(e));
 
   }
+
+
+  // addChlist(bhn: any, brino: any,chaing: any,chid: any,east: any, north: any, pkgid: any,secId: any,){
+  //   this.databaseObj.executeSql(`INSERT INTO borelog_data
+  //   (Package,NoofBoreHoles,SubAgencyName,SubAgencyAddress,SubAgencyLogo,user_id,org_id,project_id,sa_id,section_id)
+  //   VALUES
+  //   ('${package1}',
+  //   '${noholes}',
+  //   '${sunageName}',
+  //   '${subageAddr}',
+  //   '${aubAgeLog}',
+  //   '${userid}',
+  //   '${orgId}',
+  //   '${projId}',
+  //   '${said}}',
+  //   '${sectionId}')`,[]);
+  // }
   addLayer1Details(package1: any,noholes: any,sunageName: any,subageAddr: any,aubAgeLog: any,
     userid: any,orgId: any,projId: any,said: any,sectionId: any){
     this.databaseObj.executeSql(`INSERT INTO borelog_data

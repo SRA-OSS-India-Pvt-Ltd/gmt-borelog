@@ -126,8 +126,6 @@ statra: any = [];
       this.rockDepthFrom = '',
       this.rockDepthTo = '';
       this.rockSample = '';
-      this.runLength = '';
-      this.runTime = '';
       this.waterLoss = '';
 
       this.rockSamplColor = '';
@@ -226,19 +224,11 @@ statra: any = [];
     console.log($event.target.value);
   }
   runLengthCalicualtion() {
-    if (
-      this.drillingFrom !== undefined &&
-      this.drillingTo !== undefined &&
-      this.drillingFrom !== 0 &&
-      this.drillingTo !== 0
-    ) {
-      if(this.drillingTo > this.drillingFrom){
+    if (this.drillingFrom !== undefined && this.drillingTo !== undefined ) {
+      if(this.drillingTo >= this.drillingFrom){
       this.runLength = this.drillingTo - this.drillingFrom;
-      }else{
-        this.runLength = this.drillingFrom - this.drillingTo;
-
-      }
     }
+  }
   }
   weatheringChange($event) {
     this.typeOfWeathering = $event.target.value;
@@ -249,7 +239,11 @@ statra: any = [];
       this.toastSer.presentError('Please Enter  Drilling From');
     } else if (this.drillingTo === undefined) {
       this.toastSer.presentError('Please Enter  Drilling To');
-    } else if (this.typeOfstrata === undefined) {
+    }else if(this.drillingFrom> this.drillingTo){
+      this.toastSer.presentError(' Drilling To should be greater than Drilling From ');
+
+    }
+     else if (this.typeOfstrata === undefined) {
       this.toastSer.presentError('Please Select  Type of Strata');
     } else if (this.drillingFrom === '') {
       this.toastSer.presentError('Please Enter  Drilling From');
@@ -395,7 +389,7 @@ statra: any = [];
         );
       } else if (this.typeOfsample === 'UDS' && this.udsDepthFrom === 0) {
         this.toastSer.presentError(
-          'Please Enter  UDS Depth ,It should not  Zero'
+          'Please Enter  UDS Depth ,It should not be  Zero'
         );
       } else if (this.typeOfsample === 'DS') {
         this.rockDepthFrom = '';
@@ -417,8 +411,7 @@ statra: any = [];
         console.log('ds');
 
         this.rockSample = '';
-        this.runLength = '';
-        this.runTime = '';
+
         this.waterLoss = '';
 
         this.rockSamplColor = '';
@@ -438,8 +431,6 @@ statra: any = [];
         console.log('spt');
 
         this.rockSample = '';
-        this.runLength = '';
-        this.runTime = '';
         this.waterLoss = '';
 
         this.rockSamplColor = '';
@@ -469,8 +460,6 @@ statra: any = [];
         console.log('uds');
 
         this.rockSample = '';
-        this.runLength = '';
-        this.runTime = '';
         this.waterLoss = '';
 
         this.rockSamplColor = '';
@@ -514,6 +503,10 @@ statra: any = [];
       } else if (this.rockDepthTo === 0) {
         this.toastSer.presentError(
           'Please Enter  Rock depth to,it Should Not a Zero'
+        );
+      }else if (this.runLength === undefined) {
+        this.toastSer.presentError(
+          'Run depth should be some value'
         );
       }
        else {
@@ -633,12 +626,13 @@ statra: any = [];
       this.dsDepthFrom,
       this.sptDepthFrom,
       this.first,
-      this.firstB,
       this.second,
-      this.secondB,
       this.third,
-      this.thirdB,
       this.total,
+
+      this.firstB,
+      this.secondB,
+      this.thirdB,
       this.totalB,
       this.sptstatus,
       this.udsDepthFrom,

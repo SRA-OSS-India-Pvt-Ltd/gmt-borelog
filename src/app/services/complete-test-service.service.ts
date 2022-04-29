@@ -17,15 +17,40 @@ export class CompleteTestServiceService implements AutoCompleteService {
 
   constructor(    public platform: Platform) {
 
+    // this. platform.ready().then(() => {
+    //   if (this.platform.is('android')) {
+    //     this.chaingeList = Constants.chaingeListAndroid11;
+    //     console.log('chainageListsizeService',this.chaingeList.length);
+    //   }else{
+
+    // this.chaingeList = Constants.chainagesBySectionIDList;
+    //   }
+    // });
+
+
+   }
+
+
+
+   getChaingeList(sectionId: any){
+
+
     this. platform.ready().then(() => {
       if (this.platform.is('android')) {
-        this.chaingeList = Constants.chaingeListAndroid11;
+        this.chaingeList = Constants.chaingeListAndroid.filter((user: any)=>user.section_id.includes(sectionId));
+        console.log('chainageListsizeService',this.chaingeList.length);
       }else{
+        this.chaingeList = Constants.chainagesBySectionIDList.filter((user: any)=>user.section_id.includes(sectionId));
 
-    this.chaingeList = Constants.chainagesBySectionIDList;
       }
     });
+
+
+
+
    }
+
+
   getItemLabel?(item: any) {
   console.log('iteems: ',item);
   return item.chainage;

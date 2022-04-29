@@ -1,3 +1,4 @@
+import { CompleteTestServiceService } from './../services/complete-test-service.service';
 /* eslint-disable @typescript-eslint/quotes */
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable quote-props */
@@ -39,7 +40,8 @@ sectionList: any = [];
     public router: Router,
     public platform: Platform,
     public httpService: HttpcallsService,
-    public toastService: ToastService) {
+    public toastService: ToastService,
+    public compleService: CompleteTestServiceService) {
     this.layer1Id = Constants.laYer1Id;
     this.orgName = Constants.orgName;
     this.orgAddrs = Constants.orgAddre;
@@ -146,7 +148,10 @@ getLayer1() {
 
   }
   updateLayer1(){
+    Constants.chaingeListAndroid11 = '';
+
     Constants.chaingeListAndroid11 = Constants.chaingeListAndroid.filter((user: any)=>user.section_id.includes(this.sectionId));
+    this.compleService.getChaingeList(this.sectionId);
 
     if(Constants.chaingeListAndroid11.length>0){
 

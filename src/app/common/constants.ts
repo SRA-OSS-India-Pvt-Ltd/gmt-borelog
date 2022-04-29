@@ -39,6 +39,9 @@ public static duplicate: any;
 public static imageUrl='http://202.62.69.3:7071/borelogapi_v2_testing/';
 public static sectionListService: any = [];
 
+
+  //ionic build --prod -- --base-href /borelogadmin/
+
   //ionic build --prod -- --base-href /borelogweb_v2_testing/
 //        classpath 'com.android.tools.build:gradle:4.0.0'
 

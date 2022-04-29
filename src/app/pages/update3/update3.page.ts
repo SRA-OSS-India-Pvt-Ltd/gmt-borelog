@@ -157,21 +157,12 @@ sno: any;
   }
 
   runLengthCalicualtion() {
-    if (
-      this.drillingFrom !== undefined &&
-      this.drillingTo !== undefined &&
-      this.drillingFrom !== 0 &&
-      this.drillingTo !== 0
-    ) {
-      if(this.drillingTo > this.drillingFrom){
+    if (this.drillingFrom !== undefined && this.drillingTo !== undefined ) {
+      if(this.drillingTo >= this.drillingFrom){
       this.runLength = this.drillingTo - this.drillingFrom;
-      }else{
-        this.runLength = this.drillingFrom - this.drillingTo;
-
-      }
     }
   }
-
+  }
     visualChange($event){
        this.visualClassification = $event.target.value;
        console.log($event.target.value);
@@ -197,7 +188,11 @@ sno: any;
     }else if(this.drillingTo === ''){
      this.toastSer.presentError('Please Enter  Drilling To');
 
-    }else if(this.typeOfstrata === ''){
+    }else if(this.drillingFrom> this.drillingTo){
+      this.toastSer.presentError(' Drilling To should be greater than Drilling From ');
+
+    }
+    else if(this.typeOfstrata === ''){
      this.toastSer.presentError('Please Select  Type of Strata');
 
     }else if(this.drillingTo === 0){
@@ -330,7 +325,6 @@ sno: any;
          console.log('ds');
 
          this.rockSample = '';
-         this.runLength = '';
          this.runTime = '';
          this.waterLoss = '';
 
@@ -352,7 +346,6 @@ sno: any;
          console.log('spt');
 
          this.rockSample = '';
-         this.runLength = '';
          this.runTime = '';
          this.waterLoss = '';
 
@@ -383,7 +376,6 @@ sno: any;
 
 
          this.rockSample = '';
-         this.runLength = '';
          this.runTime = '';
          this.waterLoss = '';
 
@@ -567,12 +559,12 @@ sno: any;
         this.dsDepthFrom,
         this.sptDepthFrom,
         this.first,
-        this.firstB,
         this.second,
-        this.secondB,
         this.third,
-        this.thirdB,
         this.total,
+        this.firstB,
+        this.secondB,
+        this.thirdB,
         this.totalB,
         this.sptstatus,
         this.udsDepthFrom,

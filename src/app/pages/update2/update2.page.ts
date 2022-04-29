@@ -148,7 +148,7 @@ count1: any;
 ) {
       this.ref = 'IS 1892; IS 2131; IS 2132';
       this.date = new Date().toISOString();
-      this.joindate =this.datePipe.transform(this.date, 'dd-mm-yyy HH:MM');
+      this.joindate =new Date().toLocaleString();
 
       this.chaingeList = Constants.chaingeListAndroid11;
       console.log('chaingeList', this.chaingeList);
@@ -629,7 +629,7 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
   .load('assets/images/2.png')
   .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '20px Josefin Slab', '#FC0535', 0.5, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y143,'Nothing- '+this.northing, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y143,'Northing- '+this.northing, '20px Josefin Slab', '#FC0535', 0.5, 48))
 
       .then((img) => {
         this.waterMarkImage.nativeElement.src = img.src;
@@ -648,7 +648,7 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
   .load('assets/images/2.png')
   .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '10px Josefin Slab', '#FC0535', 0.5, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y143,'Nothing- '+this.northing, '10px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y143,'Northing- '+this.northing, '10px Josefin Slab', '#FC0535', 0.5, 48))
     // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
     .then((img)=> {
       console.log('Base 64 of one :', img.src);

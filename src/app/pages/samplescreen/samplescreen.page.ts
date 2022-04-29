@@ -70,8 +70,14 @@ export class SamplescreenPage implements OnInit {
               if(response.error === false){
                 Constants.yetbhidList = response.data;
                 this.router.navigate(['yettosubmit']);
+                this.package = null;
+                this.sectionId = null;
+
               }else{
                 this.toastSer.presentError(response.msg);
+                this.package = null;
+                this.sectionId = null;
+
 
               }
             });
@@ -86,8 +92,14 @@ export class SamplescreenPage implements OnInit {
             if(response.error === false){
               Constants.yetbhidList = response.data;
               this.router.navigate(['yettosubmit']);
+              this.package = null;
+              this.sectionId = null;
+
             }else{
               this.toastSer.presentError(response.msg);
+              this.package = null;
+              this.sectionId = null;
+
 
             }
           });
@@ -96,8 +108,6 @@ export class SamplescreenPage implements OnInit {
 
       });
 
-      this.package = null;
-      this.sectionId = null;
 
 
 
@@ -116,7 +126,6 @@ export class SamplescreenPage implements OnInit {
         if (this.platform.is('android')) {
           if(window.navigator.connection.type === 'none'){
             this.toastSer.presentError('Please check your internet connection');
-
           }else{
             this.httpService.getSampleStatus('1',this.package,this.sectionId,'submitted')
             .subscribe((response: any)=>{
@@ -125,8 +134,14 @@ export class SamplescreenPage implements OnInit {
               if(response.error === false){
                 Constants.submitbhList = response.data;
                 this.router.navigate(['submitted']);
+                this.package = null;
+                this.sectionId = null;
+
               }else{
                 this.toastSer.presentError(response.msg);
+                this.package = null;
+                this.sectionId = null;
+
               }
             });
 
@@ -139,8 +154,14 @@ export class SamplescreenPage implements OnInit {
             if(response.error === false){
               Constants.submitbhList = response.data;
               this.router.navigate(['submitted']);
+              this.package = null;
+              this.sectionId = null;
+
             }else{
               this.toastSer.presentError(response.msg);
+              this.package = null;
+              this.sectionId = null;
+
             }
           });
 
@@ -148,8 +169,6 @@ export class SamplescreenPage implements OnInit {
 
       });
 
-      this.package = null;
-      this.sectionId = null;
 
 
 

@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 
 import { Constants } from 'src/app/common/constants';
 import { Component, OnInit } from '@angular/core';
+import { CompleteTestServiceService } from 'src/app/services/complete-test-service.service';
 
 @Component({
   selector: 'app-web1',
@@ -41,7 +42,8 @@ export class Web1Page implements OnInit {
     public router: Router,
     public platform: Platform,
     public httpService: HttpcallsService,
-    public toastService: ToastService) {
+    public toastService: ToastService,
+    public compleService: CompleteTestServiceService) {
       this.layer1Id = Constants.laYer1Id;
       this.orgName = Constants.orgName;
       this.orgAddrs = Constants.orgAddre;
@@ -292,6 +294,8 @@ export class Web1Page implements OnInit {
           console.log('response34',response34);
           if(response34.error === false){
             Constants.chainagesBySectionIDList = response34.data;
+            this.compleService.getChaingeList(this.sectionId);
+
             this.toastService.presentSuccess(response.msg);
             console.log('structtype',this.layer1List[0].type_of_structure);
             if(this.layer1List[0].type_of_structure === ''){

@@ -1,3 +1,4 @@
+import { CompleteTestServiceService } from './../../services/complete-test-service.service';
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable @typescript-eslint/quotes */
 /* eslint-disable quote-props */
@@ -44,7 +45,8 @@ isimg = false;
     public androiDatabase: AndroidDatabaseService,
     public router: Router,
     public httpService: HttpcallsService,
-    public platform: Platform
+    public platform: Platform,
+    public compleService: CompleteTestServiceService,
     ) {
     this.orgName = Constants.orgName;
     this.orgAddrs = Constants.orgAddre;
@@ -117,6 +119,7 @@ console.log('totallist',Constants.sectionListService);
 
     }
     else{
+
       this.adding();
     }
   }
@@ -136,6 +139,8 @@ console.log('totallist',Constants.sectionListService);
 
         Constants.package = this.package;
         Constants.section = this.sectionId;
+        this.compleService.getChaingeList(this.sectionId);
+
         if(Constants.chaingeListAndroid11.length>0){
           this.router.navigate(['boreholeinformation']);
 
@@ -146,8 +151,13 @@ console.log('totallist',Constants.sectionListService);
 
 
     }else{
+      Constants.chaingeListAndroid11 = '';
+      console.log('Chaingelistsize : ',Constants.chaingeListAndroid11.length);
 
+      console.log('sectionId',this.sectionId);
       Constants.chaingeListAndroid11 = Constants.chaingeListAndroid.filter((user: any)=>user.section_id.includes(this.sectionId));
+      console.log('Chaingelistsize : ',Constants.chaingeListAndroid11.length);
+      this.compleService.getChaingeList(this.sectionId);
 
       if(Constants.chaingeListAndroid11.length>0){
 
@@ -201,7 +211,10 @@ console.log('totallist',Constants.sectionListService);
         this.httpService.getAllChainagesBySectionID(this.sectionId).subscribe((response34: any)=>{
           console.log('response34',response34);
           if(response34.error === false){
+            this.compleService.getChaingeList(this.sectionId);
+
             Constants.chainagesBySectionIDList = response34.data;
+            this.compleService.getChaingeList(this.sectionId);
 
             console.log('webbhid',Constants.webbhid);
             this.toastService.presentSuccess(response.msg);

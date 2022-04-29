@@ -154,21 +154,12 @@ colorChange($event){
 }
 
 runLengthCalicualtion() {
-  if (
-    this.drillingFrom !== undefined &&
-    this.drillingTo !== undefined &&
-    this.drillingFrom !== 0 &&
-    this.drillingTo !== 0
-  ) {
-    if(this.drillingTo > this.drillingFrom){
+  if (this.drillingFrom !== undefined && this.drillingTo !== undefined ) {
+    if(this.drillingTo >= this.drillingFrom){
     this.runLength = this.drillingTo - this.drillingFrom;
-    }else{
-      this.runLength = this.drillingFrom - this.drillingTo;
-
-    }
   }
 }
-
+}
   visualChange($event){
      this.visualClassification = $event.target.value;
      console.log($event.target.value);
@@ -322,7 +313,11 @@ validation(){
   }else if(this.drillingTo === ''){
    this.toastSer.presentError('Please Enter  Drilling To');
 
-  }else if(this.typeOfstrata === ''){
+  }else if(this.drillingFrom> this.drillingTo){
+    this.toastSer.presentError('Drilling To should be greater than Drilling From ');
+
+  }
+  else if(this.typeOfstrata === ''){
    this.toastSer.presentError('Please Select  Type of Strata');
 
   }else if(this.drillingTo === 0){
@@ -455,7 +450,6 @@ validation(){
        console.log('ds');
 
        this.rockSample = '';
-       this.runLength = '';
        this.runTime = '';
        this.waterLoss = '';
 
@@ -477,7 +471,6 @@ validation(){
        console.log('spt');
 
        this.rockSample = '';
-       this.runLength = '';
        this.runTime = '';
        this.waterLoss = '';
 
@@ -508,7 +501,6 @@ validation(){
 
 
        this.rockSample = '';
-       this.runLength = '';
        this.runTime = '';
        this.waterLoss = '';
 
