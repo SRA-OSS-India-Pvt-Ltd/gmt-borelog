@@ -40,7 +40,7 @@ export class Update4Page implements AfterViewInit {
 
   depthOfTermination: any;
 
-  date: any;
+  date2: any;
   aarveRepresName: any;
   subAgencyRepresentivaeName: string = '';
   clientRepresNaame: string = '';
@@ -130,7 +130,7 @@ export class Update4Page implements AfterViewInit {
 
 
   ) {
-    this.date = new Date().toISOString();
+    this.date2 = new Date().toISOString();
 
     this.joindate =new Date().toLocaleString();
 
@@ -187,7 +187,7 @@ export class Update4Page implements AfterViewInit {
           this.depthOfTermination = this.layer1List[0].depth_termination;
           this.waterTable = this.layer1List[0].water_table_rl;
 
-          this.date = this.layer1List[0].bh_enddate;
+          this.date2 = this.layer1List[0].bh_enddate;
           this.aarveRepresName = this.layer1List[0].rv_rep_name;
           this.base641 = this.layer1List[0].rv_rep_sign;
           this.subAgencyRepresentivaeName = this.layer1List[0].sa_rep_name;
@@ -231,8 +231,8 @@ export class Update4Page implements AfterViewInit {
       this.toastSer.presentError('please Enter the Depth of Water Table RL');
 
     }
-    else if (this.date === '') {
-      this.toastSer.presentError('please Enter the Borehole End date');
+    else if (this.date2 === '') {
+      this.toastSer.presentError('please Enter the date2 date');
     } else if (this.aarveRepresName === '') {
       this.toastSer.presentError('please Enter the AARVEE Representative Name');
     } else if (
@@ -274,8 +274,8 @@ export class Update4Page implements AfterViewInit {
       this.toastSer.presentError('please Enter the Depth of Water Table RL');
 
     }
-    else if (this.date === '') {
-      this.toastSer.presentError('please Enter the Borehole End date');
+    else if (this.date2 === '') {
+      this.toastSer.presentError('please Enter the date2 date');
     } else if (this.aarveRepresName === '') {
       this.toastSer.presentError('please Enter the AARVEE Representative Name');
     } else if (
@@ -316,7 +316,7 @@ export class Update4Page implements AfterViewInit {
     this.androidDatabase.updateLayer4(
       this.waterTable,
       this.depthOfTermination,
-      this.date,
+      this.date2,
       this.aarveRepresName,
       this.base641,
       this.subAgencyRepresentivaeName,
@@ -340,7 +340,7 @@ export class Update4Page implements AfterViewInit {
     this.androidDatabase.updateLayer4home(
       this.waterTable,
       this.depthOfTermination,
-      this.date,
+      this.date2,
       this.aarveRepresName,
       this.base641,
       this.subAgencyRepresentivaeName,
@@ -743,12 +743,6 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
   this.easting = Math.round(this.utm_data.x * 100) / 100;
   this.northing = Math.round(this.utm_data.y * 100) /100;
   console.log('utm data',this.utm_data.x);
-  this.string3 = `UTM:`+this.easting + `,`+ this.northing + `
-  Date:`+this.date+ `
-  Chainage:`+this.chainge+ `
-  Bhno:`+this.bhno;
-
-  console.log('string3',this.string3);
 
 
  }

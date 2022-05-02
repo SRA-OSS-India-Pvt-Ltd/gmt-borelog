@@ -200,20 +200,10 @@ export class Nonedit1Page implements OnInit {
           this.package = 'DFCCIL Package-3';
         }
 
-        if(this.layer1List[0].sa_id === '1'){
+        this.subAgency =this.layer1List[0].sa_name;
+        this.subAgencyLogo =this.layer1List[0].sa_logo;
 
-          this.subAgencyId = '1';
-          this.subAgency = 'SubAgency-1';
-          this.subAgencyAddress = 'Hyderabad';
-          this.subAgencyLogo = Constants.imageUrl+'/images/subagency.png';
-        }else if(this.layer1List[0].sa_id === '2'){
-
-          this.subAgencyId = '2';
-          this.subAgency = 'SubAgency-2';
-          this.subAgencyAddress = 'Hyderabad';
-          this.subAgencyLogo = Constants.imageUrl+'/images/subagency2.png';
-        }
-    });
+      });
      }
 
     onClick(){

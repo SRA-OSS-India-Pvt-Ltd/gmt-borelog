@@ -1,3 +1,4 @@
+import { AndroidDatabaseService } from 'src/app/database/android-database.service';
 /* eslint-disable @typescript-eslint/member-ordering */
 
 import { Injectable } from '@angular/core';
@@ -15,7 +16,8 @@ export class CompleteTestServiceService implements AutoCompleteService {
   formValueAttribute = 'numericCode';
    chaingeList: any = [];
 
-  constructor(    public platform: Platform) {
+  constructor(    public platform: Platform,
+    public androiDatabase: AndroidDatabaseService) {
 
     // this. platform.ready().then(() => {
     //   if (this.platform.is('android')) {
@@ -37,8 +39,22 @@ export class CompleteTestServiceService implements AutoCompleteService {
 
     this. platform.ready().then(() => {
       if (this.platform.is('android')) {
-        this.chaingeList = Constants.chaingeListAndroid.filter((user: any)=>user.section_id.includes(sectionId));
-        console.log('chainageListsizeService',this.chaingeList.length);
+
+
+
+        this.androiDatabase.getChlist(sectionId).then((data) => {
+          this.chaingeList = [];
+          console.log('size',data.rows.length);
+          if (data.rows.length > 0) {
+            for (let i = 0; i < data.rows.length; i++) {
+              this.chaingeList.push(data.rows.item(i));
+            }
+            console.log('chainageListsizeService',this.chaingeList.length);
+
+          }
+        });
+
+       // this.chaingeList = Constants.chaingeListAndroid.filter((user: any)=>user.section_id.includes(sectionId));
       }else{
         this.chaingeList = Constants.chainagesBySectionIDList.filter((user: any)=>user.section_id.includes(sectionId));
 

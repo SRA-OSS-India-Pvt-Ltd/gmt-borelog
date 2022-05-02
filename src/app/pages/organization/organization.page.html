@@ -134,7 +134,7 @@
           <ion-select  interface="popover" placeholder="Select Section" (ionChange)="sectionChange($event)">
 
 
-            <ion-select-option  *ngFor="let section of sectionList" [value]="section.section_id">
+            <ion-select-option  *ngFor="let section of sectionList" [value]="section.section_id ">
 
               {{section.section_name}}
             </ion-select-option>
@@ -158,14 +158,20 @@
         </ion-item>
       </ion-col>
       <ion-col size="6">
+        <ion-item class="padding">
+<ion-label>{{subAgency}}</ion-label>
+        </ion-item>
+      </ion-col>
+
+      <!-- <ion-col size="6">
         <ion-item class="input">
           <ion-select  interface="popover"placeholder="Select Sub Agency" (ionChange)="subAgencyChange($event)">
             <ion-select-option  *ngFor="let subAgency of subAencyList" [value]="subAgency">
               {{subAgency.sa_name}}</ion-select-option>
           </ion-select>        </ion-item>
-      </ion-col>
+      </ion-col> -->
     </ion-row>
-    <ion-row>
+    <!-- <ion-row>
       <ion-col size="6">
         <ion-item class="padding">
           <ion-label  style="white-space: pre-wrap !important;"><strong>Sub Agency Address:</strong><span class="required-asterisk">*</span></ion-label>
@@ -176,7 +182,7 @@
 <ion-label>{{subAgencyAddress}}</ion-label>
         </ion-item>
       </ion-col>
-    </ion-row>
+    </ion-row> -->
 
     <ion-row *ngIf="isimg">
       <ion-col size="6">

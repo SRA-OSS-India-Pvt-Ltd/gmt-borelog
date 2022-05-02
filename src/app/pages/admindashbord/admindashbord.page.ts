@@ -45,4 +45,8 @@ export class AdmindashbordPage implements OnInit {
     alert.present();
   }
 
+  gotosample(){
+    this.router.navigate(['samplescreen']);
+  }
+
 }

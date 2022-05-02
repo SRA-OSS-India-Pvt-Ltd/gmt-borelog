@@ -152,7 +152,7 @@ count1: any;
 
       this.chaingeList = Constants.chaingeListAndroid11;
       console.log('chaingeList', this.chaingeList);
-this.getLatLong();
+       this.getLatLong();
       this.getLayer1();
 
     }
@@ -170,8 +170,10 @@ this.getLatLong();
 
   validation() {
     console.log('typeOfStuct', this.typeOfStructure);
-     if (this.boreholeNumber === '') {
-      this.toastSer.presentError('Please Enter Borehole Number');
+     if (this.chainage === '') {
+      this.toastSer.presentError('Please Enter Chainage');
+    }else if (this.boreholeNumber === '') {
+      this.toastSer.presentError('Please Enter Chainage');
     } else if (this.easting === '') {
       this.toastSer.presentError('Please Enter Latitude');
     } else if (this.northing === '') {
@@ -203,21 +205,21 @@ this.getLatLong();
       this.detailsOfDrillingBit === 'Other' &&
       this.drillBitOther === ''
     ) {
-      this.toastSer.presentError('Please Enter Other for Method of Drilling');
+      this.toastSer.presentError('Please Enter Other for Details of Drilling Bit');
     } else if (this.typeOfRig === 'Other' && this.rigOther === null) {
       this.toastSer.presentError('Please Enter Other for Method of Drilling');
     } else if (
       this.detailsOfDrillingBit === 'Other' &&
       this.drillBitOther === null
     ) {
-      this.toastSer.presentError('Please Enter Other for Method of Drilling');
+      this.toastSer.presentError('Please Enter Other for Details of Drilling Bit');
     } else if (this.typeOfRig === 'Other' && this.rigOther === undefined) {
       this.toastSer.presentError('Please Enter Other for Method of Drilling');
     } else if (
       this.detailsOfDrillingBit === 'Other' &&
       this.drillBitOther === undefined
     ) {
-      this.toastSer.presentError('Please Enter Other for Method of Drilling');
+      this.toastSer.presentError('Please Enter Other for Details of Drilling Bit');
     } else if (this.boreholeCasingDia === 'Other' && this.casingDiaOther === null) {
       this.toastSer.presentError('Please Enter Other for Casing Dia');
     }else if (this.boreholeCasingDia === 'Other' && this.casingDiaOther === undefined) {
@@ -381,6 +383,25 @@ getWebBoreItrations() {
           }
 
           this.waterMarkImage.nativeElement.src= this.layer1List[0].borehole_pic;
+          console.log('beforeUpdateSecId',Constants.beforeUpdateSecId);
+console.log('editSectinId',this.layer1List[0].section_id);
+
+          if(Constants.beforeUpdateSecId === this.layer1List[0].section_id){
+
+          }else{
+
+
+
+            this.typeOfBridge = '';
+            this.typeOfCrossing = '';
+            this.typeOfStructure = '';
+            this.chainageId = '';
+            this.boreholeNumber = '';
+            this.chainage = '';
+
+
+
+          }
 
 
         }

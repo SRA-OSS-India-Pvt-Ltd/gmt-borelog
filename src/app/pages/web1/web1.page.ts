@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-inferrable-types */
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable @typescript-eslint/quotes */
 /* eslint-disable quote-props */
@@ -27,7 +28,7 @@ export class Web1Page implements OnInit {
   packageList: any = [];
   subAencyList: any =[];
   subAencyListValues: any =[];
-  subAgencyAddress: any;
+  subAgencyAddress: string = '';
   subAgencyLogo: any;
   boreHoles: any;
   subAgency: any;
@@ -69,24 +70,37 @@ export class Web1Page implements OnInit {
      sectionChange($event){
        this.sectionId= $event.target.value;
       console.log($event.target.value);
+      this.httpService.getSubAgency(Constants.projectId,this.package,this.sectionId)
+      .subscribe((res: any)=>{
+        console.log('res',res);
+        if(res.error === false){
+
+          this.subAgencyId = res.data.sa_id;
+
+          this.subAgency = res.data.sa_name;
+          this.subAgencyLogo = res.data.sa_logo;
+
+        }
+      });
+
      }
 
     ngOnInit() {
     }
-    subAgencyChange($event){
-      this.subAencyListValues = [$event.target.value];
-      console.log('array', this.subAencyListValues);
-      if(this.subAencyListValues.length>0){
-        this.subAgencyId = this.subAencyListValues[0].sa_id;
+    // subAgencyChange($event){
+    //   this.subAencyListValues = [$event.target.value];
+    //   console.log('array', this.subAencyListValues);
+    //   if(this.subAencyListValues.length>0){
+    //     this.subAgencyId = this.subAencyListValues[0].sa_id;
 
-        this.subAgency = this.subAencyListValues[0].sa_name;
-        this.subAgencyAddress = this.subAencyListValues[0].sa_address;
-        this.subAgencyLogo = this.subAencyListValues[0].sa_logo;
+    //     this.subAgency = this.subAencyListValues[0].sa_name;
+    //     this.subAgencyAddress = this.subAencyListValues[0].sa_address;
+    //     this.subAgencyLogo = this.subAencyListValues[0].sa_logo;
 
 
 
-      }
-    }
+    //   }
+    // }
 
      getWebData(){
       this.layer1List = [];
@@ -239,23 +253,10 @@ export class Web1Page implements OnInit {
 
 
         }
-
-        this.subAencyListValues = this.subAencyList.filter((user: any) =>
-        user.sa_id.includes(this.layer1List[0].sa_id));
-
+        this.subAgency =this.layer1List[0].sa_name;
+        this.subAgencyLogo =this.layer1List[0].sa_logo;
 
 
-       console.log('array', this.subAencyListValues);
-        if(this.subAencyListValues.length>0){
-          this.subAgencyId = this.subAencyListValues[0].sa_id;
-
-          this.subAgency = this.subAencyListValues[0].sa_name;
-          this.subAgencyAddress = this.subAencyListValues[0].sa_address;
-          this.subAgencyLogo = this.subAencyListValues[0].sa_logo;
-
-
-
-        }
 
   //  if(this.layer1List[0].sa_id === '1'){
 
@@ -329,7 +330,7 @@ export class Web1Page implements OnInit {
         this.toastService.presentError('Please Select Section');
 
       }else if(this.subAgency === ''){
-        this.toastService.presentError('Please Select SubAgencyName');
+        this.toastService.presentError('Please Select SubAgency Name');
 
       }
       else{

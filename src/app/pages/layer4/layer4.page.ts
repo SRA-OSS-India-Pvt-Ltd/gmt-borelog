@@ -40,10 +40,11 @@ export class Layer4Page implements AfterViewInit {
   base641: any;
   base642: any;
   base643: any;
+  startDate: any;
 
   depthOfTermination: any;
 
-  date: any;
+  date1: any;
   aarveRepresName: any;
   subAgencyRepresentivaeName: string = '';
   clientRepresNaame: string = '';
@@ -137,24 +138,51 @@ export class Layer4Page implements AfterViewInit {
 
   ) {
     this.getLatLong();
-    this.date = new Date().toISOString();
+    this.date1 = new Date().toISOString();
     this.joindate =new Date().toLocaleString();
 
-    console.log('date', this.date);
+    console.log('date1', this.date1);
     console.log('str',this.str);
     this.chainge = Constants.chainge;
     this.bhno = Constants.bhno;
     platform.ready().then(() => {
       if (this.platform.is('android')) {
         this.getLayer1LastId();
+        this.getLayer1();
       } else {
+        this.getLayer1Web();
       }
+
     });
   }
 
   ionViewDidEnter(){
     this.getLatLong();
+   this.platform.ready().then(() => {
+      if (this.platform.is('android')) {
+        this.getLayer1LastId();
+        this.getLayer1();
+      } else {
+        this.getLayer1Web();
 
+      }
+    });
+
+
+  }
+
+  getLayer1Web() {
+    this.layer1List = [];
+    this.httpService
+      .getBoredetails(Constants.webbhid)
+      .subscribe((response: any) => {
+        this.layer1List = response.data;
+
+        console.log('layer1List', this.layer1List);
+        if (this.layer1List.length > 0) {
+          this.startDate = this.layer1List[0].bh_start_date;
+        }
+      });
   }
 
 
@@ -194,7 +222,7 @@ export class Layer4Page implements AfterViewInit {
     }
    else if (this.depthOfTermination === undefined) {
       this.toastSer.presentError('please Enter the Depth of Termination');
-    } else if (this.date === undefined) {
+    } else if (this.date1 === undefined) {
       this.toastSer.presentError('please Enter the Borehole End date');
     } else if (this.aarveRepresName === undefined) {
       this.toastSer.presentError('please Enter the AARVEE Representative Name');
@@ -208,13 +236,13 @@ export class Layer4Page implements AfterViewInit {
     }  else if (this.depthOfTermination === '') {
       this.toastSer.presentError('please Enter the Depth of Termination');
     }
-    else if (this.date === '') {
+    else if (this.date1 === '') {
       this.toastSer.presentError('please Enter the Borehole End date');
     } else if (this.aarveRepresName === '') {
       this.toastSer.presentError('please Enter the AARVEE Representative Name');
     } else if (this.depthOfTermination === null) {
       this.toastSer.presentError('please Enter the Depth of Termination');
-    } else if (this.date === null) {
+    } else if (this.date1 === null) {
       this.toastSer.presentError('please Enter the Borehole End date');
     } else if (this.aarveRepresName === null) {
       this.toastSer.presentError('please Enter the AARVEE Representative Name');
@@ -260,12 +288,29 @@ export class Layer4Page implements AfterViewInit {
     });
   }
 
+  getLayer1() {
+    this.androidDatabase.getLayer1ById(Constants.laYer1Id).then((data) => {
+      this.layer1List = [];
+      console.log('size', data.rows.length);
+      if (data.rows.length > 0) {
+        for (let i = 0; i < data.rows.length; i++) {
+          this.layer1List.push(data.rows.item(i));
+        }
+        console.log('layer1List', this.layer1List);
+        if (this.layer1List.length > 0) {
+
+          this.startDate = this.layer1List[0].bh_start_date;
+        }
+      }
+    });
+  }
+
   addDatabase() {
     console.log(this.base641, this.base642, this.base643);
     this.androidDatabase.updateLayer4(
       this.waterTable,
       this.depthOfTermination,
-      this.date,
+      this.date1,
       this.aarveRepresName,
       this.base641,
       this.subAgencyRepresentivaeName,
@@ -283,7 +328,7 @@ export class Layer4Page implements AfterViewInit {
     this.androidDatabase.updateLayer4(
       this.waterTable,
       this.depthOfTermination,
-      this.date,
+      this.date1,
       this.aarveRepresName,
       this.base641,
       this.subAgencyRepresentivaeName,
@@ -304,7 +349,7 @@ export class Layer4Page implements AfterViewInit {
         4,
         this.waterTable,
         this.depthOfTermination,
-        this.date,
+        this.date1,
         this.aarveRepresName,
         this.base641,
         this.subAgencyRepresentivaeName,
@@ -332,7 +377,7 @@ export class Layer4Page implements AfterViewInit {
         4,
         this.waterTable,
         this.depthOfTermination,
-        this.date,
+        this.date1,
         this.aarveRepresName,
         this.base641,
         this.subAgencyRepresentivaeName,
@@ -729,9 +774,18 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
   locationcheck(){
     this.getLatLong();
 
+
     if( this.easting === undefined || this.northing === undefined){
         this.getLatLong();
-     this.toastSer.presentError('Please Turn on GPS..');
+        this.platform.ready().then(() => {
+
+          if (this.platform.is('android')) {
+            this.toastSer.presentError('Please Turn on GPS..');
+
+          }else{
+            this.toastSer.presentError('Please Enter Easing and Northing');
+          }
+        });
     }else{
       this.imageSelection();
     }
@@ -743,7 +797,15 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
     if(this.easting === undefined || this.northing === undefined){
         this.getLatLong();
 
-     this.toastSer.presentError('Please Turn on GPS..');
+        this.platform.ready().then(() => {
+
+          if (this.platform.is('android')) {
+            this.toastSer.presentError('Please Turn on GPS..');
+
+          }else{
+            this.toastSer.presentError('Please Enter Easing and Northing');
+          }
+        });
     }else{
       this.imageSelection2();
     }

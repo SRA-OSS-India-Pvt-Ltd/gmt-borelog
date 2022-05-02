@@ -36,9 +36,13 @@ export abstract class Constants {
 
   public static iterationCpunt: any;
 public static duplicate: any;
-public static imageUrl='http://202.62.69.3:7071/borelogapi_v2_testing/';
+public static imageUrl='http://202.62.69.3:7071/borelogapi_v2/';
 public static sectionListService: any = [];
 
+public static editSectionId: any;
+public static beforeUpdateSecId: any;
+public static layer2flow: any;
+public static subagenctList: any = [];
 
   //ionic build --prod -- --base-href /borelogadmin/
 

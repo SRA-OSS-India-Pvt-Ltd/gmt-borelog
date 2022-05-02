@@ -436,4 +436,15 @@ export class HttpcallsService {
     );
   }
 
+  getSubAgency(proId: any,pacid: any,secId: any) {
+    const parameters = { project_id: proId, package_id: pacid,section_id: secId};
+    console.log('JSON', JSON.stringify(parameters));
+
+    return this.httpClient.post(
+      `${environment.apiUrl}/getSubAgency`,
+      JSON.stringify(parameters)
+    );
+  }
+
+
 }

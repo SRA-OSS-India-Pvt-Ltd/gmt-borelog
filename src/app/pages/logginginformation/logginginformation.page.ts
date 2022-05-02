@@ -85,13 +85,14 @@ statra: any = [];
 
     platform.ready().then(() => {
       if (this.platform.is('android')) {
-
+Constants.layer2flow === 'fromLog';
         this.getLayer1LastId();
       } else {
       }
     });
   }
   ionViewDidEnter(){
+    Constants.layer2flow === 'fromLog';
 
     this.platform.ready().then(() => {
       if (this.platform.is('android')) {

@@ -232,7 +232,7 @@ getIterationCount() {
 
            // this.router.navigate(['logginginformation']);
 
-        this.toastService.presentError('You already added '+Constants.iterationCpunt+'Iterations');
+        this.toastService.presentError('You already added '+Constants.iterationCpunt+'  Iterations');
       }
 
     }

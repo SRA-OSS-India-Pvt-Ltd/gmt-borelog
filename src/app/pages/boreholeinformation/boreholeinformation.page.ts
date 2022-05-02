@@ -347,6 +347,7 @@ getResults(keyword:string) {
 
 
 
+
 sel(keyword: string){
   this.selectedItem=  this.chaingeList.filter(item =>{
     item.chainage.startsWith(keyword);
@@ -459,10 +460,10 @@ sel(keyword: string){
       this.toastSer.presentError('Please Enter Borehole Chainage');
     }
     else if (this.boreholeNumber === undefined) {
-      this.toastSer.presentError('Please Enter Borehole Number');
+      this.toastSer.presentError('Please Enter Borehole Chainage');
     }
     if (this.typeOfStructure === undefined) {
-      this.toastSer.presentError('Please Enter Type of Structure');
+      this.toastSer.presentError('Please Enter Chainage');
     }  else if (this.easting === undefined) {
       this.toastSer.presentError('Please Enter Latitude');
     } else if (this.northing === undefined) {
@@ -474,7 +475,13 @@ sel(keyword: string){
       this.toastSer.presentError('Please Select Method of Drilling');
     } else if (this.typeOfRig === 'Other' && this.rigOther === undefined) {
       this.toastSer.presentError('Please Enter Other for Method of Drilling');
-    }else if (this.boreholeCasingDia === 'Other' && this.casingDiaOther === undefined) {
+    }else if (
+      this.detailsOfDrillingBit === 'Other' &&
+      this.drillingBitOther === undefined
+    ) {
+      this.toastSer.presentError('Please Enter Other for Details of Drilling Bit');
+    }
+    else if (this.boreholeCasingDia === 'Other' && this.casingDiaOther === undefined) {
       this.toastSer.presentError('Please Enter Other for Casing Dia');
     }
     else if (this.boreholeDia === 'Other' && this.bhdiaOther === undefined) {
@@ -485,7 +492,7 @@ sel(keyword: string){
     } else if (this.detailsOfDrillingBit === undefined) {
       this.toastSer.presentError('Please Select the Details of Drilling Bit');
     } else if (this.typeOfStructure === '') {
-      this.toastSer.presentError('Please Enter Type of Structure');
+      this.toastSer.presentError('Please Enter Chainage');
     } else if (this.boreholeNumber === '') {
       this.toastSer.presentError('Please Enter Borehole Number');
     } else if (this.easting === '') {
@@ -500,7 +507,13 @@ sel(keyword: string){
       this.toastSer.presentError('Please Select Method of Drilling');
     } else if (this.typeOfRig === 'Other' && this.rigOther === '') {
       this.toastSer.presentError('Please Enter Other for Method of Drilling');
-    }else if (this.boreholeCasingDia === 'Other' && this.casingDiaOther === '') {
+    }else if (
+      this.detailsOfDrillingBit === 'Other' &&
+      this.drillingBitOther === ''
+    ) {
+      this.toastSer.presentError('Please Enter Other for Details of Drilling Bit');
+    }
+    else if (this.boreholeCasingDia === 'Other' && this.casingDiaOther === '') {
       this.toastSer.presentError('Please Enter Other for Casing Dia');
     }    else if (this.boreholeDia === 'Other' && this.bhdiaOther === '') {
       this.toastSer.presentError('Please Enter Other for Borehole Dia');
@@ -511,7 +524,7 @@ sel(keyword: string){
     }  else if (this.detailsOfDrillingBit === '') {
       this.toastSer.presentError('Please Select the Details of Drilling Bit');
     } else if (this.typeOfStructure === null) {
-      this.toastSer.presentError('Please Enter Type of Structure');
+      this.toastSer.presentError('Please Enter Chainage');
     } else if (this.boreholeNumber === null) {
       this.toastSer.presentError('Please Enter Borehole Number');
     } else if (this.easting === null) {
@@ -530,7 +543,13 @@ sel(keyword: string){
       this.toastSer.presentError('Please Select Method of Drilling');
     } else if (this.typeOfRig === 'Other' && this.rigOther === null) {
       this.toastSer.presentError('Please Enter Other for Method of Drilling');
-    }else if (this.boreholeCasingDia === 'Other' && this.casingDiaOther === null) {
+    }else if (
+      this.detailsOfDrillingBit === 'Other' &&
+      this.drillingBitOther === null
+    ) {
+      this.toastSer.presentError('Please Enter Other for Details of Drilling Bit');
+    }
+    else if (this.boreholeCasingDia === 'Other' && this.casingDiaOther === null) {
       this.toastSer.presentError('Please Enter Other for Casing Dia');
     }    else if (this.boreholeDia === 'Other' && this.bhdiaOther === null) {
       this.toastSer.presentError('Please Enter Other for Borehole Dia');
@@ -565,7 +584,7 @@ sel(keyword: string){
 
   addDatabase() {
 
-
+if(Constants.layer2flow === 'fromLog'){
     this.androidDatabase.getChainageCount(Constants.package,Constants.section,this.boreholeChainage).then((data) => {
       this.countList = [];
       console.log('data size',data.rows.length);
@@ -618,6 +637,60 @@ sel(keyword: string){
       }
 
     });
+  }else{
+    this.androidDatabase.getChainageCount(Constants.package,Constants.section,this.boreholeChainage).then((data) => {
+      this.countList = [];
+      console.log('data size',data.rows.length);
+      if (data.rows.length > 0) {
+        for (let i = 0; i < data.rows.length; i++) {
+          this.countList.push(data.rows.item(i));
+        }
+        console.log('countList',this.countList);
+        this.count = this.countList[0].bh_no;
+
+        if(this.count>1){
+          this.toastSer.presentError('Duplicate Chainage Exist');
+
+        }else{
+
+
+
+          this.androidDatabase.updateLayer2(
+            this.ref,
+            this.boreholeNumber,
+            this.easting,
+            this.northing,
+            this.latitude,
+            this.longitude,
+            this.boreholeChainage,
+            this.chainageId,
+            this.typeOfCrossing,
+            this.typeOfStructure,
+            this.typeOfBridge,
+            this.date,
+            this.rl,
+            this.typeOfRig,
+            this.rigOther,
+            this.orientation,
+            this.boreholeDia,
+            this.bhdiaOther,
+            this.boreholeCasingDia,
+            this.casingDiaOther,
+            this.casingDepth,
+            Constants.laYer1Id,
+            this.detailsOfDrillingBit,
+            this.drillingBitOther,
+            this.detailsOdCoreBarrel,
+            this.angleWithHorizontal,
+            this.waterMarkImage.nativeElement.src);
+
+            this.getIterationlist();
+
+        }
+      }
+
+    });
+  }
 
 
 
@@ -1020,11 +1093,18 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
   locationcheck(){
     this.getLatLong();
 
-    if(this.latitude === undefined || this.longitude === undefined ||
-      this.easting === undefined || this.northing === undefined){
+    if(this.easting === undefined || this.northing === undefined){
         this.getLatLong();
+       this.platform.ready().then(() => {
 
-     this.toastSer.presentError('Please Turn on GPS..');
+          if (this.platform.is('android')) {
+            this.toastSer.presentError('Please Turn on GPS..');
+
+          }else{
+            this.toastSer.presentError('Please Enter Easing and Northing');
+          }
+        });
+
     }else{
       this.imageSelection();
     }

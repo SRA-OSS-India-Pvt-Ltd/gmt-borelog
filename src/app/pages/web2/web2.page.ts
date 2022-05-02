@@ -382,21 +382,21 @@ export class Web2Page implements OnInit {
       this.detailsOfDrillingBit === 'Other' &&
       this.drillBitOther === ''
     ) {
-      this.toastSer.presentError('Please Enter Other for Method of Drilling');
+      this.toastSer.presentError('Please Enter Other for Details of Drilling Bit');
     } else if (this.typeOfRig === 'Other' && this.rigOther === null) {
       this.toastSer.presentError('Please Enter Other for Method of Drilling');
     } else if (
       this.detailsOfDrillingBit === 'Other' &&
       this.drillBitOther === null
     ) {
-      this.toastSer.presentError('Please Enter Other for Method of Drilling');
+      this.toastSer.presentError('Please Enter Other for Details of Drilling Bit');
     } else if (this.typeOfRig === 'Other' && this.rigOther === undefined) {
       this.toastSer.presentError('Please Enter Other for Method of Drilling');
     } else if (
       this.detailsOfDrillingBit === 'Other' &&
       this.drillBitOther === undefined
     ) {
-      this.toastSer.presentError('Please Enter Other for Method of Drilling');
+      this.toastSer.presentError('Please Enter Other for Details of Drilling Bit');
     }else if (this.boreholeCasingDia === 'Other' && this.casingDiaOther === null) {
       this.toastSer.presentError('Please Enter Other for Casing Dia');
     }else if (this.boreholeCasingDia === 'Other' && this.casingDiaOther === undefined) {
@@ -609,6 +609,20 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
     );
   }
 
+
+
+  locationcheck(){
+    this.getLatLong();
+
+    if(this.easting === undefined || this.northing === undefined){
+        this.getLatLong();
+        this.toastSer.presentError('Please Enter Easing and Northing');
+
+
+    }else{
+      this.imageSelection();
+    }
+  }
 
 
   async imageSelection() {

@@ -24,6 +24,8 @@ disconnectSubscription: any;
  timeout: any;
  countList: any = [];
  count: any;
+ isweb = false;
+ isandroid = false;
   constructor(public androidDatabase: AndroidDatabaseService,
     public router: Router,
     public httpService: HttpcallsService,
@@ -267,10 +269,13 @@ disconnectSubscription: any;
   adding(){
     this. platform.ready().then(() => {
        if (this.platform.is('android')) {
+         this.isandroid = true;
+         this.isweb = false;
        this.getLayer1();
 
        }else{
-
+this.isandroid = false;
+this.isweb = true;
          this.getPendingBoredata();
        }
 

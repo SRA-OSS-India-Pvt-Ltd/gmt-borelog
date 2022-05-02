@@ -467,6 +467,35 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
     );
   }
 
+
+  locationcheck(){
+    this.getLatLong();
+
+    if(this.easting === undefined || this.northing === undefined){
+        this.getLatLong();
+        this.toastSer.presentError('Please Enter Easing and Northing');
+
+
+    }else{
+      this.imageSelection();
+    }
+  }
+
+
+  locationcheck2(){
+    this.getLatLong();
+
+    if(this.easting === undefined || this.northing === undefined){
+        this.getLatLong();
+        this.toastSer.presentError('Please Enter Easing and Northing');
+
+
+    }else{
+      this.imageSelection2();
+    }
+  }
+
+
   async imageSelection() {
     const alert = await this.alertCtrl.create({
       header: 'Choose Type',

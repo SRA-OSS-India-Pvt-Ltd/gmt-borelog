@@ -34,9 +34,18 @@ export class AndroidDatabaseService {
          .then(() => console.log('Executed SQL'))
          .catch(e => console.log(e));
 
-        //  db.executeSql('CREATE TABLE IF NOT EXISTS chlist (bhno text,bridgeno text,chainage text,chainage_id text ,easting text,northing text,package_id text, section_id text,type_of_bridge text,type_of_crossing text,type_of_structure)',[])
-        //  .then(() => console.log('Executed SQL'))
-        //  .catch(e => console.log(e));
+         db.executeSql('CREATE TABLE IF NOT EXISTS chlist (bhno text,bridgeno text,chainage text,chainage_id text ,easting text,northing text,package_id text, section_id text,type_of_bridge text,type_of_crossing text,type_of_structure text)',[])
+         .then(() => console.log('Executed SQL'))
+         .catch(e => console.log(e));
+
+
+         db.executeSql('CREATE TABLE IF NOT EXISTS sections(package_id text,project_id text,section_id text,section_name text)',[])
+         .then(() => console.log('Executed SQL'))
+         .catch(e => console.log(e));
+
+         db.executeSql('CREATE TABLE IF NOT EXISTS subagencies(pkg_id text,sa_id text,sa_logo text,sa_name text,section_id text)',[])
+         .then(() => console.log('Executed SQL'))
+         .catch(e => console.log(e));
 
 
 
@@ -45,22 +54,85 @@ export class AndroidDatabaseService {
 
   }
 
+  addSubagencies(pkgid: any,said: any,salogo: any, saname: any,secid: any){
+    this.databaseObj.executeSql(`INSERT INTO subagencies
+    (pkg_id,sa_id,sa_logo,sa_name,section_id)
+    VALUES
+    ('${pkgid}',
+    '${said}',
+    '${salogo}',
+    '${saname}',
+    '${secid}')`,[]);
+  }
 
-  // addChlist(bhn: any, brino: any,chaing: any,chid: any,east: any, north: any, pkgid: any,secId: any,){
-  //   this.databaseObj.executeSql(`INSERT INTO borelog_data
-  //   (Package,NoofBoreHoles,SubAgencyName,SubAgencyAddress,SubAgencyLogo,user_id,org_id,project_id,sa_id,section_id)
-  //   VALUES
-  //   ('${package1}',
-  //   '${noholes}',
-  //   '${sunageName}',
-  //   '${subageAddr}',
-  //   '${aubAgeLog}',
-  //   '${userid}',
-  //   '${orgId}',
-  //   '${projId}',
-  //   '${said}}',
-  //   '${sectionId}')`,[]);
-  // }
+  addSections(pkgid: any,projectId: any,secId: any,secname: any){
+    this.databaseObj.executeSql(`INSERT INTO sections
+    (package_id,project_id,section_id,section_name)
+    VALUES
+    ('${pkgid}',
+    '${projectId}',
+    '${secId}',
+    '${secname}')`,[]);
+  }
+
+  addChlist(bhn: any, brino: any,chaing: any,chid: any,east: any, north: any, pkgid: any,secId: any,typeofbridge: any,typeOfCr: any,typeofStru: any){
+    this.databaseObj.executeSql(`INSERT INTO chlist
+    (bhno,bridgeno,chainage,chainage_id,easting,northing,package_id,section_id,type_of_bridge,type_of_crossing,type_of_structure)
+    VALUES
+    ('${bhn}',
+    '${brino}',
+    '${chaing}',
+    '${chid}',
+    '${east}',
+      '${north}',
+    '${pkgid}',
+    '${secId}',
+    '${typeofbridge}',
+    '${typeOfCr}',
+    '${typeofStru}')`,[]);
+  }
+
+
+
+  getChlist(sectioId: any) {
+    return this.databaseObj
+      .executeSql(`select * from chlist where section_id = '${sectioId}' group by chainage_id `, [])
+      .then((res) => {
+        console.log('getting Chainages');
+        return res;
+      })
+      .catch((e) => {
+        console.log('error on getting Chainages ', JSON.stringify(e));
+        return 'error on getting Chainages ' + JSON.stringify(e);
+      });
+  }
+
+  getSectin(sectioId: any) {
+    return this.databaseObj
+      .executeSql(`select * from sections where section_id = '${sectioId}' `, [])
+      .then((res) => {
+        console.log('getting sections');
+        return res;
+      })
+      .catch((e) => {
+        console.log('error on getting sections ', JSON.stringify(e));
+        return 'error on getting sections ' + JSON.stringify(e);
+      });
+  }
+
+  getSubagency(sectioId: any) {
+    return this.databaseObj
+      .executeSql(`select * from subagencies where section_id = '${sectioId}' `, [])
+      .then((res) => {
+        console.log('getting subagencies');
+        return res;
+      })
+      .catch((e) => {
+        console.log('error on getting subagencies ', JSON.stringify(e));
+        return 'error on getting subagencies ' + JSON.stringify(e);
+      });
+  }
+
   addLayer1Details(package1: any,noholes: any,sunageName: any,subageAddr: any,aubAgeLog: any,
     userid: any,orgId: any,projId: any,said: any,sectionId: any){
     this.databaseObj.executeSql(`INSERT INTO borelog_data
@@ -578,6 +650,47 @@ updateLayer4(watertable: any,depthTer: any,edate: any,rvrepname: any,
         return 'error on getting Id ' + JSON.stringify(e);
       });
   }
+
+  deleteChlist() {
+    return this.databaseObj
+      .executeSql(`DELETE FROM chlist`, [])
+      .then((res) => {
+        console.log('getting Id');
+        return res;
+      })
+      .catch((e) => {
+        console.log('error on getting Id ', JSON.stringify(e));
+        return 'error on getting Id ' + JSON.stringify(e);
+      });
+  }
+
+  deleteSections() {
+    return this.databaseObj
+      .executeSql(`DELETE FROM sections`, [])
+      .then((res) => {
+        console.log('getting Id');
+        return res;
+      })
+      .catch((e) => {
+        console.log('error on getting Id ', JSON.stringify(e));
+        return 'error on getting Id ' + JSON.stringify(e);
+      });
+  }
+
+  deleteSubagency() {
+    return this.databaseObj
+      .executeSql(`DELETE FROM subagencies`, [])
+      .then((res) => {
+        console.log('getting Id');
+        return res;
+      })
+      .catch((e) => {
+        console.log('error on getting Id ', JSON.stringify(e));
+        return 'error on getting Id ' + JSON.stringify(e);
+      });
+  }
+
+
 
   deleteRowbyIdIter(id: any) {
     return this.databaseObj

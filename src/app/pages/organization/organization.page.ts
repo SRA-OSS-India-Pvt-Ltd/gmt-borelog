@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-inferrable-types */
 import { CompleteTestServiceService } from './../../services/complete-test-service.service';
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable @typescript-eslint/quotes */
@@ -8,7 +9,7 @@ import { ToastService } from './../../services/toast.service';
 import { Component, OnInit } from '@angular/core';
 import { Constants } from 'src/app/common/constants';
 import { HttpcallsService } from 'src/app/services/httpcalls.service';
-import { Platform } from '@ionic/angular';
+import { Platform, LoadingController } from '@ionic/angular';
 
 
 
@@ -36,10 +37,12 @@ sections: any;
 sectionId: any;
 
 subAencyListValues: any =[];
-subAgencyAddress: any;
+subAgencyAddress: string = '';
 subAgencyLogo: any;
 
 layer1List: any = [];
+sectListValue: any  = [];
+sectionName: any;
 isimg = false;
   constructor(public toastService: ToastService,
     public androiDatabase: AndroidDatabaseService,
@@ -47,7 +50,10 @@ isimg = false;
     public httpService: HttpcallsService,
     public platform: Platform,
     public compleService: CompleteTestServiceService,
+    public loadingController: LoadingController
     ) {
+
+      Constants.layer2flow = '';
     this.orgName = Constants.orgName;
     this.orgAddrs = Constants.orgAddre;
     this.orgLogo = Constants.orgLogo;
@@ -77,24 +83,80 @@ console.log('totallist',Constants.sectionListService);
   sectionChange($event){
     this.sectionId= $event.target.value;
    console.log($event.target.value);
-  }
-  subAgencyChange($event){
-    this.subAencyListValues = [$event.target.value];
-    console.log('array', this.subAencyListValues);
-    if(this.subAencyListValues.length>0){
-      this.isimg = true;
+   this. platform.ready().then(() => {
+    if (this.platform.is('android')) {
+
+
+      this.androiDatabase.getSectin(this.sectionId).then((data) => {
+        this.sectListValue = [];
+        console.log('size',data.rows.length);
+        if (data.rows.length > 0) {
+          for (let i = 0; i < data.rows.length; i++) {
+            this.sectListValue.push(data.rows.item(i));
+          }
+          console.log('totalList',this.sectListValue);
+      this.sectionName = this.sectListValue[0].section_name;
+        }});
+
+
+      this.androiDatabase.getSubagency(this.sectionId).then((data) => {
+        this.subAencyListValues = [];
+        console.log('size',data.rows.length);
+        if (data.rows.length > 0) {
+          for (let i = 0; i < data.rows.length; i++) {
+            this.subAencyListValues.push(data.rows.item(i));
+          }
+          console.log('totalList',this.subAencyListValues);
       this.subAgencyId = this.subAencyListValues[0].sa_id;
+      this.isimg = true;
 
       this.subAgency = this.subAencyListValues[0].sa_name;
-      this.subAgencyAddress = this.subAencyListValues[0].sa_address;
       this.subAgencyLogo = this.subAencyListValues[0].sa_logo;
+      console.log('sub',this.subAgency+ '  '+this.subAgencyLogo);
 
 
+        }
+      });
+
+
+
+
+    }else{
+
+      this.httpService.getSubAgency(Constants.projectId,this.package,this.sectionId)
+      .subscribe((res: any)=>{
+        console.log('res',res);
+        if(res.error === false){
+          this.isimg = true;
+          this.subAgencyId = res.data.sa_id;
+
+          this.subAgency = res.data.sa_name;
+          this.subAgencyLogo = res.data.sa_logo;
+          console.log('sub',this.subAgency+ '  '+this.subAgencyLogo);
+
+        }
+      });
 
     }
-
-
+  });
   }
+  // subAgencyChange($event){
+  //   this.subAencyListValues = [$event.target.value];
+  //   console.log('array', this.subAencyListValues);
+  //   if(this.subAencyListValues.length>0){
+  //     this.isimg = true;
+  //     this.subAgencyId = this.subAencyListValues[0].sa_id;
+
+  //     this.subAgency = this.subAencyListValues[0].sa_name;
+  //     this.subAgencyAddress = this.subAencyListValues[0].sa_address;
+  //     this.subAgencyLogo = this.subAencyListValues[0].sa_logo;
+
+
+
+  //   }
+
+
+  // }
   moveToNext(){
     this.router.navigate(['boreholeinformation']);
   }
@@ -112,10 +174,10 @@ console.log('totallist',Constants.sectionListService);
      this.toastService.presentError('Please Select Section');
 
     }    else if(this.subAgency === undefined){
-      this.toastService.presentError('Please Select SubAgencyName');
+      this.toastService.presentError('Please Select SubAgency Name');
 
     }else if(this.subAgency === ''){
-      this.toastService.presentError('Please Select SubAgencyName');
+      this.toastService.presentError('Please Select SubAgency Name');
 
     }
     else{
@@ -124,54 +186,125 @@ console.log('totallist',Constants.sectionListService);
     }
   }
 
+
+  autoLoader() {
+    this.loadingController.create({
+      spinner:'lines',
+      message: 'Uploading, Please Wait ...',
+      duration: 15000
+    }).then((response) => {
+      response.present();
+      response.onDidDismiss().then((response1) => {
+        console.log('Loader dismissed', response);
+      });
+    });
+  }
   addDatabase(){
+    this.autoLoader();
     if(Constants.laYer1Id === ''){
 
 
-      this.androiDatabase.addLayer1Details(this.package,this.sectionId,this.subAgencyId,this.subAgencyAddress,this.subAgencyLogo,
+      this.androiDatabase.addLayer1Details(this.package,this.sectionName,this.subAgencyId,this.subAgencyAddress,this.subAgencyLogo,
         Constants.userId,Constants.orgId,Constants.projectId,this.subAgencyId,this.sectionId);
         this.getLayer1LastId();
 
-        Constants.chaingeListAndroid11 = Constants.chaingeListAndroid.filter((user: any)=>user.section_id.includes(this.sectionId));
-        console.log('chainageListExample1 : ',Constants.chaingeListAndroid11);
-        console.log('Chaingelistsize : ',Constants.chaingeListAndroid11.length);
-        console.log('sectionId : ',this.sectionId);
 
-        Constants.package = this.package;
-        Constants.section = this.sectionId;
-        this.compleService.getChaingeList(this.sectionId);
 
-        if(Constants.chaingeListAndroid11.length>0){
-          this.router.navigate(['boreholeinformation']);
+        this.androiDatabase.getChlist(this.sectionId).then((data) => {
+          Constants.chaingeListAndroid11 = [];
+          console.log('size',data.rows.length);
+          if (data.rows.length > 0) {
+            for (let i = 0; i < data.rows.length; i++) {
+              Constants.chaingeListAndroid11.push(data.rows.item(i));
+            }
+            console.log('totalList',Constants.chaingeListAndroid11);
+            console.log('Chaingelistsize : ',Constants.chaingeListAndroid11.length);
+            if(Constants.chaingeListAndroid11.length>0){
+              this.router.navigate(['boreholeinformation']);
+              Constants.package = this.package;
+              Constants.section = this.sectionId;
+              this.compleService.getChaingeList(this.sectionId);
 
-        }else{
-          this.toastService.presentError('No Chainage exist.');
 
-        }
+            }else{
+              this.toastService.presentError('No Chainage exist.');
+
+            }
+
+
+          }
+        });
+
+
+        // Constants.chaingeListAndroid11 = Constants.chaingeListAndroid.filter((user: any)=>user.section_id.includes(this.sectionId));
+        // console.log('chainageListExample1 : ',Constants.chaingeListAndroid11);
+        // console.log('Chaingelistsize : ',Constants.chaingeListAndroid11.length);
+        // console.log('sectionId : ',this.sectionId);
+
+
 
 
     }else{
-      Constants.chaingeListAndroid11 = '';
-      console.log('Chaingelistsize : ',Constants.chaingeListAndroid11.length);
 
-      console.log('sectionId',this.sectionId);
-      Constants.chaingeListAndroid11 = Constants.chaingeListAndroid.filter((user: any)=>user.section_id.includes(this.sectionId));
-      console.log('Chaingelistsize : ',Constants.chaingeListAndroid11.length);
-      this.compleService.getChaingeList(this.sectionId);
 
-      if(Constants.chaingeListAndroid11.length>0){
 
-      this.androiDatabase.updateLayer1(this.package,this.sections,this.subAgencyId,
-        this.subAgencyAddress,this.subAgencyLogo,Constants.laYer1Id,this.sectionId);
 
-        Constants.package = this.package;
-        Constants.section = this.sectionId;
+      this.androiDatabase.getChlist(this.sectionId).then((data) => {
+        Constants.chaingeListAndroid11 = [];
+        console.log('size',data.rows.length);
+        if (data.rows.length > 0) {
+          for (let i = 0; i < data.rows.length; i++) {
+            Constants.chaingeListAndroid11.push(data.rows.item(i));
+          }
+          console.log('sectionId',this.sectionId);
 
-        this.getLayer1();
-      }else{
-        this.toastService.presentError('No Chainage exist.');
+          console.log('totalList',Constants.chaingeListAndroid11);
+          console.log('Chaingelistsize : ',Constants.chaingeListAndroid11.length);
+          if(Constants.chaingeListAndroid11.length>0){
+            this.compleService.getChaingeList(this.sectionId);
 
-      }
+
+            this.androiDatabase.updateLayer1(this.package,this.sectionName,this.subAgencyId,
+              this.subAgencyAddress,this.subAgencyLogo,Constants.laYer1Id,this.sectionId);
+
+              Constants.package = this.package;
+              Constants.section = this.sectionId;
+
+              this.getLayer1();
+            }else{
+              this.toastService.presentError('No Chainage exist.');
+
+            }
+
+
+
+        }
+      });
+
+
+
+
+      // Constants.chaingeListAndroid11 = '';
+      // console.log('Chaingelistsize : ',Constants.chaingeListAndroid11.length);
+
+      // console.log('sectionId',this.sectionId);
+      // Constants.chaingeListAndroid11 = Constants.chaingeListAndroid.filter((user: any)=>user.section_id.includes(this.sectionId));
+      // console.log('Chaingelistsize : ',Constants.chaingeListAndroid11.length);
+      // this.compleService.getChaingeList(this.sectionId);
+
+      // if(Constants.chaingeListAndroid11.length>0){
+
+      // this.androiDatabase.updateLayer1(this.package,this.sections,this.subAgencyId,
+      //   this.subAgencyAddress,this.subAgencyLogo,Constants.laYer1Id,this.sectionId);
+
+      //   Constants.package = this.package;
+      //   Constants.section = this.sectionId;
+
+      //   this.getLayer1();
+      // }else{
+      //   this.toastService.presentError('No Chainage exist.');
+
+      // }
 
     }
 
