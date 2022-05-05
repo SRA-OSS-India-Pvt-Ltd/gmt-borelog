@@ -43,6 +43,7 @@ subAgencyLogo: any;
 layer1List: any = [];
 sectListValue: any  = [];
 sectionName: any;
+packagename: string = '';
 isimg = false;
   constructor(public toastService: ToastService,
     public androiDatabase: AndroidDatabaseService,
@@ -73,6 +74,14 @@ isimg = false;
    this.package = $event.target.value;
    console.log($event.target.value);
 
+   if(this.package === '1'){
+     this.packagename = 'DFCCIL Package-1';
+   }else if(this.package === '2'){
+     this.packagename = 'DFCCIL Package-2';
+   }else if(this.package === '3'){
+     this.packagename = 'DFCCIL Package-3';
+   }
+
 console.log('totallist',Constants.sectionListService);
    this.sectionList = Constants.sectionListService.filter((user: any) =>
    user.package_id.includes(this.package));
@@ -86,7 +95,7 @@ console.log('totallist',Constants.sectionListService);
    this. platform.ready().then(() => {
     if (this.platform.is('android')) {
 
-
+this.autoLoader();
       this.androiDatabase.getSectin(this.sectionId).then((data) => {
         this.sectListValue = [];
         console.log('size',data.rows.length);
@@ -190,7 +199,7 @@ console.log('totallist',Constants.sectionListService);
   autoLoader() {
     this.loadingController.create({
       spinner:'lines',
-      message: 'Uploading, Please Wait ...',
+      message: 'Getting sub agency and chainage details , Please Wait ...',
       duration: 15000
     }).then((response) => {
       response.present();
@@ -200,13 +209,9 @@ console.log('totallist',Constants.sectionListService);
     });
   }
   addDatabase(){
-    this.autoLoader();
     if(Constants.laYer1Id === ''){
 
 
-      this.androiDatabase.addLayer1Details(this.package,this.sectionName,this.subAgencyId,this.subAgencyAddress,this.subAgencyLogo,
-        Constants.userId,Constants.orgId,Constants.projectId,this.subAgencyId,this.sectionId);
-        this.getLayer1LastId();
 
 
 
@@ -220,10 +225,15 @@ console.log('totallist',Constants.sectionListService);
             console.log('totalList',Constants.chaingeListAndroid11);
             console.log('Chaingelistsize : ',Constants.chaingeListAndroid11.length);
             if(Constants.chaingeListAndroid11.length>0){
+
+              this.androiDatabase.addLayer1Details(this.package,this.sectionName,this.subAgencyId,this.subAgencyAddress,this.subAgencyLogo,
+                Constants.userId,Constants.orgId,Constants.projectId,this.subAgencyId,this.sectionId,this.packagename);
+                this.getLayer1LastId();
+                Constants.package = this.package;
+                Constants.section = this.sectionId;
+                this.compleService.getChaingeList(this.sectionId);
+
               this.router.navigate(['boreholeinformation']);
-              Constants.package = this.package;
-              Constants.section = this.sectionId;
-              this.compleService.getChaingeList(this.sectionId);
 
 
             }else{
@@ -231,6 +241,10 @@ console.log('totallist',Constants.sectionListService);
 
             }
 
+
+          }
+          else{
+            this.toastService.presentError('No Chainage exist.');
 
           }
         });
@@ -265,7 +279,7 @@ console.log('totallist',Constants.sectionListService);
 
 
             this.androiDatabase.updateLayer1(this.package,this.sectionName,this.subAgencyId,
-              this.subAgencyAddress,this.subAgencyLogo,Constants.laYer1Id,this.sectionId);
+              this.subAgencyAddress,this.subAgencyLogo,Constants.laYer1Id,this.sectionId,this.packagename);
 
               Constants.package = this.package;
               Constants.section = this.sectionId;
@@ -277,6 +291,9 @@ console.log('totallist',Constants.sectionListService);
             }
 
 
+
+        }else{
+          this.toastService.presentError('No Chainage exist.');
 
         }
       });

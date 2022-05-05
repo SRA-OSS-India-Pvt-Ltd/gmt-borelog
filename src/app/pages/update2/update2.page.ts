@@ -638,6 +638,27 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
     return 223;
   };
 
+
+
+  y631(coffee, metrics, context) {
+    return 95;
+  };
+  y831(coffee, metrics, context) {
+    return 110;
+  };
+
+  y1031(coffee, metrics, context) {
+    return 125;
+  };
+
+  y1231(coffee, metrics, context) {
+    return 150;
+  };
+
+  y1431(coffee, metrics, context) {
+    return 175;
+  };
+
   watermarkImage() {
 
 
@@ -661,15 +682,15 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
 
   watermarkImage1() {
     watermark([this.blobImage1])
-    .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.chainage, '10px Josefin Slab', '#FC0535', 0.5))
+    .image(watermark.text.atPos(this.xy78,this.y631,'Chainage: '+this.chainage, '10px Josefin Slab', '#FC0535', 0.5))
     .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.boreholeNumber, '10px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y831,'Bhno: '+this.boreholeNumber, '10px Josefin Slab', '#FC0535', 0.5, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '10px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y1031,'Date: '+this.joindate, '10px Josefin Slab', '#FC0535', 0.5, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '10px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y1231,'Easting- '+this.easting, '10px Josefin Slab', '#FC0535', 0.5, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y143,'Northing- '+this.northing, '10px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y1431,'Northing- '+this.northing, '10px Josefin Slab', '#FC0535', 0.5, 48))
     // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
     .then((img)=> {
       console.log('Base 64 of one :', img.src);

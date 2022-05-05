@@ -64,7 +64,7 @@ export class HomePage {
     this.loadingController.create({
       spinner:'lines',
       message: 'Loading, Please Wait ...',
-      duration: 30000
+      duration: 35000
     }).then((response) => {
       response.present();
       response.onDidDismiss().then((response1) => {
@@ -83,11 +83,14 @@ export class HomePage {
               console.log('response34',Constants.chaingeListAndroid );
               this. platform.ready().then(() => {
                 if (this.platform.is('android')) {
+                  if(response.data.user_type === 'staff'){
                   this.autoLoader();
 
+                  }
                   this.andridSer.deleteChlist();
                   this.andridSer.deleteSections();
                   this.andridSer.deleteSubagency();
+
 
                   for (let i = 0; i < Constants.chaingeListAndroid.length; i++) {
                       this.andridSer.addChlist(Constants.chaingeListAndroid[i].bhno,

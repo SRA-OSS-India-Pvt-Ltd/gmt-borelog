@@ -82,18 +82,55 @@ sno: any;
   ngOnInit() {
   }
   totalCount(){
-    if(this.second !== undefined && this.third !== undefined &&
-      this.second !== 0 && this.third !== 0 ){
-      this.total = parseInt(this.second) + parseInt(this.third);
+    if (this.first !== undefined &&this.second !== undefined && this.third !== undefined
+      && this.first !== '' &&this.second !== '' && this.third !== ''
+      && this.first !== null &&this.second !== null && this.third !== null ) {
+      this.total = parseInt(this.first)+parseInt(this.second) + parseInt(this.third);
+    }else if(this.first !== undefined&&this.second !== undefined
+      && this.first !== ''&&this.second !== ''
+      && this.first !== null &&this.second !== null ){
+      console.log('val',this.second);
+      this.total = parseInt(this.first)+parseInt(this.second) ;
 
+    }else if(this.first !== undefined &&this.third !== undefined
+      && this.first !== '' &&this.third !== ''
+      && this.first !== null &&this.third !== null ){
+      console.log('2');
+      this.total = parseInt(this.first)+parseInt(this.third) ;
+
+    }else{
+      this.total = parseInt(this.first);
     }
-    if(this.secondB !== undefined && this.thirdB !== undefined &&
-      this.secondB !== 0 && this.thirdB !== 0){
-      this.totalB = parseInt(this.secondB) + parseInt(this.thirdB);
+
+
+
+
+    if (this.firstB !== undefined &&this.secondB !== undefined && this.thirdB !== undefined
+      && this.firstB !== '' &&this.secondB !== '' && this.thirdB !== ''
+      && this.firstB !== null &&this.secondB !== null && this.thirdB !== null ) {
+      this.totalB = parseInt(this.firstB)+parseInt(this.secondB) + parseInt(this.thirdB);
+    }else if(this.firstB !== undefined&&this.secondB !== undefined
+      && this.firstB !== ''&&this.secondB !== ''
+      && this.firstB !== null &&this.secondB !== null ){
+      console.log('val',this.secondB);
+      this.totalB = parseInt(this.firstB)+parseInt(this.secondB) ;
+
+    }else if(this.firstB !== undefined &&this.thirdB !== undefined
+      && this.firstB !== '' &&this.thirdB !== ''
+      && this.firstB !== null &&this.thirdB !== null ){
+      console.log('2');
+      this.totalB = parseInt(this.firstB)+parseInt(this.thirdB) ;
+
+    }else{
+      this.totalB = parseInt(this.firstB);
     }
 
 
-    if((this.firstB === 50 && this.first < 15) || (this.secondB === 50 && this.second < 15) || (this.thirdB === 50 && this.third < 15)  ){
+
+
+
+    if((this.firstB >= 50 && this.first < 15) || (this.secondB >= 50 && this.second < 15)
+     || (this.thirdB >= 50 && this.third < 15)  ){
 
 
       this.oneB = true;
@@ -219,19 +256,8 @@ sno: any;
       }
       else if(this.typeOfsample === 'SPT' && this.first === ''){
        this.toastSer.presentError('Please Enter  Penetration From First');
-      }else if(this.typeOfsample === 'SPT' && this.second === ''){
-       this.toastSer.presentError('Please Enter  Penetration From Second');
-      }else if(this.typeOfsample === 'SPT' && this.third === ''){
-       this.toastSer.presentError('Please Enter  Penetration From Third');
-
       }else if(this.typeOfsample === 'SPT' && this.firstB === ''){
        this.toastSer.presentError('Please Enter  Blows - N From First');
-
-      }else if(this.typeOfsample === 'SPT' && this.secondB === ''){
-       this.toastSer.presentError('Please Enter  Blows - N From Second');
-
-      }else if(this.typeOfsample === 'SPT' && this.thirdB === ''){
-       this.toastSer.presentError('Please Enter  Blows - N From Third');
 
       }else if(this.typeOfsample === 'UDS' && this.udsDepthFrom === ''){
        this.toastSer.presentError('Please Enter  UDS Depth From');
@@ -253,27 +279,13 @@ sno: any;
 
       }else if( this.visualClassification === ''){
        this.toastSer.presentError('Please Enter  Visual Classification of Sample');
-      }else if(this.typeOfsample === 'DS' && this.dsDepthFrom === 0){
-        this.toastSer.presentError('Please Enter  Ds Depth From, It should not be Zero');
-
-       }else if(this.typeOfsample === 'SPT' && this.sptDepthFrom === 0){
+      }else if(this.typeOfsample === 'SPT' && this.sptDepthFrom === 0){
         this.toastSer.presentError('Please Enter  SPT Depth From,It should not be Zero');
 
        }else if(this.typeOfsample === 'SPT' && this.first === 0){
         this.toastSer.presentError('Please Enter  Penetration From First,It should not be Zero');
-       }else if(this.typeOfsample === 'SPT' && this.second === 0){
-        this.toastSer.presentError('Please Enter  Penetration From Second,It should not be Zero');
-       }else if(this.typeOfsample === 'SPT' && this.third === 0){
-        this.toastSer.presentError('Please Enter  Penetration From Third,It should not be Zero');
-
        }else if(this.typeOfsample === 'SPT' && this.firstB === 0){
         this.toastSer.presentError('Please Enter  Blows - N From First,It should not be Zero');
-
-       }else if(this.typeOfsample === 'SPT' && this.secondB === 0){
-        this.toastSer.presentError('Please Enter  Blows - N From Second,It should not be Zero');
-
-       }else if(this.typeOfsample === 'SPT' && this.thirdB === 0){
-        this.toastSer.presentError('Please Enter  Blows - N From Third,It should not be Zero');
 
        }else if(this.typeOfsample === 'UDS' && this.udsDepthFrom === 0){
         this.toastSer.presentError('Please Enter  UDS Depth From,It should not be Zero');
@@ -288,19 +300,8 @@ sno: any;
 
        }else if(this.typeOfsample === 'SPT' && this.first === null){
         this.toastSer.presentError('Please Enter  Penetration From First');
-       }else if(this.typeOfsample === 'SPT' && this.second === null){
-        this.toastSer.presentError('Please Enter  Penetration From Second');
-       }else if(this.typeOfsample === 'SPT' && this.third === null){
-        this.toastSer.presentError('Please Enter  Penetration From Third');
-
        }else if(this.typeOfsample === 'SPT' && this.firstB === null){
         this.toastSer.presentError('Please Enter  Blows - N From First');
-
-       }else if(this.typeOfsample === 'SPT' && this.secondB === null){
-        this.toastSer.presentError('Please Enter  Blows - N From Second');
-
-       }else if(this.typeOfsample === 'SPT' && this.thirdB === null){
-        this.toastSer.presentError('Please Enter  Blows - N From Third');
 
        }else if(this.typeOfsample === 'UDS' && this.udsDepthFrom === null){
         this.toastSer.presentError('Please Enter  UDS Depth From');

@@ -36,7 +36,7 @@ export abstract class Constants {
 
   public static iterationCpunt: any;
 public static duplicate: any;
-public static imageUrl='http://202.62.69.3:7071/borelogapi_v2/';
+public static imageUrl='http://apps.aarvee.net/borelogapi/';
 public static sectionListService: any = [];
 
 public static editSectionId: any;
@@ -45,6 +45,7 @@ public static layer2flow: any;
 public static subagenctList: any = [];
 
   //ionic build --prod -- --base-href /borelogadmin/
+// ionic cordova run browser --prod -- --base-href /borelogweb_v2_testing/
 
   //ionic build --prod -- --base-href /borelogweb_v2_testing/
 //        classpath 'com.android.tools.build:gradle:4.0.0'

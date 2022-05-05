@@ -39,6 +39,7 @@ export class Update1Page implements OnInit {
   sectionList: any = [];
   sectListValue: any = [];
   sectionName: any;
+  packagename: string = '';
   constructor(
     public androidDatabase: AndroidDatabaseService,
     public router: Router,
@@ -62,6 +63,14 @@ export class Update1Page implements OnInit {
   packageChange($event) {
     this.package = $event.target.value;
     console.log($event.target.value);
+    if(this.package === '1'){
+      this.packagename = 'DFCCIL Package-1';
+    }else if(this.package === '2'){
+      this.packagename = 'DFCCIL Package-2';
+    }else if(this.package === '3'){
+      this.packagename = 'DFCCIL Package-3';
+    }
+
 
     this.sectionList = Constants.sectionListService.filter((user: any) =>
       user.package_id.includes(this.package)
@@ -110,18 +119,18 @@ export class Update1Page implements OnInit {
 
   ngOnInit() {}
 
-  autoLoader() {
-    this.loadingController.create({
-      spinner:'lines',
-      message: 'Uploading, Please Wait ...',
-      duration: 15000
-    }).then((response) => {
-      response.present();
-      response.onDidDismiss().then((response1) => {
-        console.log('Loader dismissed', response);
-      });
-    });
-  }
+  // autoLoader() {
+  //   this.loadingController.create({
+  //     spinner:'lines',
+  //     message: 'Uploading, Please Wait ...',
+  //     duration: 15000
+  //   }).then((response) => {
+  //     response.present();
+  //     response.onDidDismiss().then((response1) => {
+  //       console.log('Loader dismissed', response);
+  //     });
+  //   });
+  // }
 
   getLayer1() {
     this.androidDatabase.getLayer1ById(this.layer1Id).then((data) => {
@@ -134,6 +143,7 @@ export class Update1Page implements OnInit {
         console.log('layer1List', this.layer1List);
         if (this.layer1List.length > 0) {
           this.package = this.layer1List[0].Package;
+          this.packagename = this.layer1List[0].package_name;
           this.sectionId = this.layer1List[0].section_id;
           Constants.beforeUpdateSecId = this.layer1List[0].section_id;
           this.section = this.layer1List[0].section_id;
@@ -175,7 +185,7 @@ export class Update1Page implements OnInit {
     }
   }
   updateLayer1() {
-    this.autoLoader();
+   // this.autoLoader();
     // Constants.chaingeListAndroid11 = '';
 
     // Constants.chaingeListAndroid11 = Constants.chaingeListAndroid.filter((user: any)=>user.section_id.includes(this.sectionId));
@@ -208,7 +218,8 @@ export class Update1Page implements OnInit {
             this.subAgencyAddress,
             this.subAgencyLogo,
             Constants.laYer1Id,
-            this.sectionId
+            this.sectionId,
+            this.packagename
           );
           console.log('updated');
           Constants.package = this.package;
@@ -234,6 +245,8 @@ export class Update1Page implements OnInit {
         } else {
           this.toastService.presentError('No Chainage exist.');
         }
+      }else {
+        this.toastService.presentError('No Chainage exist.');
       }
     });
   }
