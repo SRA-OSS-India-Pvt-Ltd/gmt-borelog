@@ -21,16 +21,23 @@ export class HomePage {
     employeeid: '',
     epassword: '',
   };
-
+  countList: any = [];
+  countListSec: any = [];
+  countListSub: any = [];
+  userList: any= [];
+  count: any;
+  countSec: any;
+  countSubAg: any;
   constructor(public router: Router,
     public toastSer: ToastService,
    public httpService: HttpcallsService,
    public andridSer: AndroidDatabaseService,
    public platform: Platform,
    public loadingController: LoadingController) {
-    platform.ready().then(() => {
+    this.platform.ready().then(() => {
       if (this.platform.is('android')) {
        this.andridSer.createDatabase();
+       this.getUserData();
 
       }else{
 
@@ -38,6 +45,44 @@ export class HomePage {
 
 
   });
+
+   }
+
+
+   ionViewDidEnter(){
+    this.platform.ready().then(() => {
+      if (this.platform.is('android')) {
+        this.getUserData();
+
+      }
+    });
+
+   }
+   getUserData(){
+    this.andridSer.getUser().then((data) => {
+      this.userList = [];
+      console.log('size',data.rows.length);
+      if (data.rows.length > 0) {
+        for (let i = 0; i < data.rows.length; i++) {
+          this.userList.push(data.rows.item(i));
+        }
+        console.log('userType',this.userList[0].userType);
+        Constants.userId =this.userList[0].userId;
+        Constants.userName =this.userList[0].userName;
+        Constants.usertype =this.userList[0].userType;
+
+        if(this.userList[0].userType === 'staff'){
+          this.router.navigate(['sidemenu']);
+        }else if(this.userList[0].userType === 'admin'){
+         this.router.navigate(['admindashbord']);
+
+        }else{
+          console.log('userTypeelse',this.userList[0].userType);
+
+        }
+
+      }
+    });
 
    }
   callloginservice(){
@@ -50,12 +95,63 @@ export class HomePage {
       Constants.loginUserName = this.postData.employeeid;
       Constants.loginPassword = this.postData.epassword;
 
-      this.serviceCall(this.postData.employeeid,this.postData.epassword);
+      this. platform.ready().then(() => {
+        if (this.platform.is('android')) {
+
+
+
+          this.andridSer.getUser().then((data) => {
+            this.userList = [];
+            console.log('size',data.rows.length);
+            if (data.rows.length > 0) {
+              for (let i = 0; i < data.rows.length; i++) {
+                this.userList.push(data.rows.item(i));
+              }
+              console.log('userType',this.userList[0].userType);
+              Constants.userId =this.userList[0].userId;
+              Constants.userName =this.userList[0].userName;
+              Constants.usertype =this.userList[0].userType;
+
+              if(this.userList[0].userType === 'staff'){
+                this.router.navigate(['sidemenu']);
+              }else if(this.userList[0].userType === 'admin'){
+               this.router.navigate(['admindashbord']);
+
+              }else{
+                if(window.navigator.connection.type === 'none'){
+                  this.toastSer.presentError('Please check your internet connection');
+                }else{
+                  this.serviceCall(this.postData.employeeid,this.postData.epassword);
+
+                }
+              }
+            }else{
+              if(window.navigator.connection.type === 'none'){
+                this.toastSer.presentError('Please check your internet connection');
+              }else{
+                this.serviceCall(this.postData.employeeid,this.postData.epassword);
+
+              }
+
+            }
+          });
 
 
 
 
 
+
+
+
+
+
+
+
+        }else{
+          this.serviceCall(this.postData.employeeid,this.postData.epassword);
+
+        }
+      });
 
     }
   }
@@ -83,6 +179,8 @@ export class HomePage {
               console.log('response34',Constants.chaingeListAndroid );
               this. platform.ready().then(() => {
                 if (this.platform.is('android')) {
+                  this.andridSer.addUser(response.data.user_id,response.data.user_name,response.data.user_type);
+
                   if(response.data.user_type === 'staff'){
                   this.autoLoader();
 
@@ -149,6 +247,7 @@ export class HomePage {
                   Constants.subagenctList[i].sa_name,
                   Constants.subagenctList[i].section_id);
                }
+
 
             }
           });

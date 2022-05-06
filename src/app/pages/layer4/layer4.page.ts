@@ -300,6 +300,9 @@ export class Layer4Page implements AfterViewInit {
         if (this.layer1List.length > 0) {
 
           this.startDate = this.layer1List[0].bh_start_date;
+          this.easting = this.layer1List[0].easting;
+          this.northing = this.layer1List[0].northing;
+
         }
       }
     });
@@ -448,6 +451,7 @@ export class Layer4Page implements AfterViewInit {
         this.locationCordinates = resp.coords;
         this.loadingLocation = false;
 
+        console.log('lattttt: '+this.locationCordinates.latitude);
 this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longitude);
 
       })

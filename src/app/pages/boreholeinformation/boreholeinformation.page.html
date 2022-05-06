@@ -215,7 +215,7 @@
         <ion-col size="6">
           <ion-item class="input" >
 
-            <ion-input type="text" cass="input" [(ngModel)]="easting" (click)="getLatLong()" ></ion-input>
+            <ion-input type="number"  [(ngModel)]="easting"  ></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -226,8 +226,8 @@
           </ion-item>
         </ion-col>
         <ion-col size="6">
-          <ion-item class="input" (click)="getLocations()">
-            <ion-input type="text" cass="input" [(ngModel)]="northing"></ion-input>
+          <ion-item class="input" >
+            <ion-input type="number"  [(ngModel)]="northing"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>

@@ -114,7 +114,7 @@ export class Update4Page implements AfterViewInit {
     bhno: any;
     base64Image: any;
     joindate: any;
-
+    startDate: any ='';
 
   constructor(
     public toastSer: ToastService,
@@ -203,6 +203,11 @@ export class Update4Page implements AfterViewInit {
             this.layer1List[0].sample_pic;
           this.chainge = this.layer1List[0].chainage;
           this.bhno = this.layer1List[0].bh_no;
+          this.startDate = this.layer1List[0].bh_start_date;
+          this.easting = this.layer1List[0].easting;
+          this.northing = this.layer1List[0].northing;
+
+
         }
       }
     });

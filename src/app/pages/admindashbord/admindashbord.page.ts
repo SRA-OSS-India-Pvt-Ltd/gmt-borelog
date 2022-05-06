@@ -1,6 +1,7 @@
+import { AndroidDatabaseService } from 'src/app/database/android-database.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { AlertController, Platform } from '@ionic/angular';
 import { Constants } from 'src/app/common/constants';
 
 @Component({
@@ -12,6 +13,8 @@ export class AdmindashbordPage implements OnInit {
   empName: any;
   constructor(public router: Router,
     public alertCtrl: AlertController,
+    public platform: Platform,
+    public androidDatabase: AndroidDatabaseService
     ) {
       this.empName = Constants.userName;
 
@@ -34,7 +37,16 @@ export class AdmindashbordPage implements OnInit {
         {
           text: 'Yes',
           handler: (redc) => {
-            this.router.navigate(['home']);
+            this. platform.ready().then(() => {
+              if (this.platform.is('android')) {
+                this.deleteTabledata();
+                this.router.navigate(['home']);
+
+              }else{
+                this.router.navigate(['home']);
+
+              }
+            });
           },
         },
         {
@@ -47,6 +59,15 @@ export class AdmindashbordPage implements OnInit {
 
   gotosample(){
     this.router.navigate(['samplescreen']);
+  }
+
+  deleteTabledata(){
+    this.androidDatabase.deleteChlist();
+    this.androidDatabase.deleteSections();
+    this.androidDatabase.deleteSubagency();
+    this.androidDatabase.deleteUSer();
+
+
   }
 
 }

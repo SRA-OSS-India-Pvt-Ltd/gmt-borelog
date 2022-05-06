@@ -64,7 +64,18 @@ empName: any;
         {
           text: 'Yes',
           handler: (redc) => {
-            this.router.navigate(['home']);
+
+            this. platform.ready().then(() => {
+              if (this.platform.is('android')) {
+                this.deleteTabledata();
+                this.router.navigate(['home']);
+
+              }else{
+                this.router.navigate(['home']);
+
+              }
+            });
+
           },
         },
         {
@@ -107,5 +118,13 @@ empName: any;
     this.router.navigate(['samplescreen']);
   }
 
+  deleteTabledata(){
+    this.androidDatabase.deleteChlist();
+    this.androidDatabase.deleteSections();
+    this.androidDatabase.deleteSubagency();
+    this.androidDatabase.deleteUSer();
+
+
+  }
 
 }

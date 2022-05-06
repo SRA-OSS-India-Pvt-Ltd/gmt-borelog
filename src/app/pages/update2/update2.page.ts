@@ -767,11 +767,12 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
   locationcheck(){
     this.getLatLong();
 
-    if(this.latitude === undefined || this.longitude === undefined ||
-      this.easting === undefined || this.northing === undefined){
+    if(this.easting === undefined || this.northing === undefined
+      ||this.easting === null || this.northing === null||
+      this.easting === '' || this.northing === ''){
         this.getLatLong();
 
-     this.toastSer.presentError('Please Turn on GPS..');
+     this.toastSer.presentError('Please Enter Easing and Northing');
     }else{
       this.imageSelection();
     }

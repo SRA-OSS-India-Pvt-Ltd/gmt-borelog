@@ -47,12 +47,28 @@ export class AndroidDatabaseService {
          .then(() => console.log('Executed SQL'))
          .catch(e => console.log(e));
 
+         db.executeSql('CREATE TABLE IF NOT EXISTS user(userId text, userName text, userType text)',[])
+         .then(() => console.log('Executed SQL'))
+         .catch(e => console.log(e));
+
+
 
 
       })
       .catch(e => console.log(e));
 
   }
+
+  addUser(uid: any,unmae: any, utype: any){
+    this.databaseObj.executeSql(`INSERT INTO user
+    (userId,userName,userType)
+    VALUES
+    ('${uid}',
+    '${unmae}',
+    '${utype}'
+    )`,[]);
+  }
+
 
   addSubagencies(pkgid: any,said: any,salogo: any, saname: any,secid: any){
     this.databaseObj.executeSql(`INSERT INTO subagencies
@@ -64,6 +80,8 @@ export class AndroidDatabaseService {
     '${saname}',
     '${secid}')`,[]);
   }
+
+
 
   addSections(pkgid: any,projectId: any,secId: any,secname: any){
     this.databaseObj.executeSql(`INSERT INTO sections
@@ -91,6 +109,21 @@ export class AndroidDatabaseService {
     '${typeOfCr}',
     '${typeofStru}')`,[]);
   }
+
+
+  getUser() {
+    return this.databaseObj
+      .executeSql(`select * from user  `, [])
+      .then((res) => {
+        console.log('getting Chainages');
+        return res;
+      })
+      .catch((e) => {
+        console.log('error on getting Chainages ', JSON.stringify(e));
+        return 'error on getting Chainages ' + JSON.stringify(e);
+      });
+  }
+
 
 
 
@@ -639,6 +672,45 @@ updateLayer4(watertable: any,depthTer: any,edate: any,rvrepname: any,
         return 'error on getting Id ' + JSON.stringify(e);
       });
   }
+
+  getTableCount() {
+    return this.databaseObj
+      .executeSql(`SELECT COUNT(*)  AS bhno FROM chlist   `, [])
+      .then((res) => {
+        console.log('getting chlist');
+        return res;
+      })
+      .catch((e) => {
+        console.log('error on getting chlist ', JSON.stringify(e));
+        return 'error on chlist Id ' + JSON.stringify(e);
+      });
+  }
+  getTableCountSect() {
+    return this.databaseObj
+      .executeSql(`SELECT COUNT(*)  AS package_id FROM sections   `, [])
+      .then((res) => {
+        console.log('getting chlist');
+        return res;
+      })
+      .catch((e) => {
+        console.log('error on getting chlist ', JSON.stringify(e));
+        return 'error on chlist Id ' + JSON.stringify(e);
+      });
+  }
+  getTableCountSub() {
+    return this.databaseObj
+      .executeSql(`SELECT COUNT(*)  AS sa_id FROM subagencies   `, [])
+      .then((res) => {
+        console.log('getting chlist');
+        return res;
+      })
+      .catch((e) => {
+        console.log('error on getting chlist ', JSON.stringify(e));
+        return 'error on chlist Id ' + JSON.stringify(e);
+      });
+  }
+
+
   deleteRowbyId(id: any) {
     return this.databaseObj
       .executeSql(`DELETE FROM borelog_data WHERE Id = '${id}'`, [])
@@ -681,6 +753,19 @@ updateLayer4(watertable: any,depthTer: any,edate: any,rvrepname: any,
   deleteSubagency() {
     return this.databaseObj
       .executeSql(`DELETE FROM subagencies`, [])
+      .then((res) => {
+        console.log('getting Id');
+        return res;
+      })
+      .catch((e) => {
+        console.log('error on getting Id ', JSON.stringify(e));
+        return 'error on getting Id ' + JSON.stringify(e);
+      });
+  }
+
+  deleteUSer() {
+    return this.databaseObj
+      .executeSql(`DELETE FROM user`, [])
       .then((res) => {
         console.log('getting Id');
         return res;
