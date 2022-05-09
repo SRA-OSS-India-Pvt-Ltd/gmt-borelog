@@ -40,6 +40,9 @@ import { LocationAccuracy } from '@awesome-cordova-plugins/location-accuracy/ngx
 })
 export class BoreholeinformationPage implements OnInit {
   @ViewChild('previewimage') waterMarkImage: ElementRef;
+  @ViewChild('previewimage2') waterMarkImage2: ElementRef;
+  @ViewChild('previewimage3') waterMarkImage3: ElementRef;
+
   @ViewChild('searchbar')searchbar: AutoCompleteComponent;
   @Input() public styles = new AutoCompleteStyles();
 
@@ -174,6 +177,32 @@ public teamOptions:AutoCompleteOptions;
 public otherTeam: any =[];
 public selected: any = [];
 joindate: any;
+itemboreholepic2: any;
+blobImagepic2: any;
+
+itemboreholepic3: any;
+blobImagepic3: any;
+
+originalImage2pic: any;
+originalImage3pic: any;
+
+blobImagepic33: any;
+blobImagepic22: any;
+
+base64Image2: any;
+blobImage12: any;
+
+
+base64Image3: any;
+blobImage13: any;
+
+base64Image31: any;
+base64Image312: any;
+
+blobImage131: any;
+blobImage132: any;
+
+
   constructor(
     public toastSer: ToastService,
     public androidDatabase: AndroidDatabaseService,
@@ -629,7 +658,9 @@ if(Constants.layer2flow === 'fromLog'){
             this.drillingBitOther,
             this.detailsOdCoreBarrel,
             this.angleWithHorizontal,
-            this.waterMarkImage.nativeElement.src);
+            this.waterMarkImage.nativeElement.src,
+            this.waterMarkImage2.nativeElement.src ,
+            this.waterMarkImage3.nativeElement.src  );
 
             this.getIterationlist();
 
@@ -682,7 +713,9 @@ if(Constants.layer2flow === 'fromLog'){
             this.drillingBitOther,
             this.detailsOdCoreBarrel,
             this.angleWithHorizontal,
-            this.waterMarkImage.nativeElement.src);
+            this.waterMarkImage.nativeElement.src,
+            this.waterMarkImage2.nativeElement.src ,
+            this.waterMarkImage3.nativeElement.src  );
 
             this.getIterationlist();
 
@@ -729,7 +762,9 @@ if(Constants.layer2flow === 'fromLog'){
         this.drillingBitOther,
         this.detailsOdCoreBarrel,
         this.angleWithHorizontal,
-        this.waterMarkImage.nativeElement.src       )
+        this.waterMarkImage.nativeElement.src ,
+        this.waterMarkImage2.nativeElement.src ,
+        this.waterMarkImage3.nativeElement.src     )
       .subscribe((response: any) => {
         console.log('response', response);
         if (response.error === true) {
@@ -1018,6 +1053,149 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
         });
     }
 
+    watermarkImagepic2() {
+
+
+      watermark([this.blobImagepic2])
+      .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.boreholeChainage, '20px Josefin Slab', '#FC0535', 0.5))
+      .load('assets/images/2.png')
+    .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.boreholeNumber, '20px Josefin Slab', '#FC0535', 0.5, 48))
+    .load('assets/images/2.png')
+    .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '20px Josefin Slab', '#FC0535', 0.5, 48))
+    .load('assets/images/2.png')
+    .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '20px Josefin Slab', '#FC0535', 0.5, 48))
+    .load('assets/images/2.png')
+    .image(watermark.text.atPos(this.xy78,this.y143,'Northing- '+this.northing, '20px Josefin Slab', '#FC0535', 0.5, 48))
+
+
+    .then((img)=> {
+      console.log('Base 64 of one :', img);
+
+    //document.getElementById('lower-left').appendChild(img);
+
+
+          this.waterMarkImage2.nativeElement.src = img.src;
+        });
+    }
+
+    watermarkImage1pic2() {
+      watermark([this.blobImage12])
+      .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.boreholeChainage, '20px Josefin Slab', '#FC0535', 0.5))
+      .load('assets/images/2.png')
+    .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.boreholeNumber, '20px Josefin Slab', '#FC0535', 0.5, 48))
+    .load('assets/images/2.png')
+    .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '20px Josefin Slab', '#FC0535', 0.5, 48))
+    .load('assets/images/2.png')
+    .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '20px Josefin Slab', '#FC0535', 0.5, 48))
+    .load('assets/images/2.png')
+    .image(watermark.text.atPos(this.xy78,this.y143,'Northing- '+this.northing, '20px Josefin Slab', '#FC0535', 0.5, 48))
+      // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
+      .then((img)=> {
+        console.log('Base 64 of one :', img.src);
+
+        //  document.getElementById('lower-left').appendChild(img);
+
+          this.waterMarkImage2.nativeElement.src = img.src;
+
+        });
+    }
+
+
+      watermarkImage2pic2() {
+        watermark([this.blobImage131])
+        .image(watermark.text.atPos(this.xy78,this.y631,'Chainage: '+this.boreholeChainage, '10px Josefin Slab', '#FC0535', 0.5))
+        .load('assets/images/2.png')
+      .image(watermark.text.atPos(this.xy78,this.y831,'Bhno: '+this.boreholeNumber, '10px Josefin Slab', '#FC0535', 0.5, 48))
+      .load('assets/images/2.png')
+      .image(watermark.text.atPos(this.xy78,this.y1031,'Date: '+this.joindate, '10px Josefin Slab', '#FC0535', 0.5, 48))
+      .load('assets/images/2.png')
+      .image(watermark.text.atPos(this.xy78,this.y1231,'Easting- '+this.easting, '10px Josefin Slab', '#FC0535', 0.5, 48))
+      .load('assets/images/2.png')
+      .image(watermark.text.atPos(this.xy78,this.y1431,'Northing- '+this.northing, '10px Josefin Slab', '#FC0535', 0.5, 48))
+        // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
+        .then((img)=> {
+          console.log('Base 64 of one :', img.src);
+
+          //  document.getElementById('lower-left').appendChild(img);
+
+            this.waterMarkImage2.nativeElement.src = img.src;
+
+          });
+      }
+
+
+      watermarkImagepic3() {
+
+
+        watermark([this.blobImagepic3])
+        .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.boreholeChainage, '20px Josefin Slab', '#FC0535', 0.5))
+        .load('assets/images/2.png')
+      .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.boreholeNumber, '20px Josefin Slab', '#FC0535', 0.5, 48))
+      .load('assets/images/2.png')
+      .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '20px Josefin Slab', '#FC0535', 0.5, 48))
+      .load('assets/images/2.png')
+      .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '20px Josefin Slab', '#FC0535', 0.5, 48))
+      .load('assets/images/2.png')
+      .image(watermark.text.atPos(this.xy78,this.y143,'Northing- '+this.northing, '20px Josefin Slab', '#FC0535', 0.5, 48))
+
+
+      .then((img)=> {
+        console.log('Base 64 of one :', img);
+
+      //document.getElementById('lower-left').appendChild(img);
+
+
+            this.waterMarkImage3.nativeElement.src = img.src;
+          });
+      }
+
+      watermarkImage1pic3() {
+        watermark([this.blobImage13])
+        .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.boreholeChainage, '20px Josefin Slab', '#FC0535', 0.5))
+        .load('assets/images/2.png')
+      .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.boreholeNumber, '20px Josefin Slab', '#FC0535', 0.5, 48))
+      .load('assets/images/2.png')
+      .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '20px Josefin Slab', '#FC0535', 0.5, 48))
+      .load('assets/images/2.png')
+      .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '20px Josefin Slab', '#FC0535', 0.5, 48))
+      .load('assets/images/2.png')
+      .image(watermark.text.atPos(this.xy78,this.y143,'Northing- '+this.northing, '20px Josefin Slab', '#FC0535', 0.5, 48))
+        // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
+        .then((img)=> {
+          console.log('Base 64 of one :', img.src);
+
+          //  document.getElementById('lower-left').appendChild(img);
+
+            this.waterMarkImage3.nativeElement.src = img.src;
+
+          });
+      }
+
+
+        watermarkImage2pic3() {
+          watermark([this.blobImage132])
+          .image(watermark.text.atPos(this.xy78,this.y631,'Chainage: '+this.boreholeChainage, '10px Josefin Slab', '#FC0535', 0.5))
+          .load('assets/images/2.png')
+        .image(watermark.text.atPos(this.xy78,this.y831,'Bhno: '+this.boreholeNumber, '10px Josefin Slab', '#FC0535', 0.5, 48))
+        .load('assets/images/2.png')
+        .image(watermark.text.atPos(this.xy78,this.y1031,'Date: '+this.joindate, '10px Josefin Slab', '#FC0535', 0.5, 48))
+        .load('assets/images/2.png')
+        .image(watermark.text.atPos(this.xy78,this.y1231,'Easting- '+this.easting, '10px Josefin Slab', '#FC0535', 0.5, 48))
+        .load('assets/images/2.png')
+        .image(watermark.text.atPos(this.xy78,this.y1431,'Northing- '+this.northing, '10px Josefin Slab', '#FC0535', 0.5, 48))
+          // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
+          .then((img)=> {
+            console.log('Base 64 of one :', img.src);
+
+            //  document.getElementById('lower-left').appendChild(img);
+
+              this.waterMarkImage3.nativeElement.src = img.src;
+
+            });
+        }
+
+
+
   snap(){
     const options: CameraOptions = {
       quality: 100,
@@ -1048,6 +1226,68 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
 
   }
 
+
+
+  snap2(){
+    const options: CameraOptions = {
+      quality: 100,
+      targetHeight: 320,
+      targetWidth: 320,
+      correctOrientation: true,
+
+      destinationType: this.camera.DestinationType.FILE_URI,
+      sourceType: this.camera.PictureSourceType.CAMERA,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    };
+
+    this.camera.getPicture(options).then((imgFileUri) => {
+     // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+     this.itemboreholepic2 = (<any>window).Ionic.WebView.convertFileSrc(imgFileUri);
+
+     fetch(this.itemboreholepic2)
+     .then((res) => res.blob())
+     .then((blob) => {
+       this.blobImagepic2 = blob;
+       this.watermarkImagepic2();
+     });
+
+    }, (err) => {
+     console.log(err);
+    });
+
+  }
+
+  snap3(){
+    const options: CameraOptions = {
+      quality: 100,
+      targetHeight: 320,
+      targetWidth: 320,
+      correctOrientation: true,
+
+      destinationType: this.camera.DestinationType.FILE_URI,
+      sourceType: this.camera.PictureSourceType.CAMERA,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    };
+
+    this.camera.getPicture(options).then((imgFileUri) => {
+     // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+     this.itemboreholepic3 = (<any>window).Ionic.WebView.convertFileSrc(imgFileUri);
+
+     fetch(this.itemboreholepic3)
+     .then((res) => res.blob())
+     .then((blob) => {
+       this.blobImagepic3 = blob;
+       this.watermarkImagepic3();
+     });
+
+    }, (err) => {
+     console.log(err);
+    });
+
+  }
+
   takeSnap() {
     this.camera.getPicture(this.options1).then(
       (imageData) => {
@@ -1065,6 +1305,44 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
       }
     );
   }
+
+
+  takeSnap2() {
+    this.camera.getPicture(this.options1).then(
+      (imageData) => {
+        this.originalImage2pic = 'data:image/jpeg;base64,' + imageData;
+
+        fetch(this.originalImage2pic)
+          .then((res) => res.blob())
+          .then((blob) => {
+            this.blobImagepic2 = blob;
+            this.watermarkImagepic2();
+          });
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  takeSnap3() {
+    this.camera.getPicture(this.options1).then(
+      (imageData) => {
+        this.originalImage3pic = 'data:image/jpeg;base64,' + imageData;
+
+        fetch(this.originalImage3pic)
+          .then((res) => res.blob())
+          .then((blob) => {
+            this.blobImagepic3 = blob;
+            this.watermarkImagepic3();
+          });
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
   openGallery() {
     this.camera.getPicture(this.gelleryOptions).then(
       (imgData) => {
@@ -1082,6 +1360,44 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
       }
     );
   }
+
+
+  openGallery2() {
+    this.camera.getPicture(this.gelleryOptions).then(
+      (imgData) => {
+        console.log('image data =>  ', imgData);
+        this.base64Image2 = 'data:image/jpeg;base64,' + imgData;
+        fetch(this.base64Image2)
+          .then((res) => res.blob())
+          .then((blob) => {
+            this.blobImage12 = blob;
+            this.watermarkImage1pic2();
+          });
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
+
+  openGallery3() {
+    this.camera.getPicture(this.gelleryOptions).then(
+      (imgData) => {
+        console.log('image data =>  ', imgData);
+        this.base64Image3 = 'data:image/jpeg;base64,' + imgData;
+        fetch(this.base64Image3)
+          .then((res) => res.blob())
+          .then((blob) => {
+            this.blobImage13 = blob;
+            this.watermarkImage1pic3();
+          });
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
+
 
   takePhoto(sourceType1:number) {
     const options: CameraOptions = {
@@ -1110,6 +1426,60 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
     });
   }
 
+  takePhoto2(sourceType1:number) {
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      correctOrientation: true,
+      sourceType:sourceType1,
+      targetHeight: 320,
+      targetWidth: 320,
+
+    };
+
+    this.camera.getPicture(options).then((imageData) => {
+       this.base64Image31 = 'data:image/jpeg;base64,' + imageData;
+       fetch(this.base64Image31)
+       .then((res) => res.blob())
+       .then((blob) => {
+         this.blobImage131 = blob;
+         this.watermarkImage2pic2();
+       });
+
+    }, (err) => {
+      // Handle error
+    });
+  }
+
+
+  takePhoto3(sourceType1:number) {
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      correctOrientation: true,
+      sourceType:sourceType1,
+      targetHeight: 320,
+      targetWidth: 320,
+
+    };
+
+    this.camera.getPicture(options).then((imageData) => {
+       this.base64Image312 = 'data:image/jpeg;base64,' + imageData;
+       fetch(this.base64Image312)
+       .then((res) => res.blob())
+       .then((blob) => {
+         this.blobImage132 = blob;
+         this.watermarkImage2pic3();
+       });
+
+    }, (err) => {
+      // Handle error
+    });
+  }
 
 
   locationcheck(){
@@ -1134,6 +1504,51 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
     }
   }
 
+
+  locationcheck2(){
+    this.getLatLong();
+
+    if(this.easting === undefined || this.northing === undefined
+      ||this.easting === null || this.northing === null||
+      this.easting === '' || this.northing === ''){
+        this.getLatLong();
+       this.platform.ready().then(() => {
+
+          if (this.platform.is('android')) {
+            this.toastSer.presentError('Please Enter Easing and Northing');
+
+          }else{
+            this.toastSer.presentError('Please Enter Easing and Northing');
+          }
+        });
+
+    }else{
+      this.imageSelection2();
+    }
+  }
+
+
+  locationcheck3(){
+    this.getLatLong();
+
+    if(this.easting === undefined || this.northing === undefined
+      ||this.easting === null || this.northing === null||
+      this.easting === '' || this.northing === ''){
+        this.getLatLong();
+       this.platform.ready().then(() => {
+
+          if (this.platform.is('android')) {
+            this.toastSer.presentError('Please Enter Easing and Northing');
+
+          }else{
+            this.toastSer.presentError('Please Enter Easing and Northing');
+          }
+        });
+
+    }else{
+      this.imageSelection3();
+    }
+  }
   async imageSelection() {
     this.getLatLong();
 
@@ -1179,6 +1594,96 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
     alert.present();
   }
 
+  async imageSelection2() {
+    this.getLatLong();
+
+
+    const alert = await this.alertCtrl.create({
+      header: 'Choose Type',
+      buttons: [
+        {
+          text: 'Camera',
+          handler: (redc) => {
+
+            this.platform.ready().then(() => {
+              if (this.platform.is('android')) {
+                this.snap2();
+              } else {
+                //  this.addDatabase();
+
+                this.takeSnap2();
+              }
+
+          });
+        },
+        },
+        {
+          text: 'Gallery',
+          handler: (redc) => {
+
+            this.platform.ready().then(() => {
+              if (this.platform.is('android')) {
+                this.takePhoto2(0);
+              } else {
+
+                this.openGallery2();
+
+              }
+
+          });
+
+          },
+        },
+      ],
+    });
+    alert.present();
+  }
+
+
+  async imageSelection3() {
+    this.getLatLong();
+
+
+    const alert = await this.alertCtrl.create({
+      header: 'Choose Type',
+      buttons: [
+        {
+          text: 'Camera',
+          handler: (redc) => {
+
+            this.platform.ready().then(() => {
+              if (this.platform.is('android')) {
+                this.snap3();
+              } else {
+                //  this.addDatabase();
+
+                this.takeSnap3();
+              }
+
+          });
+        },
+        },
+        {
+          text: 'Gallery',
+          handler: (redc) => {
+
+            this.platform.ready().then(() => {
+              if (this.platform.is('android')) {
+                this.takePhoto3(0);
+              } else {
+
+                this.openGallery3();
+
+              }
+
+          });
+
+          },
+        },
+      ],
+    });
+    alert.present();
+  }
 
   autoLoader1() {
     this.loadingController.create({

@@ -152,7 +152,11 @@ disconnectSubscription: any;
           this.totalList[0].drilling_bit_other,
           this.totalList[0].core_barrel,
           this.totalList[0].angle_horizontal,
-          this.totalList[0].borehole_pic,
+          this.totalList[0].borehole_pic1,
+          this.totalList[0].borehole_pic2,
+          this.totalList[0].borehole_pic3,
+
+
 
           this.totalList[0].water_table_rl,
 
@@ -169,8 +173,18 @@ disconnectSubscription: any;
 
           this.totalList[0].modified_date,
 
-          this.totalList[0].depth_termination_pic,
-          this.totalList[0].sample_pic,
+          this.totalList[0].depth_termination_pic1,
+          this.totalList[0].depth_termination_pic2,
+          this.totalList[0].depth_termination_pic3,
+
+          this.totalList[0].sample_pic1,
+          this.totalList[0].sample_pic2,
+          this.totalList[0].sample_pic3
+
+
+
+
+
           )
            .subscribe((response: any)=>{
            console.log('response',response);

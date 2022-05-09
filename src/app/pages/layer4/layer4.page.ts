@@ -31,6 +31,13 @@ export class Layer4Page implements AfterViewInit {
   @ViewChild('previewimage') waterMarkImage: ElementRef;
   @ViewChild('previewimage2') waterMarkImage2: ElementRef;
 
+  @ViewChild('previewimagedep2') waterMarkImagedep2: ElementRef;
+  @ViewChild('previewimagedep3') waterMarkImagedep3: ElementRef;
+  @ViewChild('previewimagesamp2') waterMarkImagesamp2: ElementRef;
+  @ViewChild('previewimagesamp3') waterMarkImagesamp3: ElementRef;
+
+
+
   signaturePad;
   signaturePad1;
   signaturePad2;
@@ -122,6 +129,55 @@ export class Layer4Page implements AfterViewInit {
     bhno: any;
     waterTable: any;
     joindate: any;
+
+    snaDep2: any;
+    blobSnapDep2: any;
+
+    originalImagetakeDep2: any;
+
+    base64ImageDep2: any;
+    blobImagetakeDep2: any;
+
+    base64ImageGalDep2: any;
+    blobImage1Galdep2: any;
+
+
+    snaDep3: any;
+    blobSnapDep3: any;
+
+    originalImagetakeDep3: any;
+
+    base64ImageDep3: any;
+    blobImagetakeDep3: any;
+
+    base64ImageGalDep3: any;
+    blobImage1Galdep3: any;
+
+
+    snaSamp2: any;
+    blobSnapSamp2: any;
+
+    originalImagetakeSamp2: any;
+
+    base64ImageSamp2: any;
+    blobImagetakeSamp2: any;
+
+    base64ImageGalSamp2: any;
+    blobImage1GalSamp2: any;
+
+
+    snaSamp3: any;
+    blobSnapSamp3: any;
+
+    originalImagetakeSamp3: any;
+
+    base64ImageSamp3: any;
+    blobImagetakeSamp3: any;
+
+    base64ImageGalSamp3: any;
+    blobImage1GalSamp3: any;
+
+
 
   constructor(
     public toastSer: ToastService,
@@ -322,7 +378,12 @@ export class Layer4Page implements AfterViewInit {
       this.base643,
       Constants.laYer1Id,
       this.waterMarkImage.nativeElement.src,
-      this.waterMarkImage2.nativeElement.src
+      this.waterMarkImagedep2.nativeElement.src,
+      this.waterMarkImagedep3.nativeElement.src,
+      this.waterMarkImage2.nativeElement.src,
+      this.waterMarkImagesamp2.nativeElement.src,
+      this.waterMarkImagesamp3.nativeElement.src
+
     );
     this.router.navigate(['sidemenu']);
   }
@@ -340,7 +401,11 @@ export class Layer4Page implements AfterViewInit {
       this.base643,
       Constants.laYer1Id,
       this.waterMarkImage.nativeElement.src,
-      this.waterMarkImage2.nativeElement.src
+      this.waterMarkImagedep2.nativeElement.src,
+      this.waterMarkImagedep3.nativeElement.src,
+      this.waterMarkImage2.nativeElement.src,
+      this.waterMarkImagesamp2.nativeElement.src,
+      this.waterMarkImagesamp3.nativeElement.src
     );
     this.router.navigate(['sidemenu']);
   }
@@ -359,8 +424,14 @@ export class Layer4Page implements AfterViewInit {
         this.base642,
         this.clientRepresNaame,
         this.base643,
-        '',this.waterMarkImage.nativeElement.src,
-        this.waterMarkImage2.nativeElement.src
+        '',
+        this.waterMarkImage.nativeElement.src,
+        this.waterMarkImagedep2.nativeElement.src,
+        this.waterMarkImagedep3.nativeElement.src,
+        this.waterMarkImage2.nativeElement.src,
+        this.waterMarkImagesamp2.nativeElement.src,
+        this.waterMarkImagesamp3.nativeElement.src
+
       )
       .subscribe((response: any) => {
         console.log('response', response);
@@ -389,8 +460,12 @@ export class Layer4Page implements AfterViewInit {
         this.base643,
         '',
         this.waterMarkImage.nativeElement.src,
-        this.waterMarkImage2.nativeElement.src
-      )
+        this.waterMarkImagedep2.nativeElement.src,
+        this.waterMarkImagedep3.nativeElement.src,
+        this.waterMarkImage2.nativeElement.src,
+        this.waterMarkImagesamp2.nativeElement.src,
+        this.waterMarkImagesamp3.nativeElement.src
+        )
       .subscribe((response: any) => {
         console.log('response', response);
         this.toastSer.presentSuccess(response.msg);
@@ -601,6 +676,267 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
   }
 
 
+  watermarkImagesnapDep2() {
+
+
+    watermark([this.blobSnapDep2])
+    .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.chainge, '20px Josefin Slab', '#FC0535', 0.5))
+    .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.bhno, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y143,'Northing- '+this.northing, '20px Josefin Slab', '#FC0535', 0.5, 48))
+
+    .then((img) => {
+        this.waterMarkImagedep2.nativeElement.src = img.src;
+      });
+  }
+
+
+
+  watermarkImage3takeDep2() {
+    watermark([this.blobImagetakeDep2])
+    .image(watermark.text.atPos(this.xy78,this.y631,'Chainage: '+this.chainge, '10px Josefin Slab', '#FC0535', 0.5))
+    .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y831,'Bhno: '+this.chainge, '10px Josefin Slab', '#FC0535', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y1031,'Date: '+this.joindate, '10px Josefin Slab', '#FC0535', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y1231,'Easting- '+this.easting, '10px Josefin Slab', '#FC0535', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y1431,'Northing- '+this.northing, '10px Josefin Slab', '#FC0535', 0.5, 48))
+    // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
+    .then((img)=> {
+      console.log('Base 64 of one :', img.src);
+
+      //  document.getElementById('lower-left').appendChild(img);
+
+        this.waterMarkImagedep2.nativeElement.src = img.src;
+
+      });
+  }
+
+
+  watermarkImage1GalDep2() {
+    watermark([this.blobImage1Galdep2])
+    .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.chainge, '20px Josefin Slab', '#FC0535', 0.5))
+    .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.bhno, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y143,'Northing- '+this.northing, '20px Josefin Slab', '#FC0535', 0.5, 48))
+
+    .then((img) => {
+        this.waterMarkImagedep2.nativeElement.src = img.src;
+
+        console.log('Base 64 of one :', img.src);
+      });
+  }
+
+
+
+  watermarkImagesnapDep3() {
+
+
+    watermark([this.blobSnapDep3])
+    .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.chainge, '20px Josefin Slab', '#FC0535', 0.5))
+    .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.bhno, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y143,'Northing- '+this.northing, '20px Josefin Slab', '#FC0535', 0.5, 48))
+
+    .then((img) => {
+        this.waterMarkImagedep3.nativeElement.src = img.src;
+      });
+  }
+
+
+
+  watermarkImage3takeDep3() {
+    watermark([this.blobImagetakeDep3])
+    .image(watermark.text.atPos(this.xy78,this.y631,'Chainage: '+this.chainge, '10px Josefin Slab', '#FC0535', 0.5))
+    .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y831,'Bhno: '+this.chainge, '10px Josefin Slab', '#FC0535', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y1031,'Date: '+this.joindate, '10px Josefin Slab', '#FC0535', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y1231,'Easting- '+this.easting, '10px Josefin Slab', '#FC0535', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y1431,'Northing- '+this.northing, '10px Josefin Slab', '#FC0535', 0.5, 48))
+    // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
+    .then((img)=> {
+      console.log('Base 64 of one :', img.src);
+
+      //  document.getElementById('lower-left').appendChild(img);
+
+        this.waterMarkImagedep3.nativeElement.src = img.src;
+
+      });
+  }
+
+
+  watermarkImage1GalDep3() {
+    watermark([this.blobImage1Galdep3])
+    .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.chainge, '20px Josefin Slab', '#FC0535', 0.5))
+    .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.bhno, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y143,'Northing- '+this.northing, '20px Josefin Slab', '#FC0535', 0.5, 48))
+
+    .then((img) => {
+        this.waterMarkImagedep3.nativeElement.src = img.src;
+
+        console.log('Base 64 of one :', img.src);
+      });
+  }
+
+
+
+
+  watermarkImagesnapSamp2() {
+
+
+    watermark([this.blobSnapSamp2])
+    .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.chainge, '20px Josefin Slab', '#FC0535', 0.5))
+    .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.bhno, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y143,'Northing- '+this.northing, '20px Josefin Slab', '#FC0535', 0.5, 48))
+
+    .then((img) => {
+        this.waterMarkImagesamp2.nativeElement.src = img.src;
+      });
+  }
+
+
+
+  watermarkImage3takeSamp2() {
+    watermark([this.blobImagetakeSamp2])
+    .image(watermark.text.atPos(this.xy78,this.y631,'Chainage: '+this.chainge, '10px Josefin Slab', '#FC0535', 0.5))
+    .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y831,'Bhno: '+this.chainge, '10px Josefin Slab', '#FC0535', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y1031,'Date: '+this.joindate, '10px Josefin Slab', '#FC0535', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y1231,'Easting- '+this.easting, '10px Josefin Slab', '#FC0535', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y1431,'Northing- '+this.northing, '10px Josefin Slab', '#FC0535', 0.5, 48))
+    // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
+    .then((img)=> {
+      console.log('Base 64 of one :', img.src);
+
+      //  document.getElementById('lower-left').appendChild(img);
+
+        this.waterMarkImagesamp2.nativeElement.src = img.src;
+
+      });
+  }
+
+
+  watermarkImage1GalSamp2() {
+    watermark([this.blobImage1GalSamp2])
+    .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.chainge, '20px Josefin Slab', '#FC0535', 0.5))
+    .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.bhno, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y143,'Northing- '+this.northing, '20px Josefin Slab', '#FC0535', 0.5, 48))
+
+    .then((img) => {
+        this.waterMarkImagesamp2.nativeElement.src = img.src;
+
+        console.log('Base 64 of one :', img.src);
+      });
+  }
+
+
+
+
+  watermarkImagesnapSamp3() {
+
+
+    watermark([this.blobSnapSamp3])
+    .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.chainge, '20px Josefin Slab', '#FC0535', 0.5))
+    .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.bhno, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y143,'Northing- '+this.northing, '20px Josefin Slab', '#FC0535', 0.5, 48))
+
+    .then((img) => {
+        this.waterMarkImagesamp3.nativeElement.src = img.src;
+      });
+  }
+
+
+
+  watermarkImage3takeSamp3() {
+    watermark([this.blobImagetakeSamp3])
+    .image(watermark.text.atPos(this.xy78,this.y631,'Chainage: '+this.chainge, '10px Josefin Slab', '#FC0535', 0.5))
+    .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y831,'Bhno: '+this.chainge, '10px Josefin Slab', '#FC0535', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y1031,'Date: '+this.joindate, '10px Josefin Slab', '#FC0535', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y1231,'Easting- '+this.easting, '10px Josefin Slab', '#FC0535', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y1431,'Northing- '+this.northing, '10px Josefin Slab', '#FC0535', 0.5, 48))
+    // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
+    .then((img)=> {
+      console.log('Base 64 of one :', img.src);
+
+      //  document.getElementById('lower-left').appendChild(img);
+
+        this.waterMarkImagesamp3.nativeElement.src = img.src;
+
+      });
+  }
+
+
+  watermarkImage1GalSamp3() {
+    watermark([this.blobImage1GalSamp3])
+    .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.chainge, '20px Josefin Slab', '#FC0535', 0.5))
+    .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.bhno, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y143,'Northing- '+this.northing, '20px Josefin Slab', '#FC0535', 0.5, 48))
+
+    .then((img) => {
+        this.waterMarkImagesamp3.nativeElement.src = img.src;
+
+        console.log('Base 64 of one :', img.src);
+      });
+  }
+
+
 
 
   snap(){
@@ -632,6 +968,7 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
     });
 
   }
+
   takeSnap() {
     this.camera.getPicture(this.options1).then(
       (imageData) => {
@@ -766,7 +1103,392 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
   }
 
 
+  snapDep2(){
+    const options: CameraOptions = {
+      quality: 100,
+      targetHeight: 320,
+      targetWidth: 320,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      sourceType: this.camera.PictureSourceType.CAMERA,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      correctOrientation: true
 
+    };
+
+    this.camera.getPicture(options).then((imgFileUri) => {
+     // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+     this.snaDep2 = (<any>window).Ionic.WebView.convertFileSrc(imgFileUri);
+
+     fetch(this.snaDep2)
+     .then((res) => res.blob())
+     .then((blob) => {
+       this.blobSnapDep2 = blob;
+       this.watermarkImagesnapDep2();
+     });
+
+    }, (err) => {
+     console.log(err);
+    });
+
+  }
+
+
+  takeSnapDep2() {
+    this.camera.getPicture(this.options1).then(
+      (imageData) => {
+        this.originalImagetakeDep2 = 'data:image/jpeg;base64,' + imageData;
+
+        fetch(this.originalImagetakeDep2)
+          .then((res) => res.blob())
+          .then((blob) => {
+            this.blobSnapDep2 = blob;
+            this.watermarkImagesnapDep2();
+          });
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  takePhotoDep2(sourceType1: number) {
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      correctOrientation: true,
+      sourceType:sourceType1,
+      targetHeight: 320,
+      targetWidth: 320,
+
+    };
+
+    this.camera.getPicture(options).then((imageData) => {
+       this.base64ImageDep2 = 'data:image/jpeg;base64,' + imageData;
+       fetch(this.base64ImageDep2)
+       .then((res) => res.blob())
+       .then((blob) => {
+         this.blobImagetakeDep2 = blob;
+         this.watermarkImage3takeDep2();
+       });
+
+    }, (err) => {
+      // Handle error
+    });
+  }
+
+  openGalleryDep2() {
+    this.camera.getPicture(this.gelleryOptions).then(
+      (imgData) => {
+        console.log('image data =>  ', imgData);
+        this.base64ImageGalDep2 = 'data:image/jpeg;base64,' + imgData;
+        fetch(this.base64ImageGalDep2)
+          .then((res) => res.blob())
+          .then((blob) => {
+            this.blobImage1Galdep2 = blob;
+            this.watermarkImage1GalDep2();
+          });
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
+
+
+  snapDep3(){
+    const options: CameraOptions = {
+      quality: 100,
+      targetHeight: 320,
+      targetWidth: 320,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      sourceType: this.camera.PictureSourceType.CAMERA,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      correctOrientation: true
+
+    };
+
+    this.camera.getPicture(options).then((imgFileUri) => {
+     // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+     this.snaDep3 = (<any>window).Ionic.WebView.convertFileSrc(imgFileUri);
+
+     fetch(this.snaDep3)
+     .then((res) => res.blob())
+     .then((blob) => {
+       this.blobSnapDep3 = blob;
+       this.watermarkImagesnapDep3();
+     });
+
+    }, (err) => {
+     console.log(err);
+    });
+
+  }
+
+
+
+  takeSnapDep3() {
+    this.camera.getPicture(this.options1).then(
+      (imageData) => {
+        this.originalImagetakeDep3 = 'data:image/jpeg;base64,' + imageData;
+
+        fetch(this.originalImagetakeDep3)
+          .then((res) => res.blob())
+          .then((blob) => {
+            this.blobSnapDep3 = blob;
+            this.watermarkImagesnapDep3();
+          });
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  takePhotoDep3(sourceType1: number) {
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      correctOrientation: true,
+      sourceType:sourceType1,
+      targetHeight: 320,
+      targetWidth: 320,
+
+    };
+
+    this.camera.getPicture(options).then((imageData) => {
+       this.base64ImageDep3 = 'data:image/jpeg;base64,' + imageData;
+       fetch(this.base64ImageDep3)
+       .then((res) => res.blob())
+       .then((blob) => {
+         this.blobImagetakeDep3 = blob;
+         this.watermarkImage3takeDep3();
+       });
+
+    }, (err) => {
+      // Handle error
+    });
+  }
+
+  openGalleryDep3() {
+    this.camera.getPicture(this.gelleryOptions).then(
+      (imgData) => {
+        console.log('image data =>  ', imgData);
+        this.base64ImageGalDep3 = 'data:image/jpeg;base64,' + imgData;
+        fetch(this.base64ImageGalDep3)
+          .then((res) => res.blob())
+          .then((blob) => {
+            this.blobImage1Galdep3 = blob;
+            this.watermarkImage1GalDep3();
+          });
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
+
+
+
+
+  snapSamp2(){
+    const options: CameraOptions = {
+      quality: 100,
+      targetHeight: 320,
+      targetWidth: 320,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      sourceType: this.camera.PictureSourceType.CAMERA,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      correctOrientation: true
+
+    };
+
+    this.camera.getPicture(options).then((imgFileUri) => {
+     // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+     this.snaSamp2 = (<any>window).Ionic.WebView.convertFileSrc(imgFileUri);
+
+     fetch(this.snaSamp2)
+     .then((res) => res.blob())
+     .then((blob) => {
+       this.blobSnapSamp2 = blob;
+       this.watermarkImagesnapSamp2();
+     });
+
+    }, (err) => {
+     console.log(err);
+    });
+
+  }
+
+
+
+  takeSnapSamp2() {
+    this.camera.getPicture(this.options1).then(
+      (imageData) => {
+        this.originalImagetakeSamp2 = 'data:image/jpeg;base64,' + imageData;
+
+        fetch(this.originalImagetakeSamp2)
+          .then((res) => res.blob())
+          .then((blob) => {
+            this.blobSnapSamp2 = blob;
+            this.watermarkImagesnapSamp2();
+          });
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  takePhotoSamp2(sourceType1: number) {
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      correctOrientation: true,
+      sourceType:sourceType1,
+      targetHeight: 320,
+      targetWidth: 320,
+
+    };
+
+    this.camera.getPicture(options).then((imageData) => {
+       this.base64ImageSamp2 = 'data:image/jpeg;base64,' + imageData;
+       fetch(this.base64ImageSamp2)
+       .then((res) => res.blob())
+       .then((blob) => {
+         this.blobImagetakeSamp2 = blob;
+         this.watermarkImage3takeSamp2();
+       });
+
+    }, (err) => {
+      // Handle error
+    });
+  }
+
+  openGallerySamp2() {
+    this.camera.getPicture(this.gelleryOptions).then(
+      (imgData) => {
+        console.log('image data =>  ', imgData);
+        this.base64ImageGalSamp2 = 'data:image/jpeg;base64,' + imgData;
+        fetch(this.base64ImageGalSamp2)
+          .then((res) => res.blob())
+          .then((blob) => {
+            this.blobImage1GalSamp2 = blob;
+            this.watermarkImage1GalSamp2();
+          });
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
+
+
+
+
+
+  snapSamp3(){
+    const options: CameraOptions = {
+      quality: 100,
+      targetHeight: 320,
+      targetWidth: 320,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      sourceType: this.camera.PictureSourceType.CAMERA,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      correctOrientation: true
+
+    };
+
+    this.camera.getPicture(options).then((imgFileUri) => {
+     // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+     this.snaSamp3 = (<any>window).Ionic.WebView.convertFileSrc(imgFileUri);
+
+     fetch(this.snaSamp3)
+     .then((res) => res.blob())
+     .then((blob) => {
+       this.blobSnapSamp3 = blob;
+       this.watermarkImagesnapSamp3();
+     });
+
+    }, (err) => {
+     console.log(err);
+    });
+
+  }
+
+
+
+  takeSnapSamp3() {
+    this.camera.getPicture(this.options1).then(
+      (imageData) => {
+        this.originalImagetakeSamp3 = 'data:image/jpeg;base64,' + imageData;
+
+        fetch(this.originalImagetakeSamp3)
+          .then((res) => res.blob())
+          .then((blob) => {
+            this.blobSnapSamp3 = blob;
+            this.watermarkImagesnapSamp3();
+          });
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  takePhotoSamp3(sourceType1: number) {
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      correctOrientation: true,
+      sourceType:sourceType1,
+      targetHeight: 320,
+      targetWidth: 320,
+
+    };
+
+    this.camera.getPicture(options).then((imageData) => {
+       this.base64ImageSamp3 = 'data:image/jpeg;base64,' + imageData;
+       fetch(this.base64ImageSamp3)
+       .then((res) => res.blob())
+       .then((blob) => {
+         this.blobImagetakeSamp3 = blob;
+         this.watermarkImage3takeSamp3();
+       });
+
+    }, (err) => {
+      // Handle error
+    });
+  }
+
+  openGallerySamp3() {
+    this.camera.getPicture(this.gelleryOptions).then(
+      (imgData) => {
+        console.log('image data =>  ', imgData);
+        this.base64ImageGalSamp3 = 'data:image/jpeg;base64,' + imgData;
+        fetch(this.base64ImageGalSamp3)
+          .then((res) => res.blob())
+          .then((blob) => {
+            this.blobImage1GalSamp3 = blob;
+            this.watermarkImage1GalSamp3();
+          });
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
 
 
 
@@ -836,7 +1558,6 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
       this.imageSelection2();
     }
   }
-
 
   async imageSelection() {
     this.getLatLong();
@@ -920,6 +1641,262 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
     });
     alert.present();
   }
+
+  locationcheckDep2(){
+    this.getLatLong();
+
+
+    if( this.easting === undefined || this.northing === undefined){
+        this.getLatLong();
+        this.platform.ready().then(() => {
+
+          if (this.platform.is('android')) {
+            this.toastSer.presentError('Please Turn on GPS..');
+
+          }else{
+            this.toastSer.presentError('Please Enter Easing and Northing');
+          }
+        });
+    }else{
+      this.imageSelectionDep2();
+    }
+  }
+
+
+
+  async imageSelectionDep2() {
+    this.getLatLong();
+    const alert = await this.alertCtrl.create({
+      header: 'Choose Type',
+      buttons: [
+        {
+          text: 'Camera',
+          handler: (redc) => {
+
+            this.platform.ready().then(() => {
+              if (this.platform.is('android')) {
+                this.snapDep2();
+              } else {
+
+                this.takeSnapDep2();
+              }
+
+          });
+          },
+        },
+        {
+          text: 'Gallery',
+          handler: (redc) => {
+
+            this.platform.ready().then(() => {
+              if (this.platform.is('android')) {
+                this.takePhotoDep2(0);
+              } else {
+
+                this.openGalleryDep2();
+              }
+
+          });
+
+          },
+        },
+      ],
+    });
+    alert.present();
+  }
+
+
+  locationcheckDep3(){
+    this.getLatLong();
+
+
+    if( this.easting === undefined || this.northing === undefined){
+        this.getLatLong();
+        this.platform.ready().then(() => {
+
+          if (this.platform.is('android')) {
+            this.toastSer.presentError('Please Turn on GPS..');
+
+          }else{
+            this.toastSer.presentError('Please Enter Easing and Northing');
+          }
+        });
+    }else{
+      this.imageSelectionDep3();
+    }
+  }
+
+
+  async imageSelectionDep3() {
+    this.getLatLong();
+    const alert = await this.alertCtrl.create({
+      header: 'Choose Type',
+      buttons: [
+        {
+          text: 'Camera',
+          handler: (redc) => {
+
+            this.platform.ready().then(() => {
+              if (this.platform.is('android')) {
+                this.snapDep3();
+              } else {
+
+                this.takeSnapDep3();
+              }
+
+          });
+          },
+        },
+        {
+          text: 'Gallery',
+          handler: (redc) => {
+
+            this.platform.ready().then(() => {
+              if (this.platform.is('android')) {
+                this.takePhotoDep3(0);
+              } else {
+
+                this.openGalleryDep3();
+              }
+
+          });
+
+          },
+        },
+      ],
+    });
+    alert.present();
+  }
+
+
+  locationcheckSamp2(){
+    this.getLatLong();
+
+
+    if( this.easting === undefined || this.northing === undefined){
+        this.getLatLong();
+        this.platform.ready().then(() => {
+
+          if (this.platform.is('android')) {
+            this.toastSer.presentError('Please Turn on GPS..');
+
+          }else{
+            this.toastSer.presentError('Please Enter Easing and Northing');
+          }
+        });
+    }else{
+      this.imageSelectionsnap2();
+    }
+  }
+
+
+  async imageSelectionsnap2() {
+    this.getLatLong();
+    const alert = await this.alertCtrl.create({
+      header: 'Choose Type',
+      buttons: [
+        {
+          text: 'Camera',
+          handler: (redc) => {
+
+            this.platform.ready().then(() => {
+              if (this.platform.is('android')) {
+                this.snapSamp2();
+              } else {
+
+                this.takeSnapSamp2();
+              }
+
+          });
+          },
+        },
+        {
+          text: 'Gallery',
+          handler: (redc) => {
+
+            this.platform.ready().then(() => {
+              if (this.platform.is('android')) {
+                this.takePhotoSamp2(0);
+              } else {
+
+                this.openGallerySamp2();
+              }
+
+          });
+
+          },
+        },
+      ],
+    });
+    alert.present();
+  }
+
+
+
+  locationcheckSamp3(){
+    this.getLatLong();
+
+
+    if( this.easting === undefined || this.northing === undefined){
+        this.getLatLong();
+        this.platform.ready().then(() => {
+
+          if (this.platform.is('android')) {
+            this.toastSer.presentError('Please Turn on GPS..');
+
+          }else{
+            this.toastSer.presentError('Please Enter Easing and Northing');
+          }
+        });
+    }else{
+      this.imageSelectionsnap3();
+    }
+  }
+
+
+  async imageSelectionsnap3() {
+    this.getLatLong();
+    const alert = await this.alertCtrl.create({
+      header: 'Choose Type',
+      buttons: [
+        {
+          text: 'Camera',
+          handler: (redc) => {
+
+            this.platform.ready().then(() => {
+              if (this.platform.is('android')) {
+                this.snapSamp3();
+              } else {
+
+                this.takeSnapSamp3();
+              }
+
+          });
+          },
+        },
+        {
+          text: 'Gallery',
+          handler: (redc) => {
+
+            this.platform.ready().then(() => {
+              if (this.platform.is('android')) {
+                this.takePhotoSamp3(0);
+              } else {
+
+                this.openGallerySamp3();
+              }
+
+          });
+
+          },
+        },
+      ],
+    });
+    alert.present();
+  }
+
+
+
 
    ll2utm(lat,lon){
 		//console.log(lat+','+lon)

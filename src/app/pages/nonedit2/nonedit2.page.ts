@@ -14,6 +14,9 @@ import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 })
 export class Nonedit2Page implements OnInit {
   @ViewChild('previewimage') waterMarkImage: ElementRef;
+  @ViewChild('previewimage2') waterMarkImage2: ElementRef;
+  @ViewChild('previewimage3') waterMarkImage3: ElementRef;
+
   easting: any;
   northing: any;
   boreholeNumber: any;
@@ -118,7 +121,9 @@ export class Nonedit2Page implements OnInit {
 
           }
 
-          this.waterMarkImage.nativeElement.src= this.layer1List[0].borehole_pic;
+          this.waterMarkImage.nativeElement.src= this.layer1List[0].borehole_pic1;
+          this.waterMarkImage2.nativeElement.src= this.layer1List[0].borehole_pic2;
+          this.waterMarkImage3.nativeElement.src= this.layer1List[0].borehole_pic3;
         }
       });
   }

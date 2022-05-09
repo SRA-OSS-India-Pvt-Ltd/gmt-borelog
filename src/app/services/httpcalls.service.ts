@@ -49,7 +49,9 @@ export class HttpcallsService {
     drillbitother: any,
     soilCoreBarrel: any,
     anglewithHorizontal: any,
-    boreholepic: any,
+    boreholepic1: any,
+    boreholepic2: any,
+    boreholepic3: any,
 
     watertabe: any,
    depthTermination: any,
@@ -62,8 +64,12 @@ export class HttpcallsService {
     clientRepName: any,
     clientRepSign: any,
     mdate: any,
-    depthpic: any,
-    samplepic: any,
+    depthpic1: any,
+    depthpic2: any,
+    depthpic3: any,
+    samplepic1: any,
+    samplepic2: any,
+    samplepc3: any
 
   ) {
     const parameters = {
@@ -113,11 +119,17 @@ export class HttpcallsService {
       client_rep_sign: clientRepSign,
 
       modified_date: mdate,
-      depth_termination_pic: depthpic,
-      sample_pic: samplepic,
-      borehole_pic: boreholepic,
+      depth_termination_pic1: depthpic1,
+      depth_termination_pic2: depthpic2,
+      depth_termination_pic3: depthpic3,
 
-    };
+      sample_pic1: samplepic1,
+      sample_pic2: samplepic2,
+      sample_pic3: samplepc3,
+
+      borehole_pic1: boreholepic1,
+      borehole_pic2: boreholepic2,
+      borehole_pic3: boreholepic3};
     console.log('JSON', JSON.stringify(parameters));
 
     return this.httpClient.post(
@@ -192,7 +204,9 @@ export class HttpcallsService {
     drillbitother: any,
     corebarrel: any,
     angleWithHori: any,
-    boreholepic: any
+    boreholepic1: any,
+    boreholepic2: any,
+    boreholepic3: any
   ) {
     const parameters = {
       bh_id: bhid,
@@ -221,7 +235,9 @@ export class HttpcallsService {
       drilling_bit_other: drillbitother,
       core_barrel: corebarrel,
       angle_horizontal: angleWithHori,
-      borehole_pic: boreholepic,
+      borehole_pic1: boreholepic1,
+      borehole_pic2: boreholepic2,
+      borehole_pic3: boreholepic3
     };
     console.log('JSON', JSON.stringify(parameters));
 
@@ -320,8 +336,12 @@ export class HttpcallsService {
     clientRepName: any,
     clientRepSign: any,
     mdate: any,
-    depthterpic: any,
-    samplepic: any
+    depthterpic1: any,
+    depthpic2: any,
+    depthpic3: any,
+    samplepic1: any,
+    samplepic2: any,
+    samplepic3: any
   ) {
     const parameters = {
       bh_id: bhid,
@@ -336,8 +356,12 @@ export class HttpcallsService {
       client_rep_name: clientRepName,
       client_rep_sign: clientRepSign,
       modified_date: mdate,
-      depth_termination_pic: depthterpic,
-      sample_pic: samplepic,
+      depth_termination_pic1: depthterpic1,
+      depth_termination_pic2: depthpic2,
+      depth_termination_pic3: depthpic3,
+      sample_pic1: samplepic1,
+      sample_pic2: samplepic2,
+      sample_pic3: samplepic3
     };
     console.log('JSON', JSON.stringify(parameters));
 

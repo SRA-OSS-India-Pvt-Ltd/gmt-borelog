@@ -23,6 +23,9 @@ import { DatePipe } from '@angular/common';
 })
 export class Web2Page implements OnInit {
   @ViewChild('previewimage') waterMarkImage: ElementRef;
+  @ViewChild('previewimage2') waterMarkImage2: ElementRef;
+  @ViewChild('previewimage3') waterMarkImage3: ElementRef;
+
   @ViewChild('searchbar')searchbar: AutoCompleteComponent;
   @Input() public styles = new AutoCompleteStyles();
 
@@ -125,6 +128,32 @@ export class Web2Page implements OnInit {
     latitude: any;
     longitude: any;
     joindate: any;
+
+    itemboreholepic2: any;
+blobImagepic2: any;
+
+itemboreholepic3: any;
+blobImagepic3: any;
+
+originalImage2pic: any;
+originalImage3pic: any;
+
+blobImagepic33: any;
+blobImagepic22: any;
+
+base64Image2: any;
+blobImage12: any;
+
+
+base64Image3: any;
+blobImage13: any;
+
+base64Image31: any;
+base64Image312: any;
+
+blobImage131: any;
+blobImage132: any;
+
   constructor(
     public toastSer: ToastService,
     private geolocation: Geolocation,
@@ -205,7 +234,10 @@ export class Web2Page implements OnInit {
 
           }
 
-          this.waterMarkImage.nativeElement.src= this.layer1List[0].borehole_pic;
+          this.waterMarkImage.nativeElement.src= this.layer1List[0].borehole_pic1;
+          this.waterMarkImage2.nativeElement.src= this.layer1List[0].borehole_pic2;
+          this.waterMarkImage3.nativeElement.src= this.layer1List[0].borehole_pic3;
+
         }
       });
   }
@@ -296,8 +328,9 @@ export class Web2Page implements OnInit {
         this.drillBitOther,
         this.detailsOdCoreBarrel,
         this.angleWithHorizontal,
-        this.waterMarkImage.nativeElement.src
-      )
+        this.waterMarkImage.nativeElement.src,
+        this.waterMarkImage2.nativeElement.src ,
+        this.waterMarkImage3.nativeElement.src)
       .subscribe((response: any) => {
         console.log('response', response);
         if (response.error === true) {
@@ -572,6 +605,111 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
       });
   }
 
+  watermarkImagepic2() {
+
+
+    watermark([this.blobImagepic2])
+    .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.chainage, '20px Josefin Slab', '#FC0535', 0.5))
+    .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.boreholeNumber, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y143,'Northing- '+this.northing, '20px Josefin Slab', '#FC0535', 0.5, 48))
+
+
+  .then((img)=> {
+    console.log('Base 64 of one :', img);
+
+  //document.getElementById('lower-left').appendChild(img);
+
+
+        this.waterMarkImage2.nativeElement.src = img.src;
+      });
+  }
+
+  watermarkImage1pic2() {
+    watermark([this.blobImage12])
+    .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.chainage, '20px Josefin Slab', '#FC0535', 0.5))
+    .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.boreholeNumber, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .load('assets/images/2.png')
+  .image(watermark.text.atPos(this.xy78,this.y143,'Northing- '+this.northing, '20px Josefin Slab', '#FC0535', 0.5, 48))
+    // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
+    .then((img)=> {
+      console.log('Base 64 of one :', img.src);
+
+      //  document.getElementById('lower-left').appendChild(img);
+
+        this.waterMarkImage2.nativeElement.src = img.src;
+
+      });
+  }
+
+
+
+
+
+
+    watermarkImagepic3() {
+
+
+      watermark([this.blobImagepic3])
+      .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.chainage, '20px Josefin Slab', '#FC0535', 0.5))
+      .load('assets/images/2.png')
+    .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.boreholeNumber, '20px Josefin Slab', '#FC0535', 0.5, 48))
+    .load('assets/images/2.png')
+    .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '20px Josefin Slab', '#FC0535', 0.5, 48))
+    .load('assets/images/2.png')
+    .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '20px Josefin Slab', '#FC0535', 0.5, 48))
+    .load('assets/images/2.png')
+    .image(watermark.text.atPos(this.xy78,this.y143,'Northing- '+this.northing, '20px Josefin Slab', '#FC0535', 0.5, 48))
+
+
+    .then((img)=> {
+      console.log('Base 64 of one :', img);
+
+    //document.getElementById('lower-left').appendChild(img);
+
+
+          this.waterMarkImage3.nativeElement.src = img.src;
+        });
+    }
+
+    watermarkImage1pic3() {
+      watermark([this.blobImage13])
+      .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.chainage, '20px Josefin Slab', '#FC0535', 0.5))
+      .load('assets/images/2.png')
+    .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.boreholeNumber, '20px Josefin Slab', '#FC0535', 0.5, 48))
+    .load('assets/images/2.png')
+    .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '20px Josefin Slab', '#FC0535', 0.5, 48))
+    .load('assets/images/2.png')
+    .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '20px Josefin Slab', '#FC0535', 0.5, 48))
+    .load('assets/images/2.png')
+    .image(watermark.text.atPos(this.xy78,this.y143,'Northing- '+this.northing, '20px Josefin Slab', '#FC0535', 0.5, 48))
+      // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
+      .then((img)=> {
+        console.log('Base 64 of one :', img.src);
+
+        //  document.getElementById('lower-left').appendChild(img);
+
+          this.waterMarkImage3.nativeElement.src = img.src;
+
+        });
+    }
+
+
+
+
+
+
+
 
 
   takeSnap() {
@@ -591,6 +729,43 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
       }
     );
   }
+
+  takeSnap2() {
+    this.camera.getPicture(this.options1).then(
+      (imageData) => {
+        this.originalImage2pic = 'data:image/jpeg;base64,' + imageData;
+
+        fetch(this.originalImage2pic)
+          .then((res) => res.blob())
+          .then((blob) => {
+            this.blobImagepic2 = blob;
+            this.watermarkImagepic2();
+          });
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  takeSnap3() {
+    this.camera.getPicture(this.options1).then(
+      (imageData) => {
+        this.originalImage3pic = 'data:image/jpeg;base64,' + imageData;
+
+        fetch(this.originalImage3pic)
+          .then((res) => res.blob())
+          .then((blob) => {
+            this.blobImagepic3 = blob;
+            this.watermarkImagepic3();
+          });
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
   openGallery() {
     this.camera.getPicture(this.gelleryOptions).then(
       (imgData) => {
@@ -609,6 +784,42 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
     );
   }
 
+
+  openGallery2() {
+    this.camera.getPicture(this.gelleryOptions).then(
+      (imgData) => {
+        console.log('image data =>  ', imgData);
+        this.base64Image2 = 'data:image/jpeg;base64,' + imgData;
+        fetch(this.base64Image2)
+          .then((res) => res.blob())
+          .then((blob) => {
+            this.blobImage12 = blob;
+            this.watermarkImage1pic2();
+          });
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
+
+  openGallery3() {
+    this.camera.getPicture(this.gelleryOptions).then(
+      (imgData) => {
+        console.log('image data =>  ', imgData);
+        this.base64Image3 = 'data:image/jpeg;base64,' + imgData;
+        fetch(this.base64Image3)
+          .then((res) => res.blob())
+          .then((blob) => {
+            this.blobImage13 = blob;
+            this.watermarkImage1pic3();
+          });
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
 
 
   locationcheck(){
@@ -646,6 +857,97 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
     alert.present();
   }
 
+
+  locationcheck2(){
+    this.getLatLong();
+
+    if(this.easting === undefined || this.northing === undefined
+      ||this.easting === null || this.northing === null||
+      this.easting === '' || this.northing === ''){
+        this.getLatLong();
+        this.toastSer.presentError('Please Enter Easing and Northing');
+
+
+    }else{
+      this.imageSelection2();
+    }
+  }
+
+
+  locationcheck3(){
+    this.getLatLong();
+
+    if(this.easting === undefined || this.northing === undefined
+      ||this.easting === null || this.northing === null||
+      this.easting === '' || this.northing === ''){
+        this.getLatLong();
+        this.toastSer.presentError('Please Enter Easing and Northing');
+
+
+    }else{
+      this.imageSelection3();
+    }
+  }
+
+
+
+  async imageSelection2() {
+    this.getLatLong();
+
+
+    const alert = await this.alertCtrl.create({
+      header: 'Choose Type',
+      buttons: [
+        {
+          text: 'Camera',
+          handler: (redc) => {
+
+            this.takeSnap2();
+
+        },
+        },
+        {
+          text: 'Gallery',
+          handler: (redc) => {
+
+            this.openGallery2();
+
+          },
+        },
+      ],
+    });
+    alert.present();
+  }
+
+
+  async imageSelection3() {
+    this.getLatLong();
+
+
+    const alert = await this.alertCtrl.create({
+      header: 'Choose Type',
+      buttons: [
+        {
+          text: 'Camera',
+          handler: (redc) => {
+
+            this.takeSnap3();
+
+        },
+        },
+        {
+          text: 'Gallery',
+          handler: (redc) => {
+
+            this.openGallery3();
+
+
+          },
+        },
+      ],
+    });
+    alert.present();
+  }
 
 
    ll2utm(lat,lon){

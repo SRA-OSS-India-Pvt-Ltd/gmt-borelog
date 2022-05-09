@@ -17,6 +17,11 @@ export class Nonedit4Page implements AfterViewInit {
   @ViewChild('canvas2') canvasEl2:  ElementRef;
   @ViewChild('previewimage') waterMarkImage: ElementRef;
   @ViewChild('previewimage2') waterMarkImage2: ElementRef;
+  @ViewChild('previewimagedep2') waterMarkImagedep2: ElementRef;
+  @ViewChild('previewimagedep3') waterMarkImagedep3: ElementRef;
+  @ViewChild('previewimagesamp2') waterMarkImagesamp2: ElementRef;
+  @ViewChild('previewimagesamp3') waterMarkImagesamp3: ElementRef;
+
 
 signaturePad;
 signaturePad1;
@@ -100,8 +105,22 @@ constructor(public toastSer: ToastService,
          this.signaturePad1.fromDataURL(this.base642);
          this.signaturePad2.fromDataURL(this.base643);
          this.pdf = this.layer1List[0].pdfreport;
-         this.waterMarkImage.nativeElement.src = this.layer1List[0].depth_termination_pic;
-         this.waterMarkImage2.nativeElement.src= this.layer1List[0].sample_pic;
+         this.waterMarkImage.nativeElement.src =
+         this.layer1List[0].depth_termination_pic1;
+         this.waterMarkImagedep2.nativeElement.src =
+         this.layer1List[0].depth_termination_pic2;
+         this.waterMarkImagedep3.nativeElement.src =
+         this.layer1List[0].depth_termination_pic3;
+
+
+
+         this.waterMarkImage2.nativeElement.src =
+         this.layer1List[0].sample_pic1;
+
+         this.waterMarkImagesamp2.nativeElement.src =
+         this.layer1List[0].sample_pic2;
+         this.waterMarkImagesamp3.nativeElement.src =
+         this.layer1List[0].sample_pic3;
 
 
 
