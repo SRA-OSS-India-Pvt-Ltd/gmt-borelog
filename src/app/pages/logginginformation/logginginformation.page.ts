@@ -639,26 +639,29 @@ Constants.layer2flow === 'fromLog';
 
 
 
-    if (this.firstB !== undefined &&this.secondB !== undefined && this.thirdB !== undefined
-      && this.firstB !== '' &&this.secondB !== '' && this.thirdB !== ''
-      && this.firstB !== null &&this.secondB !== null && this.thirdB !== null ) {
-      this.totalB = parseInt(this.firstB)+parseInt(this.secondB) + parseInt(this.thirdB);
-    }else if(this.firstB !== undefined&&this.secondB !== undefined
-      && this.firstB !== ''&&this.secondB !== ''
-      && this.firstB !== null &&this.secondB !== null ){
+
+
+
+     if(this.thirdB !== undefined&&this.secondB !== undefined
+      && this.thirdB !== ''&&this.secondB !== ''
+      && this.thirdB !== null &&this.secondB !== null ){
       console.log('val',this.secondB);
-      this.totalB = parseInt(this.firstB)+parseInt(this.secondB) ;
+      this.totalB = parseInt(this.thirdB)+parseInt(this.secondB) ;
 
-    }else if(this.firstB !== undefined &&this.thirdB !== undefined
-      && this.firstB !== '' &&this.thirdB !== ''
-      && this.firstB !== null &&this.thirdB !== null ){
+    }else if(this.thirdB !== undefined
+       &&this.thirdB !== ''
+      && this.thirdB !== null ){
       console.log('2');
-      this.totalB = parseInt(this.firstB)+parseInt(this.thirdB) ;
+      this.totalB = parseInt(this.thirdB) ;
+      }
 
-    }else{
-      this.totalB = parseInt(this.firstB);
-    }
+      else if(this.secondB !== undefined
+        &&this.secondB !== ''
+       && this.secondB !== null ){
+       console.log('2');
+       this.totalB = parseInt(this.secondB) ;
 
+     }
 
 
 

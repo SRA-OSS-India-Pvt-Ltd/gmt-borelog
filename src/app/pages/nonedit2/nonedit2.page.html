@@ -167,22 +167,6 @@
       </ion-row>
 
 
-      <ion-row>
-        <ion-col size="6">
-          <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>  Borehole picture1:</strong><span class="required-asterisk">*</span></ion-label>
-          </ion-item>
-
-        </ion-col>
-
-        <ion-col size="6">
-          <img #previewimage>
-
-
-        </ion-col>
-
-
-      </ion-row>
 
 
       <ion-row>
@@ -401,8 +385,24 @@
         </ion-col>
       </ion-row>
 
-      </ion-grid>
+
       <ion-row>
+        <ion-col size="6">
+          <ion-item class="padding">
+            <ion-label  style="white-space: pre-wrap !important;"><strong>  Borehole picture1:</strong><span class="required-asterisk">*</span></ion-label>
+          </ion-item>
+
+        </ion-col>
+
+        <ion-col size="6">
+          <img #previewimage>
+
+
+        </ion-col>
+
+
+      </ion-row>
+
 
 
         <ion-row>
@@ -454,7 +454,7 @@
 
         </ion-row>
 
-
+<ion-row>
         <ion-col size="12">
           <ion-button  expand="block" style="text-transform: none;" (click)="onClick()">
             Next
@@ -463,5 +463,7 @@
         </ion-col>
 
       </ion-row>
+    </ion-grid>
+
       </ion-list>
 </ion-content>
