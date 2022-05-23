@@ -12,6 +12,7 @@ import { Base64ToGallery } from '@ionic-native/base64-to-gallery/ngx';
 import { DatePicker } from '@ionic-native/date-picker/ngx';
 
 import { HttpClientModule } from '@angular/common/http';
+
 import { SQLite } from '@ionic-native/sqlite/ngx';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';

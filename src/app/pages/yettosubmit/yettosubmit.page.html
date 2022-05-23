@@ -26,6 +26,23 @@
    </ion-row>
 
    <ion-row>
+
+    <ion-col size="12">
+      <ion-item class="input">
+        <ion-label>Sample Date: </ion-label>
+        <ion-input value="{{ date5 | date: 'dd-MM-yyyy' }}" id="date5" >
+        </ion-input>
+        <ion-popover trigger="date5" size="cover">
+          <ng-template>
+            <ion-datetime presentation="dateadfhg" [(ngModel)]="date5"></ion-datetime>
+          </ng-template>
+        </ion-popover>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+
+   <ion-row>
      <ion-col size="12">
        <ion-button class= "button" expand="block" (click)="submit()" style="text-transform: none;">
 Submit       </ion-button>

@@ -13,11 +13,15 @@ import { Component, OnInit } from '@angular/core';
 export class YettosubmitPage implements OnInit {
   bhidlist: any =[];
   bhidss: any;
+  date5: any;
+
   constructor(public router: Router,
     public httpser: HttpcallsService,
     private toastSer: ToastService,
     public platform: Platform) {
       this.bhidlist = Constants.yetbhidList;
+      this.date5 = new Date().toISOString();
+
     }
 
   ngOnInit() {
@@ -30,6 +34,9 @@ export class YettosubmitPage implements OnInit {
   submit(){
     if(this.bhidss === undefined){
       this.toastSer.presentError('Please select Bh Number');
+    }else if(this.date5 === undefined){
+      this.toastSer.presentError('Please select Sample Date');
+
     }else{
 
       this. platform.ready().then(() => {
@@ -39,7 +46,7 @@ export class YettosubmitPage implements OnInit {
 
           }else{
 
-            this.httpser.submitSampleStatus(Constants.userId,this.bhidss).
+            this.httpser.submitSampleStatus(Constants.userId,this.bhidss,this.date5).
             subscribe((response: any)=>{
               console.log('response',response);
               if(response.error === false){
@@ -54,7 +61,7 @@ export class YettosubmitPage implements OnInit {
             });
           }
         }else{
-          this.httpser.submitSampleStatus(Constants.userId,this.bhidss).
+          this.httpser.submitSampleStatus(Constants.userId,this.bhidss,this.date5).
           subscribe((response: any)=>{
             console.log('response',response);
             if(response.error === false){

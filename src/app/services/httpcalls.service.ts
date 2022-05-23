@@ -450,8 +450,8 @@ export class HttpcallsService {
       JSON.stringify(parameters)
     );
   }
-  submitSampleStatus(uid: any,bhid: any) {
-    const parameters = { user_id: uid, bh_ids: bhid};
+  submitSampleStatus(uid: any,bhid: any,date: any) {
+    const parameters = { user_id: uid, bh_ids: bhid,samplesentdate: date};
     console.log('JSON', JSON.stringify(parameters));
 
     return this.httpClient.post(
