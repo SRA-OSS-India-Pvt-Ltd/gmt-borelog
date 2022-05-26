@@ -1,3 +1,4 @@
+import { Platform } from '@ionic/angular';
 /* eslint-disable @typescript-eslint/no-inferrable-types */
 /* eslint-disable @typescript-eslint/dot-notation */
 import { AlertController } from '@ionic/angular';
@@ -178,6 +179,7 @@ export class Update4Page implements AfterViewInit {
     public camera: Camera,
     private geolocation: Geolocation,
     public alertCtrl: AlertController,
+    public platform: Platform,
     private datePipe: DatePipe,
     private androidPermissions: AndroidPermissions,
     private locationAccuracy: LocationAccuracy,
@@ -477,13 +479,20 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
 
 
   xy78(coffee, metrics, context) {
-    return 28;
-  };
+    this.platform.ready().then(() => {
+
+      if (this.platform.is('tablet')) {
+        return 78;
+      }else{
+        return 28;
+
+      }
+    });  };
   y63(coffee, metrics, context) {
-    return 143;
+    return 163;
   };
   y83(coffee, metrics, context) {
-    return 163;
+    return 173;
   };
 
   y103(coffee, metrics, context) {
@@ -491,30 +500,32 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
   };
 
   y123(coffee, metrics, context) {
-    return 203;
+    return 193;
   };
 
   y143(coffee, metrics, context) {
-    return 223;
+    return 203;
   };
+
+
 
   y631(coffee, metrics, context) {
-    return 95;
+    return 115;
   };
   y831(coffee, metrics, context) {
-    return 110;
-  };
-
-  y1031(coffee, metrics, context) {
     return 125;
   };
 
+  y1031(coffee, metrics, context) {
+    return 135;
+  };
+
   y1231(coffee, metrics, context) {
-    return 150;
+    return 145;
   };
 
   y1431(coffee, metrics, context) {
-    return 175;
+    return 155;
   };
 
 
@@ -522,15 +533,15 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
 
 
     watermark([this.blobImage])
-    .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.chainge, '20px Josefin Slab', '#FC0535', 0.5))
+    .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.chainge, '10px bold', '#000000', 0))
     .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.bhno, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.bhno, '10px bold', '#000000', 0, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '10px bold', '#000000', 0, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '10px bold', '#000000', 0, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y143,'Northing- '+this.northing, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y143,'Northing- '+this.northing, '10px bold', '#000000', 0, 48))
 
       .then((img) => {
         this.waterMarkImage.nativeElement.src = img.src;
@@ -539,15 +550,15 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
 
   watermarkImage1() {
     watermark([this.blobImage1])
-    .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.chainge, '20px Josefin Slab', '#FC0535', 0.5))
+    .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.chainge, '10px bold', '#000000', 0))
     .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.bhno, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.bhno, '10px bold', '#000000', 0, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '10px bold', '#000000', 0, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '10px bold', '#000000', 0, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y143,'Northing- '+this.northing, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y143,'Northing- '+this.northing, '10px bold', '#000000', 0, 48))
 
     .then((img) => {
         this.waterMarkImage.nativeElement.src = img.src;
@@ -558,15 +569,15 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
 
   watermarkImage2() {
     watermark([this.blobImage2])
-    .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.chainge, '20px Josefin Slab', '#FC0535', 0.5))
+    .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.chainge, '10px bold', '#000000', 0))
     .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.bhno, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.bhno, '10px bold', '#000000', 0, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '10px bold', '#000000', 0, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '10px bold', '#000000', 0, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y143,'Northing- '+this.northing, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y143,'Northing- '+this.northing, '10px bold', '#000000', 0, 48))
       .then((img) => {
         this.waterMarkImage2.nativeElement.src = img.src;
       });
@@ -574,15 +585,15 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
 
   watermarkImage3() {
     watermark([this.blobImage1])
-    .image(watermark.text.atPos(this.xy78,this.y631,'Chainage: '+this.chainge, '10px Josefin Slab', '#FC0535', 0.5))
+    .image(watermark.text.atPos(this.xy78,this.y631,'Chainage: '+this.chainge, '5px bold', '#000000', 0))
     .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y831,'Bhno: '+this.chainge, '10px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y831,'Bhno: '+this.chainge, '5px bold', '#000000', 0, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y1031,'Date: '+this.joindate, '10px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y1031,'Date: '+this.joindate, '5px bold', '#000000', 0, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y1231,'Easting- '+this.easting, '10px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y1231,'Easting- '+this.easting, '5px bold', '#000000', 0, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y1431,'Northing- '+this.northing, '10px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y1431,'Northing- '+this.northing, '5px bold', '#000000', 0, 48))
     // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
     .then((img)=> {
       console.log('Base 64 of one :', img.src);
@@ -596,15 +607,15 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
 
   watermarkImage4() {
     watermark([this.blobImage2])
-    .image(watermark.text.atPos(this.xy78,this.y631,'Chainage: '+this.chainge, '10px Josefin Slab', '#FC0535', 0.5))
+    .image(watermark.text.atPos(this.xy78,this.y631,'Chainage: '+this.chainge, '5px bold', '#000000', 0))
     .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y831,'Bhno: '+this.bhno, '10px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y831,'Bhno: '+this.bhno, '5px bold', '#000000', 0, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y1031,'Date: '+this.joindate, '10px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y1031,'Date: '+this.joindate, '5px bold', '#000000', 0, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y1231,'Easting- '+this.easting, '10px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y1231,'Easting- '+this.easting, '5px bold', '#000000', 0, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y1431,'Northing- '+this.northing, '10px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y1431,'Northing- '+this.northing, '5px bold', '#000000', 0, 48))
 
     .then((img) => {
         this.waterMarkImage2.nativeElement.src = img.src;
@@ -616,15 +627,15 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
 
 
     watermark([this.blobSnapDep2])
-    .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.chainge, '20px Josefin Slab', '#FC0535', 0.5))
+    .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.chainge, '10px bold', '#000000', 0))
     .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.bhno, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.bhno, '10px bold', '#000000', 0, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '10px bold', '#000000', 0, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '10px bold', '#000000', 0, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y143,'Northing- '+this.northing, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y143,'Northing- '+this.northing, '10px bold', '#000000', 0, 48))
 
     .then((img) => {
         this.waterMarkImagedep2.nativeElement.src = img.src;
@@ -635,15 +646,15 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
 
   watermarkImage3takeDep2() {
     watermark([this.blobImagetakeDep2])
-    .image(watermark.text.atPos(this.xy78,this.y631,'Chainage: '+this.chainge, '10px Josefin Slab', '#FC0535', 0.5))
+    .image(watermark.text.atPos(this.xy78,this.y631,'Chainage: '+this.chainge, '5px bold', '#000000', 0))
     .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y831,'Bhno: '+this.chainge, '10px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y831,'Bhno: '+this.chainge, '5px bold', '#000000', 0, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y1031,'Date: '+this.joindate, '10px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y1031,'Date: '+this.joindate, '5px bold', '#000000', 0, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y1231,'Easting- '+this.easting, '10px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y1231,'Easting- '+this.easting, '5px bold', '#000000', 0, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y1431,'Northing- '+this.northing, '10px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y1431,'Northing- '+this.northing, '5px bold', '#000000', 0, 48))
     // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
     .then((img)=> {
       console.log('Base 64 of one :', img.src);
@@ -658,15 +669,15 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
 
   watermarkImage1GalDep2() {
     watermark([this.blobImage1Galdep2])
-    .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.chainge, '20px Josefin Slab', '#FC0535', 0.5))
+    .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.chainge, '10px bold', '#000000', 0))
     .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.bhno, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.bhno, '10px bold', '#000000', 0, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '10px bold', '#000000', 0, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '10px bold', '#000000', 0, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y143,'Northing- '+this.northing, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y143,'Northing- '+this.northing, '10px bold', '#000000', 0, 48))
 
     .then((img) => {
         this.waterMarkImagedep2.nativeElement.src = img.src;
@@ -681,15 +692,15 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
 
 
     watermark([this.blobSnapDep3])
-    .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.chainge, '20px Josefin Slab', '#FC0535', 0.5))
+    .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.chainge, '10px bold', '#000000', 0))
     .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.bhno, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.bhno, '10px bold', '#000000', 0, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '10px bold', '#000000', 0, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '10px bold', '#000000', 0, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y143,'Northing- '+this.northing, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y143,'Northing- '+this.northing, '10px bold', '#000000', 0, 48))
 
     .then((img) => {
         this.waterMarkImagedep3.nativeElement.src = img.src;
@@ -700,15 +711,15 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
 
   watermarkImage3takeDep3() {
     watermark([this.blobImagetakeDep3])
-    .image(watermark.text.atPos(this.xy78,this.y631,'Chainage: '+this.chainge, '10px Josefin Slab', '#FC0535', 0.5))
+    .image(watermark.text.atPos(this.xy78,this.y631,'Chainage: '+this.chainge, '5px bold', '#000000', 0))
     .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y831,'Bhno: '+this.chainge, '10px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y831,'Bhno: '+this.chainge, '5px bold', '#000000', 0, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y1031,'Date: '+this.joindate, '10px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y1031,'Date: '+this.joindate, '5px bold', '#000000', 0, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y1231,'Easting- '+this.easting, '10px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y1231,'Easting- '+this.easting, '5px bold', '#000000', 0, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y1431,'Northing- '+this.northing, '10px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y1431,'Northing- '+this.northing, '5px bold', '#000000', 0, 48))
     // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
     .then((img)=> {
       console.log('Base 64 of one :', img.src);
@@ -723,15 +734,15 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
 
   watermarkImage1GalDep3() {
     watermark([this.blobImage1Galdep3])
-    .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.chainge, '20px Josefin Slab', '#FC0535', 0.5))
+    .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.chainge, '10px bold', '#000000', 0))
     .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.bhno, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.bhno, '10px bold', '#000000', 0, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '10px bold', '#000000', 0, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '10px bold', '#000000', 0, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y143,'Northing- '+this.northing, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y143,'Northing- '+this.northing, '10px bold', '#000000', 0, 48))
 
     .then((img) => {
         this.waterMarkImagedep3.nativeElement.src = img.src;
@@ -747,15 +758,15 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
 
 
     watermark([this.blobSnapSamp2])
-    .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.chainge, '20px Josefin Slab', '#FC0535', 0.5))
+    .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.chainge, '10px bold', '#000000', 0))
     .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.bhno, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.bhno, '10px bold', '#000000', 0, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '10px bold', '#000000', 0, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '10px bold', '#000000', 0, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y143,'Northing- '+this.northing, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y143,'Northing- '+this.northing, '10px bold', '#000000', 0, 48))
 
     .then((img) => {
         this.waterMarkImagesamp2.nativeElement.src = img.src;
@@ -766,15 +777,15 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
 
   watermarkImage3takeSamp2() {
     watermark([this.blobImagetakeSamp2])
-    .image(watermark.text.atPos(this.xy78,this.y631,'Chainage: '+this.chainge, '10px Josefin Slab', '#FC0535', 0.5))
+    .image(watermark.text.atPos(this.xy78,this.y631,'Chainage: '+this.chainge, '5px bold', '#000000', 0))
     .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y831,'Bhno: '+this.chainge, '10px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y831,'Bhno: '+this.chainge, '5px bold', '#000000', 0, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y1031,'Date: '+this.joindate, '10px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y1031,'Date: '+this.joindate, '5px bold', '#000000', 0, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y1231,'Easting- '+this.easting, '10px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y1231,'Easting- '+this.easting, '5px bold', '#000000', 0, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y1431,'Northing- '+this.northing, '10px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y1431,'Northing- '+this.northing, '5px bold', '#000000', 0, 48))
     // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
     .then((img)=> {
       console.log('Base 64 of one :', img.src);
@@ -789,15 +800,15 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
 
   watermarkImage1GalSamp2() {
     watermark([this.blobImage1GalSamp2])
-    .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.chainge, '20px Josefin Slab', '#FC0535', 0.5))
+    .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.chainge, '10px bold', '#000000', 0))
     .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.bhno, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.bhno, '10px bold', '#000000', 0, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '10px bold', '#000000', 0, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '10px bold', '#000000', 0, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y143,'Northing- '+this.northing, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y143,'Northing- '+this.northing, '10px bold', '#000000', 0, 48))
 
     .then((img) => {
         this.waterMarkImagesamp2.nativeElement.src = img.src;
@@ -813,15 +824,15 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
 
 
     watermark([this.blobSnapSamp3])
-    .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.chainge, '20px Josefin Slab', '#FC0535', 0.5))
+    .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.chainge, '10px bold', '#000000', 0))
     .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.bhno, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.bhno, '10px bold', '#000000', 0, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '10px bold', '#000000', 0, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '10px bold', '#000000', 0, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y143,'Northing- '+this.northing, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y143,'Northing- '+this.northing, '10px bold', '#000000', 0, 48))
 
     .then((img) => {
         this.waterMarkImagesamp3.nativeElement.src = img.src;
@@ -832,15 +843,15 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
 
   watermarkImage3takeSamp3() {
     watermark([this.blobImagetakeSamp3])
-    .image(watermark.text.atPos(this.xy78,this.y631,'Chainage: '+this.chainge, '10px Josefin Slab', '#FC0535', 0.5))
+    .image(watermark.text.atPos(this.xy78,this.y631,'Chainage: '+this.chainge, '5px bold', '#000000', 0))
     .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y831,'Bhno: '+this.chainge, '10px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y831,'Bhno: '+this.chainge, '5px bold', '#000000', 0, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y1031,'Date: '+this.joindate, '10px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y1031,'Date: '+this.joindate, '5px bold', '#000000', 0, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y1231,'Easting- '+this.easting, '10px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y1231,'Easting- '+this.easting, '5px bold', '#000000', 0, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y1431,'Northing- '+this.northing, '10px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y1431,'Northing- '+this.northing, '5px bold', '#000000', 0, 48))
     // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
     .then((img)=> {
       console.log('Base 64 of one :', img.src);
@@ -855,15 +866,15 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
 
   watermarkImage1GalSamp3() {
     watermark([this.blobImage1GalSamp3])
-    .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.chainge, '20px Josefin Slab', '#FC0535', 0.5))
+    .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.chainge, '10px bold', '#000000', 0))
     .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.bhno, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.bhno, '10px bold', '#000000', 0, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '10px bold', '#000000', 0, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '10px bold', '#000000', 0, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y143,'Northing- '+this.northing, '20px Josefin Slab', '#FC0535', 0.5, 48))
+  .image(watermark.text.atPos(this.xy78,this.y143,'Northing- '+this.northing, '10px bold', '#000000', 0, 48))
 
     .then((img) => {
         this.waterMarkImagesamp3.nativeElement.src = img.src;
