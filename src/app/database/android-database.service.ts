@@ -30,7 +30,7 @@ export class AndroidDatabaseService {
 
 
          // eslint-disable-next-line max-len
-         db.executeSql('CREATE TABLE IF NOT EXISTS iterations (bh_iteration_id Integer Primary key AUTOINCREMENT,bh_id Text, drill_depth_from Text, drill_depth_to Text, type_of_strata Text, type_of_sample Text, soil_ds_depth Text, soil_spt_depth Text,soil_spt_penetration_1 Text,soil_spt_blow_n_1 Text,soil_spt_penetration_2 Text, soil_spt_blow_n_2 Text,soil_spt_penetration_3 Text,soil_spt_blow_n_3 Text,soil_spt_penetration_total Text,soil_spt_blow_n_total Text, soil_spt_depth_status Text, soil_uds_depth Text, soil_sample_color Text, soil_sample_color_other Text,soil_visual_classif Text,rock_sample_type Text, rock_depth_from Text,rock_depth_to Text,rock_run_length Text, rock_run_time Text,rock_water_loss Text,rock_cr Text, rock_rqd Text, rock_sample_color Text,rock_weathering Text)',[])
+         db.executeSql('CREATE TABLE IF NOT EXISTS iterations (bh_iteration_id Integer Primary key AUTOINCREMENT,bh_id Text, drill_depth_from Text, drill_depth_to Text, type_of_strata Text, type_of_sample Text, soil_ds_depth Text, soil_spt_depth Text,soil_spt_penetration_1 Text,soil_spt_blow_n_1 Text,soil_spt_penetration_2 Text, soil_spt_blow_n_2 Text,soil_spt_penetration_3 Text,soil_spt_blow_n_3 Text,soil_spt_penetration_total Text,soil_spt_blow_n_total Text, soil_spt_depth_status Text, soil_uds_depth Text, soil_sample_color Text, soil_sample_color_other Text,soil_visual_classif Text,rock_sample_type Text, rock_depth_from Text,rock_depth_to Text,rock_run_length Text, rock_run_time Text,rock_water_loss Text,rock_cr Text, rock_rqd Text, rock_sample_color Text,rock_weathering Text,soil_remarks Text)',[])
          .then(() => console.log('Executed SQL'))
          .catch(e => console.log(e));
 
@@ -382,9 +382,9 @@ additerationData(bhid: any,drillDepthFrom: any,drillDepthTo: any,typeOfstara: an
   rockdepthfrom: any,rockdepthto: any,
   rockrunLeng: any,rockRunTime: any,
   rockWaterLoss: any,rockCr: any,rockrqd: any,
-  rockSampleColor: any,rockWaethering: any){
+  rockSampleColor: any,rockWaethering: any,soilremarks: any){
     this.databaseObj.executeSql(`INSERT INTO iterations
-    (bh_id,drill_depth_from,drill_depth_to,type_of_strata,type_of_sample,soil_ds_depth,soil_spt_depth,soil_spt_penetration_1,soil_spt_blow_n_1,soil_spt_penetration_2,soil_spt_blow_n_2,soil_spt_penetration_3,soil_spt_blow_n_3,soil_spt_penetration_total,soil_spt_blow_n_total,soil_spt_depth_status,soil_uds_depth,soil_sample_color,soil_sample_color_other,soil_visual_classif,rock_sample_type,rock_depth_from,rock_depth_to,rock_run_length,rock_run_time,rock_water_loss,rock_cr,rock_rqd,rock_sample_color,rock_weathering)
+    (bh_id,drill_depth_from,drill_depth_to,type_of_strata,type_of_sample,soil_ds_depth,soil_spt_depth,soil_spt_penetration_1,soil_spt_blow_n_1,soil_spt_penetration_2,soil_spt_blow_n_2,soil_spt_penetration_3,soil_spt_blow_n_3,soil_spt_penetration_total,soil_spt_blow_n_total,soil_spt_depth_status,soil_uds_depth,soil_sample_color,soil_sample_color_other,soil_visual_classif,rock_sample_type,rock_depth_from,rock_depth_to,rock_run_length,rock_run_time,rock_water_loss,rock_cr,rock_rqd,rock_sample_color,rock_weathering,soil_remarks)
     VALUES
     ('${bhid}',
     '${drillDepthFrom}',
@@ -415,7 +415,8 @@ additerationData(bhid: any,drillDepthFrom: any,drillDepthTo: any,typeOfstara: an
     '${rockCr}',
     '${rockrqd}',
     '${rockSampleColor}',
-    '${rockWaethering}')`,[])
+    '${rockWaethering}',
+    '${soilremarks}')`,[])
     .then((res: any)=>{
       console.log('adding Borelog');
       this.toastSer.presentSuccess('Iteration Added');
@@ -437,7 +438,7 @@ additerationData(bhid: any,drillDepthFrom: any,drillDepthTo: any,typeOfstara: an
   rockdepthfrom: any,rockdepthto: any,
   rockrunLeng: any,rockRunTime: any,
   rockWaterLoss: any,rockCr: any,rockrqd: any,
-  rockSampleColor: any,rockWaethering: any){
+  rockSampleColor: any,rockWaethering: any,soilremarks: any){
         return this.databaseObj.executeSql(`UPDATE iterations
          SET bh_id = '${bhid}',
          drill_depth_from = '${drillDepthFrom}',
@@ -473,7 +474,8 @@ additerationData(bhid: any,drillDepthFrom: any,drillDepthTo: any,typeOfstara: an
          rock_cr = '${rockCr}',
          rock_rqd = '${rockrqd}',
          rock_sample_color = '${rockSampleColor}',
-         rock_weathering = '${rockWaethering}'
+         rock_weathering = '${rockWaethering}',
+         soil_remarks = '${soilremarks}'
 
 
          WHERE bh_iteration_id = ${id} `,[])

@@ -72,6 +72,8 @@ isColorShown = false;
 colorOther: any;
 increme: number;
 sno: any;
+isRemarks = false;
+remarks = '';
 
   constructor(public toastSer: ToastService,
     public androidDatabase: AndroidDatabaseService,
@@ -475,15 +477,19 @@ sno: any;
             this.isSoil = true;
           }else{
             this.isRock = true;
+            this.isRemarks = false;
           }
 
            this.typeOfsample = this.layer1List[0].type_of_sample;
            if(this.typeOfsample === 'DS'){
              this.isdsDepth = true;
+             this.isRemarks = false;
            }else if(this.typeOfsample === 'SPT'){
              this.isSPTDepth = true;
+             this.isRemarks = true;
            }else if(this.typeOfsample === 'UDS'){
              this.isUDSepth = true;
+             this.isRemarks = true;
            }
            this.dsDepthFrom = this.layer1List[0].soil_ds_depth;
 
@@ -517,6 +523,7 @@ sno: any;
            this.rockDepthFrom = this.layer1List[0].rock_depth_from;
            this.rockDepthTo = this.layer1List[0].rock_depth_to;
            this.sptstatus = this.layer1List[0].soil_spt_depth_status;
+           this.remarks = this.layer1List[0].soil_remarks;
 
            if(this.layer1List[0].soil_spt_penetration_1 === '0'){
              this. first = '';
@@ -582,7 +589,8 @@ sno: any;
         this.cr,
         this.rqd,
         this.rockSamplColor,
-        this.typeOfWeathering);
+        this.typeOfWeathering,
+        this.remarks);
 
 
         this.router.navigate(['iterations']);

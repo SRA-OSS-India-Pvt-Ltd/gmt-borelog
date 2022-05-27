@@ -106,6 +106,8 @@
 
 
 
+
+
       <ion-row *ngIf="isSPTDepth">
         <ion-col size="6">
           <ion-item class="padding">
@@ -251,11 +253,12 @@
       </ion-row>
 
 
+
+
       <ion-row *ngIf="isSPTDepth">
         <ion-col size="6">
           <ion-item class="padding">
-            <ion-label style="white-space: pre-wrap !important;"><strong>SPT Depth (m):</strong><span
-                class="required-asterisk">*</span></ion-label>
+            <ion-label style="white-space: pre-wrap !important;"><strong>SPT Depth (m):</strong></ion-label>
           </ion-item>
         </ion-col>
         <ion-col size="6">
@@ -264,6 +267,20 @@
           </ion-item>
         </ion-col>
       </ion-row>
+
+      <ion-row *ngIf="isRemarks">
+        <ion-col size="6">
+          <ion-item class="padding">
+            <ion-label style="white-space: pre-wrap !important;"><strong>Remarks:</strong></ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item class="input">
+            <ion-input type="text" [(ngModel)]="remarks"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
 
 
       <ion-row *ngIf="isSoil">

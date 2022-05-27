@@ -72,6 +72,8 @@ export class LogginginformationPage implements OnInit {
   isColorShown = false;
   colorOther: string = '';
 statra: any = [];
+isRemarks = false;
+remarks = '';
   constructor(
     public toastSer: ToastService,
     public androidDatabase: AndroidDatabaseService,
@@ -140,6 +142,7 @@ Constants.layer2flow === 'fromLog';
       this.isSPTDepth = false;
       this.isUDSepth = false;
       this.isdsDepth = false;
+      this.isRemarks = false;
       this.typeOfsample = '';
       this.soilSampleColor = '';
       this.typeOfSoil = '';
@@ -169,6 +172,7 @@ Constants.layer2flow === 'fromLog';
       this.isdsDepth = true;
       this.isSPTDepth = false;
       this.isUDSepth = false;
+      this.isRemarks = false;
       this.first = '';
       this.second = '';
       this.third = '';
@@ -187,10 +191,14 @@ Constants.layer2flow === 'fromLog';
       this.dsDepthFrom = '';
 
       this.udsDepthFrom = '';
+      this.isRemarks = true;
+
     } else if (this.typeOfsample === 'UDS') {
       this.isdsDepth = false;
       this.isSPTDepth = false;
       this.isUDSepth = true;
+      this.isRemarks = true;
+
       this.dsDepthFrom = '';
 
       this.first = '';
@@ -566,6 +574,7 @@ Constants.layer2flow === 'fromLog';
     this.visualClassification = null;
     this.soilSampleColor = null;
     this.typeOfsample = null;
+    this.remarks = '';
 
   }
   moveToNext() {}
@@ -605,7 +614,8 @@ Constants.layer2flow === 'fromLog';
       this.cr,
       this.rqd,
       this.rockSamplColor,
-      this.typeOfWeathering);
+      this.typeOfWeathering,
+      this.remarks);
       this.clearFields();
 
       this.router.navigate(['iterations']);
@@ -726,7 +736,7 @@ Constants.layer2flow === 'fromLog';
         this.rqd,
         this.rockSamplColor,
         this.typeOfWeathering,
-        ''
+        '',this.remarks
       )
       .subscribe((response: any) => {
         if (response.error === true) {

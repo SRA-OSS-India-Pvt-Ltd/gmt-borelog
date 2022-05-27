@@ -116,6 +116,8 @@ isColorShown = false;
 colorOther: any;
 increme: number;
 sno: any;
+isRemarks = false;
+remarks: any;
 constructor(public toastSer: ToastService,
   public httpService: HttpcallsService,
   public router: Router) {
@@ -199,15 +201,21 @@ this.httpService.getSingleBoreIterationDetails(Constants.iterationId).subscribe(
            this.isSoil = true;
          }else{
            this.isRock = true;
+           this.isRemarks = false;
          }
          this.typeOfsample = this.layer1List[0].type_of_sample;
          if(this.typeOfsample === 'DS'){
           this.isdsDepth = true;
+          this.isRemarks = false;
         }else if(this.typeOfsample === 'SPT'){
           this.isSPTDepth = true;
+          this.isRemarks = true;
         }else if(this.typeOfsample === 'UDS'){
           this.isUDSepth = true;
+          this.isRemarks = true;
         }
+        this.remarks = this.layer1List[0].soil_remarks;
+
 
          this.dsDepthFrom = this.layer1List[0].soil_ds_depth;
 

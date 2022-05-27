@@ -940,54 +940,47 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
   }
 
   xy78(coffee, metrics, context) {
-    this.platform.ready().then(() => {
+    return 28;
 
-      if (this.platform.is('tablet')) {
-        return 78;
-      }else{
-        return 28;
-
-      }
-    });
   };
   y63(coffee, metrics, context) {
-    return 163;
+    return 63;
   };
   y83(coffee, metrics, context) {
-    return 173;
+    return 73;
   };
 
   y103(coffee, metrics, context) {
-    return 183;
+    return 83;
   };
 
   y123(coffee, metrics, context) {
-    return 193;
+    return 93;
   };
 
   y143(coffee, metrics, context) {
-    return 203;
+    return 103;
   };
 
 
 
   y631(coffee, metrics, context) {
-    return 115;
+    return 63;
   };
   y831(coffee, metrics, context) {
-    return 125;
+    return 73;
   };
 
   y1031(coffee, metrics, context) {
-    return 135;
+    return 83;
   };
 
   y1231(coffee, metrics, context) {
-    return 145;
+    return 93;
   };
 
   y1431(coffee, metrics, context) {
-    return 155;
+    return 103;
   };
 
 
@@ -995,15 +988,15 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
 
 
     watermark([this.blobImage])
-    .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.boreholeChainage, '10px bold ', '#000000', 0))
+    .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.boreholeChainage, '10px bold ', '#FF0000', 0))
     .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.boreholeNumber, '10px bold ', '#000000', 0, 48))
+  .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.boreholeNumber, '10px bold ', '#FF0000', 0, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '10px bold ', '#000000', 0, 48))
+  .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '10px bold ', '#FF0000', 0, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '10px bold ', '#000000', 0, 48))
+  .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '10px bold ', '#FF0000', 0, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y143,'Northing- '+this.northing, '10px bold', '#000000', 0, 48))
+  .image(watermark.text.atPos(this.xy78,this.y143,'Northing- '+this.northing, '10px bold', '#FF0000', 0, 48))
 
   .then((img)=> {
     console.log('Base 64 of one :', img);
@@ -1017,15 +1010,15 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
 
   watermarkImage1() {
     watermark([this.blobImage1])
-    .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.boreholeChainage, '10px bold', '#000000', 0))
+    .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.boreholeChainage, '10px bold', '#FF0000', 0))
     .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.boreholeNumber, '10px bold', '#000000', 0, 48))
+  .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.boreholeNumber, '10px bold', '#FF0000', 0, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '10px bold', '#000000', 0, 48))
+  .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '10px bold', '#FF0000', 0, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '10px bold', '#000000', 0, 48))
+  .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '10px bold', '#FF0000', 0, 48))
   .load('assets/images/2.png')
-  .image(watermark.text.atPos(this.xy78,this.y143,'Northing- '+this.northing, '10px bold', '#000000', 0, 48))
+  .image(watermark.text.atPos(this.xy78,this.y143,'Northing- '+this.northing, '10px bold', '#FF0000', 0, 48))
     // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
     .then((img)=> {
       console.log('Base 64 of one :', img.src);
@@ -1040,15 +1033,15 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
 
     watermarkImage2() {
       watermark([this.blobImage1])
-      .image(watermark.text.atPos(this.xy78,this.y631,'Chainage: '+this.boreholeChainage, '5px bold', '#000000', 0))
+      .image(watermark.text.atPos(this.xy78,this.y631,'Chainage: '+this.boreholeChainage, '10px bold', '#FF0000', 0))
       .load('assets/images/2.png')
-    .image(watermark.text.atPos(this.xy78,this.y831,'Bhno: '+this.boreholeNumber, '5px bold', '#000000', 0, 48))
+    .image(watermark.text.atPos(this.xy78,this.y831,'Bhno: '+this.boreholeNumber, '10px bold', '#FF0000', 0, 48))
     .load('assets/images/2.png')
-    .image(watermark.text.atPos(this.xy78,this.y1031,'Date: '+this.joindate, '5px bold', '#000000', 0, 48))
+    .image(watermark.text.atPos(this.xy78,this.y1031,'Date: '+this.joindate, '10px bold', '#FF0000', 0, 48))
     .load('assets/images/2.png')
-    .image(watermark.text.atPos(this.xy78,this.y1231,'Easting- '+this.easting, '5px bold', '#000000', 0, 48))
+    .image(watermark.text.atPos(this.xy78,this.y1231,'Easting- '+this.easting, '10px bold', '#FF0000', 0, 48))
     .load('assets/images/2.png')
-    .image(watermark.text.atPos(this.xy78,this.y1431,'Northing- '+this.northing, '5px bold', '#000000', 0, 48))
+    .image(watermark.text.atPos(this.xy78,this.y1431,'Northing- '+this.northing, '10px bold', '#FF0000', 0, 48))
       // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
       .then((img)=> {
         console.log('Base 64 of one :', img.src);
@@ -1064,15 +1057,15 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
 
 
       watermark([this.blobImagepic2])
-      .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.boreholeChainage, '10px bold', '#000000', 0))
+      .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.boreholeChainage, '10px bold', '#FF0000', 0))
       .load('assets/images/2.png')
-    .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.boreholeNumber, '10px bold', '#000000', 0, 48))
+    .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.boreholeNumber, '10px bold', '#FF0000', 0, 48))
     .load('assets/images/2.png')
-    .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '10px bold', '#000000', 0, 48))
+    .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '10px bold', '#FF0000', 0, 48))
     .load('assets/images/2.png')
-    .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '10px bold', '#000000', 0, 48))
+    .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '10px bold', '#FF0000', 0, 48))
     .load('assets/images/2.png')
-    .image(watermark.text.atPos(this.xy78,this.y143,'Northing- '+this.northing, '10px bold', '#000000', 0, 48))
+    .image(watermark.text.atPos(this.xy78,this.y143,'Northing- '+this.northing, '10px bold', '#FF0000', 0, 48))
 
 
     .then((img)=> {
@@ -1087,15 +1080,15 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
 
     watermarkImage1pic2() {
       watermark([this.blobImage12])
-      .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.boreholeChainage, '15px ', '#000000', 0))
+      .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.boreholeChainage, '15px ', '#FF0000', 0))
       .load('assets/images/2.png')
-    .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.boreholeNumber, '10px bold', '#000000', 0, 48))
+    .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.boreholeNumber, '10px bold', '#FF0000', 0, 48))
     .load('assets/images/2.png')
-    .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '10px bold', '#000000', 0, 48))
+    .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '10px bold', '#FF0000', 0, 48))
     .load('assets/images/2.png')
-    .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '10px bold', '#000000', 0, 48))
+    .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '10px bold', '#FF0000', 0, 48))
     .load('assets/images/2.png')
-    .image(watermark.text.atPos(this.xy78,this.y143,'Northing- '+this.northing, '10px bold', '#000000', 0, 48))
+    .image(watermark.text.atPos(this.xy78,this.y143,'Northing- '+this.northing, '10px bold', '#FF0000', 0, 48))
       // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
       .then((img)=> {
         console.log('Base 64 of one :', img.src);
@@ -1110,15 +1103,15 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
 
       watermarkImage2pic2() {
         watermark([this.blobImage131])
-        .image(watermark.text.atPos(this.xy78,this.y631,'Chainage: '+this.boreholeChainage, '5px bold', '#000000', 0))
+        .image(watermark.text.atPos(this.xy78,this.y631,'Chainage: '+this.boreholeChainage, '10px bold', '#FF0000', 0))
         .load('assets/images/2.png')
-      .image(watermark.text.atPos(this.xy78,this.y831,'Bhno: '+this.boreholeNumber, '5px bold', '#000000', 0, 48))
+      .image(watermark.text.atPos(this.xy78,this.y831,'Bhno: '+this.boreholeNumber, '10px bold', '#FF0000', 0, 48))
       .load('assets/images/2.png')
-      .image(watermark.text.atPos(this.xy78,this.y1031,'Date: '+this.joindate, '5px bold', '#000000', 0, 48))
+      .image(watermark.text.atPos(this.xy78,this.y1031,'Date: '+this.joindate, '10px bold', '#FF0000', 0, 48))
       .load('assets/images/2.png')
-      .image(watermark.text.atPos(this.xy78,this.y1231,'Easting- '+this.easting, '5px bold', '#000000', 0, 48))
+      .image(watermark.text.atPos(this.xy78,this.y1231,'Easting- '+this.easting, '10px bold', '#FF0000', 0, 48))
       .load('assets/images/2.png')
-      .image(watermark.text.atPos(this.xy78,this.y1431,'Northing- '+this.northing, '5px bold', '#000000', 0, 48))
+      .image(watermark.text.atPos(this.xy78,this.y1431,'Northing- '+this.northing, '10px bold', '#FF0000', 0, 48))
         // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
         .then((img)=> {
           console.log('Base 64 of one :', img.src);
@@ -1135,15 +1128,15 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
 
 
         watermark([this.blobImagepic3])
-        .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.boreholeChainage, '10px bold', '#000000', 0))
+        .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.boreholeChainage, '10px bold', '#FF0000', 0))
         .load('assets/images/2.png')
-      .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.boreholeNumber, '10px bold', '#000000', 0, 48))
+      .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.boreholeNumber, '10px bold', '#FF0000', 0, 48))
       .load('assets/images/2.png')
-      .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '10px bold', '#000000', 0, 48))
+      .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '10px bold', '#FF0000', 0, 48))
       .load('assets/images/2.png')
-      .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '10px bold', '#000000', 0, 48))
+      .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '10px bold', '#FF0000', 0, 48))
       .load('assets/images/2.png')
-      .image(watermark.text.atPos(this.xy78,this.y143,'Northing- '+this.northing, '10px bold', '#000000', 0, 48))
+      .image(watermark.text.atPos(this.xy78,this.y143,'Northing- '+this.northing, '10px bold', '#FF0000', 0, 48))
 
 
       .then((img)=> {
@@ -1158,15 +1151,15 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
 
       watermarkImage1pic3() {
         watermark([this.blobImage13])
-        .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.boreholeChainage, '10px bold', '#000000', 0))
+        .image(watermark.text.atPos(this.xy78,this.y63,'Chainage: '+this.boreholeChainage, '10px bold', '#FF0000', 0))
         .load('assets/images/2.png')
-      .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.boreholeNumber, '10px bold', '#000000', 0, 48))
+      .image(watermark.text.atPos(this.xy78,this.y83,'Bhno: '+this.boreholeNumber, '10px bold', '#FF0000', 0, 48))
       .load('assets/images/2.png')
-      .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '10px bold', '#000000', 0, 48))
+      .image(watermark.text.atPos(this.xy78,this.y103,'Date: '+this.joindate, '10px bold', '#FF0000', 0, 48))
       .load('assets/images/2.png')
-      .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '10px bold', '#000000', 0, 48))
+      .image(watermark.text.atPos(this.xy78,this.y123,'Easting- '+this.easting, '10px bold', '#FF0000', 0, 48))
       .load('assets/images/2.png')
-      .image(watermark.text.atPos(this.xy78,this.y143,'Northing- '+this.northing, '10px bold', '#000000', 0, 48))
+      .image(watermark.text.atPos(this.xy78,this.y143,'Northing- '+this.northing, '10px bold', '#FF0000', 0, 48))
         // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
         .then((img)=> {
           console.log('Base 64 of one :', img.src);
@@ -1181,15 +1174,15 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
 
         watermarkImage2pic3() {
           watermark([this.blobImage132])
-          .image(watermark.text.atPos(this.xy78,this.y631,'Chainage: '+this.boreholeChainage, '5px bold', '#000000', 0))
+          .image(watermark.text.atPos(this.xy78,this.y631,'Chainage: '+this.boreholeChainage, '10px bold', '#FF0000', 0))
           .load('assets/images/2.png')
-        .image(watermark.text.atPos(this.xy78,this.y831,'Bhno: '+this.boreholeNumber, '5px bold', '#000000', 0, 48))
+        .image(watermark.text.atPos(this.xy78,this.y831,'Bhno: '+this.boreholeNumber, '10px bold', '#FF0000', 0, 48))
         .load('assets/images/2.png')
-        .image(watermark.text.atPos(this.xy78,this.y1031,'Date: '+this.joindate, '5px bold', '#000000', 0, 48))
+        .image(watermark.text.atPos(this.xy78,this.y1031,'Date: '+this.joindate, '10px bold', '#FF0000', 0, 48))
         .load('assets/images/2.png')
-        .image(watermark.text.atPos(this.xy78,this.y1231,'Easting- '+this.easting, '5px bold', '#000000', 0, 48))
+        .image(watermark.text.atPos(this.xy78,this.y1231,'Easting- '+this.easting, '10px bold', '#FF0000', 0, 48))
         .load('assets/images/2.png')
-        .image(watermark.text.atPos(this.xy78,this.y1431,'Northing- '+this.northing, '5px bold', '#000000', 0, 48))
+        .image(watermark.text.atPos(this.xy78,this.y1431,'Northing- '+this.northing, '10px bold', '#FF0000', 0, 48))
           // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
           .then((img)=> {
             console.log('Base 64 of one :', img.src);

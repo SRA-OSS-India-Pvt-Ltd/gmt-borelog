@@ -279,7 +279,8 @@ export class HttpcallsService {
     rockrqd: any,
     rockSampleColor: any,
     rockWaethering: any,
-    iterationId: any
+    iterationId: any,
+    remarks: any
   ) {
     const parameters = {
       bh_id: bhid,
@@ -315,6 +316,7 @@ export class HttpcallsService {
       rock_sample_color: rockSampleColor,
       rock_weathering: rockWaethering,
       bh_iteration_id: iterationId,
+      soil_remarks: remarks
     };
     console.log('JSON', JSON.stringify(parameters));
 
