@@ -55,6 +55,7 @@ isimg = false;
     ) {
 
       Constants.layer2flow = '';
+      console.log('orgName:', Constants.orgName+Constants.orgAddre+Constants.orgLogo+Constants.packageList);
     this.orgName = Constants.orgName;
     this.orgAddrs = Constants.orgAddre;
     this.orgLogo = Constants.orgLogo;
@@ -62,8 +63,24 @@ isimg = false;
     this.clientName = Constants.clentName;
     this.projLocation = Constants.projectLocation;
 
-    this.packageList = Constants.packageList;
     this.subAencyList = Constants.subAgencyList;
+
+    this. platform.ready().then(() => {
+      if (this.platform.is('android')) {
+        this.androiDatabase.getPackage().then((data) => {
+          this.packageList = [];
+          console.log('size',data.rows.length);
+          if (data.rows.length > 0) {
+            for (let i = 0; i < data.rows.length; i++) {
+              this.packageList.push(data.rows.item(i));
+            }
+            console.log('packageList',this.packageList);
+          }});
+      }else{
+        this.packageList = Constants.packageList;
+
+      }
+    });
 
 
   }
@@ -95,7 +112,8 @@ console.log('totallist',Constants.sectionListService);
    this. platform.ready().then(() => {
     if (this.platform.is('android')) {
 
-this.autoLoader();
+    //  this.autoLoader();
+
       this.androiDatabase.getSectin(this.sectionId).then((data) => {
         this.sectListValue = [];
         console.log('size',data.rows.length);

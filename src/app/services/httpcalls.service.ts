@@ -421,6 +421,16 @@ export class HttpcallsService {
     );
   }
 
+  getAllChainagesByUserID(uid: any) {
+    const parameters = { userid: uid };
+    console.log('JSON', JSON.stringify(parameters));
+
+    return this.httpClient.post(
+      `${environment.apiUrl}/getAllChainagesByUserID`,
+      JSON.stringify(parameters)
+    );
+  }
+
   getAllChainages() {
     return this.httpClient.get(`${environment.apiUrl}/getAllChainages`);
   }

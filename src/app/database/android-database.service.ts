@@ -47,7 +47,11 @@ export class AndroidDatabaseService {
          .then(() => console.log('Executed SQL'))
          .catch(e => console.log(e));
 
-         db.executeSql('CREATE TABLE IF NOT EXISTS user(userId text, userName text, userType text)',[])
+         db.executeSql('CREATE TABLE IF NOT EXISTS user(userId text, userName text, userType text,orgId text,orgName text,orgAddre text, orgLogo text,projectId text,projectName text,clentName text, projectLocation text,packageList text,fields text)',[])
+         .then(() => console.log('Executed SQL'))
+         .catch(e => console.log(e));
+
+         db.executeSql('CREATE TABLE IF NOT EXISTS packege(pkg_id text, pkg_name text)',[])
          .then(() => console.log('Executed SQL'))
          .catch(e => console.log(e));
 
@@ -59,13 +63,33 @@ export class AndroidDatabaseService {
 
   }
 
-  addUser(uid: any,unmae: any, utype: any){
+
+  addPackage(pid: any,pname: any){
+    this.databaseObj.executeSql(`INSERT INTO packege
+    (pkg_id,pkg_name)
+    VALUES
+    ('${pid}',
+    '${pname}'
+    )`,[]);
+  }
+
+  addUser(uid: any,unmae: any, utype: any,orgid: any,orgName: any,orgAddre: any,orgLogo: any,projectId: any,projectName: any,clentName: any,projectLocation: any,packageList: any=[],field: any){
     this.databaseObj.executeSql(`INSERT INTO user
-    (userId,userName,userType)
+    (userId,userName,userType,orgId,orgName,orgAddre,orgLogo,projectId,projectName,clentName,projectLocation,packageList,fields)
     VALUES
     ('${uid}',
     '${unmae}',
-    '${utype}'
+    '${utype}',
+    '${orgid}',
+    '${orgName}',
+    '${orgAddre}',
+    '${orgLogo}',
+    '${projectId}',
+    '${projectName}',
+    '${clentName}',
+    '${projectLocation}',
+    '${packageList}',
+    '${field}'
     )`,[]);
   }
 
@@ -110,6 +134,20 @@ export class AndroidDatabaseService {
     '${typeofStru}')`,[]);
   }
 
+
+
+  getPackage() {
+    return this.databaseObj
+      .executeSql(`select * from packege  `, [])
+      .then((res) => {
+        console.log('getting packege');
+        return res;
+      })
+      .catch((e) => {
+        console.log('error on getting packege ', JSON.stringify(e));
+        return 'error on getting packege ' + JSON.stringify(e);
+      });
+  }
 
   getUser() {
     return this.databaseObj
@@ -769,6 +807,19 @@ updateLayer4(watertable: any,depthTer: any,edate: any,rvrepname: any,
   deleteSubagency() {
     return this.databaseObj
       .executeSql(`DELETE FROM subagencies`, [])
+      .then((res) => {
+        console.log('getting Id');
+        return res;
+      })
+      .catch((e) => {
+        console.log('error on getting Id ', JSON.stringify(e));
+        return 'error on getting Id ' + JSON.stringify(e);
+      });
+  }
+
+  deletePackage() {
+    return this.databaseObj
+      .executeSql(`DELETE FROM packege`, [])
       .then((res) => {
         console.log('getting Id');
         return res;

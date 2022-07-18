@@ -56,8 +56,17 @@ export class Update1Page implements OnInit {
     this.projName = Constants.projectName;
     this.clientName = Constants.clentName;
     this.projLocation = Constants.projectLocation;
-    this.packageList = Constants.packageList;
+
     this.subAencyList = Constants.subAgencyList;
+    this.androidDatabase.getPackage().then((data) => {
+      this.packageList = [];
+      console.log('size',data.rows.length);
+      if (data.rows.length > 0) {
+        for (let i = 0; i < data.rows.length; i++) {
+          this.packageList.push(data.rows.item(i));
+        }
+        console.log('packageList',this.packageList);
+      }});
     this.getLayer1();
   }
   packageChange($event) {

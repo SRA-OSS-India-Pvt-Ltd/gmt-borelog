@@ -70,6 +70,16 @@ export class HomePage {
         Constants.userId =this.userList[0].userId;
         Constants.userName =this.userList[0].userName;
         Constants.usertype =this.userList[0].userType;
+        Constants.orgId = this.userList[0].orgId;
+        Constants.orgName = this.userList[0].orgName;
+        Constants.orgAddre = this.userList[0].orgAddre;
+        Constants.orgLogo = this.userList[0].orgLogo;
+        Constants.projectId = this.userList[0].projectId;
+        Constants.projectName = this.userList[0].projectName;
+        Constants.clentName = this.userList[0].clentName;
+        Constants.projectLocation = this.userList[0].projectLocation;
+        Constants.iterationCpunt = this.userList[0].fields;
+
 
         if(this.userList[0].userType === 'staff'){
           this.router.navigate(['sidemenu']);
@@ -159,8 +169,8 @@ export class HomePage {
   autoLoader() {
     this.loadingController.create({
       spinner:'lines',
-      message: 'Loading, Please Wait ...',
-      duration: 35000
+      message: 'Loading required data. Please wait for a moment',
+      duration: 30000
     }).then((response) => {
       response.present();
       response.onDidDismiss().then((response1) => {
@@ -172,44 +182,7 @@ export class HomePage {
   serviceCall(userid: any, password: any){
      this.httpService.logionService(userid,password).subscribe((response: any)=>{
         if(response.error === false){
-
-          this.httpService.getAllChainages().subscribe((response34: any)=>{
-            if(response34.error === false){
-              Constants.chaingeListAndroid = response34.data;
-              console.log('response34',Constants.chaingeListAndroid );
-              this. platform.ready().then(() => {
-                if (this.platform.is('android')) {
-                  this.andridSer.addUser(response.data.user_id,response.data.user_name,response.data.user_type);
-
-                  if(response.data.user_type === 'staff'){
-                  this.autoLoader();
-
-                  }
-                  this.andridSer.deleteChlist();
-                  this.andridSer.deleteSections();
-                  this.andridSer.deleteSubagency();
-
-
-                  for (let i = 0; i < Constants.chaingeListAndroid.length; i++) {
-                      this.andridSer.addChlist(Constants.chaingeListAndroid[i].bhno,
-                        Constants.chaingeListAndroid[i].bridgeno,
-                        Constants.chaingeListAndroid[i].chainage,
-                        Constants.chaingeListAndroid[i].chainage_id,
-                        Constants.chaingeListAndroid[i].easting,
-                        Constants.chaingeListAndroid[i].northing,
-                        Constants.chaingeListAndroid[i].package_id,
-                        Constants.chaingeListAndroid[i].section_id,
-                        Constants.chaingeListAndroid[i].type_of_bridge,
-                        Constants.chaingeListAndroid[i].type_of_crossing,
-                        Constants.chaingeListAndroid[i].type_of_structure);
-                  }
-
-                }
-              });
-
-
-
-             console.log('response',response.data);
+          console.log('response',response.data);
               Constants.userId = response.data.user_id;
               Constants.userName = response.data.user_name;
               Constants.orgId = response.data.org_id;
@@ -234,6 +207,17 @@ export class HomePage {
 
           this. platform.ready().then(() => {
             if (this.platform.is('android')) {
+              this.andridSer.deleteChlist();
+              this.andridSer.deleteSections();
+              this.andridSer.deleteSubagency();
+              this.andridSer.deletePackage();
+
+              for (let i = 0; i < Constants.packageList.length; i++) {
+                this.andridSer.addPackage(Constants.packageList[i].pkg_id,
+                  Constants.packageList[i].pkg_name);
+               }
+
+
               for (let i = 0; i < Constants.sectionListService.length; i++) {
                 this.andridSer.addSections(Constants.sectionListService[i].package_id,
                   Constants.sectionListService[i].project_id,
@@ -249,9 +233,57 @@ export class HomePage {
                }
 
 
+
             }
           });
 
+
+          this. platform.ready().then(() => {
+            if (this.platform.is('android')) {
+              this.andridSer.addUser(response.data.user_id,
+                response.data.user_name,
+                response.data.user_type,
+                response.data.org_id,
+                response.data.org_name,
+                response.data.org_address,
+                response.data.org_logo,
+                response.data.project_id,
+                response.data.project_name,
+                response.data.client_name,
+                response.data.project_location,
+                response.data.packages,
+                response.data.iteration_cnt);
+
+
+              if(response.data.user_type === 'staff'){
+                this.autoLoader();
+
+
+              this.httpService.getAllChainagesByUserID(response.data.user_id).subscribe((response34: any)=>{
+                if(response34.error === false){
+                  Constants.chaingeListAndroid = response34.data;
+                  console.log('response34',Constants.chaingeListAndroid );
+
+
+              for (let i = 0; i < Constants.chaingeListAndroid.length; i++) {
+                  this.andridSer.addChlist(Constants.chaingeListAndroid[i].bhno,
+                    Constants.chaingeListAndroid[i].bridgeno,
+                    Constants.chaingeListAndroid[i].chainage,
+                    Constants.chaingeListAndroid[i].chainage_id,
+                    Constants.chaingeListAndroid[i].easting,
+                    Constants.chaingeListAndroid[i].northing,
+                    Constants.chaingeListAndroid[i].package_id,
+                    Constants.chaingeListAndroid[i].section_id,
+                    Constants.chaingeListAndroid[i].type_of_bridge,
+                    Constants.chaingeListAndroid[i].type_of_crossing,
+                    Constants.chaingeListAndroid[i].type_of_structure);
+              }
+            }
+            });
+          }
+
+            }
+          });
 
 
 
@@ -265,8 +297,8 @@ export class HomePage {
              }
 
 
-            }
-           });
+
+
           }else{
           this.toastSer.presentError('Invalid Credentials');
 
