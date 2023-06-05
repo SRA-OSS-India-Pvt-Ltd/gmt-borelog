@@ -489,7 +489,7 @@ sel(keyword: string){
       this.toastSer.presentError('Please Enter Borehole Chainage');
     }
     else if (this.boreholeNumber === undefined) {
-      this.toastSer.presentError('Please Enter Borehole Chainage');
+      this.toastSer.presentError('Please Enter Borehole Number');
     }
     if (this.typeOfStructure === undefined) {
       this.toastSer.presentError('Please Enter Chainage');
@@ -588,12 +588,14 @@ sel(keyword: string){
       this.toastSer.presentError('Please Select Drilling Orientation');
     } else if (this.detailsOfDrillingBit === null) {
       this.toastSer.presentError('Please Select the Details of Drilling Bit');
-    }else if (
-      this.waterMarkImage.nativeElement.src === null ||
-      this.waterMarkImage.nativeElement.src === ''
-    ) {
-      this.toastSer.presentError('please upload Borehole Picture');
-    }else if(this.orientation === 'Inclined' && this.angleWithHorizontal === undefined){
+    }
+    // else if (
+    //   this.waterMarkImage.nativeElement.src === null ||
+    //   this.waterMarkImage.nativeElement.src === ''
+    // ) {
+    //   this.toastSer.presentError('please upload Borehole Picture');
+    // }
+    else if(this.orientation === 'Inclined' && this.angleWithHorizontal === undefined){
       this.toastSer.presentError('please Enter Angle with Horizontal');
 
     }else if(this.orientation === 'Inclined' && this.angleWithHorizontal === ''){

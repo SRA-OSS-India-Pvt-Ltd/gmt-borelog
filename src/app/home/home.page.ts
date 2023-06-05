@@ -259,7 +259,8 @@ export class HomePage {
                 this.autoLoader();
 
 
-              this.httpService.getAllChainagesByUserID(response.data.user_id).subscribe((response34: any)=>{
+              this.httpService.getAllChainagesByUserID(response.data.user_id)
+              .subscribe((response34: any)=>{
                 if(response34.error === false){
                   Constants.chaingeListAndroid = response34.data;
                   console.log('response34',Constants.chaingeListAndroid );

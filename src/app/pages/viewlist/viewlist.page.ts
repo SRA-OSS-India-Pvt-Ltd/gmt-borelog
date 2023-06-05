@@ -277,6 +277,7 @@ disconnectSubscription: any;
   getPendingBoredata(){
     this.layer1List = [];
     this.httpService.getPendingBoredata(Constants.userId).subscribe((response: any)=>{
+      console.log('ressponse',response.data);
       this.layer1List = response.data;
     });
   }
@@ -418,10 +419,9 @@ this.isweb = true;
         console.log('count',this.count);
 
         if(this.count >0){
+               this.submitboredata(id);
 
-
-          this.submitboredata(id);
-            }else{
+        }else{
 
 
 

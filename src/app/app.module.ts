@@ -24,22 +24,19 @@ import { File } from '@awesome-cordova-plugins/file/ngx';
 import { DatePipe } from '@angular/common';
 import { AndroidPermissions } from '@awesome-cordova-plugins/android-permissions/ngx';
 import { LocationAccuracy } from '@awesome-cordova-plugins/location-accuracy/ngx';
-
-
-
-
-
-
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [HttpClientModule,BrowserModule, IonicModule.forRoot(), AppRoutingModule, ServiceWorkerModule.register('ngsw-worker.js', {
+  imports: [HttpClientModule,BrowserModule, IonicModule.forRoot(), AppRoutingModule,
+     ServiceWorkerModule.register('ngsw-worker.js', {
   enabled: environment.production,
   // Register the ServiceWorker as soon as the app is stable
   // or after 30 seconds (whichever comes first).
   registrationStrategy: 'registerWhenStable:30000'
 })],
-  providers: [AndroidPermissions,LocationAccuracy,DatePipe,File,Camera,Keyboard,Network,Geolocation,SQLite,Base64ToGallery,DatePicker,{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [AndroidPermissions,LocationAccuracy,DatePipe,
+    File,Camera,Keyboard,Network,Geolocation,
+    SQLite,Base64ToGallery,DatePicker,{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

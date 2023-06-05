@@ -444,12 +444,12 @@ blobImage132: any;
       this.toastSer.presentError('Please Enter Other for Borehole Dia');
     }
 
-    else if (
-      this.waterMarkImage.nativeElement.src === null ||
-      this.waterMarkImage.nativeElement.src === ''
-    ) {
-      this.toastSer.presentError('please upload Borehole Picture');
-    }
+    // else if (
+    //   this.waterMarkImage.nativeElement.src === null ||
+    //   this.waterMarkImage.nativeElement.src === ''
+    // ) {
+    //   this.toastSer.presentError('please upload Borehole Picture');
+    // }
      else {
       this.updateLayer2();
     }

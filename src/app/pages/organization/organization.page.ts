@@ -100,8 +100,8 @@ isimg = false;
    }
 
 console.log('totallist',Constants.sectionListService);
-   this.sectionList = Constants.sectionListService.filter((user: any) =>
-   user.package_id.includes(this.package));
+   this.sectionList = Constants.sectionListService.filter((data: any) =>
+   data.package_id.includes(this.package));
    console.log('sectionList',this.sectionList);
 
 

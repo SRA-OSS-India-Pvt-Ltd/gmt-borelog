@@ -27,7 +27,8 @@ export class Viewlist1Page implements OnInit {
   }
   getSubmittedBoredata(){
     this.layer1List = [];
-    this.httpService.getSubmittedBoredata(Constants.userId,Constants.usertype).subscribe((response: any)=>{
+    this.httpService.getSubmittedBoredata(Constants.userId,Constants.usertype)
+    .subscribe((response: any)=>{
       this.layer1List = response.data;
       console.log('data',this.layer1List);
     });

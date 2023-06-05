@@ -306,17 +306,19 @@ export class Layer4Page implements AfterViewInit {
       this.toastSer.presentError(
         'please Enter the Depth of Termination, It should not be zero'
       );
-    } else if (
-      this.waterMarkImage.nativeElement.src === null ||
-      this.waterMarkImage.nativeElement.src === ''
-    ) {
-      this.toastSer.presentError('please upload  Depth Termination Picture');
-    } else if (
-      this.waterMarkImage2.nativeElement.src === null ||
-      this.waterMarkImage2.nativeElement.src === ''
-    ) {
-      this.toastSer.presentError('please upload Sample Picture');
-    } else {
+    }
+    // else if (
+    //   this.waterMarkImage.nativeElement.src === null ||
+    //   this.waterMarkImage.nativeElement.src === ''
+    // ) {
+    //   this.toastSer.presentError('please upload  Depth Termination Picture');
+    // } else if (
+    //   this.waterMarkImage2.nativeElement.src === null ||
+    //   this.waterMarkImage2.nativeElement.src === ''
+    // ) {
+    //   this.toastSer.presentError('please upload Sample Picture');
+    // }
+     else {
       this.base641 = this.signaturePad.toDataURL();
       this.signatureImg = this.base641;
       this.base642 = this.signaturePad1.toDataURL();
