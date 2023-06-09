@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-inferrable-types */
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable @typescript-eslint/dot-notation */
-import { AlertController } from '@ionic/angular';
+import { AlertController, PopoverController } from '@ionic/angular';
 /* eslint-disable @typescript-eslint/member-ordering */
 /* eslint-disable max-len */
 import { Router } from '@angular/router';
@@ -191,6 +191,7 @@ export class Layer4Page implements AfterViewInit {
     private datePipe: DatePipe,
     private androidPermissions: AndroidPermissions,
     private locationAccuracy: LocationAccuracy,
+    private popoverController: PopoverController
 
   ) {
     this.getLatLong();
@@ -307,17 +308,17 @@ export class Layer4Page implements AfterViewInit {
         'please Enter the Depth of Termination, It should not be zero'
       );
     }
-    // else if (
-    //   this.waterMarkImage.nativeElement.src === null ||
-    //   this.waterMarkImage.nativeElement.src === ''
-    // ) {
-    //   this.toastSer.presentError('please upload  Depth Termination Picture');
-    // } else if (
-    //   this.waterMarkImage2.nativeElement.src === null ||
-    //   this.waterMarkImage2.nativeElement.src === ''
-    // ) {
-    //   this.toastSer.presentError('please upload Sample Picture');
-    // }
+    else if (
+      this.waterMarkImage.nativeElement.src === null ||
+      this.waterMarkImage.nativeElement.src === ''
+    ) {
+      this.toastSer.presentError('please upload  Depth Termination Picture');
+    } else if (
+      this.waterMarkImage2.nativeElement.src === null ||
+      this.waterMarkImage2.nativeElement.src === ''
+    ) {
+      this.toastSer.presentError('please upload Sample Picture');
+    }
      else {
       this.base641 = this.signaturePad.toDataURL();
       this.signatureImg = this.base641;
@@ -1105,6 +1106,23 @@ this.showPosition(this.locationCordinates.latitude,this.locationCordinates.longi
     });
   }
 
+
+  regDateSettings() {
+    if(this.date1 !== undefined && this.date1!== null && this.date1 !== ''){
+       //console.log('popovere3');
+       this.closePopover('pop2');
+
+     }
+
+}
+async closePopover(id: string) {
+  const popover = await this.popoverController.getTop();
+  if (popover) {
+    if (popover.id === id) {
+      await this.popoverController.dismiss();
+    }
+  }
+}
 
   snapDep2(){
     const options: CameraOptions = {

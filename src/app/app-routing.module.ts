@@ -3,12 +3,12 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    path: 'token',
+    loadChildren: () => import('./pages/token/token.module').then( m => m.TokenPageModule)
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'token',
     pathMatch: 'full'
   },
   {
@@ -122,6 +122,11 @@ const routes: Routes = [
   {
     path: 'submitted',
     loadChildren: () => import('./pages/submitted/submitted.module').then( m => m.SubmittedPageModule)
+  },
+
+  {
+    path: 'home',
+    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
 ];
 

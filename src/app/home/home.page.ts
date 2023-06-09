@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/quotes */
 import { LoadingController } from '@ionic/angular';
 /* eslint-disable @typescript-eslint/prefer-for-of */
 import { Platform } from '@ionic/angular';
@@ -9,6 +10,8 @@ import { ToastService } from './../services/toast.service';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Constants } from '../common/constants';
+
+
 
 
 @Component({
@@ -28,16 +31,22 @@ export class HomePage {
   count: any;
   countSec: any;
   countSubAg: any;
+  deviceid: any;
+  tokenkey: any;
   constructor(public router: Router,
     public toastSer: ToastService,
    public httpService: HttpcallsService,
    public andridSer: AndroidDatabaseService,
    public platform: Platform,
-   public loadingController: LoadingController) {
+   public loadingController: LoadingController,
+
+   ) {
     this.platform.ready().then(() => {
       if (this.platform.is('android')) {
-       this.andridSer.createDatabase();
-       this.getUserData();
+      // this.andridSer.createDatabase();
+
+      this.getTokenData();
+      this.getUserData();
 
       }else{
 
@@ -48,7 +57,24 @@ export class HomePage {
 
    }
 
+   getTokenData(){
 
+
+
+    this.andridSer.getToken().then((data: any) => {
+      var tokenList = [];
+      //console.log('size',data.rows.length);
+      if (data.rows.length > 0) {
+        for (let i = 0; i < data.rows.length; i++) {
+          tokenList.push(data.rows.item(i));
+        }
+
+         this.tokenkey = tokenList[0].tokenid;
+         this.deviceid = tokenList[0].tokenid;
+
+      }
+    });
+  }
    ionViewDidEnter(){
     this.platform.ready().then(() => {
       if (this.platform.is('android')) {
@@ -58,6 +84,8 @@ export class HomePage {
     });
 
    }
+
+
    getUserData(){
     this.andridSer.getUser().then((data) => {
       this.userList = [];
@@ -79,6 +107,7 @@ export class HomePage {
         Constants.clentName = this.userList[0].clentName;
         Constants.projectLocation = this.userList[0].projectLocation;
         Constants.iterationCpunt = this.userList[0].fields;
+
 
 
         if(this.userList[0].userType === 'staff'){
@@ -180,7 +209,7 @@ export class HomePage {
   }
 
   serviceCall(userid: any, password: any){
-     this.httpService.logionService(userid,password).subscribe((response: any)=>{
+     this.httpService.logionService(userid,password,this.deviceid,'android',this.tokenkey).subscribe((response: any)=>{
         if(response.error === false){
           console.log('response',response.data);
               Constants.userId = response.data.user_id;
@@ -203,6 +232,8 @@ export class HomePage {
 
 
             Constants.subagenctList = response.data.subagencies;
+
+
 
 
           this. platform.ready().then(() => {
@@ -267,13 +298,16 @@ export class HomePage {
 
 
               for (let i = 0; i < Constants.chaingeListAndroid.length; i++) {
-                  this.andridSer.addChlist(Constants.chaingeListAndroid[i].bhno,
+
+
+
+                this.andridSer.addChlist(Constants.chaingeListAndroid[i].bhno,
                     Constants.chaingeListAndroid[i].bridgeno,
                     Constants.chaingeListAndroid[i].chainage,
                     Constants.chaingeListAndroid[i].chainage_id,
-                    Constants.chaingeListAndroid[i].easting,
-                    Constants.chaingeListAndroid[i].northing,
-                    Constants.chaingeListAndroid[i].package_id,
+                  '',
+                  '',
+                  Constants.chaingeListAndroid[i].package_id,
                     Constants.chaingeListAndroid[i].section_id,
                     Constants.chaingeListAndroid[i].type_of_bridge,
                     Constants.chaingeListAndroid[i].type_of_crossing,
@@ -301,10 +335,34 @@ export class HomePage {
 
 
           }else{
-          this.toastSer.presentError('Invalid Credentials');
+          this.toastSer.presentError(response.msg);
 
         }
      });
   }
 
+
+
+
+
+
+
+
+
+  decodeString(encodedString: string): string {
+    const decodedString = unescape(encodedString.replace(/\\u/g, "%u"));
+    console.log("decode",decodedString);
+    return decodedString;
+
+  }
 }
+
+
+
+
+
+
+
+
+
+

@@ -24,6 +24,9 @@ import { File } from '@awesome-cordova-plugins/file/ngx';
 import { DatePipe } from '@angular/common';
 import { AndroidPermissions } from '@awesome-cordova-plugins/android-permissions/ngx';
 import { LocationAccuracy } from '@awesome-cordova-plugins/location-accuracy/ngx';
+
+
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],

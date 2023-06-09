@@ -74,6 +74,7 @@ increme: number;
 sno: any;
 isRemarks = false;
 remarks ='';
+rockpieces: any;
 constructor(public toastSer: ToastService,
   public httpService: HttpcallsService,
   public router: Router) {
@@ -285,6 +286,7 @@ this.httpService.getSingleBoreIterationDetails(Constants.iterationId).subscribe(
          this.rockDepthTo = this.layer1List[0].rock_depth_to;
          this.sptstatus = this.layer1List[0].soil_spt_depth_status;
          this.remarks = this.layer1List[0].soil_remarks;
+         this.rockpieces = this.layer1List[0].no_of_core_pieces;
 
 
          if(this.layer1List[0].soil_spt_penetration_1 === '0'){
@@ -338,7 +340,7 @@ this.httpService.getSingleBoreIterationDetails(Constants.iterationId).subscribe(
       this.rockDepthFrom,this.rockDepthTo,
        this.runLength,this.runTime,this.waterLoss,
       this.cr,this.rqd,this.rockSamplColor,
-      this.typeOfWeathering,Constants.iterationId,this.remarks).subscribe((response: any)=>{
+      this.typeOfWeathering,Constants.iterationId,this.remarks, this.rockpieces).subscribe((response: any)=>{
 
         if(response.error === true){
           this.toastSer.presentError(response.msg);
@@ -562,6 +564,9 @@ validation(){
 
      }else if( this.runLength === null){
       this.toastSer.presentError('Please Enter  Run Length');
+
+     }else if(this.rockpieces === undefined || this.rockpieces === null || this.rockpieces === ''){
+      this.toastSer.presentError('Please enter Number of core pieces collected');
 
      }
     else{

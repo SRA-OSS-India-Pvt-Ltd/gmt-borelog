@@ -1,3 +1,4 @@
+/* eslint-disable object-shorthand */
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -9,8 +10,16 @@ import { environment } from 'src/environments/environment';
 export class HttpcallsService {
   constructor(public httpClient: HttpClient) {}
 
-  logionService(useri: any, password: any) {
-    const parameters = { userid: useri, upwd: password };
+  logionService(useri: any, password: any, device_id: any,
+    device_type: any,
+    user_token_key: any
+) {
+    const parameters = { userid: useri, upwd: password,
+      device_id: device_id,
+      device_type: device_type,
+      user_token_key: user_token_key
+
+     };
     console.log('JSON', JSON.stringify(parameters));
 
     return this.httpClient.post(
@@ -280,7 +289,8 @@ export class HttpcallsService {
     rockSampleColor: any,
     rockWaethering: any,
     iterationId: any,
-    remarks: any
+    remarks: any,
+    rockpiexce: any
   ) {
     const parameters = {
       bh_id: bhid,
@@ -316,7 +326,8 @@ export class HttpcallsService {
       rock_sample_color: rockSampleColor,
       rock_weathering: rockWaethering,
       bh_iteration_id: iterationId,
-      soil_remarks: remarks
+      soil_remarks: remarks,
+      no_of_core_pieces: rockpiexce
     };
     console.log('JSON', JSON.stringify(parameters));
 
@@ -482,5 +493,15 @@ export class HttpcallsService {
     );
   }
 
+  validateToken(tokenid: any) {
+    const parameters = {
+      tokenid: tokenid,
+    };
 
+    return this.httpClient.post(
+      `${environment.apiUrl}/validateToken`,
+
+      JSON.stringify(parameters)
+    );
+  }
 }

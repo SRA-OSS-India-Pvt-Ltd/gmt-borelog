@@ -74,6 +74,7 @@ increme: number;
 sno: any;
 isRemarks = false;
 remarks = '';
+rockpieces: any;
 
   constructor(public toastSer: ToastService,
     public androidDatabase: AndroidDatabaseService,
@@ -422,6 +423,10 @@ remarks = '';
         this.toastSer.presentError('Please Enter  Rock depth to');
 
        }
+       else if(this.rockpieces === undefined || this.rockpieces === null || this.rockpieces === ''){
+        this.toastSer.presentError('Please enter Number of core pieces collected');
+
+       }
       else{
         this.typeOfsample = '';
        this.soilSampleColor = '';
@@ -524,6 +529,7 @@ remarks = '';
            this.rockDepthTo = this.layer1List[0].rock_depth_to;
            this.sptstatus = this.layer1List[0].soil_spt_depth_status;
            this.remarks = this.layer1List[0].soil_remarks;
+           this.rockpieces = this.layer1List[0].no_of_core_pieces;
 
            if(this.layer1List[0].soil_spt_penetration_1 === '0'){
              this. first = '';
@@ -590,7 +596,8 @@ remarks = '';
         this.rqd,
         this.rockSamplColor,
         this.typeOfWeathering,
-        this.remarks);
+        this.remarks,
+        this.rockpieces);
 
 
         this.router.navigate(['iterations']);

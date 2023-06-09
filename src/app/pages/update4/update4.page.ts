@@ -1,4 +1,4 @@
-import { Platform } from '@ionic/angular';
+import { Platform, PopoverController } from '@ionic/angular';
 /* eslint-disable @typescript-eslint/no-inferrable-types */
 /* eslint-disable @typescript-eslint/dot-notation */
 import { AlertController } from '@ionic/angular';
@@ -172,7 +172,14 @@ export class Update4Page implements AfterViewInit {
     blobImage1GalSamp3: any;
 
 
-  constructor(
+    image1: any;
+    image2: any;
+    image3: any;
+    image4: any;
+    image5: any;
+    image6: any;
+
+    constructor(
     public toastSer: ToastService,
     public androidDatabase: AndroidDatabaseService,
     public router: Router,
@@ -183,6 +190,7 @@ export class Update4Page implements AfterViewInit {
     private datePipe: DatePipe,
     private androidPermissions: AndroidPermissions,
     private locationAccuracy: LocationAccuracy,
+    private popoverController: PopoverController
 
 
 
@@ -201,6 +209,22 @@ export class Update4Page implements AfterViewInit {
     this.getLayer1();
 
   }
+  regDateSettings() {
+    if(this.date2 !== undefined && this.date2!== null && this.date2 !== ''){
+       //console.log('popovere3');
+       this.closePopover('pop2');
+
+     }
+
+}
+async closePopover(id: string) {
+  const popover = await this.popoverController.getTop();
+  if (popover) {
+    if (popover.id === id) {
+      await this.popoverController.dismiss();
+    }
+  }
+}
 
   ngAfterViewInit() {
     this.signaturePad = new SignaturePad(this.canvasEl.nativeElement);
@@ -261,6 +285,20 @@ export class Update4Page implements AfterViewInit {
             this.waterMarkImagedep3.nativeElement.src =
             this.layer1List[0].depth_termination_pic3;
 
+            this.image1 = this.layer1List[0].depth_termination_pic1;
+            this.image2=
+            this.layer1List[0].depth_termination_pic2;
+            this.image3 =
+            this.layer1List[0].depth_termination_pic3;
+
+if(this.layer1List[0].depth_termination_pic2 === ''){
+  this.waterMarkImagedep2.nativeElement.src = '';
+}
+if(this.layer1List[0].depth_termination_pic3 === ''){
+  this.waterMarkImagedep3.nativeElement.src = '';
+}
+
+
 
 
             this.waterMarkImage2.nativeElement.src =
@@ -270,6 +308,22 @@ export class Update4Page implements AfterViewInit {
             this.layer1List[0].sample_pic2;
             this.waterMarkImagesamp3.nativeElement.src =
             this.layer1List[0].sample_pic3;
+
+            this.image4 =
+            this.layer1List[0].sample_pic1;
+
+            this.image5 =
+            this.layer1List[0].sample_pic2;
+            this.image6 =
+            this.layer1List[0].sample_pic3;
+
+            if(this.layer1List[0].sample_pic2 === ''){
+              this.waterMarkImagesamp2.nativeElement.src = '';
+            }
+            if(this.layer1List[0].sample_pic3 === ''){
+              this.waterMarkImagesamp3.nativeElement.src = '';
+            }
+
 
           this.chainge = this.layer1List[0].chainage;
           this.bhno = this.layer1List[0].bh_no;

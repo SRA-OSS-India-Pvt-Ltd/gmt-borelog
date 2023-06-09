@@ -45,7 +45,7 @@ disconnectSubscription: any;
   }
 
   async alert(id: any,bhid: any) {
-
+console.log('bId:',id,'bhid',bhid);
     const alert = await this.alertCtrl.create({
       header: 'Do you want to submit this borehole information to server ?',
       buttons: [
@@ -247,17 +247,21 @@ disconnectSubscription: any;
         console.log('iterationlist',this.iterationlist);
         this.httpService.submitboreiterations(bhid,this.iterationlist).subscribe((res: any)=>{
           console.log('responseIte: '+res.data);
-          if(res.error === true){
-            this.toastser.presentError(res.msg);
 
-           }else{
-           console.log('Idddddddd',bhid);
+          if(res.error === false){
+            console.log('Idddddddd',bhid);
            this.toastser.presentSuccess(res.msg);
            this.androidDatabase.deleteRowbyId(id);
            this.androidDatabase.deleteRowbyIdIter(bhid);
 
            this.router.navigate(['sidemenu']);
-           }
+
+          }else{
+            this.toastser.presentError(res.msg);
+
+          }
+
+
 
         });
 
@@ -406,6 +410,8 @@ this.isweb = true;
   getIterationCount(id: any) {
 
 
+
+    console.log('idddd',id);
     this.androidDatabase.getIterationCount(id).then((data) => {
       this.countList = [];
       console.log('size',data.rows.length);

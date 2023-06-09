@@ -30,7 +30,7 @@ export class AndroidDatabaseService {
 
 
          // eslint-disable-next-line max-len
-         db.executeSql('CREATE TABLE IF NOT EXISTS iterations (bh_iteration_id Integer Primary key AUTOINCREMENT,bh_id Text, drill_depth_from Text, drill_depth_to Text, type_of_strata Text, type_of_sample Text, soil_ds_depth Text, soil_spt_depth Text,soil_spt_penetration_1 Text,soil_spt_blow_n_1 Text,soil_spt_penetration_2 Text, soil_spt_blow_n_2 Text,soil_spt_penetration_3 Text,soil_spt_blow_n_3 Text,soil_spt_penetration_total Text,soil_spt_blow_n_total Text, soil_spt_depth_status Text, soil_uds_depth Text, soil_sample_color Text, soil_sample_color_other Text,soil_visual_classif Text,rock_sample_type Text, rock_depth_from Text,rock_depth_to Text,rock_run_length Text, rock_run_time Text,rock_water_loss Text,rock_cr Text, rock_rqd Text, rock_sample_color Text,rock_weathering Text,soil_remarks Text)',[])
+         db.executeSql('CREATE TABLE IF NOT EXISTS iterations (bh_iteration_id Integer Primary key AUTOINCREMENT,bh_id Text, drill_depth_from Text, drill_depth_to Text, type_of_strata Text, type_of_sample Text, soil_ds_depth Text, soil_spt_depth Text,soil_spt_penetration_1 Text,soil_spt_blow_n_1 Text,soil_spt_penetration_2 Text, soil_spt_blow_n_2 Text,soil_spt_penetration_3 Text,soil_spt_blow_n_3 Text,soil_spt_penetration_total Text,soil_spt_blow_n_total Text, soil_spt_depth_status Text, soil_uds_depth Text, soil_sample_color Text, soil_sample_color_other Text,soil_visual_classif Text,rock_sample_type Text, rock_depth_from Text,rock_depth_to Text,rock_run_length Text, rock_run_time Text,rock_water_loss Text,rock_cr Text, rock_rqd Text, rock_sample_color Text,rock_weathering Text,soil_remarks Text, no_of_core_pieces Text)',[])
          .then(() => console.log('Executed SQL'))
          .catch(e => console.log(e));
 
@@ -55,6 +55,11 @@ export class AndroidDatabaseService {
          .then(() => console.log('Executed SQL'))
          .catch(e => console.log(e));
 
+       db.executeSql('CREATE TABLE IF NOT EXISTS token  (userid text, username text, usertype text,tokenid text )',[])
+      .then(() => console.log('created token table'))
+      .catch(e => console.log('token creation erro',e));
+
+
 
 
 
@@ -63,6 +68,16 @@ export class AndroidDatabaseService {
 
   }
 
+  addToken(uid: any,unmae: any,utype: any,tokenid: any){
+    this.databaseObj.executeSql(`INSERT INTO token
+    (userid,username,usertype,tokenid)
+    VALUES
+    ('${uid}',
+    '${unmae}',
+    '${utype}',
+    '${tokenid}'
+    )`,[]);
+  }
 
   addPackage(pid: any,pname: any){
     this.databaseObj.executeSql(`INSERT INTO packege
@@ -134,7 +149,18 @@ export class AndroidDatabaseService {
     '${typeofStru}')`,[]);
   }
 
-
+  getToken() {
+    return this.databaseObj
+      .executeSql(`select * from token  `, [])
+      .then((res: any) => {
+        console.log('getting token');
+        return res;
+      })
+      .catch((e: any) => {
+        console.log('error on getting token ', JSON.stringify(e));
+        return 'error on getting token ' + JSON.stringify(e);
+      });
+  }
 
   getPackage() {
     return this.databaseObj
@@ -420,9 +446,9 @@ additerationData(bhid: any,drillDepthFrom: any,drillDepthTo: any,typeOfstara: an
   rockdepthfrom: any,rockdepthto: any,
   rockrunLeng: any,rockRunTime: any,
   rockWaterLoss: any,rockCr: any,rockrqd: any,
-  rockSampleColor: any,rockWaethering: any,soilremarks: any){
+  rockSampleColor: any,rockWaethering: any,soilremarks: any,rockpieces: any){
     this.databaseObj.executeSql(`INSERT INTO iterations
-    (bh_id,drill_depth_from,drill_depth_to,type_of_strata,type_of_sample,soil_ds_depth,soil_spt_depth,soil_spt_penetration_1,soil_spt_blow_n_1,soil_spt_penetration_2,soil_spt_blow_n_2,soil_spt_penetration_3,soil_spt_blow_n_3,soil_spt_penetration_total,soil_spt_blow_n_total,soil_spt_depth_status,soil_uds_depth,soil_sample_color,soil_sample_color_other,soil_visual_classif,rock_sample_type,rock_depth_from,rock_depth_to,rock_run_length,rock_run_time,rock_water_loss,rock_cr,rock_rqd,rock_sample_color,rock_weathering,soil_remarks)
+    (bh_id,drill_depth_from,drill_depth_to,type_of_strata,type_of_sample,soil_ds_depth,soil_spt_depth,soil_spt_penetration_1,soil_spt_blow_n_1,soil_spt_penetration_2,soil_spt_blow_n_2,soil_spt_penetration_3,soil_spt_blow_n_3,soil_spt_penetration_total,soil_spt_blow_n_total,soil_spt_depth_status,soil_uds_depth,soil_sample_color,soil_sample_color_other,soil_visual_classif,rock_sample_type,rock_depth_from,rock_depth_to,rock_run_length,rock_run_time,rock_water_loss,rock_cr,rock_rqd,rock_sample_color,rock_weathering,soil_remarks,no_of_core_pieces)
     VALUES
     ('${bhid}',
     '${drillDepthFrom}',
@@ -454,7 +480,9 @@ additerationData(bhid: any,drillDepthFrom: any,drillDepthTo: any,typeOfstara: an
     '${rockrqd}',
     '${rockSampleColor}',
     '${rockWaethering}',
-    '${soilremarks}')`,[])
+    '${soilremarks}',
+    '${rockpieces}'
+    )`,[])
     .then((res: any)=>{
       console.log('adding Borelog');
       this.toastSer.presentSuccess('Iteration Added');
@@ -476,7 +504,7 @@ additerationData(bhid: any,drillDepthFrom: any,drillDepthTo: any,typeOfstara: an
   rockdepthfrom: any,rockdepthto: any,
   rockrunLeng: any,rockRunTime: any,
   rockWaterLoss: any,rockCr: any,rockrqd: any,
-  rockSampleColor: any,rockWaethering: any,soilremarks: any){
+  rockSampleColor: any,rockWaethering: any,soilremarks: any,rockpieces: any){
         return this.databaseObj.executeSql(`UPDATE iterations
          SET bh_id = '${bhid}',
          drill_depth_from = '${drillDepthFrom}',
@@ -513,7 +541,8 @@ additerationData(bhid: any,drillDepthFrom: any,drillDepthTo: any,typeOfstara: an
          rock_rqd = '${rockrqd}',
          rock_sample_color = '${rockSampleColor}',
          rock_weathering = '${rockWaethering}',
-         soil_remarks = '${soilremarks}'
+         soil_remarks = '${soilremarks}',
+         no_of_core_pieces = '${rockpieces}'
 
 
          WHERE bh_iteration_id = ${id} `,[])
@@ -616,7 +645,22 @@ updateLayer4(watertable: any,depthTer: any,edate: any,rvrepname: any,
 
           }
 
-  getLayer1(userid: any) {
+
+
+          getLayer1(userid: any) {
+            return this.databaseObj
+              .executeSql(`SELECT bd.Id, bd.Package,bd.package_name,bd.bh_no,bd.chainage, (select bi.soil_spt_depth FROM iterations bi where bi.bh_iteration_id = ( SELECT MAX(bh_iteration_id) FROM iterations bi  WHERE bd.Id = bi.bh_id and type_of_strata = 'Soil' )) as soil_spt_depth, (select bi.soil_ds_depth FROM iterations bi where bi.bh_iteration_id = (  SELECT MAX(bh_iteration_id) FROM iterations bi WHERE bd.Id = bi.bh_id  and type_of_strata = 'Soil'  )) as soil_ds_depth, (select bi.soil_uds_depth FROM iterations bi where bi.bh_iteration_id = ( SELECT MAX(bh_iteration_id) FROM iterations bi WHERE bd.Id = bi.bh_id  and type_of_strata = 'Soil' )) as soil_uds_depth,  (select bi.rock_depth_from FROM iterations bi where bi.bh_iteration_id = ( SELECT MAX(bh_iteration_id)  FROM iterations bi  WHERE bd.Id = bi.bh_id  and type_of_strata = 'Rock' and type_of_sample = '' )) as rock_depth_from,  (select bi.rock_depth_to FROM  iterations bi where bi.bh_iteration_id = (  SELECT MAX(bh_iteration_id)  FROM iterations bi  WHERE bd.Id = bi.bh_id  and type_of_strata = 'Rock' and type_of_sample = ''  )) as rock_depth_to   FROM borelog_data bd where bd.user_id='${userid}'`, [])
+              .then((res) => {
+                console.log('getting Layer1');
+                return res;
+              })
+              .catch((e) => {
+                console.log('error on getting Layer1 ', JSON.stringify(e));
+                return 'error on getting Layer1 ' + JSON.stringify(e);
+              });
+          }
+
+  getLayer11(userid: any) {
     return this.databaseObj
       .executeSql(`select * from borelog_data where user_id = '${userid}'`, [])
       .then((res) => {
@@ -703,7 +747,7 @@ updateLayer4(watertable: any,depthTer: any,edate: any,rvrepname: any,
 
   getIterationCount(bhid: any) {
     return this.databaseObj
-      .executeSql(`    SELECT COUNT(*)  AS drill_depth_from FROM iterations where bh_id = '${bhid}'  `, [])
+      .executeSql(`SELECT COUNT(*)  AS drill_depth_from FROM iterations where bh_id = '${bhid}'  `, [])
       .then((res) => {
         console.log('getting Id');
         return res;
@@ -763,7 +807,18 @@ updateLayer4(watertable: any,depthTer: any,edate: any,rvrepname: any,
         return 'error on chlist Id ' + JSON.stringify(e);
       });
   }
-
+  deleteToken() {
+    return this.databaseObj
+      .executeSql(`DELETE FROM token`, [])
+      .then((res: any) => {
+        console.log('deleting token');
+        return res;
+      })
+      .catch((e: any) => {
+        console.log('error on deleting token ', JSON.stringify(e));
+        return 'error on deleting token ' + JSON.stringify(e);
+      });
+  }
 
   deleteRowbyId(id: any) {
     return this.databaseObj

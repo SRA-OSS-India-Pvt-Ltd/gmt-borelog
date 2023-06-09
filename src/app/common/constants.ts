@@ -47,10 +47,12 @@ public static subagenctList: any = [];
   //ionic build --prod -- --base-href /borelogadmin/
 // ionic cordova run browser --prod -- --base-href /borelogweb_v2_testing/
 
-  //ionic build --prod -- --base-href /borelogweb_v2_testing/
+  //ionic build --prod -- --base-href /borelogweb_hw/
 //        classpath 'com.android.tools.build:gradle:4.0.0'
 
 //http://202.62.69.3:7071/borelogweb_v2_testing
+// [popover]="someNGTemplateReference"
+
 
 
 }

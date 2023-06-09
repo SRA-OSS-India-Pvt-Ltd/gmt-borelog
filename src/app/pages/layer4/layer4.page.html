@@ -37,21 +37,29 @@
           </ion-item>
         </ion-col>
       </ion-row>
-      <ion-row>
 
+      
+
+
+
+
+      <ion-row>
         <ion-col size="12">
-          <ion-item class="input">
-            <ion-label>Borehole End Date</ion-label>
+          <ion-item class="padding">
+            <ion-label><strong>Borehole End Date</strong></ion-label>
+            </ion-item>
+            <ion-item class="input">
+
             <ion-input value="{{ date1 | date: 'dd-MM-yyyy' }}" id="date1" >
             </ion-input>
-            <ion-popover trigger="date1" size="cover">
+            <ion-popover trigger="date1" size="cover" id="pop2" >
               <ng-template>
-                <ion-datetime presentation="da"  min ="{{startDate}}" [(ngModel)]="date1"></ion-datetime>
+                <ion-datetime presentation="date1" [(ngModel)]="date1" (ngModelChange)="regDateSettings()"></ion-datetime>
               </ng-template>
             </ion-popover>
           </ion-item>
         </ion-col>
-      </ion-row>
+        </ion-row>
 
 
 
@@ -91,7 +99,7 @@
         </ion-col>
       </ion-row>
 
-      
+
 
       <ion-row >
         <ion-col size="6">
@@ -329,7 +337,7 @@
 
 
 
-        <ion-grid>
+
         <ion-row>
           <ion-col size="6">
             <ion-button expand="block" (click)="validation()" style="text-transform: none;">Submit</ion-button>
@@ -340,13 +348,10 @@
 
 
         </ion-row>
-      </ion-grid>
-    </ion-grid>
-    <!-- <img src='{{ signatureImg }}' />
-    <img src='{{ signatureImg1 }}' />
-    <img src='{{ signatureImg2 }}' /> -->
 
-  </ion-list>
+      </ion-grid>
+      </ion-list>
+
 
 
 </ion-content>

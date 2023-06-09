@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/quotes */
 /* eslint-disable max-len */
 /* eslint-disable no-var */
 import { CompleteTestServiceService } from './../../services/complete-test-service.service';
@@ -7,7 +8,7 @@ import { AutoCompleteComponent, AutoCompleteOptions, AutoCompleteService, AutoCo
 /* eslint-disable @typescript-eslint/type-annotation-spacing */
 /* eslint-disable @typescript-eslint/no-inferrable-types */
 /* eslint-disable @typescript-eslint/dot-notation */
-import { AlertController, LoadingController } from '@ionic/angular';
+import { AlertController, LoadingController, PopoverController } from '@ionic/angular';
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Router } from '@angular/router';
 import { Constants } from 'src/app/common/constants';
@@ -216,6 +217,7 @@ blobImage132: any;
     public completeTestService: CompleteTestServiceService,
     public file: File,
     public loadingController: LoadingController,
+    public popoverController: PopoverController,
 
     private datePipe: DatePipe,
     private androidPermissions: AndroidPermissions,
@@ -491,9 +493,7 @@ sel(keyword: string){
     else if (this.boreholeNumber === undefined) {
       this.toastSer.presentError('Please Enter Borehole Number');
     }
-    if (this.typeOfStructure === undefined) {
-      this.toastSer.presentError('Please Enter Chainage');
-    }  else if (this.easting === undefined) {
+     else if (this.easting === undefined) {
       this.toastSer.presentError('Please Enter Latitude');
     } else if (this.northing === undefined) {
       this.toastSer.presentError('Please Enter northing');
@@ -520,8 +520,6 @@ sel(keyword: string){
       this.toastSer.presentError('Please Select Drilling Orientation');
     } else if (this.detailsOfDrillingBit === undefined) {
       this.toastSer.presentError('Please Select the Details of Drilling Bit');
-    } else if (this.typeOfStructure === '') {
-      this.toastSer.presentError('Please Enter Chainage');
     } else if (this.boreholeNumber === '') {
       this.toastSer.presentError('Please Enter Borehole Number');
     } else if (this.easting === '') {
@@ -552,8 +550,6 @@ sel(keyword: string){
       this.toastSer.presentError('Please Select Drilling Orientation');
     }  else if (this.detailsOfDrillingBit === '') {
       this.toastSer.presentError('Please Select the Details of Drilling Bit');
-    } else if (this.typeOfStructure === null) {
-      this.toastSer.presentError('Please Enter Chainage');
     } else if (this.boreholeNumber === null) {
       this.toastSer.presentError('Please Enter Borehole Number');
     } else if (this.easting === null) {
@@ -589,12 +585,12 @@ sel(keyword: string){
     } else if (this.detailsOfDrillingBit === null) {
       this.toastSer.presentError('Please Select the Details of Drilling Bit');
     }
-    // else if (
-    //   this.waterMarkImage.nativeElement.src === null ||
-    //   this.waterMarkImage.nativeElement.src === ''
-    // ) {
-    //   this.toastSer.presentError('please upload Borehole Picture');
-    // }
+    else if (
+      this.waterMarkImage.nativeElement.src === null ||
+      this.waterMarkImage.nativeElement.src === ''
+    ) {
+      this.toastSer.presentError('please upload Borehole Picture');
+    }
     else if(this.orientation === 'Inclined' && this.angleWithHorizontal === undefined){
       this.toastSer.presentError('please Enter Angle with Horizontal');
 
@@ -611,6 +607,23 @@ sel(keyword: string){
   }
 
 
+
+    regDateSettings() {
+    if(this.date !== undefined && this.date!== null && this.date !== ''){
+       //console.log('popovere3');
+       this.closePopover('pop2');
+
+     }
+
+}
+async closePopover(id: string) {
+  const popover = await this.popoverController.getTop();
+  if (popover) {
+    if (popover.id === id) {
+      await this.popoverController.dismiss();
+    }
+  }
+}
 
 
   addDatabase() {
@@ -643,7 +656,7 @@ if(Constants.layer2flow === 'fromLog'){
             this.boreholeChainage,
             this.chainageId,
             this.typeOfCrossing,
-            this.typeOfStructure,
+            '',
             this.typeOfBridge,
             this.date,
             this.rl,
@@ -698,7 +711,7 @@ if(Constants.layer2flow === 'fromLog'){
             this.boreholeChainage,
             this.chainageId,
             this.typeOfCrossing,
-            this.typeOfStructure,
+            '',
             this.typeOfBridge,
             this.date,
             this.rl,
@@ -1819,6 +1832,11 @@ return parseFloat(this.cmeridian);
 }
 
 
+decodeString(encodedString: string): string {
+  const decodedString = unescape(encodedString.replace(/\\u/g, "%u"));
+  console.log("decode",decodedString);
+  return decodedString;
 
+}
 
 }

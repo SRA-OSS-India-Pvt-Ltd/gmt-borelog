@@ -74,6 +74,8 @@ export class LogginginformationPage implements OnInit {
 statra: any = [];
 isRemarks = false;
 remarks = '';
+
+rockpieces: any;
   constructor(
     public toastSer: ToastService,
     public androidDatabase: AndroidDatabaseService,
@@ -136,6 +138,8 @@ Constants.layer2flow === 'fromLog';
 
       this.cr = '';
       this.rqd = '';
+      this.rockpieces = '';
+
     } else if (this.typeOfstrata === 'Rock') {
       this.isSoil = false;
       this.isRock = true;
@@ -163,6 +167,7 @@ Constants.layer2flow === 'fromLog';
       this.secondB = '';
       this.thirdB = '';
       this.totalB = '';
+      this.rockpieces = '';
     }
   }
   sampleChange($event) {
@@ -465,7 +470,11 @@ Constants.layer2flow === 'fromLog';
         this.toastSer.presentError('Please Enter  Rock Sample Color');
       } else if (this.typeOfWeathering === null) {
         this.toastSer.presentError('Please Select  Type of Weathering');
-      } else if (this.rockDepthTo === 0) {
+      }else if(this.rockpieces === null || this.rockpieces === '' || this.rockpieces === null){
+        this.toastSer.presentError('Please enter Number of core pieces collected');
+
+      }
+      else if (this.rockDepthTo === 0) {
         this.toastSer.presentError(
           'Please Enter  Rock depth to,it Should Not a Zero'
         );
@@ -615,7 +624,8 @@ Constants.layer2flow === 'fromLog';
       this.rqd,
       this.rockSamplColor,
       this.typeOfWeathering,
-      this.remarks);
+      this.remarks,
+      this.rockpieces);
       this.clearFields();
 
       this.router.navigate(['iterations']);
@@ -736,7 +746,8 @@ Constants.layer2flow === 'fromLog';
         this.rqd,
         this.rockSamplColor,
         this.typeOfWeathering,
-        '',this.remarks
+        '',this.remarks,
+        this.rockpieces
       )
       .subscribe((response: any) => {
         if (response.error === true) {

@@ -1,0 +1,30 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title >GMT Borelog </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content >
+  <ion-list class="bg">
+
+
+
+
+    <ion-item class="input">
+
+      <ion-input type="text" placeholder="   Token key" name="token" [(ngModel)]="token"  maxlength="6">
+        <ion-icon slot="start" name="key" color="dark"></ion-icon>
+      </ion-input>
+    </ion-item>
+
+
+
+
+
+    <ion-button (click)="callTokenService()" expand="block"
+    class="center"style="text-transform:none"> Verify</ion-button>
+
+
+  </ion-list>
+
+
+</ion-content>

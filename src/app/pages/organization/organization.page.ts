@@ -493,4 +493,28 @@ console.log('totallist',Constants.sectionListService);
   }
 
 
+decodeUtf8(decode: string) {
+  const encodedString = decode; // UTF-8 encoded string
+
+  // Create a Uint8Array from the encoded string
+  const bytes = new Uint8Array(encodedString.length);
+  for (let i = 0; i < encodedString.length; i++) {
+    bytes[i] = encodedString.charCodeAt(i);
+  }
+
+  // Decode the UTF-8 encoded string
+  const decoder = new TextDecoder('utf-8');
+  const decodedString = decoder.decode(bytes);
+
+  console.log("UTF: ",decodedString);
+}
+
+decodeString(encodedString: string): string {
+  const decodedString = unescape(encodedString.replace(/\\u/g, "%u"));
+  console.log("decode",decodedString);
+  return decodedString;
+
+}
+
+
 }

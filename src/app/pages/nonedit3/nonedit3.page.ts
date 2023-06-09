@@ -12,51 +12,6 @@ import { ToastService } from 'src/app/services/toast.service';
   styleUrls: ['./nonedit3.page.scss'],
 })
 export class Nonedit3Page implements OnInit {
-//   drillingFrom: any;
-//   drillingTo: any;
-//   typeOfstrata: any;
-//   typeOfsample: any;
-//   isdsDepth = false;
-//   dsDepthFrom: any;
-//   dsDepthTo: any;
-//   isSPTDepth = false;
-//   sptDepthFrom: any;
-//   sptDepthTo: any;
-//   first: any;
-//   second: any;
-//   third: any;
-//   total: any;
-//   firstB: any;
-//   secondB: any;
-//   thirdB: any;
-//   totalB: any;
-//   oneB= false;
-//   isUDSepth = false;
-//   udsDepthFrom: any;
-//   udsDepthTo: any;
-//   soilSampleColor: any;
-// typeOfSoil: any;
-// isCohessive = false;
-// densityConsistace: any;
-// isCohesion = false;
-// visualClassification: any;
-// rockSample: any;
-// runLength: any;
-// runTime: any;
-// waterLoss: any;
-// allRockPiecesLenth: any;
-// rockPicesLengthgrze: any;
-// cr: any;
-// rqd: any;
-// typeOfWeathering: any;
-// rockSamplColor: any;
-// typeOfRock: any;
-// layer1List: any =[];
-// isRock = false;
-// rockDepthTo: any;
-// rockDepthFrom: any;
-// isSoil = false;
-// sptstatus: any;
 
 drillingFrom: any;
 drillingTo: any;
@@ -118,6 +73,7 @@ increme: number;
 sno: any;
 isRemarks = false;
 remarks: any;
+rockpieces: any;
 constructor(public toastSer: ToastService,
   public httpService: HttpcallsService,
   public router: Router) {
@@ -252,6 +208,7 @@ this.httpService.getSingleBoreIterationDetails(Constants.iterationId).subscribe(
          this.rockDepthFrom = this.layer1List[0].rock_depth_from;
          this.rockDepthTo = this.layer1List[0].rock_depth_to;
          this.sptstatus = this.layer1List[0].soil_spt_depth_status;
+         this.rockpieces = this.layer1List[0].no_of_core_pieces;
          if(this.layer1List[0].soil_spt_depth_status === 'Refusal'){
 
           this.oneB = true;

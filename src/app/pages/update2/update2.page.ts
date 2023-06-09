@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-inferrable-types */
 /* eslint-disable @typescript-eslint/dot-notation */
 import { HttpcallsService } from 'src/app/services/httpcalls.service';
-import { Platform, AlertController } from '@ionic/angular';
+import { Platform, AlertController, PopoverController } from '@ionic/angular';
 import { Constants } from 'src/app/common/constants';
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
@@ -160,6 +160,10 @@ blobImage132: any;
 
 
 count1: any;
+
+image1: any;
+image2: any;
+image3: any;
   constructor(public toastSer: ToastService,
     public androidDatabase: AndroidDatabaseService,
     private geolocation: Geolocation,
@@ -169,6 +173,8 @@ count1: any;
     public camera: Camera,
     public alertCtrl: AlertController,
     public completeTestService: CompleteTestServiceService,
+    public popoverController: PopoverController,
+
     private datePipe: DatePipe,
     private androidPermissions: AndroidPermissions,
     private locationAccuracy: LocationAccuracy,
@@ -345,6 +351,23 @@ getWebBoreItrations() {
         });
 
 }
+
+regDateSettings() {
+  if(this.date !== undefined && this.date!== null && this.date !== ''){
+     //console.log('popovere3');
+     this.closePopover('pop2');
+
+   }
+
+}
+async closePopover(id: string) {
+const popover = await this.popoverController.getTop();
+if (popover) {
+  if (popover.id === id) {
+    await this.popoverController.dismiss();
+  }
+}
+}
   getLayer1() {
     this.androidDatabase.getLayer1ById(Constants.laYer1Id).then((data) => {
       this.layer1List = [];
@@ -416,6 +439,17 @@ getWebBoreItrations() {
           this.waterMarkImage2.nativeElement.src= this.layer1List[0].borehole_pic2;
           this.waterMarkImage3.nativeElement.src= this.layer1List[0].borehole_pic3;
 
+          this.image1= this.layer1List[0].borehole_pic1;
+          this.image2= this.layer1List[0].borehole_pic2;
+          this.image3= this.layer1List[0].borehole_pic3;
+          if(this.layer1List[0].borehole_pic2 === ''){
+            this.waterMarkImage2.nativeElement.src= '';
+          }
+          if(this.layer1List[0].borehole_pic3 === ''){
+            this.waterMarkImage3.nativeElement.src= '';
+          }
+
+
           console.log('beforeUpdateSecId',Constants.beforeUpdateSecId);
 console.log('editSectinId',this.layer1List[0].section_id);
 
@@ -483,7 +517,7 @@ console.log('editSectinId',this.layer1List[0].section_id);
         console.log('countList',this.countList);
         this.count = this.countList[0].bh_no;
 
-        if(this.count>1){
+        if(this.count>2){
           this.toastSer.presentError('Duplicate Chainage Exist');
 
         }else{
@@ -493,7 +527,7 @@ console.log('editSectinId',this.layer1List[0].section_id);
     this.androidDatabase.updateLayer2(this.ref,this.boreholeNumber,
       this.easting,this.northing,this.latitude,this.longitude,
       this.chainage,this.chainageId,
-      this.typeOfCrossing,this.typeOfStructure,this.typeOfBridge,
+      this.typeOfCrossing,'',this.typeOfBridge,
       this.date,
       this.rl,this.typeOfRig,
       this.rigOther,
