@@ -46,7 +46,7 @@ export class HomePage {
       // this.andridSer.createDatabase();
 
       this.getTokenData();
-      this.getUserData();
+       this.getUserData();
 
       }else{
 
@@ -87,6 +87,15 @@ export class HomePage {
 
 
    getUserData(){
+     Constants.sectionListService= [];
+this.andridSer.getSectindev1().then((dbdata: any)=>{
+  if (dbdata.rows.length > 0) {
+    for (let i = 0; i < dbdata.rows.length; i++) {
+      Constants.sectionListService.push(dbdata.rows.item(i));
+    }
+  }
+});
+
     this.andridSer.getUser().then((data) => {
       this.userList = [];
       console.log('size',data.rows.length);
@@ -124,6 +133,8 @@ export class HomePage {
     });
 
    }
+
+
   callloginservice(){
     if(this.postData.employeeid.length<=0){
       this.toastSer.presentError('Please enter  Username');

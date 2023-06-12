@@ -131,7 +131,7 @@
         <ion-item class="input">
 
 
-          <ion-select  interface="popover" placeholder="Select Section" (ionChange)="sectionChange($event)">
+          <ion-select  interface="popover" placeholder="Select Section" (ionChange)="sectionChange($event)"[value]="sectionId">
 
 
             <ion-select-option  *ngFor="let section of sectionList" [value]="section.section_id ">

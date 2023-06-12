@@ -51,7 +51,7 @@
               </ion-input>
               <ion-popover trigger="date2" size="cover" id="pop2" >
                 <ng-template>
-                  <ion-datetime presentation="date2" [(ngModel)]="date2" (ngModelChange)="regDateSettings()"></ion-datetime>
+                  <ion-datetime presentation="date2" [(ngModel)]="date2" [min]="startDate" (ngModelChange)="regDateSettings()"></ion-datetime>
                 </ng-template>
               </ion-popover>
             </ion-item>

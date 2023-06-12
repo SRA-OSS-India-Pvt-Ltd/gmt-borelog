@@ -195,7 +195,7 @@ export class Update4Page implements AfterViewInit {
 
 
   ) {
-    this.date2 = new Date().toISOString();
+
 
     this.joindate =new Date().toLocaleString();
 
@@ -268,7 +268,9 @@ async closePopover(id: string) {
           this.depthOfTermination = this.layer1List[0].depth_termination;
           this.waterTable = this.layer1List[0].water_table_rl;
 
-          this.date2 = this.layer1List[0].bh_enddate;
+          this.date2 = this.layer1List[0].bh_enddate1;
+
+
           this.aarveRepresName = this.layer1List[0].rv_rep_name;
           this.base641 = this.layer1List[0].rv_rep_sign;
           this.subAgencyRepresentivaeName = this.layer1List[0].sa_rep_name;
@@ -434,6 +436,11 @@ if(this.layer1List[0].depth_termination_pic3 === ''){
       this.addDatabasehome();
     }
   }
+
+  formatDate(date: Date): string {
+    return this.datePipe.transform(date, 'dd-MM-yyyy');
+  }
+
   addDatabase() {
     this.base641 = this.signaturePad.toDataURL();
     this.signatureImg = this.base641;
@@ -445,7 +452,9 @@ if(this.layer1List[0].depth_termination_pic3 === ''){
     this.androidDatabase.updateLayer4(
       this.waterTable,
       this.depthOfTermination,
-      this.date2,
+      this.formatDate(this.date2),
+
+
       this.aarveRepresName,
       this.base641,
       this.subAgencyRepresentivaeName,
@@ -458,7 +467,8 @@ if(this.layer1List[0].depth_termination_pic3 === ''){
       this.waterMarkImagedep3.nativeElement.src,
       this.waterMarkImage2.nativeElement.src,
       this.waterMarkImagesamp2.nativeElement.src,
-      this.waterMarkImagesamp3.nativeElement.src
+      this.waterMarkImagesamp3.nativeElement.src,
+      this.date2
     );
     this.router.navigate(['sidemenu']);
   }
@@ -473,7 +483,8 @@ if(this.layer1List[0].depth_termination_pic3 === ''){
     this.androidDatabase.updateLayer4home(
       this.waterTable,
       this.depthOfTermination,
-      this.date2,
+      this.formatDate(this.date2),
+
       this.aarveRepresName,
       this.base641,
       this.subAgencyRepresentivaeName,
@@ -482,7 +493,8 @@ if(this.layer1List[0].depth_termination_pic3 === ''){
       this.base643,
       Constants.laYer1Id,
       this.waterMarkImage.nativeElement.src,
-      this.waterMarkImage2.nativeElement.src
+      this.waterMarkImage2.nativeElement.src,
+      this.date2
     );
     this.router.navigate(['sidemenu']);
   }

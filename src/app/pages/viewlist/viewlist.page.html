@@ -103,12 +103,30 @@
               <ion-label>UDS-{{item.soil_uds_depth}}</ion-label>
             </ion-col>
           </ion-row>
-          <ion-row >
+          <ion-row  *ngIf="item.rock_depth_from !== '' && item.rock_depth_from !== null">
             <ion-col size="6">
               <ion-label><strong>Rock-Depth of exploration:</strong></ion-label>
             </ion-col>
             <ion-col size="6">
               <ion-label>From {{item.rock_depth_from}} - To {{item.rock_depth_to}}</ion-label>
+            </ion-col>
+          </ion-row>
+
+          <ion-row  *ngIf="item.bh_enddate !== '' && item.bh_enddate !== null">
+            <ion-col size="6">
+              <ion-label><strong>End date of exploration:</strong></ion-label>
+            </ion-col>
+            <ion-col size="6">
+              <ion-label> {{item.bh_enddate}} </ion-label>
+            </ion-col>
+          </ion-row>
+
+          <ion-row  *ngIf="item.bh_enddate === '' || item.bh_enddate === null">
+            <ion-col size="6">
+              <ion-label><strong>End date of exploration:</strong></ion-label>
+            </ion-col>
+            <ion-col size="6">
+              <ion-label> Running </ion-label>
             </ion-col>
           </ion-row>
 

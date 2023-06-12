@@ -241,6 +241,9 @@ Constants.layer2flow === 'fromLog';
     if (this.drillingFrom !== undefined && this.drillingTo !== undefined ) {
       if(this.drillingTo >= this.drillingFrom){
       this.runLength = this.drillingTo - this.drillingFrom;
+    }else{
+
+      this.runLength='';
     }
   }
   }

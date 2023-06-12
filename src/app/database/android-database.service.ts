@@ -16,7 +16,7 @@ export class AndroidDatabaseService {
 
   createDatabase(){
     this.sqlite.create({
-      name: 'borelog.db',
+      name: 'gmtborelog.db',
       location: 'default'
     })
       .then((db: SQLiteObject) => {
@@ -24,7 +24,7 @@ export class AndroidDatabaseService {
        this.databaseObj = db;
 
        // eslint-disable-next-line max-len
-         db.executeSql('CREATE TABLE IF NOT EXISTS borelog_data (Id Integer Primary key AUTOINCREMENT,Package Text,NoofBoreHoles Text,SubAgencyName Text,SubAgencyAddress Text,SubAgencyLogo Text,section_id Text, user_id int(11) ,org_id int(11) , project_id int(11) ,sa_id int(11) ,ref_std varchar(255)  ,bh_no varchar(255) , bh_location varchar(255) , chainage Text  ,  chainage_id Text , easting varchar(255) ,northing varchar(255) ,  type_of_crossing Text,type_of_structure Text, type_of_bridge Text, bh_start_date date ,bh_rl varchar(255) , water_table_rl varchar(255) ,type_of_rig varchar(255) , type_of_rig_other Text ,drill_orientation varchar(255) ,bh_dia varchar(255) ,casing_dia varchar(255) ,casing_depth varchar(255) ,drilling_bit Text , drilling_bit_other Text,core_barrel text, drill_depth_from varchar(255) ,drill_depth_to varchar(255) ,type_of_strata varchar(255) ,type_of_sample text ,soil_ds_depth_from varchar(255) ,soil_ds_depth_to varchar(255) ,soil_spt_depth_from varchar(255) ,soil_spt_depth_to varchar(255) ,soil_uds_depth_from varchar(255) ,soil_uds_depth_to varchar(255) ,soil_sample_color varchar(255),soil_type varchar(100) ,soil_density varchar(100) ,soil_visual_classif varchar(100)  ,rock_sample_type varchar(100) ,rock_depth_from text,rock_depth_to text,rock_run_length varchar(100) ,rock_run_time varchar(100) ,rock_water_loss varchar(100) ,rock_pieces_length varchar(100) , rock_pieces_10 varchar(100) , rock_cr varchar(100) ,rock_rqd varchar(100) ,rock_sample_color varchar(100) ,rock_weathering varchar(100) ,rock_type varchar(100) ,depth_termination varchar(255) ,bh_enddate date , rv_rep_name varchar(255) ,rv_rep_sign varchar(255) ,sa_rep_name varchar(255) ,sa_rep_sign varchar(255) ,client_rep_name varchar(255) ,client_rep_sign varchar(255) ,created_date datetime ,modified_date datetime ,bh_layer text,bh_status text,first text,second text,third text,total text,firstB text,secondB text,thirdB text, totalB text,soil_spt_depth_status text,angle_horizontal Text,depth_termination_pic1 Text, depth_termination_pic2 Text,depth_termination_pic3 Text ,sample_pic1 Text,sample_pic2 Text,sample_pic3 Text,borehole_pic1 Text,borehole_pic2 Text,borehole_pic3 Text,latitude Text,longitude Text,bh_dia_other Text, casing_dia_other Text, package_name Text )',[])
+         db.executeSql('CREATE TABLE IF NOT EXISTS borelog_data (Id Integer Primary key AUTOINCREMENT,Package Text,NoofBoreHoles Text,SubAgencyName Text,SubAgencyAddress Text,SubAgencyLogo Text,section_id Text, user_id int(11) ,org_id int(11) , project_id int(11) ,sa_id int(11) ,ref_std varchar(255)  ,bh_no varchar(255) , bh_location varchar(255) , chainage Text  ,  chainage_id Text , easting varchar(255) ,northing varchar(255) ,  type_of_crossing Text,type_of_structure Text, type_of_bridge Text, bh_start_date date ,bh_rl varchar(255) , water_table_rl varchar(255) ,type_of_rig varchar(255) , type_of_rig_other Text ,drill_orientation varchar(255) ,bh_dia varchar(255) ,casing_dia varchar(255) ,casing_depth varchar(255) ,drilling_bit Text , drilling_bit_other Text,core_barrel text, drill_depth_from varchar(255) ,drill_depth_to varchar(255) ,type_of_strata varchar(255) ,type_of_sample text ,soil_ds_depth_from varchar(255) ,soil_ds_depth_to varchar(255) ,soil_spt_depth_from varchar(255) ,soil_spt_depth_to varchar(255) ,soil_uds_depth_from varchar(255) ,soil_uds_depth_to varchar(255) ,soil_sample_color varchar(255),soil_type varchar(100) ,soil_density varchar(100) ,soil_visual_classif varchar(100)  ,rock_sample_type varchar(100) ,rock_depth_from text,rock_depth_to text,rock_run_length varchar(100) ,rock_run_time varchar(100) ,rock_water_loss varchar(100) ,rock_pieces_length varchar(100) , rock_pieces_10 varchar(100) , rock_cr varchar(100) ,rock_rqd varchar(100) ,rock_sample_color varchar(100) ,rock_weathering varchar(100) ,rock_type varchar(100) ,depth_termination varchar(255) ,bh_enddate text ,bh_enddate1 date, rv_rep_name varchar(255) ,rv_rep_sign varchar(255) ,sa_rep_name varchar(255) ,sa_rep_sign varchar(255) ,client_rep_name varchar(255) ,client_rep_sign varchar(255) ,created_date datetime ,modified_date datetime ,bh_layer text,bh_status text,first text,second text,third text,total text,firstB text,secondB text,thirdB text, totalB text,soil_spt_depth_status text,angle_horizontal Text,depth_termination_pic1 Text, depth_termination_pic2 Text,depth_termination_pic3 Text ,sample_pic1 Text,sample_pic2 Text,sample_pic3 Text,borehole_pic1 Text,borehole_pic2 Text,borehole_pic3 Text,latitude Text,longitude Text,bh_dia_other Text, casing_dia_other Text, package_name Text )',[])
          .then(() => console.log('Executed SQL'))
          .catch(e => console.log(e));
 
@@ -217,6 +217,20 @@ export class AndroidDatabaseService {
       });
   }
 
+  getSectindev1() {
+    return this.databaseObj
+      .executeSql(`select * from sections  `, [])
+      .then((res) => {
+        console.log('getting sections');
+        return res;
+      })
+      .catch((e) => {
+        console.log('error on getting sections ', JSON.stringify(e));
+        return 'error on getting sections ' + JSON.stringify(e);
+      });
+  }
+
+
   getSubagency(sectioId: any) {
     return this.databaseObj
       .executeSql(`select * from subagencies where section_id = '${sectioId}' `, [])
@@ -347,10 +361,10 @@ export class AndroidDatabaseService {
     });
   }
 
-  updateLayer1(package1: string,noholes: string,sunageName: string,subageAddr: string,aubAgeLog: string, id: string,sectionId: string,pkgname: string){
+  updateLayer1(package1: string,noholes: string,sunageName: string,subageAddr: string,aubAgeLog: string, id: string,sectionId: string,pkgname: string,chainage: any,bhno: any,typeofbridge: any,typeofcrossing: any){
 
    // eslint-disable-next-line max-len
-   return this.databaseObj.executeSql(`UPDATE borelog_data SET Package = '${package1}',NoofBoreHoles = '${noholes}',SubAgencyName = '${sunageName}',SubAgencyAddress = '${subageAddr}',SubAgencyLogo = '${aubAgeLog}',section_id = '${sectionId}', package_name = '${pkgname}' WHERE Id = ${id} `,[])
+   return this.databaseObj.executeSql(`UPDATE borelog_data SET Package = '${package1}',NoofBoreHoles = '${noholes}',SubAgencyName = '${sunageName}',SubAgencyAddress = '${subageAddr}',SubAgencyLogo = '${aubAgeLog}',section_id = '${sectionId}', package_name = '${pkgname}',chainage='${chainage}',chainage_id='${chainage}',bh_no='${bhno}',type_of_crossing='${typeofcrossing}',type_of_bridge='${typeofbridge}' WHERE Id = ${id} `,[])
    .then((res) => {
     console.log('Updating');
 
@@ -582,7 +596,8 @@ updateLayer4(watertable: any,depthTer: any,edate: any,rvrepname: any,
         depthpic3: any,
         samplepic1: any,
         samplepic2: any,
-        samplepic3: any){
+        samplepic3: any,
+        edate1: any){
           return this.databaseObj.executeSql(`UPDATE borelog_data
            SET
            water_table_rl = '${watertable}',
@@ -600,7 +615,8 @@ updateLayer4(watertable: any,depthTer: any,edate: any,rvrepname: any,
 
            sample_pic1 = '${samplepic1}',
            sample_pic2 = '${samplepic2}',
-           sample_pic3 = '${samplepic3}'
+           sample_pic3 = '${samplepic3}',
+           bh_enddate1 = '${edate1}'
            WHERE Id = ${id} `,[])
           .then((res) => {
            console.log('Updating Layer4');
@@ -616,7 +632,8 @@ updateLayer4(watertable: any,depthTer: any,edate: any,rvrepname: any,
 
         updateLayer4home(watertable: any,depthTer: any,edate: any,rvrepname: any,
           rvrepsign: any,sarepname: any,sarepsign: any,clientname: any,clisign: any,id: any,
-          depthpic: any,samplepic: any){
+          depthpic: any,samplepic: any,
+          edate1: any){
             return this.databaseObj.executeSql(`UPDATE borelog_data
              SET
              water_table_rl = '${watertable}',
@@ -630,7 +647,8 @@ updateLayer4(watertable: any,depthTer: any,edate: any,rvrepname: any,
              client_rep_name = '${clientname}',
              client_rep_sign = '${clisign}',
              depth_termination_pic = '${depthpic}',
-             sample_pic = '${samplepic}'
+             sample_pic = '${samplepic}',
+             bh_enddate1='${edate1}'
 
              WHERE Id = ${id} `,[])
             .then((res) => {
@@ -649,7 +667,7 @@ updateLayer4(watertable: any,depthTer: any,edate: any,rvrepname: any,
 
           getLayer1(userid: any) {
             return this.databaseObj
-              .executeSql(`SELECT bd.Id, bd.Package,bd.package_name,bd.bh_no,bd.chainage, (select bi.soil_spt_depth FROM iterations bi where bi.bh_iteration_id = ( SELECT MAX(bh_iteration_id) FROM iterations bi  WHERE bd.Id = bi.bh_id and type_of_strata = 'Soil' )) as soil_spt_depth, (select bi.soil_ds_depth FROM iterations bi where bi.bh_iteration_id = (  SELECT MAX(bh_iteration_id) FROM iterations bi WHERE bd.Id = bi.bh_id  and type_of_strata = 'Soil'  )) as soil_ds_depth, (select bi.soil_uds_depth FROM iterations bi where bi.bh_iteration_id = ( SELECT MAX(bh_iteration_id) FROM iterations bi WHERE bd.Id = bi.bh_id  and type_of_strata = 'Soil' )) as soil_uds_depth,  (select bi.rock_depth_from FROM iterations bi where bi.bh_iteration_id = ( SELECT MAX(bh_iteration_id)  FROM iterations bi  WHERE bd.Id = bi.bh_id  and type_of_strata = 'Rock' and type_of_sample = '' )) as rock_depth_from,  (select bi.rock_depth_to FROM  iterations bi where bi.bh_iteration_id = (  SELECT MAX(bh_iteration_id)  FROM iterations bi  WHERE bd.Id = bi.bh_id  and type_of_strata = 'Rock' and type_of_sample = ''  )) as rock_depth_to   FROM borelog_data bd where bd.user_id='${userid}'`, [])
+              .executeSql(`SELECT bd.Id, bd.Package,bd.package_name,bd.bh_no,bd.chainage,bd.bh_enddate, (select bi.soil_spt_depth FROM iterations bi where bi.bh_iteration_id = ( SELECT MAX(bh_iteration_id) FROM iterations bi  WHERE bd.Id = bi.bh_id and type_of_strata = 'Soil' )) as soil_spt_depth, (select bi.soil_ds_depth FROM iterations bi where bi.bh_iteration_id = (  SELECT MAX(bh_iteration_id) FROM iterations bi WHERE bd.Id = bi.bh_id  and type_of_strata = 'Soil'  )) as soil_ds_depth, (select bi.soil_uds_depth FROM iterations bi where bi.bh_iteration_id = ( SELECT MAX(bh_iteration_id) FROM iterations bi WHERE bd.Id = bi.bh_id  and type_of_strata = 'Soil' )) as soil_uds_depth,  (select bi.rock_depth_from FROM iterations bi where bi.bh_iteration_id = ( SELECT MAX(bh_iteration_id)  FROM iterations bi  WHERE bd.Id = bi.bh_id  and type_of_strata = 'Rock' and type_of_sample = '' )) as rock_depth_from,  (select bi.rock_depth_to FROM  iterations bi where bi.bh_iteration_id = (  SELECT MAX(bh_iteration_id)  FROM iterations bi  WHERE bd.Id = bi.bh_id  and type_of_strata = 'Rock' and type_of_sample = ''  )) as rock_depth_to   FROM borelog_data bd where bd.user_id='${userid}' order by bd.Id DESC`, [])
               .then((res) => {
                 console.log('getting Layer1');
                 return res;

@@ -30,8 +30,11 @@ export class Update1Page implements OnInit {
   subAencyListValues: any = [];
   subAgencyAddress: string ='';
   subAgencyLogo: any;
+
+
   boreHoles: any;
   subAgency: any;
+
   layer1List: any = [];
   subAgencyId: any;
   sectionId: any;
@@ -40,6 +43,8 @@ export class Update1Page implements OnInit {
   sectListValue: any = [];
   sectionName: any;
   packagename: string = '';
+
+  isFirst = 1;
   constructor(
     public androidDatabase: AndroidDatabaseService,
     public router: Router,
@@ -70,7 +75,14 @@ export class Update1Page implements OnInit {
     this.getLayer1();
   }
   packageChange($event) {
+
+
     this.package = $event.target.value;
+    if(this.isFirst > 1) {
+      this.sectionId = '';
+      this.section = '';
+    }
+
     console.log($event.target.value);
     if(this.package === '1'){
       this.packagename = 'DFCCIL Package-1';
@@ -84,11 +96,14 @@ export class Update1Page implements OnInit {
     this.sectionList = Constants.sectionListService.filter((user: any) =>
       user.package_id.includes(this.package)
     );
+    this.isFirst = this.isFirst+1;
   }
 
 
 
   sectionChange($event){
+
+
     this.sectionId= $event.target.value;
    console.log($event.target.value);
       this.androidDatabase.getSectin(this.sectionId).then((data) => {
@@ -126,6 +141,10 @@ export class Update1Page implements OnInit {
 
   }
 
+  sectionChange1($event){
+
+  }
+
   ngOnInit() {}
 
   // autoLoader() {
@@ -156,6 +175,7 @@ export class Update1Page implements OnInit {
           this.sectionId = this.layer1List[0].section_id;
           Constants.beforeUpdateSecId = this.layer1List[0].section_id;
           this.section = this.layer1List[0].section_id;
+
           this.sectionName = this.layer1List[0].NoofBoreHoles;
 
           this.boreHoles = this.layer1List[0].NoofBoreHoles;
@@ -228,7 +248,8 @@ export class Update1Page implements OnInit {
             this.subAgencyLogo,
             Constants.laYer1Id,
             this.sectionId,
-            this.packagename
+            this.packagename,
+            '','','',''
           );
           console.log('updated');
           Constants.package = this.package;
@@ -264,7 +285,9 @@ export class Update1Page implements OnInit {
       this.toastService.presentError('Please Select Package');
     } else if (this.sectionId === '') {
       this.toastService.presentError('Please Select Section');
-    } else if (this.subAgency === '') {
+    }
+
+     else if (this.subAgency === '') {
       this.toastService.presentError('Please Select SubAgency Name');
     } else {
       this.updateLayer1();

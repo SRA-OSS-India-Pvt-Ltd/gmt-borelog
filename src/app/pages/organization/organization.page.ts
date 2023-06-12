@@ -91,6 +91,7 @@ isimg = false;
    this.package = $event.target.value;
    console.log($event.target.value);
 
+
    if(this.package === '1'){
      this.packagename = 'DFCCIL Package-1';
    }else if(this.package === '2'){
@@ -99,6 +100,7 @@ isimg = false;
      this.packagename = 'DFCCIL Package-3';
    }
 
+   this.sectionId = '';
 console.log('totallist',Constants.sectionListService);
    this.sectionList = Constants.sectionListService.filter((data: any) =>
    data.package_id.includes(this.package));
@@ -297,7 +299,7 @@ console.log('totallist',Constants.sectionListService);
 
 
             this.androiDatabase.updateLayer1(this.package,this.sectionName,this.subAgencyId,
-              this.subAgencyAddress,this.subAgencyLogo,Constants.laYer1Id,this.sectionId,this.packagename);
+              this.subAgencyAddress,this.subAgencyLogo,Constants.laYer1Id,this.sectionId,this.packagename,'','','','');
 
               Constants.package = this.package;
               Constants.section = this.sectionId;

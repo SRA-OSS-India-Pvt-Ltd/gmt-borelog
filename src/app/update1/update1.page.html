@@ -113,7 +113,7 @@
         </ion-col>
       </ion-row>
 
-      <ion-row>
+      <ion-row >
         <ion-col size="6">
           <ion-item class="padding">
             <ion-label  style="white-space: pre-wrap !important;"><strong>Section:</strong><span class="required-asterisk">*</span></ion-label>
@@ -123,7 +123,7 @@
           <ion-item class="input">
 
 
-            <ion-select  interface="popover" placeholder="Select Section" (ionChange)="sectionChange($event)" value="{{section}}" >
+            <ion-select  interface="popover" placeholder="Select Section" (ionChange)="sectionChange($event)" value="{{sectionId}}" >
 
 
               <ion-select-option  *ngFor="let section of sectionList" [value]="section.section_id">
@@ -133,8 +133,14 @@
             </ion-select>
 
 
-          </ion-item>        </ion-col>
+          </ion-item>
+           </ion-col>
       </ion-row>
+
+
+
+
+
 
     </ion-grid>
 
@@ -142,7 +148,8 @@
       <ion-label class="label"><strong>Sub Agency Details</strong></ion-label>
     </ion-item>
     <ion-grid fixed>
-      <ion-row>
+      <ion-row
+      >
         <ion-col size="6">
           <ion-item class="padding">
             <ion-label  style="white-space: pre-wrap !important;"><strong>Sub Agency Name:</strong><span class="required-asterisk">*</span></ion-label>
@@ -154,30 +161,15 @@
             <ion-label>{{subAgency}}</ion-label>
           </ion-item>
         </ion-col>
-        <!-- <ion-col size="6">
-          <ion-item class="input">
-            <ion-select  interface="popover" placeholder="{{subAgency}}" (ionChange)="subAgencyChange($event)"  >
-              <ion-select-option  *ngFor="let subAgency1 of subAencyList" [value]="subAgency1" >
-                {{subAgency1.sa_name}}</ion-select-option>
-            </ion-select>        </ion-item>
-        </ion-col> -->
+
+
       </ion-row>
 
-      <!-- <ion-row>
-        <ion-col size="6">
-          <ion-item class="padding">
-            <ion-label  style="white-space: pre-wrap !important;"><strong>Sub Agency Address:</strong><span class="required-asterisk">*</span></ion-label>
-          </ion-item>
-        </ion-col>
-        <ion-col size="6">
-          <ion-item class="padding">
 
-            <ion-label>{{subAgencyAddress}}</ion-label>
-          </ion-item>
-        </ion-col>
-      </ion-row> -->
 
-      <ion-row>
+
+
+      <ion-row >
         <ion-col size="6">
           <ion-item class="padding">
             <ion-label  style="white-space: pre-wrap !important;"><strong>Sub Agency Logo:</strong><span class="required-asterisk">*</span></ion-label>
@@ -187,6 +179,9 @@
           <img src="{{subAgencyLogo}}" alt="app icon"  />
         </ion-col>
       </ion-row>
+
+
+
 
       <ion-row>
         <ion-col size="6">

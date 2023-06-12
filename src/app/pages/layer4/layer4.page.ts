@@ -19,6 +19,7 @@ import { DatePipe } from '@angular/common';
 import { AndroidPermissions } from '@awesome-cordova-plugins/android-permissions/ngx';
 import { LocationAccuracy } from '@awesome-cordova-plugins/location-accuracy/ngx';
 
+
 @Component({
   selector: 'app-layer4',
   templateUrl: './layer4.page.html',
@@ -191,11 +192,11 @@ export class Layer4Page implements AfterViewInit {
     private datePipe: DatePipe,
     private androidPermissions: AndroidPermissions,
     private locationAccuracy: LocationAccuracy,
-    private popoverController: PopoverController
+    private popoverController: PopoverController,
 
   ) {
     this.getLatLong();
-    this.date1 = new Date().toISOString();
+
     this.joindate =new Date().toLocaleString();
 
     console.log('date1', this.date1);
@@ -211,6 +212,10 @@ export class Layer4Page implements AfterViewInit {
       }
 
     });
+  }
+
+  formatDate(date: Date): string {
+    return this.datePipe.transform(date, 'dd-MM-yyyy');
   }
 
   ionViewDidEnter(){
@@ -368,11 +373,11 @@ export class Layer4Page implements AfterViewInit {
   }
 
   addDatabase() {
-    console.log(this.base641, this.base642, this.base643);
+
     this.androidDatabase.updateLayer4(
       this.waterTable,
       this.depthOfTermination,
-      this.date1,
+      this.formatDate(this.date1),
       this.aarveRepresName,
       this.base641,
       this.subAgencyRepresentivaeName,
@@ -385,17 +390,20 @@ export class Layer4Page implements AfterViewInit {
       this.waterMarkImagedep3.nativeElement.src,
       this.waterMarkImage2.nativeElement.src,
       this.waterMarkImagesamp2.nativeElement.src,
-      this.waterMarkImagesamp3.nativeElement.src
+      this.waterMarkImagesamp3.nativeElement.src,
+      this.date1
 
     );
     this.router.navigate(['sidemenu']);
   }
   addDatabase1() {
-    console.log(this.base641, this.base642, this.base643);
+    console.log('date: ',this.formatDate(this.date1));
+
+
     this.androidDatabase.updateLayer4(
       this.waterTable,
       this.depthOfTermination,
-      this.date1,
+      this.formatDate(this.date1),
       this.aarveRepresName,
       this.base641,
       this.subAgencyRepresentivaeName,
@@ -408,7 +416,8 @@ export class Layer4Page implements AfterViewInit {
       this.waterMarkImagedep3.nativeElement.src,
       this.waterMarkImage2.nativeElement.src,
       this.waterMarkImagesamp2.nativeElement.src,
-      this.waterMarkImagesamp3.nativeElement.src
+      this.waterMarkImagesamp3.nativeElement.src,
+      this.date1
     );
     this.router.navigate(['sidemenu']);
   }
