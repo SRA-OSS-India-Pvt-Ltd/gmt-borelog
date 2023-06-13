@@ -96,13 +96,20 @@
 
 
 
+
       <ion-row>
-        <ion-col size="12">
+        <ion-col size="6">
           <ion-item class="padding">
             <ion-label style="white-space: pre-wrap !important;"><strong> Chainage:</strong><span
                 class="required-asterisk">*</span></ion-label>
           </ion-item>
         </ion-col>
+        <ion-col size="6" *ngIf="isch">
+          <ion-item class="padding">
+            <ion-label style="white-space: pre-wrap !important;">{{boreholeChainage}}</ion-label>
+          </ion-item>
+        </ion-col>
+
         </ion-row>
 
         <ion-row>
@@ -239,7 +246,7 @@
 
 
 
-      
+
 
 
       <ion-row>

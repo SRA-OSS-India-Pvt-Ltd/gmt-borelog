@@ -117,7 +117,7 @@ Constants.layer2flow === 'fromLog';
           this.layer1List.push(data.rows.item(i));
         }
         console.log('layer1List', this.layer1List);
-        Constants.laYer1Id = this.layer1List[0].Id;
+        //Constants.laYer1Id = this.layer1List[0].Id;
       }
     });
   }
@@ -593,6 +593,7 @@ Constants.layer2flow === 'fromLog';
   addDatabse() {
 
 
+    console.log('Id: ',Constants.laYer1Id);
 
 
     this.androidDatabase.additerationData(

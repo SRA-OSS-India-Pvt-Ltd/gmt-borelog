@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/quotes */
 import { ToastService } from 'src/app/services/toast.service';
 import { AndroidDatabaseService } from 'src/app/database/android-database.service';
 import { Router } from '@angular/router';
@@ -77,6 +78,8 @@ export class IterationsPage implements OnInit {
 
 
   getANdroidIterations() {
+    console.log("Id:  ",Constants.laYer1Id);
+
     this.androidDatabase.getIteraions(Constants.laYer1Id).then((data) => {
       this.iterationList = [];
       console.log('size',data.rows.length);
@@ -227,6 +230,7 @@ getIterationCount() {
 
 
         this.router.navigate(['logginginformation']);
+        console.log('Id: ',Constants.laYer1Id);
           }else{
 
 

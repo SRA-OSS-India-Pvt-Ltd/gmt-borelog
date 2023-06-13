@@ -202,7 +202,7 @@ base64Image312: any;
 
 blobImage131: any;
 blobImage132: any;
-
+isch = false;
 
   constructor(
     public toastSer: ToastService,
@@ -322,6 +322,7 @@ console.log('selected item : ', this.selectedItem);
 if (this.selectedItem.length > 0) {
   // this.easting = this.selectedItem[0].easting;
   // this.northing = this.selectedItem[0].northing;
+  this.isch=true;
   this.typeOfBridge = this.selectedItem[0].type_of_bridge;
   this.typeOfCrossing = this.selectedItem[0].type_of_crossing;
   this.typeOfStructure = this.selectedItem[0].type_of_structure;

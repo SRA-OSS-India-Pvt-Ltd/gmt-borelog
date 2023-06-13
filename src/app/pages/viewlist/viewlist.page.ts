@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/quotes */
 import { ToastService } from './../../services/toast.service';
 import { Router } from '@angular/router';
 import { Constants } from 'src/app/common/constants';
@@ -397,6 +398,7 @@ this.isweb = true;
 
   }
   moveToAndroidIterations(bhid: any){
+    console.log("Id:  ",bhid);
 
     Constants.laYer1Id = bhid;
 
